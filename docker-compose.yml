@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+
+  entrant-lk-db:
+    image: "postgres:10.4"
+    restart: always
+    ports:
+      - "127.0.0.1:8432:5432"
+    networks:
+    - agro
+    container_name: "entrant-lk-db"
+    environment:
+      POSTGRES_USER: "esstu"
+      POSTGRES_PASSWORD: "esstu"
+      POSTGRES_DB: "esstu"
+    volumes:
+      - "/var/lib/postgresql/data"
+
+  entrant-lk:
+    image: "entrant-lk.esstu.ru:443/entrant/entrant-lk:master"
+    restart: always
+    ports:
+    - "127.0.0.1:16080:8080"
+    networks:
+    - esstu
+    container_name: "entrant-lk"
+networks:
+  esstu:
