@@ -3,11 +3,134 @@
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <changeSet id="2021-01-01-entrant-lk-init" author="v.dambiev">
-        <createTable tableName="test_table">
-            <column name="id" type="int">
-                <constraints primaryKey="true"/>
+        <createTable tableName="admission_info">
+            <column name="id" type="varchar(80)">
+                <constraints primaryKey="true" unique="true"/>
             </column>
-            <column name="test_text" type="text"/>
+            <column name="level_of_education" type="varchar(80)"/>
+            <column name="first_direction" type="varchar(100)"/>
+            <column name="second_direction" type="varchar(100)"/>
+            <column name="third_direction" type="varchar(100)"/>
+        </createTable>
+        <createTable tableName="ask_of_result_trials">
+            <column name="id" type="varchar(80)">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="result" type="varchar(80)"/>
+        </createTable>
+        <createTable tableName="passport_data">
+            <column name="id" type="varchar(80)">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="serial_number" type="varchar(10)">
+                <constraints unique="true"/>
+            </column>
+            <column name="place_of_issue" type="varchar(80)" />
+            <column name="place_of_issue" type="varchar(80)" />
+            <column name="code_of_subdivision" type="varchar(10)" />
+            <column name="date_of_issue" type="date" />
+        </createTable>
+        <createTable tableName="entrant_private_data">
+            <column name="id" type="varchar(80)">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="name" type="varchar(80)" />
+            <column name="family_name" type="varchar(80)" />
+            <column name="patronymic" type="varchar(80)" />
+            <column name="gender" type="varchar(80)" />
+            <column name="date_of_birth" type="date" />
+            <column name="city_of_birth" type="varchar(80)" />
+            <column name="region_of_birth" type="varchar(80)" />
+        </createTable>
+        <createTable tableName="entrant">
+            <column name="login" type="varchar(80)"/>
+            <column name="password" type="varchar(80)"/>
+            <column name="id" type="varchar(80)">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="parents_information">
+            <column name="id" type="varchar(80)">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="father_mobile_number" type="varchar(11)"/>
+            <column name="father_name" type="varchar(80)"/>
+            <column name="father_second_name" type="varchar(80)"/>
+            <column name="father_patronymic" type="varchar(80)"/>
+            <column name="place_of_fathers_job" type="varchar(80)"/>
+            <column name="mother_mobile_number" type="varchar(11)"/>
+            <column name="mother_name" type="varchar(80)"/>
+            <column name="mother_second_name" type="varchar(80)"/>
+            <column name="mother_patronymic" type="varchar(80)"/>
+            <column name="place_of_mothers_job" type="varchar(80)"/>
+            <column name="additional_phone_number" type="varchar(11)"/>
+        </createTable>
+        <createTable tableName="job_information">
+            <column name="id" type="varchar(80)">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="place_of_job" type="varchar(80)"/>
+            <column name="position" type="varchar(80)"/>
+        </createTable>
+        <createTable tableName="contact_information">
+            <column name="id" type="varchar(80)">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="mobile_number" type="varchar(11)"/>
+        </createTable>
+        <createTable tableName="additional_information">
+            <column name="id" type="varchar(80)">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="index" type="varchar(6)"/>
+            <column name="region" type="varchar(40)"/>
+            <column name="area" type="varchar(40)"/>
+            <column name="city" type="varchar(40)"/>
+            <column name="street" type="varchar(40)"/>
+            <column name="number_of_building" type="varchar(10)"/>
+            <column name="number_of_apartments" type="varchar(10)"/>
+        </createTable>
+        <createTable tableName="benefit_information">
+            <column name="id" type="varchar(80)">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="reason_for_the_benefit" type="varchar(80)"/>
+            <column name="document_for_the_benefit" type="varchar(20)"/>
+            <column name="serial_number_of_document_for_the_benefit" type="varchar(10)">
+            <constraints unique="true"/>
+            </column>
+            <column name="issued_by" type="varchar(30)"/>
+            <column name="data_of_issued" type="date"/>
+        </createTable>
+        <createTable tableName="table_education_info">
+            <column name="id" type="varchar(80)">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="education" type="varchar(80)"/>
+            <column name="years_of_finished" type="varchar(4)"/>
+            <column name="document_of_education" type="varchar(8)"/>
+            <column name="document_of_education_serial_number" type="varchar(14)">
+                <constraints unique="true"/>
+            </column>
+            <column name="place_of_finished" type="varchar(80)"/>
+            <column name="date_of_finished" type="date"/>
+            <column name="studied_language" type="varchar(20)"/>
+            <column name="if_choosen_level_of_education_first" type="varchar(3)"/>
+        </createTable>
+        <createTable tableName="educational_achievements">
+            <column name="id" type="varchar(80)">
+                <constraints primaryKey="true" unique="true"/>
+            </column>
+            <column name="medal" type="varchar(10)"/>
+            <column name="honors_degree" type="varchar(3)"/>
+            <column name="olympiad_participation" type="varchar(10)"/>
+            <column name="document_of_olympiad_victories" type="varchar(20)"/>
+            <column name="document_of_olympiad_victories_serial_number" type="varchar(20)">
+            <constraints unique="true"/>
+            </column>
+            <column name="issued_by" type="varchar(30)"/>
+            <column name="data_of_issued" type="date"/>
+            <column name="candidate_minimums_passed" type="varchar(200)"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
