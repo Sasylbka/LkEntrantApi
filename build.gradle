@@ -1,12 +1,10 @@
 plugins {
     id 'org.springframework.boot' version '2.1.3.RELEASE'
     id 'org.jetbrains.kotlin.jvm' version '1.4.20-M2'
-    id 'de.aaschmid.cpd' version '3.1'
     id "com.gorylenko.gradle-git-properties" version "2.2.0"
 }
 
 apply plugin: 'pmd'
-apply plugin: 'de.aaschmid.cpd'
 apply plugin: 'io.spring.dependency-management'
 
 group = 'ru.esstu.entrant.lk'
@@ -98,20 +96,8 @@ pmdTest {
     source = sourceSets.main.allJava
 }
 
-
-cpd {
-    language 'java'
-    toolVersion '5.2.3'
-}
 gitProperties {
     keys = ['git.branch', 'git.commit.id', 'git.commit.time']
-}
-cpdCheck {
-    reports {
-        text.enabled = true
-        xml.enabled = false
-    }
-    source = sourceSets.main.allJava
 }
 
 sourceSets {
