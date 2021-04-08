@@ -27,8 +27,8 @@ public class AdditionalInformationMapper {
                 vo.getArea(),
                 vo.getCity(),
                 vo.getStreet(),
-                vo.getNumber_of_building(),
-                vo.getNumber_of_apartments()
+                vo.getNumberOfBuilding(),
+                vo.getNumberOfApartments()
         );
     }
     /**
@@ -48,8 +48,8 @@ public class AdditionalInformationMapper {
                 dto.getArea(),
                 dto.getCity(),
                 dto.getStreet(),
-                dto.getNumber_of_building(),
-                dto.getNumber_of_apartments()
+                dto.getNumberOfBuilding(),
+                dto.getNumberOfApartments()
         );
     }
 }

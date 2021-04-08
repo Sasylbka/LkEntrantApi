@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 public class EntrantPrivateDataDto {
     private String id;
     private String name;
-    private String family_name;
+    private String familyName;
     private String patronymic;
     private String gender;
-    private String date_of_birth;
-    private String city_of_birth;
-    private String region_of_birth;
+    private String dateOfBirth;
+    private String cityOfBirth;
+    private String regionOfBirth;
 }

@@ -22,10 +22,10 @@ public class AdmissionInfoMapper {
         }
         return new AdmissionInfoDto(
                 vo.getId(),
-                vo.getLevel_of_education(),
-                vo.getFirst_direction(),
-                vo.getSecond_direction(),
-                vo.getThird_direction()
+                vo.getLevelOfEducation(),
+                vo.getFirstDirection(),
+                vo.getSecondDirection(),
+                vo.getThirdDirection()
         );
     }
     /**
@@ -40,10 +40,10 @@ public class AdmissionInfoMapper {
         }
         return new AdmissionInfo(
                 dto.getId(),
-                dto.getLevel_of_education(),
-                dto.getFirst_direction(),
-                dto.getSecond_direction(),
-                dto.getThird_direction()
+                dto.getLevelOfEducation(),
+                dto.getFirstDirection(),
+                dto.getSecondDirection(),
+                dto.getThirdDirection()
         );
     }
 }

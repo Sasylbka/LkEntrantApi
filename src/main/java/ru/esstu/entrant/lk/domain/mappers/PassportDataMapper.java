@@ -24,10 +24,10 @@ public class PassportDataMapper {
         }
         return new PassportDataDto(
                 vo.getId(),
-                vo.getSerial_number(),
-                vo.getPlace_of_issue(),
-                vo.getCode_of_subdivision(),
-                vo.getDate_of_issue()
+                vo.getSerialNumber(),
+                vo.getPlaceOfIssue(),
+                vo.getCodeOfSubdivision(),
+                vo.getDateOfIssue()
         );
     }
 
@@ -43,10 +43,10 @@ public class PassportDataMapper {
         }
         return new PassportData(
                 dto.getId(),
-                dto.getSerial_number(),
-                dto.getPlace_of_issue(),
-                dto.getCode_of_subdivision(),
-                dto.getDate_of_issue()
+                dto.getSerialNumber(),
+                dto.getPlaceOfIssue(),
+                dto.getCodeOfSubdivision(),
+                dto.getDateOfIssue()
         );
     }
 }

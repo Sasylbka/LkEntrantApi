@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AdmissionInfoDto {
     private String id;
-    private String level_of_education;
-    private String first_direction;
-    private String second_direction;
-    private String third_direction;
+    private String levelOfEducation;
+    private String firstDirection;
+    private String secondDirection;
+    private String thirdDirection;
 }

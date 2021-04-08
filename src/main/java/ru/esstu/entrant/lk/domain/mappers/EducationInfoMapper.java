@@ -25,13 +25,13 @@ public class EducationInfoMapper {
         return new EducationInfoDto(
                 vo.getId(),
                 vo.getEducation(),
-                vo.getYear_of_finished(),
-                vo.getDocument_of_education(),
-                vo.getDocument_of_education_serial_number(),
-                vo.getPlace_of_finished(),
-                vo.getDate_of_finished(),
-                vo.getStudied_language(),
-                vo.getIf_choosen_level_of_education_first()
+                vo.getYearOfFinished(),
+                vo.getDocumentOfEducation(),
+                vo.getDocumentOfEducationSerialNumber(),
+                vo.getPlaceOfFinished(),
+                vo.getDateOfFinished(),
+                vo.getStudiedLanguage(),
+                vo.getIfChoosenLevelOfEducationFirst()
         );
     }
 
@@ -48,13 +48,13 @@ public class EducationInfoMapper {
         return new EducationInfo(
                 dto.getId(),
                 dto.getEducation(),
-                dto.getYear_of_finished(),
-                dto.getDocument_of_education(),
-                dto.getDocument_of_education_serial_number(),
-                dto.getPlace_of_finished(),
-                dto.getDate_of_finished(),
-                dto.getStudied_language(),
-                dto.getIf_choosen_level_of_education_first()
+                dto.getYearOfFinished(),
+                dto.getDocumentOfEducation(),
+                dto.getDocumentOfEducationSerialNumber(),
+                dto.getPlaceOfFinished(),
+                dto.getDateOfFinished(),
+                dto.getStudiedLanguage(),
+                dto.getIfChoosenLevelOfEducationFirst()
         );
     }
 }

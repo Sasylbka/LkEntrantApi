@@ -25,13 +25,13 @@ public class EducationalAchievementsMapper {
         return new EducationalAchievementsDto(
                 vo.getId(),
                 vo.getMedal(),
-                vo.getHonors_degree(),
-                vo.getOlympiad_participation(),
-                vo.getDocument_of_olympiad_victories(),
-                vo.getDocument_of_olympiad_victories_serial_number(),
-                vo.getIssued_by(),
-                vo.getData_of_issued(),
-                vo.getCandidate_minimums_passed()
+                vo.getHonorsDegree(),
+                vo.getOlympiadParticipation(),
+                vo.getDocumentOfOlympiadVictories(),
+                vo.getDocumentOfOlympiadVictoriesSerialNumber(),
+                vo.getIssuedBy(),
+                vo.getDataOfIssued(),
+                vo.getCandidateMinimumsPassed()
         );
     }
 
@@ -48,13 +48,13 @@ public class EducationalAchievementsMapper {
         return new EducationalAchievements(
                 dto.getId(),
                 dto.getMedal(),
-                dto.getHonors_degree(),
-                dto.getOlympiad_participation(),
-                dto.getDocument_of_olympiad_victories(),
-                dto.getDocument_of_olympiad_victories_serial_number(),
-                dto.getIssued_by(),
-                dto.getData_of_issued(),
-                dto.getCandidate_minimums_passed()
+                dto.getHonorsDegree(),
+                dto.getOlympiadParticipation(),
+                dto.getDocumentOfOlympiadVictories(),
+                dto.getDocumentOfOlympiadVictoriesSerialNumber(),
+                dto.getIssuedBy(),
+                dto.getDataOfIssued(),
+                dto.getCandidateMinimumsPassed()
         );
     }
 }

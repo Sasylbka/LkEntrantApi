@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ContactInformationDto {
     private String id;
-    private String mobile_number;
+    private String mobileNumber;
 }

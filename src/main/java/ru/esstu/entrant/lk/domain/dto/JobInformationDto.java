@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JobInformationDto {
     private String id;
-    private String place_of_job;
+    private String placeOfJob;
     private String position;
 }

@@ -22,11 +22,11 @@ public class BenefitInformationMapper {
         }
         return new BenefitInformationDto(
                 vo.getId(),
-                vo.getReason_for_the_benefit(),
-                vo.getDocument_for_the_benefit(),
-                vo.getSerial_number_document_for_the_benefit(),
-                vo.getIssued_by(),
-                vo.getData_of_issued()
+                vo.getReasonForTheBenefit(),
+                vo.getDocumentForTheBenefit(),
+                vo.getSerialNumberDocumentForTheBenefit(),
+                vo.getIssuedBy(),
+                vo.getDataOfIssued()
         );
     }
     /**
@@ -41,11 +41,11 @@ public class BenefitInformationMapper {
         }
         return new BenefitInformation(
                 dto.getId(),
-                dto.getReason_for_the_benefit(),
-                dto.getDocument_for_the_benefit(),
-                dto.getSerial_number_document_for_the_benefit(),
-                dto.getIssued_by(),
-                dto.getData_of_issued()
+                dto.getReasonForTheBenefit(),
+                dto.getDocumentForTheBenefit(),
+                dto.getSerialNumberDocumentForTheBenefit(),
+                dto.getIssuedBy(),
+                dto.getDataOfIssued()
         );
     }
 }

@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 public class BenefitInformationDto {
 
     private String id;
-    private String reason_for_the_benefit;
-    private String document_for_the_benefit;
-    private String serial_number_document_for_the_benefit;
-    private String issued_by;
-    private String data_of_issued;
+    private String reasonForTheBenefit;
+    private String documentForTheBenefit;
+    private String serialNumberDocumentForTheBenefit;
+    private String issuedBy;
+    private String dataOfIssued;
 }

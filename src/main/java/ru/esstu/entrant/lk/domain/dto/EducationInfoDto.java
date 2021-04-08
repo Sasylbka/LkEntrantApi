@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 public class EducationInfoDto {
     private String id;
     private String education;
-    private String year_of_finished;
-    private String document_of_education;
-    private String document_of_education_serial_number;
-    private String place_of_finished;
-    private String date_of_finished;
-    private String studied_language;
-    private String if_choosen_level_of_education_first;
+    private String yearOfFinished;
+    private String documentOfEducation;
+    private String documentOfEducationSerialNumber;
+    private String placeOfFinished;
+    private String dateOfFinished;
+    private String studiedLanguage;
+    private String ifChoosenLevelOfEducationFirst;
 }
