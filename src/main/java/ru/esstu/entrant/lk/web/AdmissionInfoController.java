@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
+import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
 import ru.esstu.entrant.lk.services.AdmissionInfoService;
 
 /**
@@ -24,6 +25,11 @@ public class AdmissionInfoController {
     }
     @RequestMapping(method = RequestMethod.GET, path = "/AdmissionInfo")
     public AdmissionInfoDto test(final String id) {
+
         return AdmissionInfoService.getAdmissionInfo(id);
+    }
+    @RequestMapping(method = RequestMethod.POST, path = "/AdmissionInfo")
+    public AdmissionInfo post(final String id, final String level_of_education, final String first_direction, final String second_direction, final String third_direction) {
+        return AdmissionInfoService.postAdmissionInfo(id,level_of_education,first_direction,second_direction,third_direction);
     }
 }

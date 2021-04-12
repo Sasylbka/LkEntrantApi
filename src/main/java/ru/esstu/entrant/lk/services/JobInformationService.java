@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.JobInformationDto;
 import ru.esstu.entrant.lk.domain.mappers.JobInformationMapper;
+import ru.esstu.entrant.lk.domain.vo.JobInformation;
 import ru.esstu.entrant.lk.repositories.JobInformationRepository;
 
 @Service
@@ -22,6 +23,8 @@ public class JobInformationService {
 
     public JobInformationDto getJobInformation(final String id) {
         return jobInformationMapper.toDto(jobInformationRepository.getJobInformation(id));
-//        return new TestTableDto(1, "NTCN");
+    }
+    public JobInformation postJobInformation(final String id, final String place_of_job , final String position) {
+        return jobInformationMapper.toVO(jobInformationRepository.postJobInformation(id,place_of_job,position));
     }
 }

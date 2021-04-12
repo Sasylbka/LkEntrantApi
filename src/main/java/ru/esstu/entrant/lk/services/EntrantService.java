@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.EntrantDto;
 import ru.esstu.entrant.lk.domain.mappers.EntrantMapper;
+import ru.esstu.entrant.lk.domain.vo.Entrant;
+import ru.esstu.entrant.lk.domain.vo.JobInformation;
 import ru.esstu.entrant.lk.repositories.EntrantRepository;
 
 @Service
@@ -22,5 +24,8 @@ public class EntrantService {
     public EntrantDto getEntrant(final String id) {
         return entrantMapper.toDto(entrantRepository.getEntrant(id));
 //        return new TestTableDto(1, "NTCN");
+    }
+    public Entrant postEntrant(final String id, final String login, final String password) {
+        return entrantMapper.toVO(entrantRepository.postEntrant(id,login,password));
     }
 }
