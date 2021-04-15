@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.esstu.entrant.lk.domain.dto.EntrantDto;
 import ru.esstu.entrant.lk.domain.vo.Entrant;
-import ru.esstu.entrant.lk.domain.vo.JobInformation;
 import ru.esstu.entrant.lk.services.EntrantService;
 
 /**
@@ -19,18 +18,18 @@ public class EntrantController {
     /**
      * Сервис.
      */
-    private final EntrantService EntrantService;
+    private final EntrantService entrantService;
 
     public EntrantController(EntrantService EntrantService) {
-        this.EntrantService = EntrantService;
+        this.entrantService = EntrantService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/Entrant")
     public EntrantDto test(final String id) {
 
-        return EntrantService.getEntrant(id);
+        return entrantService.getEntrant(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/Entrant")
     public Entrant post(final String id, final String login, final String password) {
-        return EntrantService.postEntrant(id,login,password);
+        return entrantService.postEntrant(id,login,password);
     }
 }

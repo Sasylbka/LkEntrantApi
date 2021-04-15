@@ -18,18 +18,18 @@ public class AdmissionInfoController {
     /**
      * Сервис.
      */
-    private final AdmissionInfoService AdmissionInfoService;
+    private final AdmissionInfoService admissionInfoService;
 
     public AdmissionInfoController(AdmissionInfoService AdmissionInfoService) {
-        this.AdmissionInfoService = AdmissionInfoService;
+        this.admissionInfoService = AdmissionInfoService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/AdmissionInfo")
     public AdmissionInfoDto test(final String id) {
 
-        return AdmissionInfoService.getAdmissionInfo(id);
+        return admissionInfoService.getAdmissionInfo(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/AdmissionInfo")
     public AdmissionInfo post(final String id, final String level_of_education, final String first_direction, final String second_direction, final String third_direction) {
-        return AdmissionInfoService.postAdmissionInfo(id,level_of_education,first_direction,second_direction,third_direction);
+        return admissionInfoService.postAdmissionInfo(id,level_of_education,first_direction,second_direction,third_direction);
     }
 }

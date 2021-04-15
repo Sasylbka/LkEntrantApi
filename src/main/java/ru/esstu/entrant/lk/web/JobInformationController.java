@@ -18,17 +18,17 @@ public class JobInformationController {
     /**
      * Сервис.
      */
-    private final JobInformationService JobInformationService;
+    private final JobInformationService jobInformationService;
 
     public JobInformationController(JobInformationService JobInformationService) {
-        this.JobInformationService = JobInformationService;
+        this.jobInformationService = JobInformationService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/JobInformation")
     public JobInformationDto test(final String id) {
-        return JobInformationService.getJobInformation(id);
+        return jobInformationService.getJobInformation(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/JobInformation")
     public JobInformation post(final String id, final String place_of_job, final String position) {
-        return JobInformationService.postJobInformation(id,place_of_job,position);
+        return jobInformationService.postJobInformation(id,place_of_job,position);
     }
 }
