@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.web.bind.annotation.RequestBody;
 import ru.esstu.entrant.lk.domain.dto.AdditionalInformationDto;
 import ru.esstu.entrant.lk.domain.vo.AdditionalInformation;
 
@@ -11,6 +12,6 @@ import ru.esstu.entrant.lk.domain.vo.AdditionalInformation;
 public interface AdditionalInformationRepository {
     @Select("SELECT * FROM additional_information WHERE id = #{id}")
     AdditionalInformation getAdditionalInformation(@Param("id") String id);
-    @Insert("INSERT INTO job_information VALUES('#{id}','#{index}','#{region}','#{area}','#{city}','#{street}','#{number_of_building}','#{number_of_apartments}')")
-    AdditionalInformationDto postAdditionalInformation(@Param("id") String id, @Param("index") String index, @Param("region") String region,@Param("area") String area,@Param("city") String city,@Param("street") String street,@Param("number_of_building") String number_of_building,@Param("number_of_apartments") String number_of_apartments);
+    @Insert("INSERT INTO additional_information VALUES('#{additionalInformation.id}','#{additionalInformation.index}','#{additionalInformation.region}','#{additionalInformation.area}','#{additionalInformation.city}','#{additionalInformation.street}','#{additionalInformation.number_of_building}','#{additionalInformation.number_of_apartments}')")
+    AdditionalInformationDto postAdditionalInformation(@Param("entity") AdditionalInformation additionalInformation);
 }

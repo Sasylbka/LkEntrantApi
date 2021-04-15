@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,16 +21,16 @@ public class BenefitInformationController {
      */
     private final BenefitInformationService benefitInformationService;
 
-    public BenefitInformationController(BenefitInformationService BenefitInformationService) {
-        this.benefitInformationService = BenefitInformationService;
+    public BenefitInformationController(BenefitInformationService benefitInformationService) {
+        this.benefitInformationService = benefitInformationService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/BenefitInformation")
-    public BenefitInformationDto test(final String id) {
+    public BenefitInformationDto get(final String id) {
 
         return benefitInformationService.getBenefitInformation(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/BenefitInformation")
-    public BenefitInformation post(final String id, final String reason_for_the_benefit , final String document_for_the_benefit,final String serial_number_document_for_the_benefit,final String issued_by,final String data_of_issued) {
-        return benefitInformationService.postBenefitInformation(id,reason_for_the_benefit,document_for_the_benefit,serial_number_document_for_the_benefit,issued_by,data_of_issued);
+    public BenefitInformation save(@RequestBody final BenefitInformationDto benefitInformationDto) {
+        return benefitInformationService.postBenefitInformation(benefitInformationDto);
     }
 }

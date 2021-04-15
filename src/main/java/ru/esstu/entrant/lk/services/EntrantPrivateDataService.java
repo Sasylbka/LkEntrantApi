@@ -26,8 +26,8 @@ public class EntrantPrivateDataService {
         return entrantPrivateDataMapper.toDto(entrantPrivateDataRepository.getEntrantPrivateData(id));
 //        return new TestTableDto(1, "NTCN");
     }
-    public EntrantPrivateData postEntrantPrivateData(final String id, final String name , final String family_name, final String patronymic, final String gender, final String date_of_birth, final String city_of_birth, final String region_of_birth) {
-        return entrantPrivateDataMapper.toVO(entrantPrivateDataRepository.postEntrantPrivateData(id,name,family_name,patronymic,gender,date_of_birth,city_of_birth,region_of_birth));
+    public EntrantPrivateData postEntrantPrivateData(final EntrantPrivateDataDto entrantPrivateDataDto) {
+        return entrantPrivateDataMapper.toVO(entrantPrivateDataRepository.postEntrantPrivateData(entrantPrivateDataMapper.toVO(entrantPrivateDataDto)));
     }
 
 }

@@ -11,6 +11,6 @@ import ru.esstu.entrant.lk.domain.vo.EntrantPrivateData;
 public interface EntrantPrivateDataRepository {
     @Select("SELECT * FROM entrant_private_data WHERE id = #{id}")
     EntrantPrivateData getEntrantPrivateData(@Param("id") String id);
-    @Insert("INSERT INTO job_information VALUES('#{id}','#{name}','#{family_name}','#{patronymic}','#{gender}','#{date_of_birth}','#{city_of_birth}','#{region_of_birth}')")
-    EntrantPrivateDataDto postEntrantPrivateData(@Param("id") String id, @Param("name") String name, @Param("family_name") String family_name, @Param("patronymic") String patronymic, @Param("gender") String gender, @Param("date_of_birth") String date_of_birth, @Param("city_of_birth") String city_of_birth, @Param("region_of_birth") String region_of_birth);
+    @Insert("INSERT INTO entrant_private_data VALUES('#{entrantPrivateData.id}','#{entrantPrivateData.name}','#{entrantPrivateData.family_name}','#{entrantPrivateData.patronymic}','#{entrantPrivateData.gender}','#{entrantPrivateData.date_of_birth}','#{entrantPrivateData.city_of_birth}','#{entrantPrivateData.region_of_birth}')")
+    EntrantPrivateDataDto postEntrantPrivateData(@Param("entity") EntrantPrivateData entrantPrivateData);
 }

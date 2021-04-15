@@ -26,7 +26,7 @@ public class EducationInfoService {
         return educationInfoMapper.toDto(educationInfoRepository.getEducationInfo(id));
 //        return new TestTableDto(1, "NTCN");
     }
-    public EducationInfo postEducationInfo(final String id, final String education , final String year_of_finished,final String document_of_education,final String document_of_education_serial_number,final String place_of_finished,final String date_of_finished,final String studied_language,final String if_choosen_level_of_education_first) {
-        return educationInfoMapper.toVO(educationInfoRepository.postEducationInfo(id,education,year_of_finished,document_of_education,document_of_education_serial_number,place_of_finished,date_of_finished,studied_language,if_choosen_level_of_education_first));
+    public EducationInfo postEducationInfo(final EducationInfoDto educationInfoDto) {
+        return educationInfoMapper.toVO(educationInfoRepository.postEducationInfo(educationInfoMapper.toVO(educationInfoDto)));
     }
 }

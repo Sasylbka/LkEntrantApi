@@ -11,6 +11,6 @@ import ru.esstu.entrant.lk.domain.vo.EducationalAchievements;
 public interface EducationalAchievementsRepository {
     @Select("SELECT * FROM educational_achievements WHERE id = #{id}")
     EducationalAchievements getEducationalAchievements(@Param("id") String id);
-    @Insert("INSERT INTO job_information VALUES('#{id}','#{medal}','#{honors_degree}','#{olympiad_participation}','#{document_of_olympiad_victories}','#{document_of_olympiad_victories_serial_number}','#{issued_by}','#{data_of_issued}','#{candidate_minimums_passed}')")
-    EducationalAchievementsDto postEducationalAchievements(@Param("id") String id, @Param("medal") String medal, @Param("honors_degree") String honors_degree, @Param("olympiad_participation") String olympiad_participation, @Param("document_of_olympiad_victories") String document_of_olympiad_victories, @Param("document_of_olympiad_victories_serial_number") String document_of_olympiad_victories_serial_number, @Param("issued_by") String issued_by, @Param("data_of_issued") String data_of_issued, @Param("candidate_minimums_passed") String candidate_minimums_passed);
+    @Insert("INSERT INTO educational_achievements VALUES('#{educationalAchievements.id}','#{educationalAchievements.medal}','#{educationalAchievements.honors_degree}','#{educationalAchievements.olympiad_participation}','#{educationalAchievements.document_of_olympiad_victories}','#{educationalAchievements.document_of_olympiad_victories_serial_number}','#{educationalAchievements.issued_by}','#{educationalAchievements.data_of_issued}','#{educationalAchievements.candidate_minimums_passed}')")
+    EducationalAchievementsDto postEducationalAchievements(@Param("entity") EducationalAchievements educationalAchievements);
 }

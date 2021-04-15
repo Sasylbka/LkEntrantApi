@@ -25,7 +25,7 @@ public class EntrantService {
         return entrantMapper.toDto(entrantRepository.getEntrant(id));
 //        return new TestTableDto(1, "NTCN");
     }
-    public Entrant postEntrant(final String id, final String login, final String password) {
-        return entrantMapper.toVO(entrantRepository.postEntrant(id,login,password));
+    public Entrant postEntrant(final EntrantDto entrantDto) {
+        return entrantMapper.toVO(entrantRepository.postEntrant(entrantMapper.toVO(entrantDto)));
     }
 }

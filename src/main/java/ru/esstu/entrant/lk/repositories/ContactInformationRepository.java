@@ -11,7 +11,7 @@ import ru.esstu.entrant.lk.domain.vo.ContactInformation;
 public interface ContactInformationRepository {
     @Select("SELECT * FROM contact_information WHERE id = #{id}")
     ContactInformation getContactInformation(@Param("id") String id);
-    @Insert("INSERT INTO job_information VALUES('#{id}','#{mobile_number}')")
-    ContactInformationDto postContactInformation(@Param("id") String id, @Param("mobile_number") String mobile_number);
+    @Insert("INSERT INTO contact_information VALUES('#{contactInformation.id}','#{contactInformation.mobile_number}')")
+    ContactInformationDto postContactInformation(@Param("entity") ContactInformation contactInformation);
 
 }

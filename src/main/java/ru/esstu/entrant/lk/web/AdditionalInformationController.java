@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,16 +21,16 @@ public class AdditionalInformationController {
      */
     private final AdditionalInformationService additionalInformationService;
 
-    public AdditionalInformationController(AdditionalInformationService AdditionalInformationService) {
-        this.additionalInformationService = AdditionalInformationService;
+    public AdditionalInformationController(AdditionalInformationService additionalInformationService) {
+        this.additionalInformationService = additionalInformationService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/AdditionalInformation")
-    public AdditionalInformationDto test(final String id) {
+    public AdditionalInformationDto get(final String id) {
         return additionalInformationService.getAdditionalInformation(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/AdditionalInformation")
-    public AdditionalInformation post(final String id, final String index, final String region,final String area,final String city,final String street,final String number_of_building,final String number_of_apartments)
+    public AdditionalInformation save(@RequestBody final AdditionalInformationDto additionalInformationDto)
     {
-        return additionalInformationService.postAdditionalInformation(id,index,region,area,city,street,number_of_building,number_of_apartments);
+        return additionalInformationService.postAdditionalInformation(additionalInformationDto);
     }
 }

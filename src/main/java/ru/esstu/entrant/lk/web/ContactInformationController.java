@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,16 +21,16 @@ public class ContactInformationController {
      */
     private final ContactInformationService contactInformationService;
 
-    public ContactInformationController(ContactInformationService ContactInformationService) {
-        this.contactInformationService = ContactInformationService;
+    public ContactInformationController(ContactInformationService contactInformationService) {
+        this.contactInformationService = contactInformationService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/ContactInformation")
-    public ContactInformationDto test(final String id) {
+    public ContactInformationDto get(final String id) {
 
         return contactInformationService.getContactInformation(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/ContactInformation")
-    public ContactInformation post(final String id, final String mobile_number) {
-        return contactInformationService.postContactInformation(id,mobile_number);
+    public ContactInformation save(@RequestBody final ContactInformationDto contactInformationDto) {
+        return contactInformationService.postContactInformation(contactInformationDto);
     }
 }

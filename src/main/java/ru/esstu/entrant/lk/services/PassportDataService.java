@@ -25,7 +25,7 @@ public class PassportDataService {
         return passportDataMapper.toDto(passportDataRepository.getPassportData(id));
 //        return new TestTableDto(1, "NTCN");
     }
-    public PassportData postPassportData(final String id, final String serial_number , final String place_of_issue,final String code_of_subdivision,final String date_of_issue) {
-        return passportDataMapper.toVO(passportDataRepository.postPassportData(id,serial_number,place_of_issue,code_of_subdivision,date_of_issue));
+    public PassportData postPassportData(final PassportDataDto passportDataDto) {
+        return passportDataMapper.toVO(passportDataRepository.postPassportData(passportDataMapper.toVO(passportDataDto)));
     }
 }

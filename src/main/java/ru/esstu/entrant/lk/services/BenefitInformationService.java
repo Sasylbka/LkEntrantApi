@@ -26,7 +26,7 @@ public class BenefitInformationService {
         return benefitInformationMapper.toDto(benefitInformationRepository.getBenefitInformation(id));
 //        return new TestTableDto(1, "NTCN");
     }
-    public BenefitInformation postBenefitInformation(final String id, final String reason_for_the_benefit , final String document_for_the_benefit,final String serial_number_document_for_the_benefit,final String issued_by,final String data_of_issued) {
-        return benefitInformationMapper.toVO(benefitInformationRepository.postBenefitInformation(id,reason_for_the_benefit,document_for_the_benefit,serial_number_document_for_the_benefit,issued_by,data_of_issued));
+    public BenefitInformation postBenefitInformation(final BenefitInformationDto benefitInformationDto) {
+        return benefitInformationMapper.toVO(benefitInformationRepository.postBenefitInformation(benefitInformationMapper.toVO(benefitInformationDto)));
     }
 }

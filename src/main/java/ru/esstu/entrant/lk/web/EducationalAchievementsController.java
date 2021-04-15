@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,15 +21,15 @@ public class EducationalAchievementsController {
      */
     private final EducationalAchievementsService educationalAchievementsService;
 
-    public EducationalAchievementsController(EducationalAchievementsService EducationalAchievementsService) {
-        this.educationalAchievementsService = EducationalAchievementsService;
+    public EducationalAchievementsController(EducationalAchievementsService educationalAchievementsService) {
+        this.educationalAchievementsService = educationalAchievementsService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/EducationalAchievements")
-    public EducationalAchievementsDto test(final String id) {
+    public EducationalAchievementsDto get(final String id) {
         return educationalAchievementsService.getEducationalAchievements(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/EducationalAchievements")
-    public EducationalAchievements post(final String id, final String medal , final String honors_degree, final String olympiad_participation, final String document_of_olympiad_victories, final String document_of_olympiad_victories_serial_number, final String issued_by, final String data_of_issued, final String candidate_minimums_passed) {
-        return educationalAchievementsService.postEducationalAchievements(id,medal,honors_degree,olympiad_participation,document_of_olympiad_victories,document_of_olympiad_victories_serial_number,issued_by,data_of_issued,candidate_minimums_passed);
+    public EducationalAchievements save(@RequestBody final EducationalAchievementsDto educationalAchievementsDto) {
+        return educationalAchievementsService.postEducationalAchievements(educationalAchievementsDto);
     }
 }

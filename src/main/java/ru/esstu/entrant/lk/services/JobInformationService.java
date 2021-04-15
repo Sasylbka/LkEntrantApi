@@ -24,7 +24,7 @@ public class JobInformationService {
     public JobInformationDto getJobInformation(final String id) {
         return jobInformationMapper.toDto(jobInformationRepository.getJobInformation(id));
     }
-    public JobInformation postJobInformation(final String id, final String place_of_job , final String position) {
-        return jobInformationMapper.toVO(jobInformationRepository.postJobInformation(id,place_of_job,position));
+    public JobInformation postJobInformation(final JobInformationDto jobInformationDto) {
+        return jobInformationMapper.toVO(jobInformationRepository.postJobInformation(jobInformationMapper.toVO(jobInformationDto)));
     }
 }

@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,15 +21,15 @@ public class PassportDataController {
      */
     private final PassportDataService passportDataService;
 
-    public PassportDataController(PassportDataService PassportDataService) {
-        this.passportDataService = PassportDataService;
+    public PassportDataController(PassportDataService passportDataService) {
+        this.passportDataService = passportDataService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/PassportData")
-    public PassportDataDto test(final String id) {
+    public PassportDataDto get(final String id) {
         return passportDataService.getPassportData(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/PassportData")
-    public PassportData post(final String id, final String serial_number , final String place_of_issue,final String code_of_subdivision,final String date_of_issue) {
-        return passportDataService.postPassportData(id,serial_number,place_of_issue,code_of_subdivision,date_of_issue);
+    public PassportData save(@RequestBody final PassportDataDto passportDataDto) {
+        return passportDataService.postPassportData(passportDataDto);
     }
 }

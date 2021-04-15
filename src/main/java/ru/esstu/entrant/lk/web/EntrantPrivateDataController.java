@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,16 +21,16 @@ public class EntrantPrivateDataController {
      */
     private final EntrantPrivateDataService entrantPrivateDataService;
 
-    public EntrantPrivateDataController(EntrantPrivateDataService EntrantPrivateDataService) {
-        this.entrantPrivateDataService = EntrantPrivateDataService;
+    public EntrantPrivateDataController(EntrantPrivateDataService entrantPrivateDataService) {
+        this.entrantPrivateDataService = entrantPrivateDataService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/EntrantPrivateData")
-    public EntrantPrivateDataDto test(final String id) {
+    public EntrantPrivateDataDto get(final String id) {
 
         return entrantPrivateDataService.getEntrantPrivateData(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/EntrantPrivateData")
-    public EntrantPrivateData post(final String id, final String name , final String family_name, final String patronymic, final String gender, final String date_of_birth, final String city_of_birth, final String region_of_birth) {
-        return entrantPrivateDataService.postEntrantPrivateData(id,name,family_name,patronymic,gender,date_of_birth,city_of_birth,region_of_birth);
+    public EntrantPrivateData save(@RequestBody final EntrantPrivateDataDto entrantPrivateDataDto) {
+        return entrantPrivateDataService.postEntrantPrivateData(entrantPrivateDataDto);
     }
 }

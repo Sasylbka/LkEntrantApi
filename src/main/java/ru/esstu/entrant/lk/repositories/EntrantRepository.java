@@ -11,6 +11,6 @@ import ru.esstu.entrant.lk.domain.vo.Entrant;
 public interface EntrantRepository {
     @Select("SELECT * FROM entrant WHERE id = #{id}")
     Entrant getEntrant(@Param("id") String id);
-    @Insert("INSERT INTO job_information VALUES('#{id}','#{login}','#{password}')")
-    EntrantDto postEntrant(@Param("id") String id, @Param("login") String login, @Param("password") String password);
+    @Insert("INSERT INTO entrant VALUES('#{entrant.id}','#{entrant.login}','#{entrant.password}')")
+    EntrantDto postEntrant(@Param("entity") Entrant entrant);
 }

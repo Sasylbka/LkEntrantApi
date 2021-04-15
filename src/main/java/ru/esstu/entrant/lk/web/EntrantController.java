@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,16 +21,15 @@ public class EntrantController {
      */
     private final EntrantService entrantService;
 
-    public EntrantController(EntrantService EntrantService) {
-        this.entrantService = EntrantService;
+    public EntrantController(EntrantService entrantService) {
+        this.entrantService = entrantService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/Entrant")
-    public EntrantDto test(final String id) {
-
+    public EntrantDto get(final String id) {
         return entrantService.getEntrant(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/Entrant")
-    public Entrant post(final String id, final String login, final String password) {
-        return entrantService.postEntrant(id,login,password);
+    public Entrant save(@RequestBody final EntrantDto entrantDto) {
+        return entrantService.postEntrant(entrantDto);
     }
 }

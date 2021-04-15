@@ -11,6 +11,6 @@ import ru.esstu.entrant.lk.domain.vo.JobInformation;
 public interface JobInformationRepository {
     @Select("SELECT * FROM job_information WHERE id = #{id}")
     JobInformation getJobInformation(@Param("id") String id);
-    @Insert("INSERT INTO job_information VALUES('#{id}','#{place_of_job}','#{position}')")
-    JobInformationDto postJobInformation(@Param("id") String id, @Param("place_of_job") String place_of_job, @Param("position") String position);
+    @Insert("INSERT INTO job_information VALUES('#{jobInformation.id}','#{jobInformation.place_of_job}','#{jobInformation.position}')")
+    JobInformationDto postJobInformation(@Param("entity") JobInformation jobInformation);
 }

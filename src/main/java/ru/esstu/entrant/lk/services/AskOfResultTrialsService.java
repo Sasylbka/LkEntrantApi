@@ -25,9 +25,8 @@ public class AskOfResultTrialsService {
 
     public AskOfResultTrialsDto getAskOfResultTrials(final String id) {
         return askOfResultTrialsMapper.toDto(askOfResultTrialsRepository.getAskOfResultTrials(id));
-//        return new TestTableDto(1, "NTCN");
     }
-    public AskOfResultTrials postAskOfResultTrials(final String id, final String result) {
-        return askOfResultTrialsMapper.toVO(askOfResultTrialsRepository.postAskOfResultTrials(id,result));
+    public AskOfResultTrials postAskOfResultTrials(final AskOfResultTrialsDto askOfResultTrialsDto) {
+        return askOfResultTrialsMapper.toVO(askOfResultTrialsRepository.postAskOfResultTrials(askOfResultTrialsMapper.toVO(askOfResultTrialsDto)));
     }
 }

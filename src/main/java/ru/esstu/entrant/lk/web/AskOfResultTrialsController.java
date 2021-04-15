@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,15 +21,15 @@ public class AskOfResultTrialsController {
      */
     private final AskOfResultTrialsService askOfResultTrialsService;
 
-    public AskOfResultTrialsController(AskOfResultTrialsService AskOfResultTrialsService) {
-        this.askOfResultTrialsService = AskOfResultTrialsService;
+    public AskOfResultTrialsController(AskOfResultTrialsService askOfResultTrialsService) {
+        this.askOfResultTrialsService = askOfResultTrialsService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/AskOfResultTrials")
-    public AskOfResultTrialsDto test(final String id) {
+    public AskOfResultTrialsDto get(final String id) {
         return askOfResultTrialsService.getAskOfResultTrials(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/AskOfResultTrials")
-    public AskOfResultTrials post(final String id, final String result) {
-        return askOfResultTrialsService.postAskOfResultTrials(id,result);
+    public AskOfResultTrials save(@RequestBody final AskOfResultTrialsDto askOfResultTrialsDto) {
+        return askOfResultTrialsService.postAskOfResultTrials(askOfResultTrialsDto);
     }
 }
