@@ -11,7 +11,7 @@ cache:
 stages:
   - build
 #  - test
-#  - package
+  - package
 #  - deploy
 
 build-regular:
@@ -28,39 +28,39 @@ build-regular:
       - build/libs/*.jar
       - build/reports/tests/
 
-#package-docker-master:
-#  stage: package
-#  only:
-#    - master
-#  tags:
-#    - docker
-#  script:
-#    - docker login -u $DOCKER_ESSTU_USER -p $DOCKER_ESSTU_PASSWORD docker.esstu.ru:443
-#    - docker build -t docker.esstu.ru:443/entrant/entrant-lk:master .
-#    - docker push docker.esstu.ru:443/entrant/entrant-lk:master
+package-docker-master:
+  stage: package
+  only:
+    - master
+  tags:
+    - docker
+  script:
+    - docker login -u $DOCKER_ESSTU_USER -p $DOCKER_ESSTU_PASSWORD docker.esstu.ru:443
+    - docker build -t docker.esstu.ru:443/entrant/entrant-lk:master .
+    - docker push docker.esstu.ru:443/entrant/entrant-lk:master
 
-#package-docker-develop:
-#  stage: package
-#  only:
-#    - develop
-#  tags:
-#    - docker
-#  script:
-#    - docker login -u $DOCKER_ESSTU_USER -p $DOCKER_ESSTU_PASSWORD docker.esstu.ru:443
-#    - docker build -t docker.esstu.ru:443/entrant/entrant-lk:develop .
-#    - docker push docker.esstu.ru:443/entrant/entrant-lk:develop
+package-docker-develop:
+  stage: package
+  only:
+    - develop
+  tags:
+    - docker
+  script:
+    - docker login -u $DOCKER_ESSTU_USER -p $DOCKER_ESSTU_PASSWORD docker.esstu.ru:443
+    - docker build -t docker.esstu.ru:443/entrant/entrant-lk:develop .
+    - docker push docker.esstu.ru:443/entrant/entrant-lk:develop
 
-#package-docker-tags:
-#  stage: package
-#  only:
-#    - repositoryTags
-#    - tags
-#  tags:
-#    - docker
-#  script:
-#    - docker login -u $DOCKER_ESSTU_USER -p $DOCKER_ESSTU_PASSWORD docker.esstu.ru:443
-#    - docker build -t docker.esstu.ru:443/entrant/entrant-lk:$CI_COMMIT_TAG .
-#    - docker push docker.esstu.ru:443/entrant/entrant-lk:$CI_COMMIT_TAG
+package-docker-tags:
+  stage: package
+  only:
+    - repositoryTags
+    - tags
+  tags:
+    - docker
+  script:
+    - docker login -u $DOCKER_ESSTU_USER -p $DOCKER_ESSTU_PASSWORD docker.esstu.ru:443
+    - docker build -t docker.esstu.ru:443/entrant/entrant-lk:$CI_COMMIT_TAG .
+    - docker push docker.esstu.ru:443/entrant/entrant-lk:$CI_COMMIT_TAG
 
 #deploy-docker-develop:
 #  image: kroniak/ssh-client
