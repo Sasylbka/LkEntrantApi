@@ -35,6 +35,7 @@ package-docker-master:
   tags:
     - docker
   script:
+    - echo $DOCKER_ESSTU_USER
     - docker login -u $DOCKER_ESSTU_USER -p $DOCKER_ESSTU_PASSWORD docker.esstu.ru:443
     - docker build -t docker.esstu.ru:443/entrant/entrant-lk:master .
     - docker push docker.esstu.ru:443/entrant/entrant-lk:master
