@@ -24,13 +24,13 @@ public class ContactInformationController {
     public ContactInformationController(ContactInformationService contactInformationService) {
         this.contactInformationService = contactInformationService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/ContactInformation")
+    @RequestMapping(method = RequestMethod.GET, path = "/contactInformation")
     public ContactInformationDto get(final String id) {
 
         return contactInformationService.getContactInformation(id);
     }
-    @RequestMapping(method = RequestMethod.POST, path = "/ContactInformation")
-    public ContactInformation save(@RequestBody final ContactInformationDto contactInformationDto) {
-        return contactInformationService.postContactInformation(contactInformationDto);
+    @RequestMapping(method = RequestMethod.POST, path = "/contactInformation")
+    public ContactInformationDto save(@RequestBody final ContactInformationDto contactInformationDto) {
+        return contactInformationService.save(contactInformationDto);
     }
 }

@@ -7,6 +7,6 @@ import ru.esstu.entrant.lk.domain.vo.TestTable;
 
 @Mapper
 public interface TestTableRepository {
-    @Select("SELECT * FROM test_table WHERE id = #{id}")
+    @Select("SELECT * FROM public.test_table WHERE id = #{id}")
     TestTable getTestTable(@Param("id") Integer id);
 }

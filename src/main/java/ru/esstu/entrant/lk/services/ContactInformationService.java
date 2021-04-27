@@ -23,8 +23,10 @@ public class ContactInformationService {
     public ContactInformationDto getContactInformation(final String id) {
         return contactInformationMapper.toDto(contactInformationRepository.getContactInformation(id));
     }
-    public ContactInformation postContactInformation(final ContactInformationDto contactInformationDto) {
-        return contactInformationMapper.toVO(contactInformationRepository.postContactInformation(contactInformationMapper.toVO(contactInformationDto)));
+    public ContactInformationDto save(final ContactInformationDto contactInformationDto) {
+        ContactInformation entity = contactInformationMapper.toVO(contactInformationDto);
+        contactInformationRepository.save(entity);
+        return contactInformationMapper.toDto(entity);
     }
 
 }

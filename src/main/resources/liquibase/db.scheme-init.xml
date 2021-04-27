@@ -66,7 +66,7 @@
         </column>
         </createTable>
         <createTable tableName="entrant">
-            <column name="id" type="varchar(80)">
+            <column name="id" type="serial">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
             <column name="login" type="varchar(80)">
@@ -100,9 +100,10 @@
             <column name="position" type="varchar(80)"/>
         </createTable>
         <createTable tableName="contact_information">
-            <column name="id" type="varchar(80)">
+            <column name="id" type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
+            <column name="entrant_id" type="integer"></column>
             <column name="mobile_number" type="varchar(11)">
             <constraints nullable="false"/>
         </column>
@@ -196,207 +197,5 @@
             <column name="data_of_issued" type="date"/>
             <column name="candidate_minimums_passed" type="varchar(200)"/>
         </createTable>
-
-        <createTable tableName="ask_of_result_trials_vocabulary">
-            <column name="id" type="varchar(80)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="id_ask_of_result_trials" type="varchar(80)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="passport_data_vocabulary">
-            <column name="id" type="varchar(80)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="id_passport_data" type="varchar(80)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="admission_info_vocabulary">
-            <column name="id" type="varchar(80)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="id_admission_info" type="varchar(80)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="entrant_private_data_vocabulary">
-            <column name="id" type="varchar(80)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="id_entrant_private_data" type="varchar(80)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="parents_information_vocabulary">
-            <column name="id" type="varchar(80)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="id_parents_information" type="varchar(80)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="job_information_vocabulary">
-            <column name="id" type="varchar(80)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="id_job_information" type="varchar(80)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="contact_information_vocabulary">
-            <column name="id" type="varchar(80)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="id_contact_information" type="varchar(80)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="additional_information_vocabulary">
-            <column name="id" type="varchar(80)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="id_additional_information" type="varchar(80)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="benefit_information_vocabulary">
-            <column name="id" type="varchar(80)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="id_benefit_information" type="varchar(80)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="table_education_info_vocabulary">
-            <column name="id" type="varchar(80)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="id_table_education_info" type="varchar(80)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-        <createTable tableName="educational_achievements_vocabulary">
-            <column name="id" type="varchar(80)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="id_educational_achievements" type="varchar(80)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addForeignKeyConstraint baseTableName="educational_achievements_vocabulary"
-                                 baseColumnNames="id"
-                                 constraintName="fk_educational_achievements_entrant"
-                                 referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="parents_information_vocabulary"
-                                 baseColumnNames="id"
-                                 constraintName="fk_parents_information_entrant"
-                                 referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="admission_info_vocabulary"
-                                 baseColumnNames="id"
-                                 constraintName="fk_admission_info_entrant"
-                                 referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="ask_of_result_trials_vocabulary"
-                                 baseColumnNames="id"
-                                 constraintName="fk_ask_of_result_trials_entrant"
-                                 referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="passport_data_vocabulary"
-                                 baseColumnNames="id"
-                                 constraintName="fk_passport_data_entrant"
-                                 referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="entrant_private_data_vocabulary"
-                                 baseColumnNames="id"
-                                 constraintName="fk_entrant_private_data_entrant"
-                                 referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="job_information_vocabulary"
-                                 baseColumnNames="id"
-                                 constraintName="fk_job_information_entrant"
-                                 referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="additional_information_vocabulary"
-                                 baseColumnNames="id"
-                                 constraintName="fk_additional_information_entrant"
-                                 referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="contact_information_vocabulary"
-                                 baseColumnNames="id"
-                                 constraintName="fk_contact_information_entrant"
-                                 referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="benefit_information_vocabulary"
-                                 baseColumnNames="id"
-                                 constraintName="fk_benefit_information_entrant"
-                                 referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="table_education_info_vocabulary"
-                                 baseColumnNames="id"
-                                 constraintName="fk_table_education_info_entrant"
-                                 referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
-
-
-        <addForeignKeyConstraint baseTableName="educational_achievements_vocabulary"
-                                 baseColumnNames="id_educational_achievements"
-                                 constraintName="fk_educational_achievements_vocabulary"
-                                 referencedTableName="educational_achievements"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="parents_information_vocabulary"
-                                 baseColumnNames="id_parents_information"
-                                 constraintName="fk_parents_information_vocabulary"
-                                 referencedTableName="parents_information"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="admission_info_vocabulary"
-                                 baseColumnNames="id_admission_info"
-                                 constraintName="fk_admission_info_vocabulary"
-                                 referencedTableName="admission_info"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="ask_of_result_trials_vocabulary"
-                                 baseColumnNames="id_ask_of_result_trials"
-                                 constraintName="fk_ask_of_result_trials_vocabulary"
-                                 referencedTableName="ask_of_result_trials"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="passport_data_vocabulary"
-                                 baseColumnNames="id_passport_data"
-                                 constraintName="fk_passport_data_vocabulary"
-                                 referencedTableName="passport_data"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="entrant_private_data_vocabulary"
-                                 baseColumnNames="id_entrant_private_data"
-                                 constraintName="fk_entrant_private_data_vocabulary"
-                                 referencedTableName="entrant_private_data"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="job_information_vocabulary"
-                                 baseColumnNames="id_job_information"
-                                 constraintName="fk_job_information_vocabulary"
-                                 referencedTableName="job_information"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="additional_information_vocabulary"
-                                 baseColumnNames="id_additional_information"
-                                 constraintName="fk_additional_information_vocabulary"
-                                 referencedTableName="additional_information"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="contact_information_vocabulary"
-                                 baseColumnNames="id_contact_information"
-                                 constraintName="fk_contact_information_vocabulary"
-                                 referencedTableName="contact_information"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="benefit_information_vocabulary"
-                                 baseColumnNames="id_benefit_information"
-                                 constraintName="fk_benefit_information_vocabulary"
-                                 referencedTableName="benefit_information"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="table_education_info_vocabulary"
-                                 baseColumnNames="id_table_education_info"
-                                 constraintName="fk_table_education_info_vocabulary"
-                                 referencedTableName="table_education_info"
-                                 referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>
