@@ -24,12 +24,12 @@ public class AskOfResultTrialsController {
     public AskOfResultTrialsController(AskOfResultTrialsService askOfResultTrialsService) {
         this.askOfResultTrialsService = askOfResultTrialsService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/AskOfResultTrials")
-    public AskOfResultTrialsDto get(final String id) {
+    @RequestMapping(method = RequestMethod.GET, path = "/askOfResultTrials")
+    public AskOfResultTrialsDto get(final int id) {
         return askOfResultTrialsService.getAskOfResultTrials(id);
     }
-    @RequestMapping(method = RequestMethod.POST, path = "/AskOfResultTrials")
-    public AskOfResultTrials save(@RequestBody final AskOfResultTrialsDto askOfResultTrialsDto) {
-        return askOfResultTrialsService.postAskOfResultTrials(askOfResultTrialsDto);
+    @RequestMapping(method = RequestMethod.POST, path = "/askOfResultTrials")
+    public AskOfResultTrialsDto save(@RequestBody final AskOfResultTrialsDto askOfResultTrialsDto) {
+        return askOfResultTrialsService.save(askOfResultTrialsDto);
     }
 }

@@ -24,12 +24,12 @@ public class EntrantController {
     public EntrantController(EntrantService entrantService) {
         this.entrantService = entrantService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/Entrant")
-    public EntrantDto get(final String id) {
+    @RequestMapping(method = RequestMethod.GET, path = "/entrant")
+    public EntrantDto get(final int id) {
         return entrantService.getEntrant(id);
     }
-    @RequestMapping(method = RequestMethod.POST, path = "/Entrant")
-    public Entrant save(@RequestBody final EntrantDto entrantDto) {
-        return entrantService.postEntrant(entrantDto);
+    @RequestMapping(method = RequestMethod.POST, path = "/entrant")
+    public EntrantDto save(@RequestBody final EntrantDto entrantDto) {
+        return entrantService.save(entrantDto);
     }
 }

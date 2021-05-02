@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EntrantPrivateData {
-    private String id;
+    private int id;
+    private int entrantId;
     private String name;
     private String familyName;
     private String patronymic;

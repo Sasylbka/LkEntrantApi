@@ -25,7 +25,7 @@ public class ContactInformationController {
         this.contactInformationService = contactInformationService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/contactInformation")
-    public ContactInformationDto get(final String id) {
+    public ContactInformationDto get(final int id) {
 
         return contactInformationService.getContactInformation(id);
     }

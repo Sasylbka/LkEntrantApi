@@ -24,12 +24,12 @@ public class EducationalAchievementsController {
     public EducationalAchievementsController(EducationalAchievementsService educationalAchievementsService) {
         this.educationalAchievementsService = educationalAchievementsService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/EducationalAchievements")
-    public EducationalAchievementsDto get(final String id) {
+    @RequestMapping(method = RequestMethod.GET, path = "/educationalAchievements")
+    public EducationalAchievementsDto get(final int id) {
         return educationalAchievementsService.getEducationalAchievements(id);
     }
-    @RequestMapping(method = RequestMethod.POST, path = "/EducationalAchievements")
-    public EducationalAchievements save(@RequestBody final EducationalAchievementsDto educationalAchievementsDto) {
-        return educationalAchievementsService.postEducationalAchievements(educationalAchievementsDto);
+    @RequestMapping(method = RequestMethod.POST, path = "/educationalAchievements")
+    public EducationalAchievementsDto save(@RequestBody final EducationalAchievementsDto educationalAchievementsDto) {
+        return educationalAchievementsService.save(educationalAchievementsDto);
     }
 }

@@ -22,6 +22,7 @@ public class AdditionalInformationMapper {
         }
         return new AdditionalInformationDto(
                 vo.getId(),
+                vo.getEntrantId(),
                 vo.getIndex(),
                 vo.getRegion(),
                 vo.getArea(),
@@ -43,6 +44,7 @@ public class AdditionalInformationMapper {
         }
         return new AdditionalInformation(
                 dto.getId(),
+                dto.getEntrantId(),
                 dto.getIndex(),
                 dto.getRegion(),
                 dto.getArea(),

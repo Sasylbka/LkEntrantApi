@@ -24,13 +24,13 @@ public class ParentsInformationController {
     public ParentsInformationController(ParentsInformationService parentsInformationService) {
         this.parentsInformationService = parentsInformationService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/ParentsInformation")
-    public ParentsInformationDto get(final String id) {
+    @RequestMapping(method = RequestMethod.GET, path = "/parentsInformation")
+    public ParentsInformationDto get(final int id) {
 
         return parentsInformationService.getParentsInformation(id);
     }
-    @RequestMapping(method = RequestMethod.POST, path = "/ParentsInformation")
-    public ParentsInformation save(@RequestBody final ParentsInformationDto parentsInformationDto) {
-        return parentsInformationService.postParentsInformation(parentsInformationDto);
+    @RequestMapping(method = RequestMethod.POST, path = "/parentsInformation")
+    public ParentsInformationDto save(@RequestBody final ParentsInformationDto parentsInformationDto) {
+        return parentsInformationService.save(parentsInformationDto);
     }
 }

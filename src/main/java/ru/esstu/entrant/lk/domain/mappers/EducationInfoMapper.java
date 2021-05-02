@@ -24,6 +24,7 @@ public class EducationInfoMapper {
         }
         return new EducationInfoDto(
                 vo.getId(),
+                vo.getEntrantId(),
                 vo.getEducation(),
                 vo.getYearOfFinished(),
                 vo.getDocumentOfEducation(),
@@ -47,6 +48,7 @@ public class EducationInfoMapper {
         }
         return new EducationInfo(
                 dto.getId(),
+                dto.getEntrantId(),
                 dto.getEducation(),
                 dto.getYearOfFinished(),
                 dto.getDocumentOfEducation(),

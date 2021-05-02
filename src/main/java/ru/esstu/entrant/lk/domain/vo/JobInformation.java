@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobInformation {
-    private String id;
+    private int id;
+    private int entrantId;
     private String placeOfJob;
     private String position;
 }

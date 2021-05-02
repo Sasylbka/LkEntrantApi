@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EducationInfoDto {
-    private String id;
+    private int id;
+    private int entrantId;
     private String education;
     private String yearOfFinished;
     private String documentOfEducation;

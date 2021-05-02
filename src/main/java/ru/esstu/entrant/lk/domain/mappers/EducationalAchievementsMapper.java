@@ -24,6 +24,7 @@ public class EducationalAchievementsMapper {
         }
         return new EducationalAchievementsDto(
                 vo.getId(),
+                vo.getEntrantId(),
                 vo.getMedal(),
                 vo.getHonorsDegree(),
                 vo.getOlympiadParticipation(),
@@ -47,6 +48,7 @@ public class EducationalAchievementsMapper {
         }
         return new EducationalAchievements(
                 dto.getId(),
+                dto.getEntrantId(),
                 dto.getMedal(),
                 dto.getHonorsDegree(),
                 dto.getOlympiadParticipation(),

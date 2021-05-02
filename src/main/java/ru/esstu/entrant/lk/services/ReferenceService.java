@@ -21,7 +21,6 @@ public class ReferenceService {
         this.referenceMapper = referenceMapper;
     }
 
-
     public List<EducationalFormDto> getEducationalForms() {
         return referenceMapper.toDtos(referenceRepository.getEducationalForms());
     }

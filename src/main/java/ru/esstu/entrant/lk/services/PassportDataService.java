@@ -3,7 +3,9 @@ package ru.esstu.entrant.lk.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.PassportDataDto;
+import ru.esstu.entrant.lk.domain.dto.PassportDataDto;
 import ru.esstu.entrant.lk.domain.mappers.PassportDataMapper;
+import ru.esstu.entrant.lk.domain.vo.PassportData;
 import ru.esstu.entrant.lk.domain.vo.JobInformation;
 import ru.esstu.entrant.lk.domain.vo.PassportData;
 import ru.esstu.entrant.lk.repositories.PassportDataRepository;
@@ -21,11 +23,14 @@ public class PassportDataService {
         this.passportDataMapper = passportDataMapper;
     }
 
-    public PassportDataDto getPassportData(final String id) {
+    public PassportDataDto getPassportData(final int id) {
         return passportDataMapper.toDto(passportDataRepository.getPassportData(id));
 //        return new TestTableDto(1, "NTCN");
     }
-    public PassportData postPassportData(final PassportDataDto passportDataDto) {
-        return passportDataMapper.toVO(passportDataRepository.postPassportData(passportDataMapper.toVO(passportDataDto)));
+
+    public PassportDataDto save(final PassportDataDto passportDataDto) {
+        PassportData entity= passportDataMapper.toVO(passportDataDto);
+        passportDataRepository.save(entity);
+        return passportDataMapper.toDto(entity);
     }
 }

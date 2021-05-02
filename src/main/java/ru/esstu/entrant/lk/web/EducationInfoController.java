@@ -24,13 +24,13 @@ public class EducationInfoController {
     public EducationInfoController(EducationInfoService educationInfoService) {
         this.educationInfoService = educationInfoService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/EducationInfo")
-    public EducationInfoDto get(final String id) {
+    @RequestMapping(method = RequestMethod.GET, path = "/educationInfo")
+    public EducationInfoDto get(final int id) {
 
         return educationInfoService.getEducationInfo(id);
     }
-    @RequestMapping(method = RequestMethod.POST, path = "/EducationInfo")
-    public EducationInfo save(@RequestBody final EducationInfoDto educationInfoDto) {
-        return educationInfoService.postEducationInfo(educationInfoDto);
+    @RequestMapping(method = RequestMethod.POST, path = "/educationInfo")
+    public EducationInfoDto save(@RequestBody final EducationInfoDto educationInfoDto) {
+        return educationInfoService.save(educationInfoDto);
     }
 }

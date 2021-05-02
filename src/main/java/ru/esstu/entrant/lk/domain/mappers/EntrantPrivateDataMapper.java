@@ -24,6 +24,7 @@ public class EntrantPrivateDataMapper {
         }
         return new EntrantPrivateDataDto(
                 vo.getId(),
+                vo.getEntrantId(),
                 vo.getName(),
                 vo.getFamilyName(),
                 vo.getPatronymic(),
@@ -46,6 +47,7 @@ public class EntrantPrivateDataMapper {
         }
         return new EntrantPrivateData(
                 dto.getId(),
+                dto.getEntrantId(),
                 dto.getName(),
                 dto.getFamilyName(),
                 dto.getPatronymic(),

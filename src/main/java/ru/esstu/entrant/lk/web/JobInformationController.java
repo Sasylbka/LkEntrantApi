@@ -24,12 +24,12 @@ public class JobInformationController {
     public JobInformationController(JobInformationService jobInformationService) {
         this.jobInformationService = jobInformationService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/JobInformation")
-    public JobInformationDto get(final String id) {
+    @RequestMapping(method = RequestMethod.GET, path = "/jobInformation")
+    public JobInformationDto get(final int id) {
         return jobInformationService.getJobInformation(id);
     }
-    @RequestMapping(method = RequestMethod.POST, path = "/JobInformation")
-    public JobInformation save(@RequestBody final JobInformationDto jobInformationDto) {
-        return jobInformationService.postJobInformation(jobInformationDto);
+    @RequestMapping(method = RequestMethod.POST, path = "/jobInformation")
+    public JobInformationDto save(@RequestBody final JobInformationDto jobInformationDto) {
+        return jobInformationService.save(jobInformationDto);
     }
 }

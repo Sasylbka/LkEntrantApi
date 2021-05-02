@@ -2,11 +2,9 @@ package ru.esstu.entrant.lk.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
 import ru.esstu.entrant.lk.domain.dto.AskOfResultTrialsDto;
 import ru.esstu.entrant.lk.domain.mappers.AskOfResultTrialsMapper;
 import ru.esstu.entrant.lk.domain.vo.AskOfResultTrials;
-import ru.esstu.entrant.lk.domain.vo.JobInformation;
 import ru.esstu.entrant.lk.repositories.AskOfResultTrialsRepository;
 
 @Service
@@ -23,10 +21,12 @@ public class AskOfResultTrialsService {
     }
 
 
-    public AskOfResultTrialsDto getAskOfResultTrials(final String id) {
+    public AskOfResultTrialsDto getAskOfResultTrials(final int id) {
         return askOfResultTrialsMapper.toDto(askOfResultTrialsRepository.getAskOfResultTrials(id));
     }
-    public AskOfResultTrials postAskOfResultTrials(final AskOfResultTrialsDto askOfResultTrialsDto) {
-        return askOfResultTrialsMapper.toVO(askOfResultTrialsRepository.postAskOfResultTrials(askOfResultTrialsMapper.toVO(askOfResultTrialsDto)));
+    public AskOfResultTrialsDto save(final AskOfResultTrialsDto askOfResultTrialsDto) {
+        AskOfResultTrials entity= askOfResultTrialsMapper.toVO(askOfResultTrialsDto);
+        askOfResultTrialsRepository.save(entity);
+        return askOfResultTrialsMapper.toDto(entity);
     }
 }

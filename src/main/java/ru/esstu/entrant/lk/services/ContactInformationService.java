@@ -20,7 +20,7 @@ public class ContactInformationService {
         this.contactInformationMapper = contactInformationMapper;
     }
 
-    public ContactInformationDto getContactInformation(final String id) {
+    public ContactInformationDto getContactInformation(final int id) {
         return contactInformationMapper.toDto(contactInformationRepository.getContactInformation(id));
     }
     public ContactInformationDto save(final ContactInformationDto contactInformationDto) {

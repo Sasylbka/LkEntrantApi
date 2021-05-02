@@ -24,13 +24,13 @@ public class AdditionalInformationController {
     public AdditionalInformationController(AdditionalInformationService additionalInformationService) {
         this.additionalInformationService = additionalInformationService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/AdditionalInformation")
-    public AdditionalInformationDto get(final String id) {
+    @RequestMapping(method = RequestMethod.GET, path = "/additionalInformation")
+    public AdditionalInformationDto get(final int id) {
         return additionalInformationService.getAdditionalInformation(id);
     }
-    @RequestMapping(method = RequestMethod.POST, path = "/AdditionalInformation")
-    public AdditionalInformation save(@RequestBody final AdditionalInformationDto additionalInformationDto)
+    @RequestMapping(method = RequestMethod.POST, path = "/additionalInformation")
+    public AdditionalInformationDto save(@RequestBody final AdditionalInformationDto additionalInformationDto)
     {
-        return additionalInformationService.postAdditionalInformation(additionalInformationDto);
+        return additionalInformationService.save(additionalInformationDto);
     }
 }

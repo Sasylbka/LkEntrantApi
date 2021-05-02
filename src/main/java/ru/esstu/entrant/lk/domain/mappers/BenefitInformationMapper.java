@@ -22,6 +22,7 @@ public class BenefitInformationMapper {
         }
         return new BenefitInformationDto(
                 vo.getId(),
+                vo.getEntrantId(),
                 vo.getReasonForTheBenefit(),
                 vo.getDocumentForTheBenefit(),
                 vo.getSerialNumberDocumentForTheBenefit(),
@@ -41,6 +42,7 @@ public class BenefitInformationMapper {
         }
         return new BenefitInformation(
                 dto.getId(),
+                dto.getEntrantId(),
                 dto.getReasonForTheBenefit(),
                 dto.getDocumentForTheBenefit(),
                 dto.getSerialNumberDocumentForTheBenefit(),

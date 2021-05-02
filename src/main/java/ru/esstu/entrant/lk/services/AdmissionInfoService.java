@@ -3,8 +3,10 @@ package ru.esstu.entrant.lk.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import ru.esstu.entrant.lk.domain.dto.AdditionalInformationDto;
 import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
 import ru.esstu.entrant.lk.domain.mappers.AdmissionInfoMapper;
+import ru.esstu.entrant.lk.domain.vo.AdditionalInformation;
 import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
 import ru.esstu.entrant.lk.repositories.AdmissionInfoRepository;
 
@@ -22,10 +24,12 @@ public class AdmissionInfoService {
     }
 
 
-    public AdmissionInfoDto getAdmissionInfo(final String id) {
+    public AdmissionInfoDto getAdmissionInfo(final int id) {
         return admissionInfoMapper.toDto(admissionInfoRepository.getAdmissionInfo(id));
     }
-    public AdmissionInfo postAdmissionInfo(final AdmissionInfoDto admissionInfoDto) {
-        return admissionInfoMapper.toVO(admissionInfoRepository.postAdmissionInfo(admissionInfoMapper.toVO(admissionInfoDto)));
+    public AdmissionInfoDto save(final AdmissionInfoDto admissionInfoDto) {
+        AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);
+        admissionInfoRepository.save(entity);
+        return admissionInfoMapper.toDto(entity);
     }
 }

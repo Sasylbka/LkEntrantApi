@@ -3,7 +3,9 @@ package ru.esstu.entrant.lk.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.BenefitInformationDto;
+import ru.esstu.entrant.lk.domain.dto.BenefitInformationDto;
 import ru.esstu.entrant.lk.domain.mappers.BenefitInformationMapper;
+import ru.esstu.entrant.lk.domain.vo.BenefitInformation;
 import ru.esstu.entrant.lk.domain.vo.BenefitInformation;
 import ru.esstu.entrant.lk.domain.vo.JobInformation;
 import ru.esstu.entrant.lk.repositories.BenefitInformationRepository;
@@ -22,11 +24,13 @@ public class BenefitInformationService {
     }
 
 
-    public BenefitInformationDto getBenefitInformation(final String id) {
+    public BenefitInformationDto getBenefitInformation(final int id) {
         return benefitInformationMapper.toDto(benefitInformationRepository.getBenefitInformation(id));
 //        return new TestTableDto(1, "NTCN");
     }
-    public BenefitInformation postBenefitInformation(final BenefitInformationDto benefitInformationDto) {
-        return benefitInformationMapper.toVO(benefitInformationRepository.postBenefitInformation(benefitInformationMapper.toVO(benefitInformationDto)));
+    public BenefitInformationDto save(final BenefitInformationDto benefitInformationDto) {
+        BenefitInformation entity= benefitInformationMapper.toVO(benefitInformationDto);
+        benefitInformationRepository.save(entity);
+        return benefitInformationMapper.toDto(entity);
     }
 }

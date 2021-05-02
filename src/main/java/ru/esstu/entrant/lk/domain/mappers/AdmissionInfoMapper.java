@@ -22,6 +22,7 @@ public class AdmissionInfoMapper {
         }
         return new AdmissionInfoDto(
                 vo.getId(),
+                vo.getEntrantId(),
                 vo.getLevelOfEducation(),
                 vo.getFirstDirection(),
                 vo.getSecondDirection(),
@@ -40,6 +41,7 @@ public class AdmissionInfoMapper {
         }
         return new AdmissionInfo(
                 dto.getId(),
+                dto.getEntrantId(),
                 dto.getLevelOfEducation(),
                 dto.getFirstDirection(),
                 dto.getSecondDirection(),

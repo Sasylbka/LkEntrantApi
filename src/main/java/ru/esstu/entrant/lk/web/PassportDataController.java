@@ -24,12 +24,12 @@ public class PassportDataController {
     public PassportDataController(PassportDataService passportDataService) {
         this.passportDataService = passportDataService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/PassportData")
-    public PassportDataDto get(final String id) {
+    @RequestMapping(method = RequestMethod.GET, path = "/passportData")
+    public PassportDataDto get(final int id) {
         return passportDataService.getPassportData(id);
     }
-    @RequestMapping(method = RequestMethod.POST, path = "/PassportData")
-    public PassportData save(@RequestBody final PassportDataDto passportDataDto) {
-        return passportDataService.postPassportData(passportDataDto);
+    @RequestMapping(method = RequestMethod.POST, path = "/passportData")
+    public PassportDataDto save(@RequestBody final PassportDataDto passportDataDto) {
+        return passportDataService.save(passportDataDto);
     }
 }

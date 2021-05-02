@@ -24,13 +24,12 @@ public class BenefitInformationController {
     public BenefitInformationController(BenefitInformationService benefitInformationService) {
         this.benefitInformationService = benefitInformationService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/BenefitInformation")
-    public BenefitInformationDto get(final String id) {
-
+    @RequestMapping(method = RequestMethod.GET, path = "/benefitInformation")
+    public BenefitInformationDto get(final int id) {
         return benefitInformationService.getBenefitInformation(id);
     }
-    @RequestMapping(method = RequestMethod.POST, path = "/BenefitInformation")
-    public BenefitInformation save(@RequestBody final BenefitInformationDto benefitInformationDto) {
-        return benefitInformationService.postBenefitInformation(benefitInformationDto);
+    @RequestMapping(method = RequestMethod.POST, path = "/benefitInformation")
+    public BenefitInformationDto save(@RequestBody final BenefitInformationDto benefitInformationDto) {
+        return benefitInformationService.save(benefitInformationDto);
     }
 }

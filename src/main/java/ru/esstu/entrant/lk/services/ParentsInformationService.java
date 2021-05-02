@@ -3,7 +3,9 @@ package ru.esstu.entrant.lk.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.ParentsInformationDto;
+import ru.esstu.entrant.lk.domain.dto.ParentsInformationDto;
 import ru.esstu.entrant.lk.domain.mappers.ParentsInformationMapper;
+import ru.esstu.entrant.lk.domain.vo.ParentsInformation;
 import ru.esstu.entrant.lk.domain.vo.JobInformation;
 import ru.esstu.entrant.lk.domain.vo.ParentsInformation;
 import ru.esstu.entrant.lk.repositories.ParentsInformationRepository;
@@ -22,11 +24,14 @@ public class ParentsInformationService {
     }
 
 
-    public ParentsInformationDto getParentsInformation(final String id) {
+    public ParentsInformationDto getParentsInformation(final int id) {
         return parentsInformationMapper.toDto(parentsInformationRepository.getParentsInformation(id));
 //        return new TestTableDto(1, "NTCN");
     }
-    public ParentsInformation postParentsInformation(final ParentsInformationDto parentsInformationDto) {
-        return parentsInformationMapper.toVO(parentsInformationRepository.postParentsInformation(parentsInformationMapper.toVO(parentsInformationDto)));
+
+    public ParentsInformationDto save(final ParentsInformationDto parentsInformationDto) {
+        ParentsInformation entity= parentsInformationMapper.toVO(parentsInformationDto);
+        parentsInformationRepository.save(entity);
+        return parentsInformationMapper.toDto(entity);
     }
 }

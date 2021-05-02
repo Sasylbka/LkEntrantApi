@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EducationalAchievements {
-    private String id;
+    private int id;
+    private int entrantId;
     private String medal;
     private String honorsDegree;
     private String olympiadParticipation;

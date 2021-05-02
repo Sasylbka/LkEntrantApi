@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BenefitInformationDto {
-
-    private String id;
+    private int id;
+    private int entrantId;
     private String reasonForTheBenefit;
     private String documentForTheBenefit;
     private String serialNumberDocumentForTheBenefit;

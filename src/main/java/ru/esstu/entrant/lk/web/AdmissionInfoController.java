@@ -24,13 +24,13 @@ public class AdmissionInfoController {
     public AdmissionInfoController(AdmissionInfoService admissionInfoService) {
         this.admissionInfoService = admissionInfoService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/AdmissionInfo")
-    public AdmissionInfoDto get(final String id) {
 
+    @RequestMapping(method = RequestMethod.GET, path = "/admissionInfo")
+    public AdmissionInfoDto get(final int id) {
         return admissionInfoService.getAdmissionInfo(id);
     }
-    @RequestMapping(method = RequestMethod.POST, path = "/AdmissionInfo")
-    public AdmissionInfo save(@RequestBody final AdmissionInfoDto admissionInfoDto) {
-        return admissionInfoService.postAdmissionInfo(admissionInfoDto);
+    @RequestMapping(method = RequestMethod.POST, path = "/admissionInfo")
+    public AdmissionInfoDto save(@RequestBody final AdmissionInfoDto admissionInfoDto) {
+        return admissionInfoService.save(admissionInfoDto);
     }
 }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AskOfResultTrialsDto {
-    private String id;
+    private int id;
+    private int entrantId;
     private String result;
 }

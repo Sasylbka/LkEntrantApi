@@ -24,13 +24,13 @@ public class EntrantPrivateDataController {
     public EntrantPrivateDataController(EntrantPrivateDataService entrantPrivateDataService) {
         this.entrantPrivateDataService = entrantPrivateDataService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/EntrantPrivateData")
-    public EntrantPrivateDataDto get(final String id) {
+    @RequestMapping(method = RequestMethod.GET, path = "/entrantPrivateData")
+    public EntrantPrivateDataDto get(final int id) {
 
         return entrantPrivateDataService.getEntrantPrivateData(id);
     }
-    @RequestMapping(method = RequestMethod.POST, path = "/EntrantPrivateData")
-    public EntrantPrivateData save(@RequestBody final EntrantPrivateDataDto entrantPrivateDataDto) {
-        return entrantPrivateDataService.postEntrantPrivateData(entrantPrivateDataDto);
+    @RequestMapping(method = RequestMethod.POST, path = "/entrantPrivateData")
+    public EntrantPrivateDataDto save(@RequestBody final EntrantPrivateDataDto entrantPrivateDataDto) {
+        return entrantPrivateDataService.save(entrantPrivateDataDto);
     }
 }

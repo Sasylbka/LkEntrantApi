@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdmissionInfo {
-    private String id;
+    private int id;
+    private int entrantId;
     private String levelOfEducation;
     private String firstDirection;
     private String secondDirection;

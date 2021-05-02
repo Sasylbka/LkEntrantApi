@@ -22,6 +22,7 @@ public class ParentsInformationMapper {
         }
         return new ParentsInformationDto(
                 vo.getId(),
+                vo.getEntrantId(),
                 vo.getFatherMobileNumber(),
                 vo.getFatherName(),
                 vo.getFatherSecondName(),
@@ -47,6 +48,7 @@ public class ParentsInformationMapper {
         }
         return new ParentsInformation(
                 dto.getId(),
+                dto.getEntrantId(),
                 dto.getFatherMobileNumber(),
                 dto.getFatherName(),
                 dto.getFatherSecondName(),

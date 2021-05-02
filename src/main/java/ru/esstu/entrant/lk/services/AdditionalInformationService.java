@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import ru.esstu.entrant.lk.domain.dto.AdditionalInformationDto;
 import ru.esstu.entrant.lk.domain.mappers.AdditionalInformationMapper;
+import ru.esstu.entrant.lk.domain.mappers.ContactInformationMapper;
 import ru.esstu.entrant.lk.domain.vo.AdditionalInformation;
+import ru.esstu.entrant.lk.domain.vo.ContactInformation;
 import ru.esstu.entrant.lk.domain.vo.JobInformation;
 import ru.esstu.entrant.lk.repositories.AdditionalInformationRepository;
 
@@ -23,10 +25,12 @@ public class AdditionalInformationService {
     }
 
 
-    public AdditionalInformationDto getAdditionalInformation(final String id) {
+    public AdditionalInformationDto getAdditionalInformation(final int id) {
         return additionalInformationMapper.toDto(additionalInformationRepository.getAdditionalInformation(id));
     }
-    public AdditionalInformation postAdditionalInformation(final AdditionalInformationDto additionalInformationDto) {
-        return additionalInformationMapper.toVO(additionalInformationRepository.postAdditionalInformation(additionalInformationMapper.toVO(additionalInformationDto)));
+    public AdditionalInformationDto save(final AdditionalInformationDto additionalInformationDto) {
+        AdditionalInformation entity= additionalInformationMapper.toVO(additionalInformationDto);
+        additionalInformationRepository.save(entity);
+        return additionalInformationMapper.toDto(entity);
     }
 }

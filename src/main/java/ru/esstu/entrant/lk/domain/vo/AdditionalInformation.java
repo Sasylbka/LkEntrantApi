@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdditionalInformation {
-    private String id;
+    private int id;
+    private int entrantId;
     private String index;
     private String region;
     private String area;

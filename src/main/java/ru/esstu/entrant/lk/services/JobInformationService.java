@@ -3,7 +3,9 @@ package ru.esstu.entrant.lk.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.JobInformationDto;
+import ru.esstu.entrant.lk.domain.dto.JobInformationDto;
 import ru.esstu.entrant.lk.domain.mappers.JobInformationMapper;
+import ru.esstu.entrant.lk.domain.vo.JobInformation;
 import ru.esstu.entrant.lk.domain.vo.JobInformation;
 import ru.esstu.entrant.lk.repositories.JobInformationRepository;
 
@@ -21,10 +23,13 @@ public class JobInformationService {
     }
 
 
-    public JobInformationDto getJobInformation(final String id) {
+    public JobInformationDto getJobInformation(final int id) {
         return jobInformationMapper.toDto(jobInformationRepository.getJobInformation(id));
     }
-    public JobInformation postJobInformation(final JobInformationDto jobInformationDto) {
-        return jobInformationMapper.toVO(jobInformationRepository.postJobInformation(jobInformationMapper.toVO(jobInformationDto)));
+
+    public JobInformationDto save(final JobInformationDto jobInformationDto) {
+        JobInformation entity= jobInformationMapper.toVO(jobInformationDto);
+        jobInformationRepository.save(entity);
+        return jobInformationMapper.toDto(entity);
     }
 }

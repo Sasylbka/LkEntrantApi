@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PassportData {
-    private String id;
+    private int id;
+    private int entrantId;
     private String serialNumber;
     private String placeOfIssue;
     private String codeOfSubdivision;
