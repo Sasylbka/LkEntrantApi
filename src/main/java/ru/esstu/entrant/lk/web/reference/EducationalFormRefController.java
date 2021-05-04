@@ -1,12 +1,11 @@
-package ru.esstu.entrant.lk.web;
+package ru.esstu.entrant.lk.web.reference;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.esstu.entrant.lk.domain.dto.reference.EducationalFormDto;
-import ru.esstu.entrant.lk.services.ContactInformationService;
-import ru.esstu.entrant.lk.services.ReferenceService;
+import ru.esstu.entrant.lk.services.reference.EducationalFormRefService;
 
 import java.util.List;
 
@@ -15,19 +14,19 @@ import java.util.List;
  */
 @RestController
 @Slf4j
-public class ReferenceController {
+public class EducationalFormRefController {
 
     /**
      * Сервис.
      */
-    private final ReferenceService referenceService;
+    private final EducationalFormRefService educationalFormRefService;
 
-    public ReferenceController(ReferenceService referenceService) {
-        this.referenceService = referenceService;
+    public EducationalFormRefController(EducationalFormRefService educationalFormRefService) {
+        this.educationalFormRefService = educationalFormRefService;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/reference/educationalForm")
     public List<EducationalFormDto> get() {
-        return referenceService.getEducationalForms();
+        return educationalFormRefService.getEducationalForms();
     }
 }

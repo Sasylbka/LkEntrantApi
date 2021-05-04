@@ -16,4 +16,5 @@ public class EntrantPrivateData {
     private String dateOfBirth;
     private String cityOfBirth;
     private String regionOfBirth;
+    private String Snills;
 }

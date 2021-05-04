@@ -3,10 +3,7 @@ package ru.esstu.entrant.lk.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.ParentsInformationDto;
-import ru.esstu.entrant.lk.domain.dto.ParentsInformationDto;
 import ru.esstu.entrant.lk.domain.mappers.ParentsInformationMapper;
-import ru.esstu.entrant.lk.domain.vo.ParentsInformation;
-import ru.esstu.entrant.lk.domain.vo.JobInformation;
 import ru.esstu.entrant.lk.domain.vo.ParentsInformation;
 import ru.esstu.entrant.lk.repositories.ParentsInformationRepository;
 
@@ -18,7 +15,7 @@ public class ParentsInformationService {
     private final ParentsInformationMapper parentsInformationMapper;
 
     public ParentsInformationService(ParentsInformationRepository parentsInformationRepository,
-                                ParentsInformationMapper parentsInformationMapper) {
+                                     ParentsInformationMapper parentsInformationMapper) {
         this.parentsInformationRepository = parentsInformationRepository;
         this.parentsInformationMapper = parentsInformationMapper;
     }

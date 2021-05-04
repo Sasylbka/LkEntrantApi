@@ -31,7 +31,8 @@ public class EntrantPrivateDataMapper {
                 vo.getGender(),
                 vo.getDateOfBirth(),
                 vo.getCityOfBirth(),
-                vo.getRegionOfBirth()
+                vo.getRegionOfBirth(),
+                vo.getSnills()
         );
     }
 
@@ -54,7 +55,8 @@ public class EntrantPrivateDataMapper {
                 dto.getGender(),
                 dto.getDateOfBirth(),
                 dto.getCityOfBirth(),
-                dto.getRegionOfBirth()
+                dto.getRegionOfBirth(),
+                dto.getSnills()
         );
     }
 }

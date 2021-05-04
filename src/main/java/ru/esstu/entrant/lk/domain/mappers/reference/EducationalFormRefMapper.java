@@ -1,4 +1,4 @@
-package ru.esstu.entrant.lk.domain.mappers;
+package ru.esstu.entrant.lk.domain.mappers.reference;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class ReferenceMapper {
+public class EducationalFormRefMapper {
     /**
      * Преобразование.
      *

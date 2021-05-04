@@ -33,4 +33,5 @@ public class AdditionalInformationService {
         additionalInformationRepository.save(entity);
         return additionalInformationMapper.toDto(entity);
     }
+   
 }

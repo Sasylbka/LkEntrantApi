@@ -14,7 +14,7 @@ public interface ParentsInformationRepository {
             "mother_mobile_number, mother_name, mother_second_name, mother_patronymic, place_of_mother_job, additional_phone_number) " +
             "VALUES(#{parentsInformation.entrantId},#{parentsInformation.father_mobile_number},#{parentsInformation.father_name}," +
             "#{parentsInformation.father_second_name},#{parentsInformation.father_patronymic},#{parentsInformation.place_of_father_job}," +
-            "#{parentsInformation.mother_mobile_number},#{parentsInformation.mother_name},#{parentsInformation.mother_second_name'," +
+            "#{parentsInformation.mother_mobile_number},#{parentsInformation.mother_name},#{parentsInformation.mother_second_name}," +
             "#{parentsInformation.mother_patronymic},#{parentsInformation.place_of_mother_job},#{parentsInformation.additional_phone_number})")
-    long save(@Param("jobInformation") ParentsInformation parentsInformation);
+    long save(@Param("parentsInformation") ParentsInformation parentsInformation);
 }
