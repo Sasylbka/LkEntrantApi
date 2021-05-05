@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DiplomaType {
-    private int dipTypeId;
-    private String dipTypeName;
+    private int diplomaTypeId;
+    private String diplomaTypeName;
 }

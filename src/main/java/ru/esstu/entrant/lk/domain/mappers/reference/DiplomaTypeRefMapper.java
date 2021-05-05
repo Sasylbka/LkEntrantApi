@@ -15,8 +15,8 @@ public class DiplomaTypeRefMapper {
             return null;
         }
         return new DiplomaTypeDto(
-                vo.getDipTypeId(),
-                vo.getDipTypeName()
+                vo.getDiplomaTypeId(),
+                vo.getDiplomaTypeName()
         );
     }
     public DiplomaType toVO(DiplomaTypeDto dto) {
@@ -24,8 +24,8 @@ public class DiplomaTypeRefMapper {
             return null;
         }
         return new DiplomaType(
-                dto.getDipTypeId(),
-                dto.getDipTypeName()
+                dto.getDiplomaTypeId(),
+                dto.getDiplomaTypeName()
         );
     }
     public List<DiplomaTypeDto> toDtos (List<DiplomaType> vos) {

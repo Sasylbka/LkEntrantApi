@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Olimpiad {
-    private int OlimpiadId;
-    private String OlimpiadName;
+public class District
+{
+    private int DistrictId;
+    private String DistrictName;
 }

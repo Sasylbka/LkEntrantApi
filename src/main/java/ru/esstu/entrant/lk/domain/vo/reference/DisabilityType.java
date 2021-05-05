@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DisabilityType {
-    private int disTypeId;
-    private String disTypeName;
+    private int disabilityTypeId;
+    private String disabilityTypeName;
 }

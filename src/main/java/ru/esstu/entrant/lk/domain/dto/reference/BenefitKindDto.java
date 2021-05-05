@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BenefitKindDto {
-    private int benKindId;
-    private String benKindName;
+    private int benefitKindId;
+    private String benefitKindName;
 }

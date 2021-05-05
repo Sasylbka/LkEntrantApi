@@ -16,8 +16,8 @@ public class DisabilityTypeRefMapper {
         return null;
     }
     return new DisabilityTypeDto(
-            vo.getDisTypeId(),
-            vo.getDisTypeName()
+            vo.getDisabilityTypeId(),
+            vo.getDisabilityTypeName()
     );
 }
     public DisabilityType toVO(DisabilityTypeDto dto) {
@@ -25,8 +25,8 @@ public class DisabilityTypeRefMapper {
             return null;
         }
         return new DisabilityType(
-                dto.getDisTypeId(),
-                dto.getDisTypeName()
+                dto.getDisabilityTypeId(),
+                dto.getDisabilityTypeName()
         );
     }
     public List<DisabilityTypeDto> toDtos (List<DisabilityType> vos) {

@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DisabilityTypeDto {
-    private int disabilityTypeId;
-    private String disabilityTypeName;
+public class OlympiadDto {
+    private int OlimpiadId;
+    private String OlimpiadNumber;
+    private String OlimpiadName;
 }

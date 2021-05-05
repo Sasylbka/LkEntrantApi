@@ -16,8 +16,8 @@ public class BenefitKindRefMapper
             return null;
         }
         return new BenefitKindDto(
-                vo.getBenKindId(),
-                vo.getBenKindName()
+                vo.getBenefitKindId(),
+                vo.getBenefitKindName()
         );
     }
     public BenefitKind toVO(BenefitKindDto dto) {
@@ -25,8 +25,8 @@ public class BenefitKindRefMapper
             return null;
         }
         return new BenefitKind(
-                dto.getBenKindId(),
-                dto.getBenKindName()
+                dto.getBenefitKindId(),
+                dto.getBenefitKindName()
         );
     }
     public List<BenefitKindDto> toDtos (List<BenefitKind> vos) {

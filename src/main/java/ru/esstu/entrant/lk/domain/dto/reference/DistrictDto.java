@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DisabilityTypeDto {
-    private int disabilityTypeId;
-    private String disabilityTypeName;
+public class DistrictDto {
+    private int DistrictId;
+    private String DistrictName;
 }
