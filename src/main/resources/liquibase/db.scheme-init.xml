@@ -2,9 +2,9 @@
 <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet id="2021-05-05-entrant-lk-init-v.0.7" author="S.druzhinin">
+    <changeSet id="2021-07-05-entrant-lk-init-v.0.73" author="S.druzhinin">
         <createTable tableName="admission_info">
-            <column name="id"  type="varchar(80)">
+            <column name="id"  type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="entrant_id" type="integer"></column>
@@ -18,7 +18,7 @@
             <column name="third_direction" type="varchar(100)"/>
         </createTable>
         <createTable tableName="ask_of_result_trials">
-            <column name="id" type="varchar(80)">
+            <column name="id" type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="entrant_id" type="integer"></column>
@@ -27,7 +27,7 @@
             </column>
         </createTable>
         <createTable tableName="passport_data">
-            <column name="id" type="varchar(80)">
+            <column name="id" type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="entrant_id" type="integer"></column>
@@ -45,7 +45,7 @@
             </column>
         </createTable>
         <createTable tableName="entrant_private_data">
-            <column name="id" type="varchar(80)">
+            <column name="id" type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="entrant_id" type="integer"></column>
@@ -87,7 +87,7 @@
             </column>
         </createTable>
         <createTable tableName="parents_information">
-            <column name="id" type="varchar(80)">
+            <column name="id" type="serial">
                 <constraints nullable="false" unique="true" />
             </column>
             <column name="entrant_id" type="integer"></column>
@@ -104,7 +104,7 @@
             <column name="additional_phone_number" type="varchar(11)"/>
         </createTable>
         <createTable tableName="job_information">
-            <column name="id" type="varchar(80)">
+            <column name="id" type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="entrant_id" type="integer"></column>
@@ -121,7 +121,7 @@
             </column>
         </createTable>
         <createTable tableName="additional_information">
-            <column name="id" type="varchar(80)">
+            <column name="id" type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="index" type="varchar(6)">
@@ -146,7 +146,7 @@
             <column name="number_of_apartments" type="varchar(10)"/>
         </createTable>
         <createTable tableName="benefit_information">
-            <column name="id" type="varchar(80)">
+            <column name="id" type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="entrant_id" type="integer"></column>
@@ -167,7 +167,7 @@
             </column>
         </createTable>
         <createTable tableName="table_education_info">
-            <column name="id" type="varchar(80)">
+            <column name="id" type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="education" type="varchar(80)">
@@ -195,7 +195,7 @@
             </column>
         </createTable>
         <createTable tableName="educational_achievements">
-            <column name="id" type="varchar(80)">
+            <column name="id" type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="entrant_id" type="integer"></column>
@@ -211,6 +211,51 @@
             <column name="issued_by" type="varchar(30)"/>
             <column name="data_of_issued" type="date"/>
             <column name="candidate_minimums_passed" type="varchar(200)"/>
+        </createTable>
+        <createTable tableName="dialog_table">
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="moderator_id" type="serial">
+                <constraints nullable="false"/>
+            </column>
+            <column name="entrant_id" type="serial">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="message_table">
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="dialog_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="moderator">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="login" type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="second_name" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="patronymic" type="text">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
 
         <addForeignKeyConstraint baseTableName="contact_information"
@@ -268,8 +313,21 @@
                                  constraintName="fk_benefit_entrant"
                                  referencedTableName="entrant"
                                  referencedColumnNames="id"/>
-
-
+        <addForeignKeyConstraint baseTableName="dialog_table"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_dialog_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="dialog_table"
+                                 baseColumnNames="moderator_id"
+                                 constraintName="fk_dialog_moderator"
+                                 referencedTableName="moderator"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="message_table"
+                                 baseColumnNames="dialog_id"
+                                 constraintName="fk_message_dialog"
+                                 referencedTableName="dialog_table"
+                                 referencedColumnNames="id"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Entrant {
-    private int id;
-    private String login;
-    private String password;
-    private boolean status;
+public class Message {
+    private int Id;
+    private int dialogId;
+    private String message;
+    private String date;
 }

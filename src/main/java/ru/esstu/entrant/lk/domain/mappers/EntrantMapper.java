@@ -18,7 +18,8 @@ public class EntrantMapper {
         return new EntrantDto(
                 vo.getId(),
                 vo.getLogin(),
-                vo.getPassword()
+                vo.getPassword(),
+                vo.isStatus()
         );
     }
 
@@ -29,7 +30,8 @@ public class EntrantMapper {
         return new Entrant(
                 dto.getId(),
                 dto.getLogin(),
-                dto.getPassword()
+                dto.getPassword(),
+                dto.isStatus()
         );
     }
 }

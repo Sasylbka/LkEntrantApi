@@ -1,0 +1,24 @@
+package ru.esstu.entrant.lk.web;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import ru.esstu.entrant.lk.domain.dto.MessageDto;
+import ru.esstu.entrant.lk.services.MessageService;
+
+public class MessageController {
+
+    private final MessageService messageService;
+
+    public MessageController(MessageService messageService) {
+        this.messageService = messageService;
+    }
+    @RequestMapping(method = RequestMethod.GET, path = "/message")
+    public MessageDto get(final int id) {
+        return messageService.getMessage(id);
+    }
+    @RequestMapping(method = RequestMethod.POST, path = "/message")
+    public MessageDto save(@RequestBody final MessageDto MessageDto) {
+        return messageService.save(MessageDto);
+    }
+}

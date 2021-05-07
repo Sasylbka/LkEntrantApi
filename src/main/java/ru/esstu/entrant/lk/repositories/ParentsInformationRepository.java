@@ -10,7 +10,7 @@ public interface ParentsInformationRepository {
     ParentsInformation getParentsInformation(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO parents_information(entrantId, father_mobile_number, father_name, father_second_name, father_patronymic, place_of_father_job," +
+    @Insert("INSERT INTO parents_information(entrant_id, father_mobile_number, father_name, father_second_name, father_patronymic, place_of_father_job," +
             "mother_mobile_number, mother_name, mother_second_name, mother_patronymic, place_of_mother_job, additional_phone_number) " +
             "VALUES(#{parentsInformation.entrantId},#{parentsInformation.father_mobile_number},#{parentsInformation.father_name}," +
             "#{parentsInformation.father_second_name},#{parentsInformation.father_patronymic},#{parentsInformation.place_of_father_job}," +
