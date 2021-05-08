@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,5 +15,5 @@ public class PassportDataDto {
     private String serialNumber;
     private String placeOfIssue;
     private String codeOfSubdivision;
-    private String dateOfIssue;
+    private Date dateOfIssue;
 }

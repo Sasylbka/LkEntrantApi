@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.esstu.entrant.lk.domain.dto.BenefitInformationDto;
 import ru.esstu.entrant.lk.domain.dto.DialogDto;
 import ru.esstu.entrant.lk.services.DialogService;
+
+import java.util.List;
+
 @RestController
 @Slf4j
 public class DialogController {
@@ -17,11 +20,11 @@ public class DialogController {
         this.dialogService = dialogService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/edialog")
-    public DialogDto get(final int id) {
+    public List<DialogDto> get(final int id) {
         return dialogService.getModeratorDialog(id);
     }
     @RequestMapping(method = RequestMethod.GET, path = "/mdialog")
-    public DialogDto getEntrant(final int id) {
+    public List<DialogDto> getEntrant(final int id) {
         return dialogService.getEntrantDialog(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/dialog")

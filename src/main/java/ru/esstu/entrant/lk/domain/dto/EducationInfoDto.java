@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +17,7 @@ public class EducationInfoDto {
     private String documentOfEducation;
     private String documentOfEducationSerialNumber;
     private String placeOfFinished;
-    private String dateOfFinished;
+    private Date dateOfFinished;
     private String studiedLanguage;
     private String ifChoosenLevelOfEducationFirst;
 }

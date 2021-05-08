@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +18,6 @@ public class EducationalAchievementsDto {
     private String documentOfOlympiadVictories;
     private String documentOfOlympiadVictoriesSerialNumber;
     private String issuedBy;
-    private String dataOfIssued;
+    private Date dataOfIssued;
     private String candidateMinimumsPassed;
 }

@@ -3,6 +3,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +15,7 @@ public class EntrantPrivateDataDto {
     private String familyName;
     private String patronymic;
     private String gender;
-    private String dateOfBirth;
+    private Date dateOfBirth;
     private String cityOfBirth;
     private String regionOfBirth;
     private String Snills;
