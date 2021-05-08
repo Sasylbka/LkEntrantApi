@@ -3,7 +3,12 @@ package ru.esstu.entrant.lk.domain.mappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.esstu.entrant.lk.domain.dto.MessageDto;
+import ru.esstu.entrant.lk.domain.dto.MessageDto;
 import ru.esstu.entrant.lk.domain.vo.Message;
+import ru.esstu.entrant.lk.domain.vo.Message;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -30,5 +35,12 @@ public class MessageMapper {
                 dto.getMessage(),
                 dto.getDate()
         );
+    }
+    public List<MessageDto> toDtos (List<Message> vos) {
+        List<MessageDto> list = new ArrayList<>();
+        for (Message vo : vos) {
+            list.add(toDto(vo));
+        }
+        return list;
     }
 }

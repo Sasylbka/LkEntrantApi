@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Message {
-    private int Id;
+    private int id;
     private int dialogId;
     private String message;
-    private String date;
+    private Date date;
 }

@@ -4,6 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.esstu.entrant.lk.domain.dto.DialogDto;
 import ru.esstu.entrant.lk.domain.vo.Dialog;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @Component
 public class DialogMapper {
@@ -28,4 +32,12 @@ public class DialogMapper {
                 dto.getEntrantId()
         );
     }
+    public List<DialogDto> toDtos (List<Dialog> vos) {
+        List<DialogDto> list = new ArrayList<>();
+        for (Dialog vo : vos) {
+            list.add(toDto(vo));
+        }
+        return list;
+    }
+    
 }
