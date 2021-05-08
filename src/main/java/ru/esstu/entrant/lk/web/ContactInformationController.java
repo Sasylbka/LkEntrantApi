@@ -33,4 +33,8 @@ public class ContactInformationController {
     public ContactInformationDto save(@RequestBody final ContactInformationDto contactInformationDto) {
         return contactInformationService.save(contactInformationDto);
     }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/contactInformation")
+    public ContactInformationDto update(@RequestBody final ContactInformationDto contactInformationDto) {
+        return contactInformationService.update(contactInformationDto);
+    }
 }

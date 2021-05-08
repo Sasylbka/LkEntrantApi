@@ -20,15 +20,17 @@ public class ParentsInformationService {
         this.parentsInformationMapper = parentsInformationMapper;
     }
 
-
     public ParentsInformationDto getParentsInformation(final int id) {
         return parentsInformationMapper.toDto(parentsInformationRepository.getParentsInformation(id));
-//        return new TestTableDto(1, "NTCN");
     }
-
     public ParentsInformationDto save(final ParentsInformationDto parentsInformationDto) {
         ParentsInformation entity= parentsInformationMapper.toVO(parentsInformationDto);
         parentsInformationRepository.save(entity);
+        return parentsInformationMapper.toDto(entity);
+    }
+    public ParentsInformationDto update(final ParentsInformationDto parentsInformationDto) {
+        ParentsInformation entity= parentsInformationMapper.toVO(parentsInformationDto);
+        parentsInformationRepository.update(entity);
         return parentsInformationMapper.toDto(entity);
     }
 }

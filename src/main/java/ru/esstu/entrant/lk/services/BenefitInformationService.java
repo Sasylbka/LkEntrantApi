@@ -33,4 +33,9 @@ public class BenefitInformationService {
         benefitInformationRepository.save(entity);
         return benefitInformationMapper.toDto(entity);
     }
+    public BenefitInformationDto update(final BenefitInformationDto benefitInformationDto) {
+        BenefitInformation entity= benefitInformationMapper.toVO(benefitInformationDto);
+        benefitInformationRepository.update(entity);
+        return benefitInformationMapper.toDto(entity);
+    }
 }

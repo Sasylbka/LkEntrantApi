@@ -34,4 +34,10 @@ public class EntrantPrivateDataService {
         entrantPrivateDataRepository.save(entity);
         return entrantPrivateDataMapper.toDto(entity);
     }
+
+    public EntrantPrivateDataDto update(final EntrantPrivateDataDto entrantPrivateDataDto) {
+        EntrantPrivateData entity = entrantPrivateDataMapper.toVO(entrantPrivateDataDto);
+        entrantPrivateDataRepository.update(entity);
+        return entrantPrivateDataMapper.toDto(entity);
+    }
 }

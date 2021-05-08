@@ -33,4 +33,8 @@ public class EducationInfoController {
     public EducationInfoDto save(@RequestBody final EducationInfoDto educationInfoDto) {
         return educationInfoService.save(educationInfoDto);
     }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/educationInfo")
+    public EducationInfoDto update(@RequestBody final EducationInfoDto educationInfoDto) {
+        return educationInfoService.update(educationInfoDto);
+    }
 }

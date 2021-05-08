@@ -32,4 +32,8 @@ public class EntrantController {
     public EntrantDto save(@RequestBody final EntrantDto entrantDto) {
         return entrantService.save(entrantDto);
     }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/entrant")
+    public EntrantDto update(@RequestBody final EntrantDto entrantDto) {
+        return entrantService.update(entrantDto);
+    }
 }

@@ -33,4 +33,9 @@ public class AdditionalInformationController {
     {
         return additionalInformationService.save(additionalInformationDto);
     }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/additionalInformation")
+    public AdditionalInformationDto update(@RequestBody final AdditionalInformationDto additionalInformationDto)
+    {
+        return additionalInformationService.update(additionalInformationDto);
+    }
 }

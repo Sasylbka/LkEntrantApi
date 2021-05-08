@@ -29,4 +29,10 @@ public class AskOfResultTrialsService {
         askOfResultTrialsRepository.save(entity);
         return askOfResultTrialsMapper.toDto(entity);
     }
+
+    public AskOfResultTrialsDto update(final AskOfResultTrialsDto askOfResultTrialsDto) {
+        AskOfResultTrials entity= askOfResultTrialsMapper.toVO(askOfResultTrialsDto);
+        askOfResultTrialsRepository.update(entity);
+        return askOfResultTrialsMapper.toDto(entity);
+    }
 }

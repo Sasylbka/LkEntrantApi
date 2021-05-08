@@ -6,12 +6,20 @@ import ru.esstu.entrant.lk.domain.vo.EntrantPrivateData;
 
 @Mapper
 public interface EntrantPrivateDataRepository {
-    @Select("SELECT * FROM entrant_private_data WHERE id = #{id}")
+    @Select("SELECT * FROM entrant_private_data WHERE entrant_id = #{id}")
     EntrantPrivateData getEntrantPrivateData(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert("INSERT INTO entrant_private_data(entrantId, name, family_name, patronymic, gender, date_of_birth, city_of_birth, region_of_birth) " +
-            "VALUES(#{entrantPrivateData.entrantId},#{entrantPrivateData.name},#{entrantPrivateData.family_name},#{entrantPrivateData.patronymic}," +
-            "#{entrantPrivateData.gender},#{entrantPrivateData.date_of_birth},#{entrantPrivateData.city_of_birth},#{entrantPrivateData.region_of_birth})")
+            "VALUES(#{entrantPrivateData.entrantId},#{entrantPrivateData.name},#{entrantPrivateData.familyName},#{entrantPrivateData.patronymic}," +
+            "#{entrantPrivateData.gender},#{entrantPrivateData.dateOfBirth},#{entrantPrivateData.cityOfBirth},#{entrantPrivateData.regionOfBirth})")
     long save(@Param("entrantPrivateData") EntrantPrivateData entrantPrivateData);
+
+    @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
+    @Update("UPDATE entrant_private_data SET " +
+            "name=#{entrantPrivateData.name}, family_name=#{entrantPrivateData.familyName}, patronymic=#{entrantPrivateData.patronymic}, " +
+            "gender=#{entrantPrivateData.gender}, date_of_birth=#{entrantPrivateData.dateOfBirth}, " +
+            "city_of_birth=#{entrantPrivateData.cityOfBirth}, region_of_birth=#{entrantPrivateData.regionOfBirth} " +
+            "WHERE entrant_id=#{entrantPrivateData.entrantId}")
+    long update(@Param("entrantPrivateData") EntrantPrivateData entrantPrivateData);
 }

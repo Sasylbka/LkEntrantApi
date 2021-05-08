@@ -32,4 +32,8 @@ public class JobInformationController {
     public JobInformationDto save(@RequestBody final JobInformationDto jobInformationDto) {
         return jobInformationService.save(jobInformationDto);
     }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/jobInformation")
+    public JobInformationDto update(@RequestBody final JobInformationDto jobInformationDto) {
+        return jobInformationService.update(jobInformationDto);
+    }
 }

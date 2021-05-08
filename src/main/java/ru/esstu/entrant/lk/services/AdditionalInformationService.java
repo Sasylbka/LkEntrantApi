@@ -33,5 +33,10 @@ public class AdditionalInformationService {
         additionalInformationRepository.save(entity);
         return additionalInformationMapper.toDto(entity);
     }
-   
+    public AdditionalInformationDto update(final AdditionalInformationDto additionalInformationDto) {
+        AdditionalInformation entity= additionalInformationMapper.toVO(additionalInformationDto);
+        additionalInformationRepository.update(entity);
+        return additionalInformationMapper.toDto(entity);
+    }
+
 }

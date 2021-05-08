@@ -33,4 +33,8 @@ public class EntrantPrivateDataController {
     public EntrantPrivateDataDto save(@RequestBody final EntrantPrivateDataDto entrantPrivateDataDto) {
         return entrantPrivateDataService.save(entrantPrivateDataDto);
     }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/entrantPrivateData")
+    public EntrantPrivateDataDto update(@RequestBody final EntrantPrivateDataDto entrantPrivateDataDto) {
+        return entrantPrivateDataService.update(entrantPrivateDataDto);
+    }
 }

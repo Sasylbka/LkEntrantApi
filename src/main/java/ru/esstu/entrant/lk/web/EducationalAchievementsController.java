@@ -32,4 +32,8 @@ public class EducationalAchievementsController {
     public EducationalAchievementsDto save(@RequestBody final EducationalAchievementsDto educationalAchievementsDto) {
         return educationalAchievementsService.save(educationalAchievementsDto);
     }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/educationalAchievements")
+    public EducationalAchievementsDto update(@RequestBody final EducationalAchievementsDto educationalAchievementsDto) {
+        return educationalAchievementsService.update(educationalAchievementsDto);
+    }
 }

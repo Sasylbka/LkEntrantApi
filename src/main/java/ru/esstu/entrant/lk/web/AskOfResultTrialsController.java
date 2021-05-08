@@ -28,8 +28,14 @@ public class AskOfResultTrialsController {
     public AskOfResultTrialsDto get(final int id) {
         return askOfResultTrialsService.getAskOfResultTrials(id);
     }
+
     @RequestMapping(method = RequestMethod.POST, path = "/askOfResultTrials")
     public AskOfResultTrialsDto save(@RequestBody final AskOfResultTrialsDto askOfResultTrialsDto) {
         return askOfResultTrialsService.save(askOfResultTrialsDto);
+    }
+
+    @RequestMapping(method = RequestMethod.PATCH, path = "/askOfResultTrials")
+    public AskOfResultTrialsDto update(@RequestBody final AskOfResultTrialsDto askOfResultTrialsDto) {
+        return askOfResultTrialsService.update(askOfResultTrialsDto);
     }
 }

@@ -32,4 +32,10 @@ public class EducationalAchievementsService {
         educationalAchievementsRepository.save(entity);
         return educationalAchievementsMapper.toDto(entity);
     }
+
+    public EducationalAchievementsDto update(final EducationalAchievementsDto educationalAchievementsDto) {
+        EducationalAchievements entity= educationalAchievementsMapper.toVO(educationalAchievementsDto);
+        educationalAchievementsRepository.update(entity);
+        return educationalAchievementsMapper.toDto(entity);
+    }
 }

@@ -25,12 +25,15 @@ public class PassportDataService {
 
     public PassportDataDto getPassportData(final int id) {
         return passportDataMapper.toDto(passportDataRepository.getPassportData(id));
-//        return new TestTableDto(1, "NTCN");
     }
-
     public PassportDataDto save(final PassportDataDto passportDataDto) {
         PassportData entity= passportDataMapper.toVO(passportDataDto);
         passportDataRepository.save(entity);
+        return passportDataMapper.toDto(entity);
+    }
+    public PassportDataDto update(final PassportDataDto passportDataDto) {
+        PassportData entity= passportDataMapper.toVO(passportDataDto);
+        passportDataRepository.update(entity);
         return passportDataMapper.toDto(entity);
     }
 }

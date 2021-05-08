@@ -34,4 +34,10 @@ public class EducationInfoService {
         educationInfoRepository.save(entity);
         return educationInfoMapper.toDto(entity);
     }
+
+    public EducationInfoDto update(final EducationInfoDto educationInfoDto) {
+        EducationInfo entity= educationInfoMapper.toVO(educationInfoDto);
+        educationInfoRepository.update(entity);
+        return educationInfoMapper.toDto(entity);
+    }
 }

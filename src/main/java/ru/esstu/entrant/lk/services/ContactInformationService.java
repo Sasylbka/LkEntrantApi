@@ -28,5 +28,10 @@ public class ContactInformationService {
         contactInformationRepository.save(entity);
         return contactInformationMapper.toDto(entity);
     }
+    public ContactInformationDto update(final ContactInformationDto contactInformationDto) {
+        ContactInformation entity = contactInformationMapper.toVO(contactInformationDto);
+        contactInformationRepository.update(entity);
+        return contactInformationMapper.toDto(entity);
+    }
 
 }

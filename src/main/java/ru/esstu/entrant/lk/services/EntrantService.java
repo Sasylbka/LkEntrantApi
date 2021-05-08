@@ -25,11 +25,20 @@ public class EntrantService {
 
     public EntrantDto getEntrant(final int id) {
         return entrantMapper.toDto(entrantRepository.getEntrant(id));
-//        return new TestTableDto(1, "NTCN");
     }
     public EntrantDto save(final EntrantDto entrantDto) {
         Entrant entity= entrantMapper.toVO(entrantDto);
         entrantRepository.save(entity);
         return entrantMapper.toDto(entity);
     }
+    public EntrantDto update(final EntrantDto entrantDto) {
+        Entrant entity= entrantMapper.toVO(entrantDto);
+        entrantRepository.update(entity);
+        return entrantMapper.toDto(entity);
+    }
+    /*public EntrantDto updateStatus(final EntrantDto entrantDto) {
+        Entrant entity= entrantRepository.getEntrant(entrantDto.id);
+        entrantRepository.update(entity);
+        return entrantMapper.toDto(entity);
+    }*/
 }

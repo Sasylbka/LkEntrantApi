@@ -32,4 +32,8 @@ public class PassportDataController {
     public PassportDataDto save(@RequestBody final PassportDataDto passportDataDto) {
         return passportDataService.save(passportDataDto);
     }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/passportData")
+    public PassportDataDto update(@RequestBody final PassportDataDto passportDataDto) {
+        return passportDataService.update(passportDataDto);
+    }
 }

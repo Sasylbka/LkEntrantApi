@@ -33,4 +33,8 @@ public class ParentsInformationController {
     public ParentsInformationDto save(@RequestBody final ParentsInformationDto parentsInformationDto) {
         return parentsInformationService.save(parentsInformationDto);
     }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/parentsInformation")
+    public ParentsInformationDto update(@RequestBody final ParentsInformationDto parentsInformationDto) {
+        return parentsInformationService.update(parentsInformationDto);
+    }
 }

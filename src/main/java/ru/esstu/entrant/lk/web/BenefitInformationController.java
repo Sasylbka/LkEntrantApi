@@ -32,4 +32,8 @@ public class BenefitInformationController {
     public BenefitInformationDto save(@RequestBody final BenefitInformationDto benefitInformationDto) {
         return benefitInformationService.save(benefitInformationDto);
     }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/benefitInformation")
+    public BenefitInformationDto update(@RequestBody final BenefitInformationDto benefitInformationDto) {
+        return benefitInformationService.update(benefitInformationDto);
+    }
 }

@@ -32,4 +32,9 @@ public class AdmissionInfoService {
         admissionInfoRepository.save(entity);
         return admissionInfoMapper.toDto(entity);
     }
+    public AdmissionInfoDto update(final AdmissionInfoDto admissionInfoDto) {
+        AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);
+        admissionInfoRepository.update(entity);
+        return admissionInfoMapper.toDto(entity);
+    }
 }

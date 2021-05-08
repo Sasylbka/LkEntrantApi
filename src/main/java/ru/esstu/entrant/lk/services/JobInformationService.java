@@ -21,15 +21,17 @@ public class JobInformationService {
         this.jobInformationRepository = jobInformationRepository;
         this.jobInformationMapper = jobInformationMapper;
     }
-
-
     public JobInformationDto getJobInformation(final int id) {
         return jobInformationMapper.toDto(jobInformationRepository.getJobInformation(id));
     }
-
     public JobInformationDto save(final JobInformationDto jobInformationDto) {
         JobInformation entity= jobInformationMapper.toVO(jobInformationDto);
         jobInformationRepository.save(entity);
+        return jobInformationMapper.toDto(entity);
+    }
+    public JobInformationDto update(final JobInformationDto jobInformationDto) {
+        JobInformation entity= jobInformationMapper.toVO(jobInformationDto);
+        jobInformationRepository.update(entity);
         return jobInformationMapper.toDto(entity);
     }
 }

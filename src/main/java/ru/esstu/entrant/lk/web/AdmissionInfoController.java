@@ -33,4 +33,8 @@ public class AdmissionInfoController {
     public AdmissionInfoDto save(@RequestBody final AdmissionInfoDto admissionInfoDto) {
         return admissionInfoService.save(admissionInfoDto);
     }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/admissionInfo")
+    public AdmissionInfoDto update(@RequestBody final AdmissionInfoDto admissionInfoDto) {
+        return admissionInfoService.update(admissionInfoDto);
+    }
 }
