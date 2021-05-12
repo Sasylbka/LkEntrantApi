@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet id="2021-07-05-entrant-lk-init-v.0.73" author="S.druzhinin">
+    <changeSet id="2021-12-05-entrant-lk-init-v.0.76" author="S.druzhinin">
         <createTable tableName="admission_info">
             <column name="id"  type="serial">
                 <constraints nullable="false" unique="true"/>
@@ -68,7 +68,7 @@
             <column name="region_of_birth" type="varchar(80)" >
                 <constraints nullable="false"/>
             </column>
-            <column name="Snills" type="varchar(80)" >
+            <column name="snills" type="varchar(80)" >
                 <constraints nullable="false"/>
             </column>
         </createTable>

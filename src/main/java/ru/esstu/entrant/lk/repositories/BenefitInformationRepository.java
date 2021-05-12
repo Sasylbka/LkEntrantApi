@@ -10,7 +10,7 @@ public interface BenefitInformationRepository {
     BenefitInformation getBenefitInformation(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO benefit_information(entrantId, reason_for_the_benefit, document_for_the_benefit, serial_number_document_for_the_benefit, issued_by, data_of_issued) " +
+    @Insert("INSERT INTO benefit_information(entrant_id, reason_for_the_benefit, document_for_the_benefit, serial_number_document_for_the_benefit, issued_by, data_of_issued) " +
             "VALUES(#{benefitInformation.entrantId},#{benefitInformation.reasonForTheBenefit},#{benefitInformation.documentForTheBenefit}," +
             "#{benefitInformation.serialNumberDocumentForTheBenefit},#{benefitInformation.issuedBy},#{benefitInformation.dataOfIssued})")
     long save(@Param("benefitInformation") BenefitInformation benefitInformation);

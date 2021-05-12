@@ -10,7 +10,7 @@ public interface EducationalAchievementsRepository {
     EducationalAchievements getEducationalAchievements(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO educational_achievements(entrantId, medal, honors_degree, olympiad_participation, document_of_olympiad_victories," +
+    @Insert("INSERT INTO educational_achievements(entrant_id, medal, honors_degree, olympiad_participation, document_of_olympiad_victories," +
             "document_of_olympiad_victories_serial_number, issued_by, data_of_issued, candidate_minimums_passed) " +
             "VALUES(#{educationalAchievements.entrantId},#{educationalAchievements.medal},#{educationalAchievements.honorsDegree}," +
             "#{educationalAchievements.olympiadParticipation},#{educationalAchievements.documentOfOlympiadVictories}," +

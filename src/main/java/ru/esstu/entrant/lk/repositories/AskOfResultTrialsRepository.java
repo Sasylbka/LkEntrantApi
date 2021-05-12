@@ -11,7 +11,7 @@ public interface AskOfResultTrialsRepository {
     AskOfResultTrials getAskOfResultTrials(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO ask_of_result_trials(entrantId, result) " +
+    @Insert("INSERT INTO ask_of_result_trials(entrant_id, result) " +
             "VALUES(#{askOfResultTrials.entrantId},#{askOfResultTrials.result})")
     long save(@Param("askOfResultTrials") AskOfResultTrials askOfResultTrials);
 

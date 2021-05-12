@@ -11,7 +11,7 @@ public interface AdmissionInfoRepository {
     AdmissionInfo getAdmissionInfo(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO admission_info(entrantId, level_of_education, first_direction, second_direction, third_direction) " +
+    @Insert("INSERT INTO admission_info(entrant_id, level_of_education, first_direction, second_direction, third_direction) " +
             "VALUES(#{admissionInfo.entrantId},#{admissionInfo.levelOfEducation},#{admissionInfo.firstDirection}" +
             ",#{admissionInfo.secondDirection},#{admissionInfo.thirdDirection})")
     long save(@Param("admissionInfo") AdmissionInfo admissionInfo);

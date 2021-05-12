@@ -10,7 +10,7 @@ public interface JobInformationRepository {
     JobInformation getJobInformation(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO job_information(entrantId, place_of_job, position) VALUES(#{jobInformation.entrantId}," +
+    @Insert("INSERT INTO job_information(entrant_id, place_of_job, position) VALUES(#{jobInformation.entrantId}," +
             "#{jobInformation.placeOfJob},#{jobInformation.position})")
     long save(@Param("jobInformation") JobInformation jobInformation);
 
