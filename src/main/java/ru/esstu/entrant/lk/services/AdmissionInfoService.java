@@ -10,6 +10,8 @@ import ru.esstu.entrant.lk.domain.vo.AdditionalInformation;
 import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
 import ru.esstu.entrant.lk.repositories.AdmissionInfoRepository;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class AdmissionInfoService {
@@ -24,8 +26,8 @@ public class AdmissionInfoService {
     }
 
 
-    public AdmissionInfoDto getAdmissionInfo(final int id) {
-        return admissionInfoMapper.toDto(admissionInfoRepository.getAdmissionInfo(id));
+    public List<AdmissionInfoDto> getAdmissionInfo(final int id) {
+        return admissionInfoMapper.toDtos(admissionInfoRepository.getAdmissionInfo(id));
     }
     public AdmissionInfoDto save(final AdmissionInfoDto admissionInfoDto) {
         AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);

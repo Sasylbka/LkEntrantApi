@@ -13,6 +13,6 @@ public interface ContactInformationRepository {
     long save(@Param("contactInformation") ContactInformation contactInformation);
 
     @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
-    @Update("UPDATE contact_information SET mobile_number=#{contactInformation.mobileNumber} WHERE entrant_id#{contactInformation.entrantId}")
+    @Update("UPDATE contact_information SET mobile_number=#{contactInformation.mobileNumber} WHERE entrant_id=#{contactInformation.entrantId}")
     long update(@Param("contactInformation") ContactInformation contactInformation);
 }

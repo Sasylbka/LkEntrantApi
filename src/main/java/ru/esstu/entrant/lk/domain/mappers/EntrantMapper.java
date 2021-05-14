@@ -19,7 +19,7 @@ public class EntrantMapper {
                 vo.getId(),
                 vo.getLogin(),
                 vo.getPassword(),
-                vo.isStatus()
+                vo.getStatus()
         );
     }
 
@@ -31,7 +31,7 @@ public class EntrantMapper {
                 dto.getId(),
                 dto.getLogin(),
                 dto.getPassword(),
-                dto.isStatus()
+                dto.getStatus()
         );
     }
 }

@@ -9,6 +9,8 @@ import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
 import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
 import ru.esstu.entrant.lk.services.AdmissionInfoService;
 
+import java.util.List;
+
 /**
  * API Profile.
  */
@@ -26,7 +28,7 @@ public class AdmissionInfoController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/admissionInfo")
-    public AdmissionInfoDto get(final int id) {
+    public List<AdmissionInfoDto> get(final int id) {
         return admissionInfoService.getAdmissionInfo(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/admissionInfo")

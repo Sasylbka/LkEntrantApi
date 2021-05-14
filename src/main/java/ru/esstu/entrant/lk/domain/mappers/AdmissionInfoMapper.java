@@ -3,19 +3,20 @@ package ru.esstu.entrant.lk.domain.mappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
+import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
 import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
+import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Маппер.
  */
 @Slf4j
 @Component
 public class AdmissionInfoMapper {
-    /**
-     * Преобразование.
-     *
-     * @param vo объект
-     * @return dto
-     */
+
     public AdmissionInfoDto toDto(AdmissionInfo vo) {
         if (vo == null) {
             return null;
@@ -24,17 +25,14 @@ public class AdmissionInfoMapper {
                 vo.getId(),
                 vo.getEntrantId(),
                 vo.getLevelOfEducation(),
-                vo.getFirstDirection(),
-                vo.getSecondDirection(),
-                vo.getThirdDirection()
+                vo.getDirection(),
+                vo.isBudget(),
+                vo.isContract(),
+                vo.isTargetedTraining(),
+                vo.isQuota(),
+                vo.isConsent()
         );
     }
-    /**
-     * Преобразование.
-     *
-     * @param dto объект
-     * @return dto
-     */
     public AdmissionInfo toVO(AdmissionInfoDto dto) {
         if (dto == null) {
             return null;
@@ -43,9 +41,19 @@ public class AdmissionInfoMapper {
                 dto.getId(),
                 dto.getEntrantId(),
                 dto.getLevelOfEducation(),
-                dto.getFirstDirection(),
-                dto.getSecondDirection(),
-                dto.getThirdDirection()
+                dto.getDirection(),
+                dto.isBudget(),
+                dto.isContract(),
+                dto.isTargetedTraining(),
+                dto.isQuota(),
+                dto.isConsent()
         );
+    }
+    public List<AdmissionInfoDto> toDtos (List<AdmissionInfo> vos) {
+        List<AdmissionInfoDto> list = new ArrayList<>();
+        for (AdmissionInfo vo : vos) {
+            list.add(toDto(vo));
+        }
+        return list;
     }
 }

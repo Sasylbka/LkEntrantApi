@@ -10,7 +10,7 @@ public interface EntrantRepository {
     Entrant getEntrant(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO entrant(login, password,status) VALUES(#{entrant.login},#{entrant.password},#{entrant.status})")
+    @Insert("INSERT INTO entrant(login, password, status) VALUES(#{entrant.login},#{entrant.password},#{entrant.status})")
     long save(@Param("entrant") Entrant entrant);
     @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
     @Update("UPDATE entrant SET login=#{entrant.login}, password=#{entrant.password}, status=#{entrant.status} WHERE id=#{entrant.id}")
