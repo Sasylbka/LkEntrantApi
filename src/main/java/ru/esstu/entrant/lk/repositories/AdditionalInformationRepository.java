@@ -22,7 +22,7 @@ public interface AdditionalInformationRepository {
     @Update("UPDATE additional_information SET entrant_id=#{additionalInformation.entrantId}, index=#{additionalInformation.index}, " +
             "region=#{additionalInformation.region}, area=#{additionalInformation.area},city=#{additionalInformation.city}, " +
             "street=#{additionalInformation.street}, number_of_building=#{additionalInformation.numberOfBuilding}, " +
-            "number_of_apartments=#{additionalInformation.numberOfApartments} WHERE entrant_id=#{additionalInformation.entrantId}")
+            "number_of_apartments=#{additionalInformation.numberOfApartments} WHERE id=#{additionalInformation.entrantId}")
     long update(@Param("additionalInformation") AdditionalInformation additionalInformation);
 
 }

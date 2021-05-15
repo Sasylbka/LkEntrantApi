@@ -2,8 +2,8 @@
 <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet id="2021-12-05-entrant-lk-init-v.0.8" author="Nikita">
-        <createTable tableName="admission_info" >
+    <changeSet id="2021-15-05-entrant-lk-init-v.0.76" author="S.druzhinin">
+        <createTable tableName="admission_info">
             <column name="id"  type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
@@ -220,6 +220,15 @@
             <column name="data_of_issued" type="date"/>
             <column name="candidate_minimums_passed" type="varchar(200)"/>
         </createTable>
+        <createTable tableName="changes_data">
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="entrant_id" type="integer"></column>
+            <column name="date_of_creation" type="date"/>
+            <column name="date_of_send" type="date"/>
+            <column name="date_of_answer" type="date"/>
+        </createTable>
         <createTable tableName="dialog_table">
             <column name="id" type="serial">
                 <constraints nullable="false" unique="true"/>
@@ -265,15 +274,17 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
+
         <createTable tableName="consent">
-            <column name="id" type="serial">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="entrant_id" type="integer"></column>
-            <column name="admission_info_id" type="int"/>
-            <column name="date" type="date"/>
-            <column name="action_type" type="varchar(80)"/>
+        <column name="id" type="serial">
+            <constraints nullable="false" unique="true"/>
+        </column>
+        <column name="entrant_id" type="integer"></column>
+        <column name="admission_info_id" type="int"/>
+        <column name="date" type="date"/>
+        <column name="action_type" type="varchar(80)"/>
         </createTable>
+
         <addForeignKeyConstraint baseTableName="contact_information"
                                  baseColumnNames="entrant_id"
                                  constraintName="fk_contact_entrant"
@@ -345,14 +356,15 @@
                                  referencedTableName="dialog_table"
                                  referencedColumnNames="id"/>
         <addForeignKeyConstraint baseTableName="consent"
-                                 baseColumnNames="entrant_id"
-                                 constraintName="fk_contact_entrant"
-                                 referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
+                             baseColumnNames="entrant_id"
+                             constraintName="fk_contact_entrant"
+                             referencedTableName="entrant"
+                             referencedColumnNames="id"/>
         <addForeignKeyConstraint baseTableName="consent"
-                                 baseColumnNames="admission_info_id"
-                                 constraintName="fk_consent_admission"
-                                 referencedTableName="admission_info"
-                                 referencedColumnNames="id"/>
+                             baseColumnNames="admission_info_id"
+                             constraintName="fk_consent_admission"
+                             referencedTableName="admission_info"
+                             referencedColumnNames="id"/>
+
     </changeSet>
 </databaseChangeLog>
