@@ -12,7 +12,7 @@ stages:
   - build
 #  - test
   - package
-#  - deploy
+  - deploy
 
 build-regular:
   stage: build
