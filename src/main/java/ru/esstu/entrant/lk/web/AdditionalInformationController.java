@@ -9,6 +9,8 @@ import ru.esstu.entrant.lk.domain.dto.AdditionalInformationDto;
 import ru.esstu.entrant.lk.domain.vo.AdditionalInformation;
 import ru.esstu.entrant.lk.services.AdditionalInformationService;
 
+import java.util.List;
+
 /**
  * API Profile.
  */
@@ -25,7 +27,7 @@ public class AdditionalInformationController {
         this.additionalInformationService = additionalInformationService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/additionalInformation")
-    public AdditionalInformationDto get(final int id) {
+    public List<AdditionalInformationDto> get(final int id) {
         return additionalInformationService.getAdditionalInformation(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/additionalInformation")

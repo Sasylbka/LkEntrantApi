@@ -155,6 +155,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="number_of_apartments" type="varchar(10)"/>
+            <column name="type" type="text"></column>
         </createTable>
         <createTable tableName="benefit_information">
             <column name="id" type="serial">

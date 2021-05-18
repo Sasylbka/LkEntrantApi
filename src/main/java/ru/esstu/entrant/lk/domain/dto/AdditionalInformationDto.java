@@ -17,4 +17,7 @@ public class AdditionalInformationDto {
     private String street;
     private String numberOfBuilding;
     private String numberOfApartments;
+    private String type;
 }
+
+

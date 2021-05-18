@@ -3,7 +3,13 @@ package ru.esstu.entrant.lk.domain.mappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.esstu.entrant.lk.domain.dto.AdditionalInformationDto;
+import ru.esstu.entrant.lk.domain.dto.MessageDto;
 import ru.esstu.entrant.lk.domain.vo.AdditionalInformation;
+import ru.esstu.entrant.lk.domain.vo.Message;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Маппер.
  */
@@ -29,7 +35,8 @@ public class AdditionalInformationMapper {
                 vo.getCity(),
                 vo.getStreet(),
                 vo.getNumberOfBuilding(),
-                vo.getNumberOfApartments()
+                vo.getNumberOfApartments(),
+                vo.getType()
         );
     }
     /**
@@ -51,7 +58,15 @@ public class AdditionalInformationMapper {
                 dto.getCity(),
                 dto.getStreet(),
                 dto.getNumberOfBuilding(),
-                dto.getNumberOfApartments()
+                dto.getNumberOfApartments(),
+                dto.getType()
         );
+    }
+    public List<AdditionalInformationDto> toDtos (List<AdditionalInformation> vos) {
+        List<AdditionalInformationDto> list = new ArrayList<>();
+        for (AdditionalInformation vo : vos) {
+            list.add(toDto(vo));
+        }
+        return list;
     }
 }

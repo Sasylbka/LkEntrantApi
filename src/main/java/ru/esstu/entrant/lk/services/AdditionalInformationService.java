@@ -11,6 +11,8 @@ import ru.esstu.entrant.lk.domain.vo.ContactInformation;
 import ru.esstu.entrant.lk.domain.vo.JobInformation;
 import ru.esstu.entrant.lk.repositories.AdditionalInformationRepository;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class AdditionalInformationService {
@@ -25,8 +27,8 @@ public class AdditionalInformationService {
     }
 
 
-    public AdditionalInformationDto getAdditionalInformation(final int id) {
-        return additionalInformationMapper.toDto(additionalInformationRepository.getAdditionalInformation(id));
+    public List<AdditionalInformationDto> getAdditionalInformation(final int id) {
+        return additionalInformationMapper.toDtos(additionalInformationRepository.getAdditionalInformation(id));
     }
     public AdditionalInformationDto save(final AdditionalInformationDto additionalInformationDto) {
         AdditionalInformation entity= additionalInformationMapper.toVO(additionalInformationDto);
