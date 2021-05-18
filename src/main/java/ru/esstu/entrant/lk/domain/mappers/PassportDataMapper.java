@@ -25,7 +25,8 @@ public class PassportDataMapper {
         return new PassportDataDto(
                 vo.getId(),
                 vo.getEntrantId(),
-                vo.getSerialNumber(),
+                vo.getSeries(),
+                vo.getNumber(),
                 vo.getPlaceOfIssue(),
                 vo.getCodeOfSubdivision(),
                 vo.getDateOfIssue()
@@ -45,7 +46,8 @@ public class PassportDataMapper {
         return new PassportData(
                 dto.getId(),
                 dto.getEntrantId(),
-                dto.getSerialNumber(),
+                dto.getSeries(),
+                dto.getNumber(),
                 dto.getPlaceOfIssue(),
                 dto.getCodeOfSubdivision(),
                 dto.getDateOfIssue()

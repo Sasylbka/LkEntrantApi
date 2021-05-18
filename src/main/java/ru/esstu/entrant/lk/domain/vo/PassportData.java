@@ -12,7 +12,8 @@ import java.util.Date;
 public class PassportData {
     private int id;
     private int entrantId;
-    private String serialNumber;
+    private String series;
+    private String number;
     private String placeOfIssue;
     private String codeOfSubdivision;
     private Date dateOfIssue;

@@ -10,14 +10,14 @@ public interface PassportDataRepository {
     PassportData getPassportData(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO passport_data(entrant_id, serial_number, place_of_issue, code_of_subdivision, date_of_issue) " +
-            "VALUES(#{passportData.entrantId},#{passportData.serialNumber},#{passportData.placeOfIssue}," +
+    @Insert("INSERT INTO passport_data(entrant_id, series,number, place_of_issue, code_of_subdivision, date_of_issue) " +
+            "VALUES(#{passportData.entrantId},#{passportData.series},#{passportData.number},#{passportData.placeOfIssue}," +
             "#{passportData.codeOfSubdivision},#{passportData.dateOfIssue})")
     long save(@Param("passportData") PassportData passportData);
 
     @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
     @Update("UPDATE passport_data SET " +
-            "serial_number=#{passportData.serialNumber}, place_of_issue=#{passportData.placeOfIssue}, " +
+            "series=#{passportData.series},number=#{passportData.number}, place_of_issue=#{passportData.placeOfIssue}, " +
             "code_of_subdivision=#{passportData.codeOfSubdivision}, date_of_issue=#{passportData.dateOfIssue} WHERE entrant_id=#{passportData.entrantId}")
     long update(@Param("passportData") PassportData passportData);
 }

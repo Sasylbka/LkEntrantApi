@@ -39,7 +39,10 @@
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="entrant_id" type="integer"></column>
-            <column name="serial_number" type="varchar(10)">
+            <column name="series" type="text">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="number" type="text">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="place_of_issue" type="varchar(80)" >
