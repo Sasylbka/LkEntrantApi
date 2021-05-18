@@ -9,7 +9,7 @@ public interface MessageRepository {
     List<Message> getMessage(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO message_table(dialog_id,message,date) " +
-            "VALUES(#{message.dialogId},#{message.message},#{message.date})")
+    @Insert("INSERT INTO message_table(dialog_id,sender,message,date) " +
+            "VALUES(#{message.dialogId},#{message.sender},#{message.message},#{message.date})")
     long save(@Param("message") Message message);
 }
