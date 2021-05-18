@@ -78,18 +78,18 @@ package-docker-tags:
 #  script:
 #    - ssh entrant@entrant.esstu.ru 'cd ~/poligon/docker/entrant; ./lk-update.sh;'
 
-#deploy-docker-master:
-#  image: kroniak/ssh-client
-#  stage: deploy
-#  only:
-#    - master
-#  tags:
-#    - docker
-#  before_script:
-#    - mkdir -p ~/.ssh
-#    - chmod 700 ~/.ssh
-#    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-#    - echo "$SSH_PRIVATE_KEY_MASTER" > ~/.ssh/id_rsa
-#    - chmod 600 ~/.ssh/id_rsa
-#  script:
-#    - ssh esstu@$SSH_HOSTNAME_MASTER 'cd ~/poligon/docker/entrant-docker; ./lk-update.sh;'
+deploy-docker-master:
+  image: kroniak/ssh-client
+  stage: deploy
+  only:
+    - master
+  tags:
+    - docker
+  before_script:
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - echo "$SSH_PRIVATE_KEY_MASTER" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+  script:
+    - ssh vladimir@$SSH_HOSTNAME_MASTER 'cd docker/; ./entrant-lk-api-update.sh;'
