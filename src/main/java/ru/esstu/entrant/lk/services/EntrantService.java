@@ -18,7 +18,7 @@ public class EntrantService {
     private final EntrantMapper entrantMapper;
 
     public EntrantService(EntrantRepository entrantRepository,
-                                     EntrantMapper entrantMapper) {
+                          EntrantMapper entrantMapper) {
         this.entrantRepository = entrantRepository;
         this.entrantMapper = entrantMapper;
     }
@@ -26,15 +26,23 @@ public class EntrantService {
     public EntrantDto getEntrant(final int id) {
         return entrantMapper.toDto(entrantRepository.getEntrant(id));
     }
-    public EntrantDto save(final EntrantDto entrantDto) {
-        Entrant entity= entrantMapper.toVO(entrantDto);
-        entrantRepository.save(entity);
-        return entrantMapper.toDto(entity);
-    }
+
     public EntrantDto update(final EntrantDto entrantDto) {
-        Entrant entity= entrantMapper.toVO(entrantDto);
+        Entrant entity = entrantMapper.toVO(entrantDto);
         entrantRepository.update(entity);
         return entrantMapper.toDto(entity);
+    }
+
+    public Entrant getOrCreateEntrantByKeycloakGuid(final String guid) {
+        Entrant entrant = entrantRepository.getEntrantByKeycloakGuid(guid);
+        if (entrant == null) {
+            Entrant newEntrant = new Entrant();
+            newEntrant.setLogin("keycloak"); //пока не используется
+            newEntrant.setPassword("keycloak"); //пока не используется
+            entrantRepository.save(newEntrant, guid);
+            return newEntrant;
+        }
+        return entrant;
     }
     /*public EntrantDto updateStatus(final EntrantDto entrantDto) {
         Entrant entity= entrantRepository.getEntrant(entrantDto.id);
