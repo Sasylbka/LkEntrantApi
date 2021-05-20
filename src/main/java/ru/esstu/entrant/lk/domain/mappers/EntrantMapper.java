@@ -11,13 +11,6 @@ import ru.esstu.entrant.lk.domain.vo.Entrant;
 @Slf4j
 @Component
 public class EntrantMapper {
-
-    /**
-     * Преобразование.
-     *
-     * @param vo объект
-     * @return dto
-     */
     public EntrantDto toDto(Entrant vo) {
         if (vo == null) {
             return null;
@@ -25,16 +18,11 @@ public class EntrantMapper {
         return new EntrantDto(
                 vo.getId(),
                 vo.getLogin(),
-                vo.getPassword()
+                vo.getPassword(),
+                vo.getStatus()
         );
     }
 
-    /**
-     * Преобразование.
-     *
-     * @param dto объект
-     * @return dto
-     */
     public Entrant toVO(EntrantDto dto) {
         if (dto == null) {
             return null;
@@ -42,7 +30,8 @@ public class EntrantMapper {
         return new Entrant(
                 dto.getId(),
                 dto.getLogin(),
-                dto.getPassword()
+                dto.getPassword(),
+                dto.getStatus()
         );
     }
 }

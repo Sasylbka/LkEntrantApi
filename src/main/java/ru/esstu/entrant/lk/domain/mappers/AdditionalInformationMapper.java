@@ -3,7 +3,13 @@ package ru.esstu.entrant.lk.domain.mappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.esstu.entrant.lk.domain.dto.AdditionalInformationDto;
+import ru.esstu.entrant.lk.domain.dto.MessageDto;
 import ru.esstu.entrant.lk.domain.vo.AdditionalInformation;
+import ru.esstu.entrant.lk.domain.vo.Message;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Маппер.
  */
@@ -22,13 +28,15 @@ public class AdditionalInformationMapper {
         }
         return new AdditionalInformationDto(
                 vo.getId(),
+                vo.getEntrantId(),
                 vo.getIndex(),
                 vo.getRegion(),
                 vo.getArea(),
                 vo.getCity(),
                 vo.getStreet(),
-                vo.getNumber_of_building(),
-                vo.getNumber_of_apartments()
+                vo.getNumberOfBuilding(),
+                vo.getNumberOfApartments(),
+                vo.getType()
         );
     }
     /**
@@ -43,13 +51,22 @@ public class AdditionalInformationMapper {
         }
         return new AdditionalInformation(
                 dto.getId(),
+                dto.getEntrantId(),
                 dto.getIndex(),
                 dto.getRegion(),
                 dto.getArea(),
                 dto.getCity(),
                 dto.getStreet(),
-                dto.getNumber_of_building(),
-                dto.getNumber_of_apartments()
+                dto.getNumberOfBuilding(),
+                dto.getNumberOfApartments(),
+                dto.getType()
         );
+    }
+    public List<AdditionalInformationDto> toDtos (List<AdditionalInformation> vos) {
+        List<AdditionalInformationDto> list = new ArrayList<>();
+        for (AdditionalInformation vo : vos) {
+            list.add(toDto(vo));
+        }
+        return list;
     }
 }

@@ -4,17 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class EducationalAchievements {
-    private String id;
+    private int id;
+    private int entrantId;
     private String medal;
-    private String honors_degree;
-    private String olympiad_participation;
-    private String document_of_olympiad_victories;
-    private String document_of_olympiad_victories_serial_number;
-    private String issued_by;
-    private String data_of_issued;
-    private String candidate_minimums_passed;
+    private String honorsDegree;
+    private String olympiadParticipation;
+    private String documentOfOlympiadVictories;
+    private String documentOfOlympiadVictoriesSerialNumber;
+    private String issuedBy;
+    private Date dataOfIssued;
+    private String candidateMinimumsPassed;
 }

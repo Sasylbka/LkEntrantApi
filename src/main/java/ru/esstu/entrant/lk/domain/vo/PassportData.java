@@ -4,13 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PassportData {
-    private String id;
-    private String serial_number;
-    private String place_of_issue;
-    private String code_of_subdivision;
-    private String date_of_issue;
+    private int id;
+    private int entrantId;
+    private String series;
+    private String number;
+    private String placeOfIssue;
+    private String codeOfSubdivision;
+    private Date dateOfIssue;
 }

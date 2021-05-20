@@ -22,17 +22,18 @@ public class ParentsInformationMapper {
         }
         return new ParentsInformationDto(
                 vo.getId(),
-                vo.getFather_mobile_number(),
-                vo.getFather_name(),
-                vo.getFather_second_name(),
-                vo.getFather_patronymic(),
-                vo.getPlace_of_father_job(),
-                vo.getMother_mobile_number(),
-                vo.getMother_name(),
-                vo.getMother_second_name(),
-                vo.getMother_patronymic(),
-                vo.getPlace_of_mother_job(),
-                vo.getAdditional_phone_number()
+                vo.getEntrantId(),
+                vo.getFatherMobileNumber(),
+                vo.getFatherName(),
+                vo.getFatherSecondName(),
+                vo.getFatherPatronymic(),
+                vo.getPlaceOfFatherJob(),
+                vo.getMotherMobileNumber(),
+                vo.getMotherName(),
+                vo.getMotherSecondName(),
+                vo.getMotherPatronymic(),
+                vo.getPlaceOfMotherJob(),
+                vo.getAdditionalPhoneNumber()
         );
     }
     /**
@@ -47,17 +48,18 @@ public class ParentsInformationMapper {
         }
         return new ParentsInformation(
                 dto.getId(),
-                dto.getFather_mobile_number(),
-                dto.getFather_name(),
-                dto.getFather_second_name(),
-                dto.getFather_patronymic(),
-                dto.getPlace_of_father_job(),
-                dto.getMother_mobile_number(),
-                dto.getMother_name(),
-                dto.getMother_second_name(),
-                dto.getMother_patronymic(),
-                dto.getPlace_of_mother_job(),
-                dto.getAdditional_phone_number()
+                dto.getEntrantId(),
+                dto.getFatherMobileNumber(),
+                dto.getFatherName(),
+                dto.getFatherSecondName(),
+                dto.getFatherPatronymic(),
+                dto.getPlaceOfFatherJob(),
+                dto.getMotherMobileNumber(),
+                dto.getMotherName(),
+                dto.getMotherSecondName(),
+                dto.getMotherPatronymic(),
+                dto.getPlaceOfMotherJob(),
+                dto.getAdditionalPhoneNumber()
         );
     }
 }

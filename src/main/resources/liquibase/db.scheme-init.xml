@@ -2,57 +2,109 @@
 <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet id="2021-01-01-entrant-lk-init" author="v.dambiev">
+    <changeSet id="2021-18-05-entrant-lk-init-v.0.76" author="S.druzhinin">
         <createTable tableName="admission_info">
-            <column name="id" type="varchar(80)">
-                <constraints primaryKey="true" unique="true"/>
+            <column name="id"  type="serial">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="level_of_education" type="varchar(80)"/>
-            <column name="first_direction" type="varchar(100)"/>
-            <column name="second_direction" type="varchar(100)"/>
-            <column name="third_direction" type="varchar(100)"/>
+            <column name="entrant_id" type="integer"></column>
+            <column name="level_of_education" type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="direction"  type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="budget"  type="boolean">
+            </column>
+            <column name="contract"  type="boolean">
+            </column>
+            <column name="targeted_training"  type="boolean">
+            </column>
+            <column name="quota"  type="boolean">
+            </column>
+            <column name="consent"  type="boolean">
+            </column>
         </createTable>
         <createTable tableName="ask_of_result_trials">
-            <column name="id" type="varchar(80)">
-                <constraints primaryKey="true" unique="true"/>
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="result" type="varchar(80)"/>
+            <column name="entrant_id" type="integer"></column>
+            <column name="result"  type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <createTable tableName="passport_data">
-            <column name="id" type="varchar(80)">
-                <constraints primaryKey="true" unique="true"/>
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="serial_number" type="varchar(10)">
-                <constraints unique="true"/>
+            <column name="entrant_id" type="integer"></column>
+            <column name="series" type="text">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="place_of_issue" type="varchar(80)" />
-            <column name="place_of_issue" type="varchar(80)" />
-            <column name="code_of_subdivision" type="varchar(10)" />
-            <column name="date_of_issue" type="date" />
+            <column name="number" type="text">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="place_of_issue" type="varchar(80)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="code_of_subdivision" type="varchar(10)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_of_issue" type="date" >
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <createTable tableName="entrant_private_data">
-            <column name="id" type="varchar(80)">
-                <constraints primaryKey="true" unique="true"/>
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="name" type="varchar(80)" />
-            <column name="family_name" type="varchar(80)" />
+            <column name="entrant_id" type="integer"></column>
+            <column name="name" type="varchar(80)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="family_name" type="varchar(80)" >
+                <constraints nullable="false"/>
+            </column>
             <column name="patronymic" type="varchar(80)" />
-            <column name="gender" type="varchar(80)" />
-            <column name="date_of_birth" type="date" />
-            <column name="city_of_birth" type="varchar(80)" />
-            <column name="region_of_birth" type="varchar(80)" />
+            <column name="gender" type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_of_birth" type="date" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="city_of_birth" type="varchar(80)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="region_of_birth" type="varchar(80)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="snills" type="varchar(80)" >
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <createTable tableName="entrant">
-            <column name="login" type="varchar(80)"/>
-            <column name="password" type="varchar(80)"/>
-            <column name="id" type="varchar(80)">
-                <constraints primaryKey="true" unique="true"/>
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="login" type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="keycloak_guid" type="text">
+                <constraints nullable="true"/>
             </column>
         </createTable>
         <createTable tableName="parents_information">
-            <column name="id" type="varchar(80)">
-                <constraints primaryKey="true" unique="true"/>
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true" />
             </column>
+            <column name="entrant_id" type="integer"></column>
             <column name="father_mobile_number" type="varchar(11)"/>
             <column name="father_name" type="varchar(80)"/>
             <column name="father_second_name" type="varchar(80)"/>
@@ -66,71 +118,265 @@
             <column name="additional_phone_number" type="varchar(11)"/>
         </createTable>
         <createTable tableName="job_information">
-            <column name="id" type="varchar(80)">
-                <constraints primaryKey="true" unique="true"/>
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
             </column>
+            <column name="entrant_id" type="integer"></column>
             <column name="place_of_job" type="varchar(80)"/>
             <column name="position" type="varchar(80)"/>
         </createTable>
         <createTable tableName="contact_information">
-            <column name="id" type="varchar(80)">
-                <constraints primaryKey="true" unique="true"/>
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="mobile_number" type="varchar(11)"/>
+            <column name="entrant_id" type="integer"></column>
+            <column name="mobile_number" type="varchar(11)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <createTable tableName="additional_information">
-            <column name="id" type="varchar(80)">
-                <constraints primaryKey="true" unique="true"/>
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="index" type="varchar(6)"/>
-            <column name="region" type="varchar(40)"/>
-            <column name="area" type="varchar(40)"/>
-            <column name="city" type="varchar(40)"/>
-            <column name="street" type="varchar(40)"/>
-            <column name="number_of_building" type="varchar(10)"/>
+            <column name="index" type="varchar(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="entrant_id" type="integer"></column>
+            <column name="region" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="area" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="number_of_building" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
             <column name="number_of_apartments" type="varchar(10)"/>
+            <column name="type" type="text"></column>
         </createTable>
         <createTable tableName="benefit_information">
-            <column name="id" type="varchar(80)">
-                <constraints primaryKey="true" unique="true"/>
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="reason_for_the_benefit" type="varchar(80)"/>
-            <column name="document_for_the_benefit" type="varchar(20)"/>
+            <column name="entrant_id" type="integer"></column>
+            <column name="reason_for_the_benefit" type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="document_for_the_benefit" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
             <column name="serial_number_of_document_for_the_benefit" type="varchar(10)">
-            <constraints unique="true"/>
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="issued_by" type="varchar(30)"/>
-            <column name="data_of_issued" type="date"/>
+            <column name="issued_by" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_of_issued" type="date">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <createTable tableName="table_education_info">
-            <column name="id" type="varchar(80)">
-                <constraints primaryKey="true" unique="true"/>
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="education" type="varchar(80)"/>
-            <column name="years_of_finished" type="varchar(4)"/>
-            <column name="document_of_education" type="varchar(8)"/>
+            <column name="education" type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="entrant_id" type="integer"></column>
+            <column name="years_of_finished" type="varchar(4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="document_of_education" type="varchar(8)">
+                <constraints nullable="false"/>
+            </column>
             <column name="document_of_education_serial_number" type="varchar(14)">
-                <constraints unique="true"/>
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="place_of_finished" type="varchar(80)"/>
-            <column name="date_of_finished" type="date"/>
+            <column name="place_of_finished" type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_of_finished" type="date">
+                <constraints nullable="false"/>
+            </column>
             <column name="studied_language" type="varchar(20)"/>
-            <column name="if_choosen_level_of_education_first" type="varchar(3)"/>
+            <column name="if_choosen_level_of_education_first" type="varchar(3)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <createTable tableName="educational_achievements">
-            <column name="id" type="varchar(80)">
-                <constraints primaryKey="true" unique="true"/>
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
             </column>
+            <column name="entrant_id" type="integer"></column>
             <column name="medal" type="varchar(10)"/>
-            <column name="honors_degree" type="varchar(3)"/>
-            <column name="olympiad_participation" type="varchar(10)"/>
+            <column name="honors_degree" type="varchar(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="olympiad_participation"  type="varchar(10)"/>
             <column name="document_of_olympiad_victories" type="varchar(20)"/>
             <column name="document_of_olympiad_victories_serial_number" type="varchar(20)">
-            <constraints unique="true"/>
+                <constraints unique="true"/>
             </column>
             <column name="issued_by" type="varchar(30)"/>
             <column name="data_of_issued" type="date"/>
             <column name="candidate_minimums_passed" type="varchar(200)"/>
         </createTable>
+        <createTable tableName="changes_date">
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="entrant_id" type="integer"></column>
+            <column name="date_of_creation" type="date"/>
+            <column name="date_of_send" type="date"/>
+            <column name="date_of_answer" type="date"/>
+        </createTable>
+        <createTable tableName="dialog_table">
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="moderator_id" type="serial">
+                <constraints nullable="false"/>
+            </column>
+            <column name="entrant_id" type="serial">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="message_table">
+            <column name="id" type="serial">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="dialog_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sender" type="text"></column>
+            <column name="message" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="moderator">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="login" type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="second_name" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="patronymic" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="keycloak_guid" type="text">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="consent">
+        <column name="id" type="serial">
+            <constraints nullable="false" unique="true"/>
+        </column>
+        <column name="entrant_id" type="integer"></column>
+        <column name="admission_info_id" type="int"/>
+        <column name="date" type="date"/>
+        <column name="action_type" type="varchar(80)"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="contact_information"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_contact_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="additional_information"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_additional_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="table_education_info"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_education_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="educational_achievements"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_achievements_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="job_information"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_job_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="parents_information"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_parents_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="passport_data"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_passport_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="ask_of_result_trials"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_trials_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="admission_info"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_admission_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="benefit_information"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_benefit_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="entrant_private_data"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_benefit_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="dialog_table"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_dialog_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="dialog_table"
+                                 baseColumnNames="moderator_id"
+                                 constraintName="fk_dialog_moderator"
+                                 referencedTableName="moderator"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="message_table"
+                                 baseColumnNames="dialog_id"
+                                 constraintName="fk_message_dialog"
+                                 referencedTableName="dialog_table"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="consent"
+                             baseColumnNames="entrant_id"
+                             constraintName="fk_contact_entrant"
+                             referencedTableName="entrant"
+                             referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="consent"
+                             baseColumnNames="admission_info_id"
+                             constraintName="fk_consent_admission"
+                             referencedTableName="admission_info"
+                             referencedColumnNames="id"/>
+
+
     </changeSet>
 </databaseChangeLog>

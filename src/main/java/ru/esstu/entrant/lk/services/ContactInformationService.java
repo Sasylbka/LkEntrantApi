@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.ContactInformationDto;
 import ru.esstu.entrant.lk.domain.mappers.ContactInformationMapper;
+import ru.esstu.entrant.lk.domain.vo.ContactInformation;
 import ru.esstu.entrant.lk.repositories.ContactInformationRepository;
 
 @Service
@@ -19,9 +20,18 @@ public class ContactInformationService {
         this.contactInformationMapper = contactInformationMapper;
     }
 
-
-    public ContactInformationDto getContactInformation(final String id) {
+    public ContactInformationDto getContactInformation(final int id) {
         return contactInformationMapper.toDto(contactInformationRepository.getContactInformation(id));
-//        return new TestTableDto(1, "NTCN");
     }
+    public ContactInformationDto save(final ContactInformationDto contactInformationDto) {
+        ContactInformation entity = contactInformationMapper.toVO(contactInformationDto);
+        contactInformationRepository.save(entity);
+        return contactInformationMapper.toDto(entity);
+    }
+    public ContactInformationDto update(final ContactInformationDto contactInformationDto) {
+        ContactInformation entity = contactInformationMapper.toVO(contactInformationDto);
+        contactInformationRepository.update(entity);
+        return contactInformationMapper.toDto(entity);
+    }
+
 }

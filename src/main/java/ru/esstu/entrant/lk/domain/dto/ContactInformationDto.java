@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContactInformationDto {
-    private String id;
-    private String mobile_number;
+    private int id;
+    private int entrantId;
+    private String mobileNumber;
 }

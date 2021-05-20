@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.ParentsInformationDto;
 import ru.esstu.entrant.lk.domain.mappers.ParentsInformationMapper;
+import ru.esstu.entrant.lk.domain.vo.ParentsInformation;
 import ru.esstu.entrant.lk.repositories.ParentsInformationRepository;
 
 @Service
@@ -14,14 +15,22 @@ public class ParentsInformationService {
     private final ParentsInformationMapper parentsInformationMapper;
 
     public ParentsInformationService(ParentsInformationRepository parentsInformationRepository,
-                                ParentsInformationMapper parentsInformationMapper) {
+                                     ParentsInformationMapper parentsInformationMapper) {
         this.parentsInformationRepository = parentsInformationRepository;
         this.parentsInformationMapper = parentsInformationMapper;
     }
 
-
-    public ParentsInformationDto getParentsInformation(final String id) {
+    public ParentsInformationDto getParentsInformation(final int id) {
         return parentsInformationMapper.toDto(parentsInformationRepository.getParentsInformation(id));
-//        return new TestTableDto(1, "NTCN");
+    }
+    public ParentsInformationDto save(final ParentsInformationDto parentsInformationDto) {
+        ParentsInformation entity= parentsInformationMapper.toVO(parentsInformationDto);
+        parentsInformationRepository.save(entity);
+        return parentsInformationMapper.toDto(entity);
+    }
+    public ParentsInformationDto update(final ParentsInformationDto parentsInformationDto) {
+        ParentsInformation entity= parentsInformationMapper.toVO(parentsInformationDto);
+        parentsInformationRepository.update(entity);
+        return parentsInformationMapper.toDto(entity);
     }
 }

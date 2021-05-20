@@ -8,12 +8,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdditionalInformationDto {
-    private String id;
+    private int id;
+    private int entrantId;
     private String index;
     private String region;
     private String area;
     private String city;
     private String street;
-    private String number_of_building;
-    private String number_of_apartments;
+    private String numberOfBuilding;
+    private String numberOfApartments;
+    private String type;
 }
+
+

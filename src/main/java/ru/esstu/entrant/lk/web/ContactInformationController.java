@@ -1,10 +1,12 @@
 package ru.esstu.entrant.lk.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.esstu.entrant.lk.domain.dto.ContactInformationDto;
+import ru.esstu.entrant.lk.domain.vo.ContactInformation;
 import ru.esstu.entrant.lk.services.ContactInformationService;
 
 /**
@@ -17,13 +19,22 @@ public class ContactInformationController {
     /**
      * Сервис.
      */
-    private final ContactInformationService ContactInformationService;
+    private final ContactInformationService contactInformationService;
 
-    public ContactInformationController(ContactInformationService ContactInformationService) {
-        this.ContactInformationService = ContactInformationService;
+    public ContactInformationController(ContactInformationService contactInformationService) {
+        this.contactInformationService = contactInformationService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/ContactInformation")
-    public ContactInformationDto test(final String id) {
-        return ContactInformationService.getContactInformation(id);
+    @RequestMapping(method = RequestMethod.GET, path = "/contactInformation")
+    public ContactInformationDto get(final int id) {
+
+        return contactInformationService.getContactInformation(id);
+    }
+    @RequestMapping(method = RequestMethod.POST, path = "/contactInformation")
+    public ContactInformationDto save(@RequestBody final ContactInformationDto contactInformationDto) {
+        return contactInformationService.save(contactInformationDto);
+    }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/contactInformation")
+    public ContactInformationDto update(@RequestBody final ContactInformationDto contactInformationDto) {
+        return contactInformationService.update(contactInformationDto);
     }
 }

@@ -4,17 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class EducationInfoDto {
-    private String id;
+    private int id;
+    private int entrantId;
     private String education;
-    private String year_of_finished;
-    private String document_of_education;
-    private String document_of_education_serial_number;
-    private String place_of_finished;
-    private String date_of_finished;
-    private String studied_language;
-    private String if_choosen_level_of_education_first;
+    private String yearOfFinished;
+    private String documentOfEducation;
+    private String documentOfEducationSerialNumber;
+    private String placeOfFinished;
+    private Date dateOfFinished;
+    private String studiedLanguage;
+    private String ifChoosenLevelOfEducationFirst;
 }

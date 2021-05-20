@@ -8,16 +8,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParentsInformation {
-    private String id;
-    private String father_mobile_number;
-    private String father_name;
-    private String father_second_name;
-    private String father_patronymic;
-    private String place_of_father_job;
-    private String mother_mobile_number;
-    private String mother_name;
-    private String mother_second_name;
-    private String mother_patronymic;
-    private String place_of_mother_job;
-    private String additional_phone_number;
+    private int id;
+    private int entrantId;
+    private String fatherMobileNumber;
+    private String fatherName;
+    private String fatherSecondName;
+    private String fatherPatronymic;
+    private String placeOfFatherJob;
+    private String motherMobileNumber;
+    private String motherName;
+    private String motherSecondName;
+    private String motherPatronymic;
+    private String placeOfMotherJob;
+    private String additionalPhoneNumber;
 }

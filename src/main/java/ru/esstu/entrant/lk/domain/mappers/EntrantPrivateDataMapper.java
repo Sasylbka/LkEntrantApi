@@ -24,13 +24,15 @@ public class EntrantPrivateDataMapper {
         }
         return new EntrantPrivateDataDto(
                 vo.getId(),
+                vo.getEntrantId(),
                 vo.getName(),
-                vo.getFamily_name(),
+                vo.getFamilyName(),
                 vo.getPatronymic(),
                 vo.getGender(),
-                vo.getDate_of_birth(),
-                vo.getCity_of_birth(),
-                vo.getRegion_of_birth()
+                vo.getDateOfBirth(),
+                vo.getCityOfBirth(),
+                vo.getRegionOfBirth(),
+                vo.getSnills()
         );
     }
 
@@ -46,13 +48,15 @@ public class EntrantPrivateDataMapper {
         }
         return new EntrantPrivateData(
                 dto.getId(),
+                dto.getEntrantId(),
                 dto.getName(),
-                dto.getFamily_name(),
+                dto.getFamilyName(),
                 dto.getPatronymic(),
                 dto.getGender(),
-                dto.getDate_of_birth(),
-                dto.getCity_of_birth(),
-                dto.getRegion_of_birth()
+                dto.getDateOfBirth(),
+                dto.getCityOfBirth(),
+                dto.getRegionOfBirth(),
+                dto.getSnills()
         );
     }
 }

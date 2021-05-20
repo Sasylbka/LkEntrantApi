@@ -22,7 +22,8 @@ public class JobInformationMapper {
         }
         return new JobInformationDto(
                 vo.getId(),
-                vo.getPlace_of_job(),
+                vo.getEntrantId(),
+                vo.getPlaceOfJob(),
                 vo.getPosition()
         );
     }
@@ -38,7 +39,8 @@ public class JobInformationMapper {
         }
         return new JobInformation(
                 dto.getId(),
-                dto.getPlace_of_job(),
+                dto.getEntrantId(),
+                dto.getPlaceOfJob(),
                 dto.getPosition()
         );
     }

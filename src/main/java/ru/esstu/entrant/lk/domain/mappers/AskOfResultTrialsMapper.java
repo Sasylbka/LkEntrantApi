@@ -24,6 +24,7 @@ public class AskOfResultTrialsMapper {
         }
         return new AskOfResultTrialsDto(
                 vo.getId(),
+                vo.getEntrantId(),
                 vo.getResult()
         );
     }
@@ -40,6 +41,7 @@ public class AskOfResultTrialsMapper {
         }
         return new AskOfResultTrials(
                 dto.getId(),
+                dto.getEntrantId(),
                 dto.getResult()
         );
     }

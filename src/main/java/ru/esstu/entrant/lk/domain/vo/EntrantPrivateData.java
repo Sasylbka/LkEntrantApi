@@ -1,20 +1,22 @@
 package ru.esstu.entrant.lk.domain.vo;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EntrantPrivateData
-{
-    private String id;
+public class EntrantPrivateData {
+    private int id;
+    private int entrantId;
     private String name;
-    private String family_name;
+    private String familyName;
     private String patronymic;
     private String gender;
-    private String date_of_birth;
-    private String city_of_birth;
-    private String region_of_birth;
+    private Date dateOfBirth;
+    private String cityOfBirth;
+    private String regionOfBirth;
+    private String snills;
 }

@@ -3,7 +3,10 @@ package ru.esstu.entrant.lk.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.EducationalAchievementsDto;
+import ru.esstu.entrant.lk.domain.dto.EducationalAchievementsDto;
 import ru.esstu.entrant.lk.domain.mappers.EducationalAchievementsMapper;
+import ru.esstu.entrant.lk.domain.vo.EducationalAchievements;
+import ru.esstu.entrant.lk.domain.vo.EducationalAchievements;
 import ru.esstu.entrant.lk.repositories.EducationalAchievementsRepository;
 
 @Service
@@ -20,8 +23,19 @@ public class EducationalAchievementsService {
     }
 
 
-    public EducationalAchievementsDto getEducationalAchievements(final String id) {
+    public EducationalAchievementsDto getEducationalAchievements(final int id) {
         return educationalAchievementsMapper.toDto(educationalAchievementsRepository.getEducationalAchievements(id));
-//        return new TestTableDto(1, "NTCN");
+    }
+
+    public EducationalAchievementsDto save(final EducationalAchievementsDto educationalAchievementsDto) {
+        EducationalAchievements entity= educationalAchievementsMapper.toVO(educationalAchievementsDto);
+        educationalAchievementsRepository.save(entity);
+        return educationalAchievementsMapper.toDto(entity);
+    }
+
+    public EducationalAchievementsDto update(final EducationalAchievementsDto educationalAchievementsDto) {
+        EducationalAchievements entity= educationalAchievementsMapper.toVO(educationalAchievementsDto);
+        educationalAchievementsRepository.update(entity);
+        return educationalAchievementsMapper.toDto(entity);
     }
 }
