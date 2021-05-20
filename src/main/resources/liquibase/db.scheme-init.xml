@@ -224,7 +224,7 @@
             <column name="data_of_issued" type="date"/>
             <column name="candidate_minimums_passed" type="varchar(200)"/>
         </createTable>
-        <createTable tableName="changes_data">
+        <createTable tableName="changes_date">
             <column name="id" type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
