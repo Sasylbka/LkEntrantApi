@@ -15,4 +15,7 @@ public interface EntrantRepository {
     @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
     @Update("UPDATE entrant SET login=#{entrant.login}, password=#{entrant.password}, status=#{entrant.status} WHERE id=#{entrant.id}")
     long update(@Param("entrant") Entrant entrant);
+    @Options( keyProperty = "id", keyColumn = "id")
+    @Update("UPDATE entrant SET status=#{entrant.status} WHERE id=#{entrant.id}")
+    long updateStatus(@Param("entrant") Entrant entrant);
 }

@@ -36,4 +36,8 @@ public class EntrantController {
     public EntrantDto update(@RequestBody final EntrantDto entrantDto) {
         return entrantService.update(entrantDto);
     }
+    @RequestMapping(method = RequestMethod.PATCH, path = "/entrantStatus")
+    public Entrant updateStatus(@RequestBody final Entrant entrant) {
+        return entrantService.updateStatus(entrant);
+    }
 }

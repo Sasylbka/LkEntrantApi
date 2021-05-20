@@ -36,9 +36,9 @@ public class EntrantService {
         entrantRepository.update(entity);
         return entrantMapper.toDto(entity);
     }
-    /*public EntrantDto updateStatus(final EntrantDto entrantDto) {
-        Entrant entity= entrantRepository.getEntrant(entrantDto.id);
-        entrantRepository.update(entity);
-        return entrantMapper.toDto(entity);
-    }*/
+    public Entrant updateStatus(final Entrant entrant) {
+        Entrant entity= entrant;
+        entrantRepository.updateStatus(entity);
+        return entity;
+    }
 }
