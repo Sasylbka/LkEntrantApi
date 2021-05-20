@@ -29,11 +29,6 @@ public class EntrantController {
     public EntrantDto get(final int id) {
         return entrantService.getEntrant(id);
     }
-
-    //    @RequestMapping(method = RequestMethod.POST, path = "/entrant")
-//    public EntrantDto save(@RequestBody final EntrantDto entrantDto) {
-//        return entrantService.save(entrantDto);
-//    }
     @RequestMapping(method = RequestMethod.PATCH, path = "/entrant")
     public EntrantDto update(@RequestBody final EntrantDto entrantDto) {
         return entrantService.update(entrantDto);

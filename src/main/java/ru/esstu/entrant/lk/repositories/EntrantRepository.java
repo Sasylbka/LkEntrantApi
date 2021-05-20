@@ -9,10 +9,18 @@ public interface EntrantRepository {
     @Select("SELECT * FROM entrant WHERE id = #{id}")
     Entrant getEntrant(@Param("id") int id);
 
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO entrant(login, password, status) VALUES(#{entrant.login},#{entrant.password},#{entrant.status})")
-    long save(@Param("entrant") Entrant entrant);
+    @Select("SELECT * FROM entrant WHERE keycloak_guid = #{guid}")
+    Entrant getEntrantByKeycloakGuid(String guid);
+
+    @Options(useGeneratedKeys = true, keyProperty = "entrant.id", keyColumn = "id")
+    @Insert("INSERT INTO entrant(login, password, status, keycloak_guid) VALUES(#{entrant.login},#{entrant.password},#{entrant.status},#{keycloakGuid})")
+    long save(@Param("entrant") Entrant entrant, @Param("keycloakGuid") String guid);
+
     @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
     @Update("UPDATE entrant SET login=#{entrant.login}, password=#{entrant.password}, status=#{entrant.status} WHERE id=#{entrant.id}")
     long update(@Param("entrant") Entrant entrant);
+
+    @Options( keyProperty = "id", keyColumn = "id")
+    @Update("UPDATE entrant SET status=#{entrant.status} WHERE id=#{entrant.id}")
+    long updateStatus(@Param("entrant") Entrant entrant);
 }
