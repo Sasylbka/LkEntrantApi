@@ -14,7 +14,7 @@ public class ModeratorService {
     private final ModeratorMapper moderatorMapper;
 
     public ModeratorService(ModeratorRepository moderatorRepository,
-                                 ModeratorMapper moderatorMapper) {
+                            ModeratorMapper moderatorMapper) {
         this.moderatorRepository = moderatorRepository;
         this.moderatorMapper = moderatorMapper;
     }
@@ -24,4 +24,15 @@ public class ModeratorService {
         return moderatorMapper.toDto(moderatorRepository.getModerator(id));
     }
 
+    public Moderator getOrCreateModeratorByKeycloakGuid(final String guid) {
+        Moderator moderator = moderatorRepository.getModeratorByKeycloakGuid(guid);
+        if (moderator == null) {
+            Moderator newModerator = new Moderator();
+            newModerator.setLogin("keycloak"); //пока не используется
+            newModerator.setPassword("keycloak"); //пока не используется
+            moderatorRepository.save(newModerator, guid);
+            return newModerator;
+        }
+        return moderator;
+    }
 }

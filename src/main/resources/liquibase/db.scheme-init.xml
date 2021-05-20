@@ -96,6 +96,9 @@
             <column name="status" type="text">
                 <constraints nullable="true"/>
             </column>
+            <column name="keycloak_guid" type="text">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
         <createTable tableName="parents_information">
             <column name="id" type="serial">
@@ -276,6 +279,9 @@
                 <constraints nullable="true"/>
             </column>
             <column name="patronymic" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="keycloak_guid" type="text">
                 <constraints nullable="true"/>
             </column>
         </createTable>

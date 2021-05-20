@@ -68,7 +68,7 @@ public class EntrantLkConfiguration extends KeycloakWebSecurityConfigurerAdapter
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/swagger-resources/**", "/swagger-ui.html", "/v2/api-docs", "/webjars/**","/**");
+        web.ignoring().antMatchers("/swagger-resources/**", "/swagger-ui.html", "/v2/api-docs", "/webjars/**");
     }
 
     @Bean
