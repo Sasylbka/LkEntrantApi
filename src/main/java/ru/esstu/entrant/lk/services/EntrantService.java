@@ -3,12 +3,11 @@ package ru.esstu.entrant.lk.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.EntrantDto;
-import ru.esstu.entrant.lk.domain.dto.EntrantDto;
 import ru.esstu.entrant.lk.domain.mappers.EntrantMapper;
 import ru.esstu.entrant.lk.domain.vo.Entrant;
-import ru.esstu.entrant.lk.domain.vo.Entrant;
-import ru.esstu.entrant.lk.domain.vo.JobInformation;
+import ru.esstu.entrant.lk.exceptions.PermissionDeniedException;
 import ru.esstu.entrant.lk.repositories.EntrantRepository;
+import ru.esstu.entrant.lk.utils.UserUtils;
 
 @Service
 @Slf4j
@@ -24,14 +23,25 @@ public class EntrantService {
     }
 
     public EntrantDto getEntrant(final int id) {
+        if (!UserUtils.hasCommonAccess(id,
+                getOrCreateEntrantByKeycloakGuid(UserUtils.getCurrentUserKeycloakGuid()).getId())) {
+            throw new PermissionDeniedException(
+                    "Нет прав доступа. ИД пользователя : " + id);
+        }
         return entrantMapper.toDto(entrantRepository.getEntrant(id));
     }
 
     public EntrantDto update(final EntrantDto entrantDto) {
+        if (!UserUtils.hasCommonAccess(entrantDto.getId(),
+                getOrCreateEntrantByKeycloakGuid(UserUtils.getCurrentUserKeycloakGuid()).getId())) {
+            throw new PermissionDeniedException(
+                    "Нет прав доступа. ИД пользователя : " + entrantDto.getId());
+        }
         Entrant entity = entrantMapper.toVO(entrantDto);
         entrantRepository.update(entity);
         return entrantMapper.toDto(entity);
     }
+
     public Entrant updateStatus(final Entrant entrant) {
         Entrant entity = entrant;
         entrantRepository.updateStatus(entity);
