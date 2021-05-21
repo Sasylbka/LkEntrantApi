@@ -4,10 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.DialogDto;
 import ru.esstu.entrant.lk.domain.dto.DialogDto;
+import ru.esstu.entrant.lk.domain.dto.MessageDto;
 import ru.esstu.entrant.lk.domain.mappers.DialogMapper;
 import ru.esstu.entrant.lk.domain.vo.Dialog;
 import ru.esstu.entrant.lk.repositories.DialogRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,10 +26,23 @@ public class DialogService {
 
 
     public List<DialogDto> getModeratorDialog(final int id) {
-        return dialogMapper.toDtos(dialogRepository.getModeratorDialog(id));
+        List<DialogDto> temp = dialogMapper.toDtos(dialogRepository.getModeratorDialog(id));
+        if(temp.size()==0){
+            DialogDto dialogDto = new DialogDto(0,0,0);
+            temp.add(dialogDto);
+            return temp;
+        }
+        return temp;
     }
     public List<DialogDto> getEntrantDialog(final int id) {
-        return dialogMapper.toDtos(dialogRepository.getEntrantDialog(id));
+
+        List<DialogDto> temp =dialogMapper.toDtos(dialogRepository.getEntrantDialog(id));
+        if(temp.size()==0){
+            DialogDto dialogDto = new DialogDto(0,0,0);
+            temp.add(dialogDto);
+            return temp;
+        }
+        return temp;
     }
     public DialogDto save(final DialogDto dialogDto) {
         Dialog entity= dialogMapper.toVO(dialogDto);

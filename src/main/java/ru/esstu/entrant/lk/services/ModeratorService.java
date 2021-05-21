@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.services;
 
 import lombok.extern.slf4j.Slf4j;
+import org.geolatte.geom.M;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.ModeratorDto;
 import ru.esstu.entrant.lk.domain.mappers.ModeratorMapper;
@@ -21,7 +22,12 @@ public class ModeratorService {
 
 
     public ModeratorDto getModerator(final int id) {
-        return moderatorMapper.toDto(moderatorRepository.getModerator(id));
+        ModeratorDto temp = moderatorMapper.toDto(moderatorRepository.getModerator(id));
+        if(temp==null){
+            temp= new ModeratorDto(0,"","",null,null,null);
+            return temp;
+        }
+        return temp;
     }
 
     public Moderator getOrCreateModeratorByKeycloakGuid(final String guid) {

@@ -24,7 +24,12 @@ public class EducationalAchievementsService {
 
 
     public EducationalAchievementsDto getEducationalAchievements(final int id) {
-        return educationalAchievementsMapper.toDto(educationalAchievementsRepository.getEducationalAchievements(id));
+        EducationalAchievementsDto temp = educationalAchievementsMapper.toDto(educationalAchievementsRepository.getEducationalAchievements(id));
+        if (temp==null){
+            temp=new EducationalAchievementsDto(0,0,null,null,null,null,null,null,null,null);
+            return temp;
+        }
+        return temp;
     }
 
     public EducationalAchievementsDto save(final EducationalAchievementsDto educationalAchievementsDto) {

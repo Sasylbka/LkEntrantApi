@@ -22,7 +22,12 @@ public class AskOfResultTrialsService {
 
 
     public AskOfResultTrialsDto getAskOfResultTrials(final int id) {
-        return askOfResultTrialsMapper.toDto(askOfResultTrialsRepository.getAskOfResultTrials(id));
+        AskOfResultTrialsDto temp = askOfResultTrialsMapper.toDto(askOfResultTrialsRepository.getAskOfResultTrials(id));
+        if(temp==null){
+            temp=new AskOfResultTrialsDto(0,0,null);
+            return temp;
+        }
+        return temp;
     }
     public AskOfResultTrialsDto save(final AskOfResultTrialsDto askOfResultTrialsDto) {
         AskOfResultTrials entity= askOfResultTrialsMapper.toVO(askOfResultTrialsDto);

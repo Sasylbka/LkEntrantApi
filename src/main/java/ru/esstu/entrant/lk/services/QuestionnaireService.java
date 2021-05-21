@@ -19,6 +19,12 @@ public class QuestionnaireService {
         this.questionnaireMapper = questionnaireMapper;
     }
     public List<QuestionnaireDto> getQuestionnaire() {
-        return questionnaireMapper.toDtos(questionnaireRepository.getQuestionnaire());
+        List<QuestionnaireDto> temp = questionnaireMapper.toDtos(questionnaireRepository.getQuestionnaire());
+        if(temp.size()==0){
+            QuestionnaireDto questionnaireDto = new QuestionnaireDto(0,0,null,null,null,null,null,null,null,null,null);
+            temp.add(questionnaireDto);
+            return temp;
+        }
+        return temp;
     }
 }

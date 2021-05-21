@@ -1,8 +1,7 @@
 package ru.esstu.entrant.lk.repositories;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import ru.esstu.entrant.lk.domain.vo.ContactInformation;
 import ru.esstu.entrant.lk.domain.vo.Questionnaire;
 
 import java.util.List;
@@ -22,4 +21,8 @@ public interface QuestionnaireRepository {
             "and entrant.id=admission_info.entrant_id " +
             "and entrant.id=changes_date.entrant_id ")
     List<Questionnaire> getQuestionnaire();
+
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    @Insert("INSERT INTO questionnaire(entrant_id, status,additional) VALUES( #{questionnaire.entrantId}, #{questionnaire.status}, #{questionnaire.additional})")
+    long save(@Param("contactInformation") ContactInformation contactInformation);
 }

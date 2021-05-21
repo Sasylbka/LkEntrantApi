@@ -23,7 +23,13 @@ public class MessageService {
 
 
     public List<MessageDto> getMessage(final int id) {
-        return messageMapper.toDtos(messageRepository.getMessage(id));
+        List<MessageDto> temp = messageMapper.toDtos(messageRepository.getMessage(id));
+        if(temp.size()==0){
+            MessageDto messageDto = new MessageDto(0,0,null,null,null);
+            temp.add(messageDto);
+            return temp;
+        }
+        return temp;
     }
     public MessageDto save(final MessageDto messageDto) {
         Message entity= messageMapper.toVO(messageDto);

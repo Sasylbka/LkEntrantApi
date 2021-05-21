@@ -22,7 +22,12 @@ public class JobInformationService {
         this.jobInformationMapper = jobInformationMapper;
     }
     public JobInformationDto getJobInformation(final int id) {
-        return jobInformationMapper.toDto(jobInformationRepository.getJobInformation(id));
+        JobInformationDto temp = jobInformationMapper.toDto(jobInformationRepository.getJobInformation(id));
+        if(temp==null){
+            temp=new JobInformationDto(0,0,null,null);
+            return temp;
+        }
+        return temp;
     }
     public JobInformationDto save(final JobInformationDto jobInformationDto) {
         JobInformation entity= jobInformationMapper.toVO(jobInformationDto);

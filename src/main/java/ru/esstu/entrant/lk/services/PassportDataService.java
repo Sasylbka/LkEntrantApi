@@ -24,7 +24,12 @@ public class PassportDataService {
     }
 
     public PassportDataDto getPassportData(final int id) {
-        return passportDataMapper.toDto(passportDataRepository.getPassportData(id));
+        PassportDataDto temp= passportDataMapper.toDto(passportDataRepository.getPassportData(id));
+        if(temp==null){
+            temp=new PassportDataDto(0,0,"","","",null,null);
+            return temp;
+        }
+        return temp;
     }
     public PassportDataDto save(final PassportDataDto passportDataDto) {
         PassportData entity= passportDataMapper.toVO(passportDataDto);

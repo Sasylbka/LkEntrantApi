@@ -27,7 +27,13 @@ public class AdmissionInfoService {
 
 
     public List<AdmissionInfoDto> getAdmissionInfo(final int id) {
-        return admissionInfoMapper.toDtos(admissionInfoRepository.getAdmissionInfo(id));
+        List<AdmissionInfoDto> temp = admissionInfoMapper.toDtos(admissionInfoRepository.getAdmissionInfo(id));
+        if(temp.size()==0){
+            AdmissionInfoDto admissionInfoDto = new AdmissionInfoDto(0,0,null,null,false,false,false,false,false);
+            temp.add(admissionInfoDto);
+            return temp;
+        }
+        return temp;
     }
     public AdmissionInfoDto save(final AdmissionInfoDto admissionInfoDto) {
         AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);

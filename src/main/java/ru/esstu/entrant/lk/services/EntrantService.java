@@ -24,7 +24,12 @@ public class EntrantService {
     }
 
     public EntrantDto getEntrant(final int id) {
-        return entrantMapper.toDto(entrantRepository.getEntrant(id));
+        EntrantDto temp = entrantMapper.toDto(entrantRepository.getEntrant(id));
+        if(temp==null){
+            temp = new EntrantDto(0,"","","");
+            return temp;
+        }
+        return temp;
     }
 
     public EntrantDto update(final EntrantDto entrantDto) {

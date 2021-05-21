@@ -22,7 +22,12 @@ public class ConsentService {
         this.consentMapper = consentMapper;
     }
     public ConsentDto getConsent(final int id) {
-        return consentMapper.toDto(consentRepository.getConsent(id));
+        ConsentDto temp =  consentMapper.toDto(consentRepository.getConsent(id));
+        if(temp==null){
+            temp=new ConsentDto(0,0,0,null,null);
+            return temp;
+        }
+        return temp;
     }
     public ConsentDto save(final ConsentDto consentDto) {
         Consent entity= consentMapper.toVO(consentDto);

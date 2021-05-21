@@ -14,7 +14,7 @@ import ru.esstu.entrant.lk.services.EntrantService;
  */
 @RestController
 @Slf4j
-public class EntrantController {
+public class    EntrantController {
 
     /**
      * Сервис.

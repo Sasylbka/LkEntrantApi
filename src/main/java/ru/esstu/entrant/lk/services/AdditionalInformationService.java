@@ -28,7 +28,13 @@ public class AdditionalInformationService {
 
 
     public List<AdditionalInformationDto> getAdditionalInformation(final int id) {
-        return additionalInformationMapper.toDtos(additionalInformationRepository.getAdditionalInformation(id));
+        List<AdditionalInformationDto> temp=additionalInformationMapper.toDtos(additionalInformationRepository.getAdditionalInformation(id));
+        if(temp.size()==0){
+            AdditionalInformationDto additionalInformationDto=new AdditionalInformationDto(0,0,null,null,null,null,null,null,null,null);
+            temp.add(additionalInformationDto);
+            return temp;
+        }
+        return temp;
     }
     public AdditionalInformationDto save(final AdditionalInformationDto additionalInformationDto) {
         AdditionalInformation entity= additionalInformationMapper.toVO(additionalInformationDto);

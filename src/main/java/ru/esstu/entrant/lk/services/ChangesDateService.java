@@ -19,7 +19,12 @@ public class ChangesDateService {
     }
 
     public ChangesDateDto getChangesDate(final int id) {
-        return ChangesDateMapper.toDto(ChangesDateRepository.getChangesDate(id));
+        ChangesDateDto temp= ChangesDateMapper.toDto(ChangesDateRepository.getChangesDate(id));
+        if(temp==null){
+            temp=new ChangesDateDto(0,0,null,null,null);
+            return temp;
+        }
+        return temp;
     }
     public ChangesDateDto save(final ChangesDateDto ChangesDateDto) {
         ChangesDate entity = ChangesDateMapper.toVO(ChangesDateDto);

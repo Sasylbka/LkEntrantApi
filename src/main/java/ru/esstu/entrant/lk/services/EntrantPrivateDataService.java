@@ -25,8 +25,13 @@ public class EntrantPrivateDataService {
 
 
     public EntrantPrivateDataDto getEntrantPrivateData(final int id) {
-        return entrantPrivateDataMapper.toDto(entrantPrivateDataRepository.getEntrantPrivateData(id));
-//        return new TestTableDto(1, "NTCN");
+        EntrantPrivateDataDto temp = entrantPrivateDataMapper.toDto(entrantPrivateDataRepository.getEntrantPrivateData(id));
+        if(temp==null){
+            temp = new EntrantPrivateDataDto(0,0,null,null,null,null,null,null,null,"");
+            return temp;
+
+        }
+        return temp;
     }
 
     public EntrantPrivateDataDto save(final EntrantPrivateDataDto entrantPrivateDataDto) {

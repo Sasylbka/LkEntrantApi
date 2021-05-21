@@ -25,8 +25,12 @@ public class EducationInfoService {
 
 
     public EducationInfoDto getEducationInfo(final int id) {
-        return educationInfoMapper.toDto(educationInfoRepository.getEducationInfo(id));
-//        return new TestTableDto(1, "NTCN");
+        EducationInfoDto temp= educationInfoMapper.toDto(educationInfoRepository.getEducationInfo(id));
+        if(temp==null){
+            temp=new EducationInfoDto(0,0,null,null,null,null,null,null,null,null);
+            return temp;
+        }
+        return temp;
     }
 
     public EducationInfoDto save(final EducationInfoDto educationInfoDto) {

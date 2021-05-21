@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,7 +10,10 @@ import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
 import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
 import ru.esstu.entrant.lk.services.AdmissionInfoService;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * API Profile.
@@ -29,7 +33,7 @@ public class AdmissionInfoController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/admissionInfo")
     public List<AdmissionInfoDto> get(final int id) {
-        return admissionInfoService.getAdmissionInfo(id);
+       return admissionInfoService.getAdmissionInfo(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/admissionInfo")
     public AdmissionInfoDto save(@RequestBody final AdmissionInfoDto admissionInfoDto) {

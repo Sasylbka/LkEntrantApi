@@ -21,7 +21,12 @@ public class ContactInformationService {
     }
 
     public ContactInformationDto getContactInformation(final int id) {
-        return contactInformationMapper.toDto(contactInformationRepository.getContactInformation(id));
+        ContactInformationDto contactInformationDto=contactInformationMapper.toDto(contactInformationRepository.getContactInformation(id));
+        if(contactInformationDto==null){
+            ContactInformationDto temp=new ContactInformationDto(0,0,null);
+            return temp;
+        }
+        return contactInformationDto;
     }
     public ContactInformationDto save(final ContactInformationDto contactInformationDto) {
         ContactInformation entity = contactInformationMapper.toVO(contactInformationDto);

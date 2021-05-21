@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.services;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.ParentsInformationDto;
 import ru.esstu.entrant.lk.domain.mappers.ParentsInformationMapper;
@@ -21,7 +22,12 @@ public class ParentsInformationService {
     }
 
     public ParentsInformationDto getParentsInformation(final int id) {
-        return parentsInformationMapper.toDto(parentsInformationRepository.getParentsInformation(id));
+        ParentsInformationDto temp = parentsInformationMapper.toDto(parentsInformationRepository.getParentsInformation(id));
+        if(temp==null){
+            temp=new ParentsInformationDto(0,0,null,null,null,null,null,null,null,null,null,null,null);
+            return temp;
+        }
+        return temp;
     }
     public ParentsInformationDto save(final ParentsInformationDto parentsInformationDto) {
         ParentsInformation entity= parentsInformationMapper.toVO(parentsInformationDto);

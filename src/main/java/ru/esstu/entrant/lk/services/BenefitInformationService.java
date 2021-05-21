@@ -25,8 +25,12 @@ public class BenefitInformationService {
 
 
     public BenefitInformationDto getBenefitInformation(final int id) {
-        return benefitInformationMapper.toDto(benefitInformationRepository.getBenefitInformation(id));
-//        return new TestTableDto(1, "NTCN");
+       BenefitInformationDto temp = benefitInformationMapper.toDto(benefitInformationRepository.getBenefitInformation(id));
+       if(temp==null){
+           temp=new BenefitInformationDto(0,0,null,null,null,null,null);
+           return temp;
+       }
+       return temp;
     }
     public BenefitInformationDto save(final BenefitInformationDto benefitInformationDto) {
         BenefitInformation entity= benefitInformationMapper.toVO(benefitInformationDto);
