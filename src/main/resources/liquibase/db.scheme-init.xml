@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet id="2021-20-05-entrant-lk-init-v.0.76" author="S.druzhinin">
+    <changeSet id="2021-21-05-entrant-lk-init-v.0.85" author="S.druzhinin">
         <createTable tableName="admission_info">
             <column name="id"  type="serial">
                 <constraints nullable="false" unique="true"/>
@@ -181,7 +181,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <createTable tableName="table_education_info">
+        <createTable tableName="education_info">
             <column name="id" type="serial">
                 <constraints nullable="false" unique="true"/>
             </column>
@@ -294,13 +294,6 @@
         <column name="admission_info_id" type="int"/>
         <column name="date" type="date"/>
         <column name="action_type" type="varchar(80)"/>
-        </createTable>
-
-        <createTable tableName="questionnaire">
-            <column name="id" type="serial"></column>
-            <column name="entrant_id" type="serial"></column>
-            <column name="status" type="text"></column>
-            <column name="additional" type="text"></column>
         </createTable>
 
         <addForeignKeyConstraint baseTableName="contact_information"
