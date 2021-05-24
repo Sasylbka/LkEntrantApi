@@ -306,7 +306,7 @@
                                  constraintName="fk_additional_entrant"
                                  referencedTableName="entrant"
                                  referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="table_education_info"
+        <addForeignKeyConstraint baseTableName="education_info"
                                  baseColumnNames="entrant_id"
                                  constraintName="fk_education_entrant"
                                  referencedTableName="entrant"
