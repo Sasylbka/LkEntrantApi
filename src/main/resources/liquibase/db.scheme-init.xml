@@ -285,7 +285,6 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
-
         <createTable tableName="consent">
         <column name="id" type="serial">
             <constraints nullable="false" unique="true"/>
