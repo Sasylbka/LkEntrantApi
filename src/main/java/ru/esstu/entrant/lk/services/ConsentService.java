@@ -24,7 +24,7 @@ public class ConsentService {
     public ConsentDto getConsent(final int id) {
         ConsentDto temp =  consentMapper.toDto(consentRepository.getConsent(id));
         if(temp==null){
-            temp=new ConsentDto(0,0,0,null,null);
+            temp=new ConsentDto();
             return temp;
         }
         return temp;

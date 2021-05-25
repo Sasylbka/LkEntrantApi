@@ -24,7 +24,7 @@ public class JobInformationService {
     public JobInformationDto getJobInformation(final int id) {
         JobInformationDto temp = jobInformationMapper.toDto(jobInformationRepository.getJobInformation(id));
         if(temp==null){
-            temp=new JobInformationDto(0,0,null,null);
+            temp=new JobInformationDto();
             return temp;
         }
         return temp;

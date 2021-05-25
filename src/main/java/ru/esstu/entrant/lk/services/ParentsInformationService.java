@@ -24,7 +24,7 @@ public class ParentsInformationService {
     public ParentsInformationDto getParentsInformation(final int id) {
         ParentsInformationDto temp = parentsInformationMapper.toDto(parentsInformationRepository.getParentsInformation(id));
         if(temp==null){
-            temp=new ParentsInformationDto(0,0,null,null,null,null,null,null,null,null,null,null,null);
+            temp=new ParentsInformationDto();
             return temp;
         }
         return temp;

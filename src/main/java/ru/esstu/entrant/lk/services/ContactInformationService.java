@@ -23,7 +23,7 @@ public class ContactInformationService {
     public ContactInformationDto getContactInformation(final int id) {
         ContactInformationDto contactInformationDto=contactInformationMapper.toDto(contactInformationRepository.getContactInformation(id));
         if(contactInformationDto==null){
-            ContactInformationDto temp=new ContactInformationDto(0,0,null);
+            ContactInformationDto temp=new ContactInformationDto();
             return temp;
         }
         return contactInformationDto;

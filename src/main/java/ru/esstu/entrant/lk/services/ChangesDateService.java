@@ -21,7 +21,7 @@ public class ChangesDateService {
     public ChangesDateDto getChangesDate(final int id) {
         ChangesDateDto temp= ChangesDateMapper.toDto(ChangesDateRepository.getChangesDate(id));
         if(temp==null){
-            temp=new ChangesDateDto(0,0,null,null,null);
+            temp=new ChangesDateDto();
             return temp;
         }
         return temp;

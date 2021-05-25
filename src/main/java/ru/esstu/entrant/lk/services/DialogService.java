@@ -37,11 +37,6 @@ public class DialogService {
     public List<DialogDto> getEntrantDialog(final int id) {
 
         List<DialogDto> temp =dialogMapper.toDtos(dialogRepository.getEntrantDialog(id));
-        if(temp.size()==0){
-            DialogDto dialogDto = new DialogDto(0,0,0);
-            temp.add(dialogDto);
-            return temp;
-        }
         return temp;
     }
     public DialogDto save(final DialogDto dialogDto) {

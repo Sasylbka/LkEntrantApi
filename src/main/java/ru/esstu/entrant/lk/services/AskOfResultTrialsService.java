@@ -24,7 +24,7 @@ public class AskOfResultTrialsService {
     public AskOfResultTrialsDto getAskOfResultTrials(final int id) {
         AskOfResultTrialsDto temp = askOfResultTrialsMapper.toDto(askOfResultTrialsRepository.getAskOfResultTrials(id));
         if(temp==null){
-            temp=new AskOfResultTrialsDto(0,0,null);
+            temp=new AskOfResultTrialsDto();
             return temp;
         }
         return temp;

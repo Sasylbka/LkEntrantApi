@@ -26,7 +26,7 @@ public class EducationalAchievementsService {
     public EducationalAchievementsDto getEducationalAchievements(final int id) {
         EducationalAchievementsDto temp = educationalAchievementsMapper.toDto(educationalAchievementsRepository.getEducationalAchievements(id));
         if (temp==null){
-            temp=new EducationalAchievementsDto(0,0,null,null,null,null,null,null,null,null);
+            temp=new EducationalAchievementsDto();
             return temp;
         }
         return temp;

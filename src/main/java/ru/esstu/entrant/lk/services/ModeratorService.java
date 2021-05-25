@@ -24,7 +24,7 @@ public class ModeratorService {
     public ModeratorDto getModerator(final int id) {
         ModeratorDto temp = moderatorMapper.toDto(moderatorRepository.getModerator(id));
         if(temp==null){
-            temp= new ModeratorDto(0,"","",null,null,null);
+            temp= new ModeratorDto();
             return temp;
         }
         return temp;

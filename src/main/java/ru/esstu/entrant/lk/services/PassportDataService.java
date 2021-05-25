@@ -26,7 +26,7 @@ public class PassportDataService {
     public PassportDataDto getPassportData(final int id) {
         PassportDataDto temp= passportDataMapper.toDto(passportDataRepository.getPassportData(id));
         if(temp==null){
-            temp=new PassportDataDto(0,0,"","","",null,null);
+            temp=new PassportDataDto();
             return temp;
         }
         return temp;

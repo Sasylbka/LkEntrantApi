@@ -27,7 +27,7 @@ public class BenefitInformationService {
     public BenefitInformationDto getBenefitInformation(final int id) {
        BenefitInformationDto temp = benefitInformationMapper.toDto(benefitInformationRepository.getBenefitInformation(id));
        if(temp==null){
-           temp=new BenefitInformationDto(0,0,null,null,null,null,null);
+           temp=new BenefitInformationDto();
            return temp;
        }
        return temp;

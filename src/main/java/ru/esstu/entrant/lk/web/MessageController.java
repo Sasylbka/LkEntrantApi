@@ -9,6 +9,7 @@ import ru.esstu.entrant.lk.domain.dto.MessageDto;
 import ru.esstu.entrant.lk.domain.vo.Message;
 import ru.esstu.entrant.lk.services.MessageService;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class MessageController {
         return messageService.getMessage(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/message")
-    public MessageDto save(@RequestBody final MessageDto MessageDto) {
+    public MessageDto save(@RequestBody final MessageDto MessageDto) throws ParseException {
         return messageService.save(MessageDto);
     }
 }

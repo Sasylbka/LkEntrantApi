@@ -27,7 +27,7 @@ public class EducationInfoService {
     public EducationInfoDto getEducationInfo(final int id) {
         EducationInfoDto temp= educationInfoMapper.toDto(educationInfoRepository.getEducationInfo(id));
         if(temp==null){
-            temp=new EducationInfoDto(0,0,null,null,null,null,null,null,null,null);
+            temp = new EducationInfoDto();
             return temp;
         }
         return temp;

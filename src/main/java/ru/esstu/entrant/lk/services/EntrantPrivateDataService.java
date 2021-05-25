@@ -27,9 +27,8 @@ public class EntrantPrivateDataService {
     public EntrantPrivateDataDto getEntrantPrivateData(final int id) {
         EntrantPrivateDataDto temp = entrantPrivateDataMapper.toDto(entrantPrivateDataRepository.getEntrantPrivateData(id));
         if(temp==null){
-            temp = new EntrantPrivateDataDto(0,0,null,null,null,null,null,null,null,"");
+            temp = new EntrantPrivateDataDto();
             return temp;
-
         }
         return temp;
     }
