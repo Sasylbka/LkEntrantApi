@@ -17,15 +17,19 @@ import java.util.List;
 public class DialogService {
     private final DialogRepository dialogRepository;
     private final DialogMapper dialogMapper;
+    private final AccessService accessService;
 
     public DialogService(DialogRepository dialogRepository,
-                            DialogMapper dialogMapper) {
+                            DialogMapper dialogMapper,
+                         AccessService accessService) {
         this.dialogRepository = dialogRepository;
         this.dialogMapper = dialogMapper;
+        this.accessService = accessService;
     }
 
 
     public List<DialogDto> getModeratorDialog(final int id) {
+        accessService.commonAccessCheck(id);
         List<DialogDto> temp = dialogMapper.toDtos(dialogRepository.getModeratorDialog(id));
         if(temp.size()==0){
             DialogDto dialogDto = new DialogDto(0,0,0);
@@ -35,11 +39,12 @@ public class DialogService {
         return temp;
     }
     public List<DialogDto> getEntrantDialog(final int id) {
-
+        accessService.commonAccessCheck(id);
         List<DialogDto> temp =dialogMapper.toDtos(dialogRepository.getEntrantDialog(id));
         return temp;
     }
     public DialogDto save(final DialogDto dialogDto) {
+        accessService.commonAccessCheck(dialogDto.getEntrantId());
         Dialog entity= dialogMapper.toVO(dialogDto);
         dialogRepository.save(entity);
         return dialogMapper.toDto(entity);

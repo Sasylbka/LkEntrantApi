@@ -24,7 +24,8 @@ public class MessageService {
     private final MessageMapper messageMapper;
 
     public MessageService(MessageRepository messageRepository,
-                         MessageMapper messageMapper) {
+                         MessageMapper messageMapper,
+                          AccessService accessService) {
         this.messageRepository = messageRepository;
         this.messageMapper = messageMapper;
     }

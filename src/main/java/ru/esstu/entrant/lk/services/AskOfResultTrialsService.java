@@ -13,15 +13,19 @@ public class AskOfResultTrialsService {
 
     private final AskOfResultTrialsRepository askOfResultTrialsRepository;
     private final AskOfResultTrialsMapper askOfResultTrialsMapper;
+    private final AccessService accessService;
 
     public AskOfResultTrialsService(AskOfResultTrialsRepository askOfResultTrialsRepository,
-                                    AskOfResultTrialsMapper askOfResultTrialsMapper) {
+                                    AskOfResultTrialsMapper askOfResultTrialsMapper,
+                                    AccessService accessService) {
         this.askOfResultTrialsRepository = askOfResultTrialsRepository;
         this.askOfResultTrialsMapper = askOfResultTrialsMapper;
+        this.accessService = accessService;
     }
 
 
     public AskOfResultTrialsDto getAskOfResultTrials(final int id) {
+        accessService.commonAccessCheck(id);
         AskOfResultTrialsDto temp = askOfResultTrialsMapper.toDto(askOfResultTrialsRepository.getAskOfResultTrials(id));
         if(temp==null){
             temp=new AskOfResultTrialsDto();
@@ -30,12 +34,14 @@ public class AskOfResultTrialsService {
         return temp;
     }
     public AskOfResultTrialsDto save(final AskOfResultTrialsDto askOfResultTrialsDto) {
+        accessService.commonAccessCheck(askOfResultTrialsDto.getEntrantId());
         AskOfResultTrials entity= askOfResultTrialsMapper.toVO(askOfResultTrialsDto);
         askOfResultTrialsRepository.save(entity);
         return askOfResultTrialsMapper.toDto(entity);
     }
 
     public AskOfResultTrialsDto update(final AskOfResultTrialsDto askOfResultTrialsDto) {
+        accessService.commonAccessCheck(askOfResultTrialsDto.getEntrantId());
         AskOfResultTrials entity= askOfResultTrialsMapper.toVO(askOfResultTrialsDto);
         askOfResultTrialsRepository.update(entity);
         return askOfResultTrialsMapper.toDto(entity);

@@ -15,13 +15,17 @@ public class JobInformationService {
 
     private final JobInformationRepository jobInformationRepository;
     private final JobInformationMapper jobInformationMapper;
+    private final AccessService accessService;
 
     public JobInformationService(JobInformationRepository jobInformationRepository,
-                                JobInformationMapper jobInformationMapper) {
+                                JobInformationMapper jobInformationMapper,
+                                 AccessService accessService) {
         this.jobInformationRepository = jobInformationRepository;
         this.jobInformationMapper = jobInformationMapper;
+        this.accessService = accessService;
     }
     public JobInformationDto getJobInformation(final int id) {
+        accessService.commonAccessCheck(id);
         JobInformationDto temp = jobInformationMapper.toDto(jobInformationRepository.getJobInformation(id));
         if(temp==null){
             temp=new JobInformationDto();
@@ -30,11 +34,13 @@ public class JobInformationService {
         return temp;
     }
     public JobInformationDto save(final JobInformationDto jobInformationDto) {
+        accessService.commonAccessCheck(jobInformationDto.getEntrantId());
         JobInformation entity= jobInformationMapper.toVO(jobInformationDto);
         jobInformationRepository.save(entity);
         return jobInformationMapper.toDto(entity);
     }
     public JobInformationDto update(final JobInformationDto jobInformationDto) {
+        accessService.commonAccessCheck(jobInformationDto.getEntrantId());
         JobInformation entity= jobInformationMapper.toVO(jobInformationDto);
         jobInformationRepository.update(entity);
         return jobInformationMapper.toDto(entity);
