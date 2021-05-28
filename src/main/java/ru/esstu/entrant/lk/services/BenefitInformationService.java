@@ -16,15 +16,19 @@ public class BenefitInformationService {
 
     private final BenefitInformationRepository benefitInformationRepository;
     private final BenefitInformationMapper benefitInformationMapper;
+    private final AccessService accessService;
 
     public BenefitInformationService(BenefitInformationRepository benefitInformationRepository,
-                                BenefitInformationMapper benefitInformationMapper) {
+                                     BenefitInformationMapper benefitInformationMapper,
+                                     AccessService accessService) {
         this.benefitInformationRepository = benefitInformationRepository;
         this.benefitInformationMapper = benefitInformationMapper;
+        this.accessService = accessService;
     }
 
 
     public BenefitInformationDto getBenefitInformation(final int id) {
+        accessService.commonAccessCheck(id);
        BenefitInformationDto temp = benefitInformationMapper.toDto(benefitInformationRepository.getBenefitInformation(id));
        if(temp==null){
            temp=new BenefitInformationDto();
@@ -33,11 +37,13 @@ public class BenefitInformationService {
        return temp;
     }
     public BenefitInformationDto save(final BenefitInformationDto benefitInformationDto) {
+        accessService.commonAccessCheck(benefitInformationDto.getEntrantId());
         BenefitInformation entity= benefitInformationMapper.toVO(benefitInformationDto);
         benefitInformationRepository.save(entity);
         return benefitInformationMapper.toDto(entity);
     }
     public BenefitInformationDto update(final BenefitInformationDto benefitInformationDto) {
+        accessService.commonAccessCheck(benefitInformationDto.getEntrantId());
         BenefitInformation entity= benefitInformationMapper.toVO(benefitInformationDto);
         benefitInformationRepository.update(entity);
         return benefitInformationMapper.toDto(entity);

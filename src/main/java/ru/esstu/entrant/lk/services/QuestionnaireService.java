@@ -13,10 +13,14 @@ import java.util.List;
 public class QuestionnaireService {
     private final QuestionnaireRepository questionnaireRepository;
     private final QuestionnaireMapper questionnaireMapper;
+    private final AccessService accessService;
+
     public QuestionnaireService(QuestionnaireRepository questionnaireRepository,
-                         QuestionnaireMapper questionnaireMapper) {
+                                QuestionnaireMapper questionnaireMapper,
+                                AccessService accessService) {
         this.questionnaireRepository = questionnaireRepository;
         this.questionnaireMapper = questionnaireMapper;
+        this.accessService = accessService;
     }
     public List<QuestionnaireDto> getQuestionnaire() {
         List<QuestionnaireDto> temp = questionnaireMapper.toDtos(questionnaireRepository.getQuestionnaire());

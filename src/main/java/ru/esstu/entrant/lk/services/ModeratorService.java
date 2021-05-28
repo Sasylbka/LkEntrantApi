@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.ModeratorDto;
 import ru.esstu.entrant.lk.domain.mappers.ModeratorMapper;
 import ru.esstu.entrant.lk.domain.vo.Moderator;
+import ru.esstu.entrant.lk.exceptions.PermissionDeniedException;
 import ru.esstu.entrant.lk.repositories.ModeratorRepository;
+import ru.esstu.entrant.lk.utils.UserUtils;
 
 @Service
 @Slf4j
@@ -22,6 +24,11 @@ public class ModeratorService {
 
 
     public ModeratorDto getModerator(final int id) {
+        if (!UserUtils.hasCommonAccess(id,
+                getOrCreateModeratorByKeycloakGuid(UserUtils.getCurrentUserKeycloakGuid()).getId())) {
+            throw new PermissionDeniedException(
+                    "Нет прав доступа. ИД пользователя : " + id);
+        }
         ModeratorDto temp = moderatorMapper.toDto(moderatorRepository.getModerator(id));
         if(temp==null){
             temp= new ModeratorDto();

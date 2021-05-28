@@ -19,7 +19,6 @@ public class AdditionalInformationService {
 
     public AdditionalInformationService(AdditionalInformationRepository additionalInformationRepository,
                                         AdditionalInformationMapper additionalInformationMapper,
-                                        UserService userService,
                                         AccessService accessService) {
         this.additionalInformationRepository = additionalInformationRepository;
         this.additionalInformationMapper = additionalInformationMapper;
@@ -33,14 +32,14 @@ public class AdditionalInformationService {
     }
 
     public AdditionalInformationDto save(final AdditionalInformationDto additionalInformationDto) {
-        accessService.commonAccessCheck(additionalInformationDto.getId());
+        accessService.commonAccessCheck(additionalInformationDto.getEntrantId());
         AdditionalInformation entity = additionalInformationMapper.toVO(additionalInformationDto);
         additionalInformationRepository.save(entity);
         return additionalInformationMapper.toDto(entity);
     }
 
     public AdditionalInformationDto update(final AdditionalInformationDto additionalInformationDto) {
-        accessService.commonAccessCheck(additionalInformationDto.getId());
+        accessService.commonAccessCheck(additionalInformationDto.getEntrantId());
         AdditionalInformation entity = additionalInformationMapper.toVO(additionalInformationDto);
         additionalInformationRepository.update(entity);
         return additionalInformationMapper.toDto(entity);

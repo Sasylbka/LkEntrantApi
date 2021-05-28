@@ -21,4 +21,5 @@ public class AccessService {
                     "Нет прав доступа. ИД пользователя : " + entityEntrantId);
         }
     }
+
 }
