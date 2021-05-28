@@ -16,26 +16,36 @@ public class EducationInfoService {
 
     private final EducationInfoRepository educationInfoRepository;
     private final EducationInfoMapper educationInfoMapper;
+    private final AccessService accessService;
 
     public EducationInfoService(EducationInfoRepository educationInfoRepository,
-                                    EducationInfoMapper educationInfoMapper) {
+                                    EducationInfoMapper educationInfoMapper,
+                                AccessService accessService) {
         this.educationInfoRepository = educationInfoRepository;
         this.educationInfoMapper = educationInfoMapper;
+        this.accessService = accessService;
     }
 
 
     public EducationInfoDto getEducationInfo(final int id) {
-        return educationInfoMapper.toDto(educationInfoRepository.getEducationInfo(id));
-//        return new TestTableDto(1, "NTCN");
+        accessService.commonAccessCheck(id);
+        EducationInfoDto temp= educationInfoMapper.toDto(educationInfoRepository.getEducationInfo(id));
+        if(temp==null){
+            temp = new EducationInfoDto();
+            return temp;
+        }
+        return temp;
     }
 
     public EducationInfoDto save(final EducationInfoDto educationInfoDto) {
+        accessService.commonAccessCheck(educationInfoDto.getEntrantId());
         EducationInfo entity= educationInfoMapper.toVO(educationInfoDto);
         educationInfoRepository.save(entity);
         return educationInfoMapper.toDto(entity);
     }
 
     public EducationInfoDto update(final EducationInfoDto educationInfoDto) {
+        accessService.commonAccessCheck(educationInfoDto.getEntrantId());
         EducationInfo entity= educationInfoMapper.toVO(educationInfoDto);
         educationInfoRepository.update(entity);
         return educationInfoMapper.toDto(entity);

@@ -15,21 +15,32 @@ public class ConsentService {
 
     private final ConsentRepository consentRepository;
     private final ConsentMapper consentMapper;
+    private final AccessService accessService;
 
     public ConsentService(ConsentRepository consentRepository,
-                                 ConsentMapper consentMapper) {
+                          ConsentMapper consentMapper,
+                          AccessService accessService) {
         this.consentRepository = consentRepository;
         this.consentMapper = consentMapper;
+        this.accessService = accessService;
     }
     public ConsentDto getConsent(final int id) {
-        return consentMapper.toDto(consentRepository.getConsent(id));
+        accessService.commonAccessCheck(id);
+        ConsentDto temp =  consentMapper.toDto(consentRepository.getConsent(id));
+        if(temp==null){
+            temp=new ConsentDto();
+            return temp;
+        }
+        return temp;
     }
     public ConsentDto save(final ConsentDto consentDto) {
+        accessService.commonAccessCheck(consentDto.getEntrantId());
         Consent entity= consentMapper.toVO(consentDto);
         consentRepository.save(entity);
         return consentMapper.toDto(entity);
     }
     public ConsentDto update(final ConsentDto consentDto) {
+        accessService.commonAccessCheck(consentDto.getEntrantId());
         Consent entity= consentMapper.toVO(consentDto);
         consentRepository.update(entity);
         return consentMapper.toDto(entity);

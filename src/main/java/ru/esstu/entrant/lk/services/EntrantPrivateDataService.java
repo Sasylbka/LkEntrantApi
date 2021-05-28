@@ -16,26 +16,37 @@ public class EntrantPrivateDataService {
 
     private final EntrantPrivateDataRepository entrantPrivateDataRepository;
     private final EntrantPrivateDataMapper entrantPrivateDataMapper;
+    private final AccessService accessService;
 
     public EntrantPrivateDataService(EntrantPrivateDataRepository entrantPrivateDataRepository,
-                                     EntrantPrivateDataMapper entrantPrivateDataMapper) {
+                                     EntrantPrivateDataMapper entrantPrivateDataMapper,
+                                     UserService userService,
+                                     AccessService accessService) {
         this.entrantPrivateDataRepository = entrantPrivateDataRepository;
         this.entrantPrivateDataMapper = entrantPrivateDataMapper;
+        this.accessService = accessService;
     }
 
 
     public EntrantPrivateDataDto getEntrantPrivateData(final int id) {
-        return entrantPrivateDataMapper.toDto(entrantPrivateDataRepository.getEntrantPrivateData(id));
-//        return new TestTableDto(1, "NTCN");
+        accessService.commonAccessCheck(id);
+        EntrantPrivateDataDto temp = entrantPrivateDataMapper.toDto(entrantPrivateDataRepository.getEntrantPrivateData(id));
+        if(temp==null){
+            temp = new EntrantPrivateDataDto();
+            return temp;
+        }
+        return temp;
     }
 
     public EntrantPrivateDataDto save(final EntrantPrivateDataDto entrantPrivateDataDto) {
+        accessService.commonAccessCheck(entrantPrivateDataDto.getEntrantId());
         EntrantPrivateData entity= entrantPrivateDataMapper.toVO(entrantPrivateDataDto);
         entrantPrivateDataRepository.save(entity);
         return entrantPrivateDataMapper.toDto(entity);
     }
 
     public EntrantPrivateDataDto update(final EntrantPrivateDataDto entrantPrivateDataDto) {
+        accessService.commonAccessCheck(entrantPrivateDataDto.getEntrantId());
         EntrantPrivateData entity = entrantPrivateDataMapper.toVO(entrantPrivateDataDto);
         entrantPrivateDataRepository.update(entity);
         return entrantPrivateDataMapper.toDto(entity);

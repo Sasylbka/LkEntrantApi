@@ -16,22 +16,33 @@ public class PassportDataService {
 
     private final PassportDataRepository passportDataRepository;
     private final PassportDataMapper passportDataMapper;
+    private final AccessService accessService;
 
     public PassportDataService(PassportDataRepository passportDataRepository,
-                               PassportDataMapper passportDataMapper) {
+                               PassportDataMapper passportDataMapper,
+                               AccessService accessService) {
         this.passportDataRepository = passportDataRepository;
         this.passportDataMapper = passportDataMapper;
+        this.accessService = accessService;
     }
 
     public PassportDataDto getPassportData(final int id) {
-        return passportDataMapper.toDto(passportDataRepository.getPassportData(id));
+        accessService.commonAccessCheck(id);
+        PassportDataDto temp= passportDataMapper.toDto(passportDataRepository.getPassportData(id));
+        if(temp==null){
+            temp=new PassportDataDto();
+            return temp;
+        }
+        return temp;
     }
     public PassportDataDto save(final PassportDataDto passportDataDto) {
+        accessService.commonAccessCheck(passportDataDto.getEntrantId());
         PassportData entity= passportDataMapper.toVO(passportDataDto);
         passportDataRepository.save(entity);
         return passportDataMapper.toDto(entity);
     }
     public PassportDataDto update(final PassportDataDto passportDataDto) {
+        accessService.commonAccessCheck(passportDataDto.getEntrantId());
         PassportData entity= passportDataMapper.toVO(passportDataDto);
         passportDataRepository.update(entity);
         return passportDataMapper.toDto(entity);

@@ -12,4 +12,5 @@ public interface MessageRepository {
     @Insert("INSERT INTO message_table(dialog_id,sender,message,date) " +
             "VALUES(#{message.dialogId},#{message.sender},#{message.message},#{message.date})")
     long save(@Param("message") Message message);
+
 }

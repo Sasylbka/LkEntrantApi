@@ -15,25 +15,36 @@ public class EducationalAchievementsService {
 
     private final EducationalAchievementsRepository educationalAchievementsRepository;
     private final EducationalAchievementsMapper educationalAchievementsMapper;
+    private final AccessService accessService;
 
     public EducationalAchievementsService(EducationalAchievementsRepository educationalAchievementsRepository,
-                                EducationalAchievementsMapper educationalAchievementsMapper) {
+                                EducationalAchievementsMapper educationalAchievementsMapper,
+                                          AccessService accessService) {
         this.educationalAchievementsRepository = educationalAchievementsRepository;
         this.educationalAchievementsMapper = educationalAchievementsMapper;
+        this.accessService = accessService;
     }
 
 
     public EducationalAchievementsDto getEducationalAchievements(final int id) {
-        return educationalAchievementsMapper.toDto(educationalAchievementsRepository.getEducationalAchievements(id));
+        accessService.commonAccessCheck(id);
+        EducationalAchievementsDto temp = educationalAchievementsMapper.toDto(educationalAchievementsRepository.getEducationalAchievements(id));
+        if (temp==null){
+            temp=new EducationalAchievementsDto();
+            return temp;
+        }
+        return temp;
     }
 
     public EducationalAchievementsDto save(final EducationalAchievementsDto educationalAchievementsDto) {
+        accessService.commonAccessCheck(educationalAchievementsDto.getEntrantId());
         EducationalAchievements entity= educationalAchievementsMapper.toVO(educationalAchievementsDto);
         educationalAchievementsRepository.save(entity);
         return educationalAchievementsMapper.toDto(entity);
     }
 
     public EducationalAchievementsDto update(final EducationalAchievementsDto educationalAchievementsDto) {
+        accessService.commonAccessCheck(educationalAchievementsDto.getEntrantId());
         EducationalAchievements entity= educationalAchievementsMapper.toVO(educationalAchievementsDto);
         educationalAchievementsRepository.update(entity);
         return educationalAchievementsMapper.toDto(entity);

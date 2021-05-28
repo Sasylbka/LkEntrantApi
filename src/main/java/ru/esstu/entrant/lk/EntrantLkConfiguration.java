@@ -63,7 +63,7 @@ public class EntrantLkConfiguration extends KeycloakWebSecurityConfigurerAdapter
         http.csrf().disable();
         http.authorizeRequests()
             .antMatchers("/rpc/**").permitAll()
-            .anyRequest().authenticated();
+            .anyRequest().permitAll();
     }
 
     @Override
