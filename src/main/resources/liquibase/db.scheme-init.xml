@@ -159,6 +159,7 @@
             </column>
             <column name="number_of_apartments" type="varchar(10)"/>
             <column name="type" type="text"></column>
+            <column name="coincides" type="boolean"></column>
         </createTable>
         <createTable tableName="benefit_information">
             <column name="id" type="serial">

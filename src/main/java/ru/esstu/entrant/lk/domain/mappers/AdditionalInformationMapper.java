@@ -36,7 +36,8 @@ public class AdditionalInformationMapper {
                 vo.getStreet(),
                 vo.getNumberOfBuilding(),
                 vo.getNumberOfApartments(),
-                vo.getType()
+                vo.getType(),
+                vo.isCoincides()
         );
     }
     /**
@@ -59,7 +60,8 @@ public class AdditionalInformationMapper {
                 dto.getStreet(),
                 dto.getNumberOfBuilding(),
                 dto.getNumberOfApartments(),
-                dto.getType()
+                dto.getType(),
+                dto.isCoincides()
         );
     }
     public List<AdditionalInformationDto> toDtos (List<AdditionalInformation> vos) {

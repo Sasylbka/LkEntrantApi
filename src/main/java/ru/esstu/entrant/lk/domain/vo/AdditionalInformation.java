@@ -18,4 +18,5 @@ public class AdditionalInformation {
     private String numberOfBuilding;
     private String numberOfApartments;
     private String type;
+    private boolean coincides;
 }

@@ -18,6 +18,7 @@ public class AdditionalInformationDto {
     private String numberOfBuilding;
     private String numberOfApartments;
     private String type;
+    private boolean coincides;
 }
 
 
