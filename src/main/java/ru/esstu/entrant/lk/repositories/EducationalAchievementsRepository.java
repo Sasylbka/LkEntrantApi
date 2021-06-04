@@ -18,9 +18,9 @@ public interface EducationalAchievementsRepository {
             "#{educationalAchievements.dataOfIssued},#{educationalAchievements.candidateMinimumsPassed})")
     long save(@Param("educationalAchievements") EducationalAchievements educationalAchievements);
 
-    @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
+    @Options(keyProperty = "id", keyColumn = "id")
     @Update("UPDATE educational_achievements SET " +
-            "medal=#{educationalAchievements.medal}, honors_degree#={educationalAchievements.honorsDegree}, " +
+            "medal=#{educationalAchievements.medal}, honors_degree=#{educationalAchievements.honorsDegree}, " +
             "olympiad_participation=#{educationalAchievements.olympiadParticipation}, " +
             "document_of_olympiad_victories=#{educationalAchievements.documentOfOlympiadVictories}, " +
             "document_of_olympiad_victories_serial_number=#{educationalAchievements.documentOfOlympiadVictoriesSerialNumber}, " +
