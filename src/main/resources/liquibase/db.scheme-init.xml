@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet id="2021-21-05-entrant-lk-init-v.0.9" author="nikita">
+    <changeSet id="2021-07-06-entrant-lk-init-v.0.9.1" author="nikita">
         <createTable tableName="admission_info">
             <column name="id"  type="serial">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
@@ -241,7 +241,7 @@
             <column name="id" type="serial">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
-            <column name="moderator_id" type="serial">
+            <column name="moderator_role" type="text">
                 <constraints nullable="false"/>
             </column>
             <column name="entrant_id" type="serial">
@@ -295,10 +295,24 @@
             <column name="date" type="date"/>
             <column name="action_type" type="varchar(80)"/>
         </createTable>
-
+        <createTable tableName="entrant_files">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="entrant_id" type="integer"/>
+            <column name="file_name" type="text"/>
+            <column name="file_extension" type="text"/>
+            <column name="document_type" type="text"/>
+            <column name="guid" type="text"/>
+        </createTable>
         <addForeignKeyConstraint baseTableName="contact_information"
                                  baseColumnNames="entrant_id"
                                  constraintName="fk_contact_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="entrant_files"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_files_entrant"
                                  referencedTableName="entrant"
                                  referencedColumnNames="id"/>
         <addForeignKeyConstraint baseTableName="additional_information"
@@ -355,11 +369,6 @@
                                  baseColumnNames="entrant_id"
                                  constraintName="fk_dialog_entrant"
                                  referencedTableName="entrant"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="dialog_table"
-                                 baseColumnNames="moderator_id"
-                                 constraintName="fk_dialog_moderator"
-                                 referencedTableName="moderator"
                                  referencedColumnNames="id"/>
         <addForeignKeyConstraint baseTableName="message_table"
                                  baseColumnNames="dialog_id"

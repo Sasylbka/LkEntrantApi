@@ -17,7 +17,7 @@ public class DialogMapper {
         }
         return new DialogDto(
                 vo.getId(),
-                vo.getModeratorId(),
+                vo.getModeratorRole(),
                 vo.getEntrantId()
         );
     }
@@ -28,7 +28,7 @@ public class DialogMapper {
         }
         return new Dialog(
                 dto.getId(),
-                dto.getModeratorId(),
+                dto.getModeratorRole(),
                 dto.getEntrantId()
         );
     }
