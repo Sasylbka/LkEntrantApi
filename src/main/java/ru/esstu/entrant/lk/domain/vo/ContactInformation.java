@@ -11,4 +11,5 @@ public class ContactInformation {
     private int id;
     private int entrantId;
     private String mobileNumber;
+    private String email;
 }

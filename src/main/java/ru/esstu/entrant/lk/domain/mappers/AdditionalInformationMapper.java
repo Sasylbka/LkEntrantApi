@@ -37,7 +37,9 @@ public class AdditionalInformationMapper {
                 vo.getNumberOfBuilding(),
                 vo.getNumberOfApartments(),
                 vo.getType(),
-                vo.isCoincides()
+                vo.isCoincides(),
+                vo.isReservist(),
+                vo.isNeedsHostel()
         );
     }
     /**
@@ -61,7 +63,9 @@ public class AdditionalInformationMapper {
                 dto.getNumberOfBuilding(),
                 dto.getNumberOfApartments(),
                 dto.getType(),
-                dto.isCoincides()
+                dto.isCoincides(),
+                dto.isReservist(),
+                dto.isNeedsHostel()
         );
     }
     public List<AdditionalInformationDto> toDtos (List<AdditionalInformation> vos) {

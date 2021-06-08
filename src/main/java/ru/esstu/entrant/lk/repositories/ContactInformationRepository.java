@@ -9,10 +9,12 @@ public interface ContactInformationRepository {
     ContactInformation getContactInformation(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO contact_information(entrant_id, mobile_number) VALUES( #{contactInformation.entrantId}, #{contactInformation.mobileNumber})")
+    @Insert("INSERT INTO contact_information(entrant_id, mobile_number, email) VALUES( #{contactInformation.entrantId}, #{contactInformation.mobileNumber}, " +
+            "#{contactInformation.email})")
     long save(@Param("contactInformation") ContactInformation contactInformation);
 
     @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
-    @Update("UPDATE contact_information SET mobile_number=#{contactInformation.mobileNumber} WHERE entrant_id=#{contactInformation.entrantId}")
+    @Update("UPDATE contact_information SET mobile_number=#{contactInformation.mobileNumber} email=#{contactInformation.email} " +
+            "WHERE entrant_id=#{contactInformation.entrantId}")
     long update(@Param("contactInformation") ContactInformation contactInformation);
 }
