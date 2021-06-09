@@ -17,7 +17,7 @@ public class OlympiadRefController {
         this.olympiadRefService = olympiadRefService;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/reference/olympiad")
+    @RequestMapping(method = RequestMethod.GET, path = "/reference/olimpiad")
     public List<OlympiadDto> get() {
         return olympiadRefService.getOlympiads();
     }

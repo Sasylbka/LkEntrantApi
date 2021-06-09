@@ -7,8 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface DialogRepository {
-    @Select("SELECT * FROM dialog_table WHERE moderator_id = #{id}")
-    List<Dialog> getModeratorDialog(@Param("id") int id);
+    @Select("SELECT * FROM dialog_table WHERE moderator_role = #{moderator_role}")
+    List<Dialog> getModeratorDialog(@Param("moderator_role") String role);
 
     @Select("SELECT * FROM dialog_table WHERE entrant_id = #{id}")
     List<Dialog> getEntrantDialog(@Param("id") int id);

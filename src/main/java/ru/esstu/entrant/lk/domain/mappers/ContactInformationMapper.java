@@ -23,7 +23,8 @@ public class ContactInformationMapper {
         return new ContactInformationDto(
                 vo.getId(),
                 vo.getEntrantId(),
-                vo.getMobileNumber()
+                vo.getMobileNumber(),
+                vo.getEmail()
         );
     }
     /**
@@ -39,7 +40,8 @@ public class ContactInformationMapper {
         return new ContactInformation(
                 dto.getId(),
                 dto.getEntrantId(),
-                dto.getMobileNumber()
+                dto.getMobileNumber(),
+                dto.getEmail()
         );
     }
 }

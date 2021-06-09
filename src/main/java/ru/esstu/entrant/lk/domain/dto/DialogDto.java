@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DialogDto {
     private int Id;
-    private int moderatorId;
+    private String moderatorRole;
     private int entrantId;
 }
