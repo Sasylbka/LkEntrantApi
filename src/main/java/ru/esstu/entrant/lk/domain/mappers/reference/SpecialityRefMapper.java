@@ -17,7 +17,7 @@ public class SpecialityRefMapper {
         return new SpecialityDto(
                 vo.getSpecId(),
                 vo.getEduFormId(),
-                vo.getEduLvlId(),
+                vo.getEduLevelId(),
                 vo.getSpecialityName(),
                 vo.getSpecCode()
         );
@@ -29,7 +29,7 @@ public class SpecialityRefMapper {
         return new Speciality(
                 dto.getSpecId(),
                 dto.getEduFormId(),
-                dto.getEduLvlId(),
+                dto.getEduLevelId(),
                 dto.getSpecialityName(),
                 dto.getSpecCode()
         );
