@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan(basePackages = "ru.esstu")
 public class PersistenceConfig {
-    @Primary
+   @Primary
     @Bean(name = "dataSource")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
