@@ -28,7 +28,7 @@ public class EducationInfoService {
 
 
     public EducationInfoDto getEducationInfo(final int id) {
-        //accessService.commonAccessCheck(id);
+        accessService.commonAccessCheck(id);
         EducationInfoDto temp= educationInfoMapper.toDto(educationInfoRepository.getEducationInfo(id));
         if(temp==null){
             temp = new EducationInfoDto();
@@ -38,14 +38,14 @@ public class EducationInfoService {
     }
 
     public EducationInfoDto save(final EducationInfoDto educationInfoDto) {
-        //accessService.commonAccessCheck(educationInfoDto.getEntrantId());
+        accessService.commonAccessCheck(educationInfoDto.getEntrantId());
         EducationInfo entity= educationInfoMapper.toVO(educationInfoDto);
         educationInfoRepository.save(entity);
         return educationInfoMapper.toDto(entity);
     }
 
     public EducationInfoDto update(final EducationInfoDto educationInfoDto) {
-        //accessService.commonAccessCheck(educationInfoDto.getEntrantId());
+        accessService.commonAccessCheck(educationInfoDto.getEntrantId());
         EducationInfo entity= educationInfoMapper.toVO(educationInfoDto);
         educationInfoRepository.update(entity);
         return educationInfoMapper.toDto(entity);

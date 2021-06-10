@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Speciality {
     private long specId;
     private int eduFormId;
-    private int eduLvlId;
+    private int eduLevelId;
     private String specialityName;
     private String specCode;
 }
