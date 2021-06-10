@@ -14,7 +14,7 @@ public interface DialogRepository {
     List<Dialog> getEntrantDialog(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO dialog_table(moderator_id,entrant_id) " +
-            "VALUES(#{dialog.moderatorId},#{dialog.entrantId})")
+    @Insert("INSERT INTO dialog_table(moderator_role,entrant_id) " +
+            "VALUES(#{dialog.moderatorRole},#{dialog.entrantId})")
     long save(@Param("dialog") Dialog dialog);
 }
