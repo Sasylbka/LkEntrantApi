@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet id="2021-08-06-entrant-lk-init-v.0.9.2" author="nikita">
+    <changeSet id="2021-07-06-entrant-lk-init-v.0.9.1" author="nikita">
         <createTable tableName="admission_info">
             <column name="id"  type="serial">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
@@ -392,5 +392,19 @@
                                  referencedColumnNames="id"/>
 
 
+    </changeSet>
+    <changeSet id="2021-10-06-fix-parents-information-v.0.1.1" author="nikita">
+        <renameColumn
+                columnDataType="text"
+                newColumnName="place_of_father_job"
+                oldColumnName="place_of_fathers_job"
+                schemaName="lk"
+                tableName="parents_information"/>
+        <renameColumn
+                columnDataType="text"
+                newColumnName="place_of_mother_job"
+                oldColumnName="place_of_mothers_job"
+                schemaName="lk"
+                tableName="parents_information"/>
     </changeSet>
 </databaseChangeLog>
