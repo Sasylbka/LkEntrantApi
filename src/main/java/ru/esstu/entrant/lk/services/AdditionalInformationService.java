@@ -27,19 +27,19 @@ public class AdditionalInformationService {
 
 
     public List<AdditionalInformationDto> getAdditionalInformation(final int id) {
-        //accessService.commonAccessCheck(id);
+        accessService.commonAccessCheck(id);
         return additionalInformationMapper.toDtos(additionalInformationRepository.getAdditionalInformation(id));
     }
 
     public AdditionalInformationDto save(final AdditionalInformationDto additionalInformationDto) {
-        //accessService.commonAccessCheck(additionalInformationDto.getEntrantId());
+        accessService.commonAccessCheck(additionalInformationDto.getEntrantId());
         AdditionalInformation entity = additionalInformationMapper.toVO(additionalInformationDto);
         additionalInformationRepository.save(entity);
         return additionalInformationMapper.toDto(entity);
     }
 
     public AdditionalInformationDto update(final AdditionalInformationDto additionalInformationDto) {
-        //accessService.commonAccessCheck(additionalInformationDto.getEntrantId());
+        accessService.commonAccessCheck(additionalInformationDto.getEntrantId());
         AdditionalInformation entity = additionalInformationMapper.toVO(additionalInformationDto);
         additionalInformationRepository.update(entity);
         return additionalInformationMapper.toDto(entity);
