@@ -24,6 +24,7 @@ public class FileService {
         this.accessService = accessService;
     }
     public List<FileDto> getFiles(final int id) {
+        accessService.commonAccessCheck(id);
         List<FileDto> temp = fileMapper.toDtos(fileRepository.getFiles(id));
         return temp;
     }
@@ -32,5 +33,9 @@ public class FileService {
         File entity=fileMapper.toVO(fileDto);
         fileRepository.save(entity);
         return fileMapper.toDto(entity);
+    }
+    public void delete(final String guid,final int entrantId){
+        accessService.commonAccessCheck(entrantId);
+        fileRepository.delete(guid);
     }
 }
