@@ -15,8 +15,8 @@ public class DocumentTypeRefMapper {
             return null;
         }
         return new DocumentTypeDto(
-                vo.getDocTypeId(),
-                vo.getDocTypeName()
+                vo.getId(),
+                vo.getName()
         );
     }
     public DocumentType toVO(DocumentTypeDto dto) {
@@ -24,8 +24,8 @@ public class DocumentTypeRefMapper {
             return null;
         }
         return new DocumentType(
-                dto.getDocTypeId(),
-                dto.getDocTypeName()
+                dto.getId(),
+                dto.getName()
         );
     }
     public List<DocumentTypeDto> toDtos (List<DocumentType> vos) {

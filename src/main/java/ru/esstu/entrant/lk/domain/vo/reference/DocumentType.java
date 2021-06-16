@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DocumentType {
-    private int docTypeId;
-    private String docTypeName;
+    private int id;
+    private String name;
 }

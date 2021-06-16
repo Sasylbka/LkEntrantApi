@@ -8,6 +8,6 @@ import ru.esstu.entrant.lk.domain.vo.reference.DocumentType;
 import java.util.List;
 @Mapper
 public interface DocumentTypeRefRepository {
-    @Select("SELECT * FROM public.entrant_doc_type")
+    @Select("SELECT * FROM public.anketa_upload_file_doc_type")
     List<DocumentType> getDocumentTypes();
 }
