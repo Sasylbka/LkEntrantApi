@@ -22,7 +22,6 @@ import java.util.TimeZone;
 public class MessageService {
     private final MessageRepository messageRepository;
     private final MessageMapper messageMapper;
-
     public MessageService(MessageRepository messageRepository,
                          MessageMapper messageMapper,
                           AccessService accessService) {

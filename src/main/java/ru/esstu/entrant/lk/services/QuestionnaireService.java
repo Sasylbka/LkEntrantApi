@@ -6,6 +6,7 @@ import ru.esstu.entrant.lk.domain.dto.QuestionnaireDto;
 import ru.esstu.entrant.lk.domain.mappers.QuestionnaireMapper;
 import ru.esstu.entrant.lk.repositories.QuestionnaireRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +25,17 @@ public class QuestionnaireService {
     }
     public List<QuestionnaireDto> getQuestionnaire() {
         List<QuestionnaireDto> temp = questionnaireMapper.toDtos(questionnaireRepository.getQuestionnaire());
-        return temp;
+        int k=0;
+        List<Integer> list=new ArrayList<Integer>();
+        list.add(temp.get(0).getId());
+        List<QuestionnaireDto> temp1=new ArrayList<QuestionnaireDto>();
+        temp1.add(temp.get(0));
+        for(int i = 1;i<temp.size();i++){
+            if(!list.contains(temp.get(i).getId())) {
+                list.add(temp.get(i).getId());
+                temp1.add(temp.get(i));
+            }
+        }
+        return temp1;
     }
 }
