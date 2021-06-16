@@ -427,4 +427,7 @@
             <column name="needs_hostel" type="boolean"></column>
         </addColumn>
     </changeSet>
+    <changeSet id="" author="">
+        <modifyDataType tableName="message_table" columnName="date" newDataType="timestamp without time zone"/>
+    </changeSet>
 </databaseChangeLog>

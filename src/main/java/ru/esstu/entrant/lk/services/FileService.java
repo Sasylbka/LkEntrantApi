@@ -34,8 +34,7 @@ public class FileService {
         fileRepository.save(entity);
         return fileMapper.toDto(entity);
     }
-    public void delete(final String guid,final int entrantId){
-        accessService.commonAccessCheck(entrantId);
-        fileRepository.delete(guid);
+    public void delete(final int id){
+        fileRepository.delete(id);
     }
 }

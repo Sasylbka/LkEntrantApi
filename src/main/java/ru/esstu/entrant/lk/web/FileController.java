@@ -19,7 +19,6 @@ public class FileController {
     }
     @RequestMapping(method = RequestMethod.GET, path = "/file")
     public List<FileDto> get(final int id) {
-
         return fileService.getFiles(id);
     }
 }

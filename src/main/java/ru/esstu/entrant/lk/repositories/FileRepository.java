@@ -16,8 +16,7 @@ public interface FileRepository {
     @Insert("INSERT INTO entrant_files(entrant_id, file_name, file_extension, document_type,guid)" +
             "VALUES(#{file.entrantId},#{file.fileName},#{file.fileExtension},#{file.documentType},#{file.guid})")
     long save(@Param("file") File file);
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Delete("Delete From entrant_files " +
-            "Where entrant_files.guid=guid")
-    long delete(@Param("guid") String guid);
+            "Where entrant_files.id=#{id}")
+    long delete(@Param("id") int id);
 }
