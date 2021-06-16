@@ -407,4 +407,24 @@
                 schemaName="lk"
                 tableName="parents_information"/>
     </changeSet>
+    <changeSet id="2021-16-06-message_fix" author="nikita">
+        <addColumn tableName="message_table">
+            <column name="sender_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2021-16-06-additional_to_private_fix-1" author="nikita">
+        <dropColumn  schemaName="lk"
+                     tableName="additional_information">
+            <column  name="reservist"/>
+            <column  name="needs_hostel"/>
+        </dropColumn>
+        <addColumn tableName="entrant_private_data">
+            <column name="reservist" type="boolean"></column>
+        </addColumn>
+        <addColumn tableName="entrant_private_data">
+            <column name="needs_hostel" type="boolean"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

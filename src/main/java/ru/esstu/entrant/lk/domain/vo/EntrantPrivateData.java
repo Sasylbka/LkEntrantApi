@@ -19,4 +19,6 @@ public class EntrantPrivateData {
     private String cityOfBirth;
     private String regionOfBirth;
     private String snills;
+    private boolean reservist;//военнообязанный
+    private boolean needsHostel;//нужно общежитие
 }

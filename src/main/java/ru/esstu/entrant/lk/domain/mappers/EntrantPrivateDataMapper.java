@@ -11,13 +11,6 @@ import ru.esstu.entrant.lk.domain.vo.EntrantPrivateData;
 @Slf4j
 @Component
 public class EntrantPrivateDataMapper {
-
-    /**
-     * Преобразование.
-     *
-     * @param vo объект
-     * @return dto
-     */
     public EntrantPrivateDataDto toDto(EntrantPrivateData vo) {
         if (vo == null) {
             return null;
@@ -32,16 +25,12 @@ public class EntrantPrivateDataMapper {
                 vo.getDateOfBirth(),
                 vo.getCityOfBirth(),
                 vo.getRegionOfBirth(),
-                vo.getSnills()
+                vo.getSnills(),
+                vo.isReservist(),
+                vo.isNeedsHostel()
         );
     }
 
-    /**
-     * Преобразование.
-     *
-     * @param dto объект
-     * @return dto
-     */
     public EntrantPrivateData toVO(EntrantPrivateDataDto dto) {
         if (dto == null) {
             return null;
@@ -56,7 +45,9 @@ public class EntrantPrivateDataMapper {
                 dto.getDateOfBirth(),
                 dto.getCityOfBirth(),
                 dto.getRegionOfBirth(),
-                dto.getSnills()
+                dto.getSnills(),
+                dto.isReservist(),
+                dto.isNeedsHostel()
         );
     }
 }

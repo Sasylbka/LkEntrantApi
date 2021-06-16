@@ -18,6 +18,7 @@ import java.util.Date;
 public class Message {
     private int id;
     private int dialogId;
+    private int senderId;
     private String sender;
     private String message;
     private Date date;
