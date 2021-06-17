@@ -8,10 +8,10 @@ public interface ChangesDateRepository {
     ChangesDate getChangesDate(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO changes_date(date_of_creation,date_of_send,date_of_answer) VALUES( #{ChangesDate.dateOfCreation}, #{ChangesDate.dateOfSend},#{ChangesDate.dateOfAnswer})")
+    @Insert("INSERT INTO changes_date(entrant_id,date_of_creation,date_of_send,date_of_answer) VALUES( #{ChangesDate.entrantId},#{ChangesDate.dateOfCreation}, #{ChangesDate.dateOfSend},#{ChangesDate.dateOfAnswer})")
     long save(@Param("ChangesDate") ChangesDate ChangesDate);
     
     @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
-    @Update("UPDATE changes_date SET date_of_creation=#{ChangesDate.dateOfCreation},date_of_send=#{ChangesDate.dateOfSend},date_of_answer=#{ChangesDate.dateOfAnswer}  WHERE entrant_id#{ChangesDate.entrantId}")
+    @Update("UPDATE changes_date SET entrant_id=#{ChangesDate.entrantId}, date_of_creation=#{ChangesDate.dateOfCreation},date_of_send=#{ChangesDate.dateOfSend},date_of_answer=#{ChangesDate.dateOfAnswer}  WHERE entrant_id#{ChangesDate.entrantId}")
     long update(@Param("ChangesDate") ChangesDate ChangesDate);
 }
