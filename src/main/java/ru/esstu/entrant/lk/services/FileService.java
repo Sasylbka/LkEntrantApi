@@ -34,7 +34,7 @@ public class FileService {
         fileRepository.save(entity);
         return fileMapper.toDto(entity);
     }
-    public void delete(final int id){
-        fileRepository.delete(id);
+    public void delete(final int idForDelete){
+        fileRepository.delete(idForDelete);
     }
 }

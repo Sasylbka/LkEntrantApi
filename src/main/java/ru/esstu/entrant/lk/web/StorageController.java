@@ -42,9 +42,9 @@ public class StorageController {
         return fileService.save(fileCode,type,entrantId,filename,contentType);
     }
     @RequestMapping(value = "/file/delete.do",method = RequestMethod.POST)
-    public void delete(@RequestParam(required = false)String guid,int id){
+    public void delete(@RequestParam(required = false)String guid,int idForDelete){
         String fileCode=guid;
         storageConnector.removeFileSafety(fileCode);
-        fileService.delete(id);
+        fileService.delete(idForDelete);
     }
 }
