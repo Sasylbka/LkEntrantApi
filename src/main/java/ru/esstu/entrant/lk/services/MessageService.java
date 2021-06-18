@@ -30,13 +30,17 @@ public class MessageService {
     }
 
 
-    public List<MessageDto> getMessage(final int id) {
-        List<MessageDto> temp = messageMapper.toDtos(messageRepository.getMessage(id));
+    public List<MessageDto> getMessage(final int id,final String role) {
+        List<MessageDto> temp = messageMapper.toDtos(messageRepository.getMessage(id,role));
         return temp;
     }
     public MessageDto save(final MessageDto messageDto) throws ParseException {
         Message entity= messageMapper.toVO(messageDto);
         messageRepository.save(entity);
         return messageMapper.toDto(entity);
+    }
+    public MessageDto getLastMessage(final int id,final String role){
+       MessageDto temp= messageMapper.toDto(messageRepository.getLastMessage(id,role));
+        return temp;
     }
 }

@@ -18,7 +18,8 @@ public class DialogMapper {
         return new DialogDto(
                 vo.getId(),
                 vo.getModeratorRole(),
-                vo.getEntrantId()
+                vo.getEntrantId(),
+                vo.getLastMessage()
         );
     }
 
@@ -29,7 +30,8 @@ public class DialogMapper {
         return new Dialog(
                 dto.getId(),
                 dto.getModeratorRole(),
-                dto.getEntrantId()
+                dto.getEntrantId(),
+                dto.getLastMessage()
         );
     }
     public List<DialogDto> toDtos (List<Dialog> vos) {

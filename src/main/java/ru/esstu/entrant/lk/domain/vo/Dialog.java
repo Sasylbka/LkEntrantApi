@@ -11,4 +11,5 @@ public class Dialog {
     private int Id;
     private String moderatorRole;
     private int entrantId;
+    private int lastMessage;
 }

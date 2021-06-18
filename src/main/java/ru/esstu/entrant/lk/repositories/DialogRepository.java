@@ -8,13 +8,13 @@ import java.util.List;
 @Mapper
 public interface DialogRepository {
     @Select("SELECT * FROM dialog_table WHERE moderator_role = #{moderator_role}")
-    List<Dialog> getModeratorDialog(@Param("moderator_role") String role);
+    List<Dialog> getModeratorDialog(@Param("moderator_role") String moderator_role);
 
     @Select("SELECT * FROM dialog_table WHERE entrant_id = #{id}")
     List<Dialog> getEntrantDialog(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO dialog_table(moderator_role,entrant_id) " +
-            "VALUES(#{dialog.moderatorRole},#{dialog.entrantId})")
+    @Insert("INSERT INTO dialog_table(moderator_role,entrant_id, last_message) " +
+            "VALUES(#{dialog.moderatorRole},#{dialog.entrantId},#{dialog.lastMessage})")
     long save(@Param("dialog") Dialog dialog);
 }

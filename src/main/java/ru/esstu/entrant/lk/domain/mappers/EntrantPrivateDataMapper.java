@@ -26,8 +26,8 @@ public class EntrantPrivateDataMapper {
                 vo.getCityOfBirth(),
                 vo.getRegionOfBirth(),
                 vo.getSnills(),
-                vo.isReservist(),
-                vo.isNeedsHostel()
+                vo.getReservist(),
+                vo.getNeedsHostel()
         );
     }
 
@@ -46,8 +46,8 @@ public class EntrantPrivateDataMapper {
                 dto.getCityOfBirth(),
                 dto.getRegionOfBirth(),
                 dto.getSnills(),
-                dto.isReservist(),
-                dto.isNeedsHostel()
+                dto.getReservist(),
+                dto.getNeedsHostel()
         );
     }
 }

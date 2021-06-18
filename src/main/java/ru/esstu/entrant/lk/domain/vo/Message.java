@@ -17,6 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Message {
     private int id;
+    private String role;
     private int dialogId;
     private int senderId;
     private String sender;

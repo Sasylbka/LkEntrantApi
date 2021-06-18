@@ -29,15 +29,15 @@ public class DialogService {
 
 
     public List<DialogDto> getModeratorDialog(final int id,final String role) {
-        accessService.commonAccessCheck(id);
+        //accessService.commonAccessCheck(id);
         return dialogMapper.toDtos(dialogRepository.getModeratorDialog(role));
     }
     public List<DialogDto> getEntrantDialog(final int id) {
-        accessService.commonAccessCheck(id);
+        //accessService.commonAccessCheck(id);
         return dialogMapper.toDtos(dialogRepository.getEntrantDialog(id));
     }
     public DialogDto save(final DialogDto dialogDto) {
-        accessService.commonAccessCheck(dialogDto.getEntrantId());
+        //accessService.commonAccessCheck(dialogDto.getEntrantId());
         Dialog entity= dialogMapper.toVO(dialogDto);
         dialogRepository.save(entity);
         return dialogMapper.toDto(entity);
