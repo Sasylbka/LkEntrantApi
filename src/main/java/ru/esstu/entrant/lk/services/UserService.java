@@ -28,6 +28,11 @@ public class UserService {
                     moderatorService.getOrCreateModeratorByKeycloakGuid(keycloakUserGuid);
             return new UserDto(moderator.getId(), UserRoleEnum.ROLE_SELECTION_COMMIT);
         }
+        if (UserUtils.hasRole(UserRoleEnum.ROLE_ECONOMIC.toString())) {
+            Moderator moderator =
+                    moderatorService.getOrCreateModeratorByKeycloakGuid(keycloakUserGuid);
+            return new UserDto(moderator.getId(), UserRoleEnum.ROLE_ECONOMIC);
+        }
         Entrant entrant = entrantService.getOrCreateEntrantByKeycloakGuid(keycloakUserGuid);
         return new UserDto(entrant.getId(), UserRoleEnum.ROLE_ENTRANT);
     }
