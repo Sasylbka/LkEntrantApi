@@ -464,4 +464,7 @@
             <column name="consent_checked" type="text"></column>
         </addColumn>
     </changeSet>
+    <changeSet id="dima_ne_dushi" author="druzhinin">
+        <modifyDataType tableName="entrant_private_data" columnName="consent_checked" newDataType="bool"/>
+    </changeSet>
 </databaseChangeLog>

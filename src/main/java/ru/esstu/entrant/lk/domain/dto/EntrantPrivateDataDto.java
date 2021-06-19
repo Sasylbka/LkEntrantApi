@@ -21,5 +21,5 @@ public class EntrantPrivateDataDto {
     private String snills;
     private String reservist;//военнообязанный
     private String needsHostel;//нужно общежитие
-    private String consentChecked;
+    private boolean consentChecked;
 }

@@ -28,7 +28,7 @@ public class EntrantPrivateDataMapper {
                 vo.getSnills(),
                 vo.getReservist(),
                 vo.getNeedsHostel(),
-                vo.getConsentChecked()
+                vo.isConsentChecked()
         );
     }
 
@@ -49,7 +49,7 @@ public class EntrantPrivateDataMapper {
                 dto.getSnills(),
                 dto.getReservist(),
                 dto.getNeedsHostel(),
-                dto.getConsentChecked()
+                dto.isConsentChecked()
         );
     }
 }
