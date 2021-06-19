@@ -14,15 +14,25 @@ public interface AdmissionInfoRepository {
     List<AdmissionInfo> getAdmissionInfo(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO admission_info(entrant_id, level_of_education, direction, budget, contract, targeted_training, quota, consent) " +
+    @Insert("INSERT INTO admission_info(entrant_id, level_of_education, direction, budget, contract, targeted_training, quota," +
+            " consent_budget, consent_target, consent_quote ) " +
             "VALUES(#{admissionInfo.entrantId},#{admissionInfo.levelOfEducation},#{admissionInfo.direction}," +
-            "#{admissionInfo.budget},#{admissionInfo.contract},#{admissionInfo.targetedTraining},#{admissionInfo.quota},#{admissionInfo.consent})")
+            "#{admissionInfo.budget},#{admissionInfo.contract},#{admissionInfo.targetedTraining},#{admissionInfo.quota},#{admissionInfo.consentBudget}," +
+            "#{admissionInfo.consentTarget},#{admissionInfo.consentQuote})")
     long save(@Param("admissionInfo") AdmissionInfo admissionInfo);
 
-    @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
+    @Options( keyProperty = "id", keyColumn = "id")
     @Update("UPDATE admission_info SET level_of_education=#{admissionInfo.levelOfEducation}, " +
             "direction=#{admissionInfo.direction}, budget=#{admissionInfo.budget}, contract=#{admissionInfo.contract}, " +
-            "targeted_training=#{admissionInfo.targetedTraining}, quota=#{admissionInfo.quota}, consent=#{admissionInfo.consent} " +
+            "targeted_training=#{admissionInfo.targetedTraining}, quota=#{admissionInfo.quota} " +
             "WHERE id=#{admissionInfo.id}")
     long update(@Param("admissionInfo") AdmissionInfo admissionInfo);
+
+    @Options( keyProperty = "id", keyColumn = "id")
+    @Update("UPDATE admission_info SET consent_budget=#{admissionInfo.consentBudget}, " +
+            "consent_target=#{admissionInfo.consentTarget}, consent_quote=#{admissionInfo.consentQuote} " +
+            "WHERE id=#{admissionInfo.id}")
+    long updateConsent(@Param("admissionInfo") AdmissionInfo admissionInfo);
+
+
 }

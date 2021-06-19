@@ -30,7 +30,9 @@ public class AdmissionInfoMapper {
                 vo.isContract(),
                 vo.isTargetedTraining(),
                 vo.isQuota(),
-                vo.isConsent()
+                vo.isConsentBudget(),
+                vo.isConsentTarget(),
+                vo.isConsentQuote()
         );
     }
     public AdmissionInfo toVO(AdmissionInfoDto dto) {
@@ -46,7 +48,9 @@ public class AdmissionInfoMapper {
                 dto.isContract(),
                 dto.isTargetedTraining(),
                 dto.isQuota(),
-                dto.isConsent()
+                dto.isConsentBudget(),
+                dto.isConsentTarget(),
+                dto.isConsentQuote()
         );
     }
     public List<AdmissionInfoDto> toDtos (List<AdmissionInfo> vos) {

@@ -14,9 +14,11 @@ public class AdmissionInfoDto {
     private int entrantId;
     private String levelOfEducation;
     private String direction;//id из справочника
-    private boolean budget;//бюджет
+    private boolean budget;//выбрал бюджет
     private boolean contract;//договор
-    private boolean targetedTraining;//целевое
-    private boolean quota;//квотники
-    private boolean consent;//согласен на зачисление
+    private boolean targetedTraining;//выбрал целевое
+    private boolean quota;//выбрал льготы
+    private boolean consentBudget;//согласен на зачисление на бюджет
+    private boolean consentTarget;//согласен на зачисление на целевое
+    private boolean consentQuote;//согласен на зачисление на льготное
 }

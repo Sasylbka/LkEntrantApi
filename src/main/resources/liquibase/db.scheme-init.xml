@@ -467,4 +467,47 @@
     <changeSet id="dima_ne_dushi" author="druzhinin">
         <modifyDataType tableName="entrant_private_data" columnName="consent_checked" newDataType="bool"/>
     </changeSet>
+    <changeSet id="2021-18-06-configuration" author="nikita">
+        <createTable tableName="configuration">
+            <column name="id" type="integer">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="max_withdrawal_of_consent" type="integer"></column>
+            <column name="last_date_bubget" type="date"></column>
+            <column name="last_date_quote" type="date">
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2021-19-06-consentDateFix" author="nikita">
+        <modifyDataType tableName="consent" columnName="date" newDataType="timestamp without time zone"/>
+    </changeSet>
+    <changeSet id="2021-10-06-configurationFix" author="nikita">
+        <renameColumn
+                columnDataType="date"
+                newColumnName="last_date_budget"
+                oldColumnName="last_date_bubget"
+                schemaName="lk"
+                tableName="configuration"/>
+
+    </changeSet>
+    <changeSet id="2021-16-06-admissionInfoFix" author="nikita">
+        <addColumn tableName="admission_info">
+            <column name="consent_budget" type="boolean">
+            </column>
+        </addColumn>
+        <addColumn tableName="admission_info">
+            <column name="consent_target" type="boolean">
+            </column>
+        </addColumn>
+        <addColumn tableName="admission_info">
+            <column name="consent_quote" type="boolean">
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2021-16-06-admissionInfoFix2" author="nikita">
+        <dropColumn  schemaName="lk"
+                     tableName="admission_info">
+            <column  name="consent"/>
+        </dropColumn>
+    </changeSet>
 </databaseChangeLog>
