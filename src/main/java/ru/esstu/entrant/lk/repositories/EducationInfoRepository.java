@@ -11,7 +11,7 @@ public interface EducationInfoRepository {
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert("INSERT INTO education_info(entrant_id, education, year_of_finished, document_of_education, document_of_education_serial_number," +
-            "place_of_finished, date_of_finished, studied_language, if_choosen_level_of_education_first, entrance_tests)" +
+            "place_of_finished, date_of_finished, studied_language, if_choosen_level_of_education_first, entrance_test)" +
             " VALUES(#{educationInfo.entrantId},#{educationInfo.education},#{educationInfo.yearOfFinished}," +
             "#{educationInfo.documentOfEducation},#{educationInfo.documentOfEducationSerialNumber}," +
             "#{educationInfo.placeOfFinished},#{educationInfo.dateOfFinished},#{educationInfo.studiedLanguage}," +

@@ -20,5 +20,5 @@ public class EducationInfoDto {
     private Date dateOfFinished;
     private String studiedLanguage;
     private String ifChoosenLevelOfEducationFirst;
-    private String entranceTests;
+    private String entranceTest;
 }
