@@ -30,7 +30,7 @@ public class UserUtils {
     }
 
     public static boolean isModerator() {
-        if (hasRole(UserRoleEnum.ROLE_MODERATOR.toString())) return true;
+        if (hasRole(UserRoleEnum.ROLE_SELECTION_COMMIT.toString())) return true;
         return false;
     }
 

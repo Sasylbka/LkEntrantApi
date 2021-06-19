@@ -23,10 +23,10 @@ public class UserService {
 
     public UserDto getCurrentUser() {
         String keycloakUserGuid = UserUtils.getCurrentUserKeycloakGuid();
-        if (UserUtils.hasRole(UserRoleEnum.ROLE_MODERATOR.toString())) {
+        if (UserUtils.hasRole(UserRoleEnum.ROLE_SELECTION_COMMIT.toString())) {
             Moderator moderator =
                     moderatorService.getOrCreateModeratorByKeycloakGuid(keycloakUserGuid);
-            return new UserDto(moderator.getId(), UserRoleEnum.ROLE_MODERATOR);
+            return new UserDto(moderator.getId(), UserRoleEnum.ROLE_SELECTION_COMMIT);
         }
         Entrant entrant = entrantService.getOrCreateEntrantByKeycloakGuid(keycloakUserGuid);
         return new UserDto(entrant.getId(), UserRoleEnum.ROLE_ENTRANT);

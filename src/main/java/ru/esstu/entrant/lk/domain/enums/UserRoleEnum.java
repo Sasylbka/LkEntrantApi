@@ -5,5 +5,6 @@ package ru.esstu.entrant.lk.domain.enums;
  */
 public enum UserRoleEnum {
     ROLE_ENTRANT,
-    ROLE_MODERATOR
+    ROLE_ECONOMIC,//экономический отдел
+    ROLE_SELECTION_COMMIT//приёмка
 }
