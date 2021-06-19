@@ -454,4 +454,14 @@
         <addForeignKeyConstraint baseTableName="message_table" baseColumnNames="dialog_id,role" constraintName="fk_message_dialog" referencedTableName="dialog_table"
                                  referencedColumnNames="id, moderator_role"/>
     </changeSet>
+    <changeSet id="2021-19-06-hotfix5" author="">
+        <addColumn tableName="benefit_information">
+            <column name="benefit_checked" type="text"></column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2021-19-06-hotfix5" author="druzhinin">
+        <addColumn tableName="entrant_private_data">
+            <column name="consent_checked" type="text"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
