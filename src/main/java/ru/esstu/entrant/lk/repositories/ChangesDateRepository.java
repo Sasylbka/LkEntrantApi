@@ -12,6 +12,6 @@ public interface ChangesDateRepository {
     long save(@Param("ChangesDate") ChangesDate ChangesDate);
     
     @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
-    @Update("UPDATE changes_date SET entrant_id=#{ChangesDate.entrantId}, date_of_creation=#{ChangesDate.dateOfCreation},date_of_send=#{ChangesDate.dateOfSend},date_of_answer=#{ChangesDate.dateOfAnswer}  WHERE entrant_id#{ChangesDate.entrantId}")
+    @Update("UPDATE changes_date SET entrant_id=#{ChangesDate.entrantId}, date_of_creation=#{ChangesDate.dateOfCreation},date_of_send=#{ChangesDate.dateOfSend},date_of_answer=#{ChangesDate.dateOfAnswer}  WHERE entrant_id=#{ChangesDate.entrantId}")
     long update(@Param("ChangesDate") ChangesDate ChangesDate);
 }
