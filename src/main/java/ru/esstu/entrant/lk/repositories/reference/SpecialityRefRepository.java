@@ -18,6 +18,6 @@ public interface SpecialityRefRepository {
             "public.acceptance_plan.number_benefit " +
             "FROM public.speciality " +
             "left join public.speciality_code on public.speciality.spec_code_id=public.speciality_code.spec_id " +
-            "left join public.acceptance_plan on public.speciality.spec_code_id=public.acceptance_plan.spec_id ")
+            "left join public.acceptance_plan on public.speciality.spec_id=public.acceptance_plan.spec_id ")
     List<Speciality> getSpecialities();
 }
