@@ -510,4 +510,7 @@
             <column  name="consent"/>
         </dropColumn>
     </changeSet>
+    <changeSet id="2021-20-06" author="nikita">
+        <modifyDataType tableName="benefit_information" columnName="benefit_checked" newDataType="bool"/>
+    </changeSet>
 </databaseChangeLog>

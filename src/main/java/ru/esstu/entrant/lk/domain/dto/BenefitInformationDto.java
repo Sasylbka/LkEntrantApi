@@ -17,5 +17,5 @@ public class BenefitInformationDto {
     private String serialNumberOfDocumentForTheBenefit;
     private String issuedBy;
     private Date dataOfIssued;
-    private String benefitChecked;
+    private Boolean benefitChecked;
 }
