@@ -25,9 +25,10 @@ public class BenefitInformationMapper {
                 vo.getEntrantId(),
                 vo.getReasonForTheBenefit(),
                 vo.getDocumentForTheBenefit(),
-                vo.getSerialNumberDocumentForTheBenefit(),
+                vo.getSerialNumberOfDocumentForTheBenefit(),
                 vo.getIssuedBy(),
-                vo.getDataOfIssued()
+                vo.getDataOfIssued(),
+                vo.getBenefitChecked()
         );
     }
     /**
@@ -45,9 +46,10 @@ public class BenefitInformationMapper {
                 dto.getEntrantId(),
                 dto.getReasonForTheBenefit(),
                 dto.getDocumentForTheBenefit(),
-                dto.getSerialNumberDocumentForTheBenefit(),
+                dto.getSerialNumberOfDocumentForTheBenefit(),
                 dto.getIssuedBy(),
-                dto.getDataOfIssued()
+                dto.getDataOfIssued(),
+                dto.getBenefitChecked()
         );
     }
 }

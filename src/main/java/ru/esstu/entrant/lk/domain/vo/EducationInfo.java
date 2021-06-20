@@ -20,4 +20,5 @@ public class EducationInfo {
     private Date dateOfFinished;
     private String studiedLanguage;
     private String ifChoosenLevelOfEducationFirst;
+    private String entranceTest;
 }

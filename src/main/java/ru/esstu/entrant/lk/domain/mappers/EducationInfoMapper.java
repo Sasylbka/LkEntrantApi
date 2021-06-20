@@ -32,7 +32,8 @@ public class EducationInfoMapper {
                 vo.getPlaceOfFinished(),
                 vo.getDateOfFinished(),
                 vo.getStudiedLanguage(),
-                vo.getIfChoosenLevelOfEducationFirst()
+                vo.getIfChoosenLevelOfEducationFirst(),
+                vo.getEntranceTest()
         );
     }
 
@@ -56,7 +57,8 @@ public class EducationInfoMapper {
                 dto.getPlaceOfFinished(),
                 dto.getDateOfFinished(),
                 dto.getStudiedLanguage(),
-                dto.getIfChoosenLevelOfEducationFirst()
+                dto.getIfChoosenLevelOfEducationFirst(),
+                dto.getEntranceTest()
         );
     }
 }

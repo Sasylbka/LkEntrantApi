@@ -3,7 +3,13 @@ package ru.esstu.entrant.lk.domain.mappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.esstu.entrant.lk.domain.dto.ConsentDto;
+import ru.esstu.entrant.lk.domain.dto.ConsentDto;
 import ru.esstu.entrant.lk.domain.vo.Consent;
+import ru.esstu.entrant.lk.domain.vo.Consent;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Маппер.
  */
@@ -43,5 +49,12 @@ public class ConsentMapper {
                 dto.getDate(),
                 dto.getActionType()
         );
+    }
+    public List<ConsentDto> toDtos (List<Consent> vos) {
+        List<ConsentDto> list = new ArrayList<>();
+        for (Consent vo : vos) {
+            list.add(toDto(vo));
+        }
+        return list;
     }
 }

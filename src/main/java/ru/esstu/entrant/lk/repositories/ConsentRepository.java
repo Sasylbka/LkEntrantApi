@@ -3,10 +3,15 @@ package ru.esstu.entrant.lk.repositories;
 import org.apache.ibatis.annotations.*;
 import ru.esstu.entrant.lk.domain.vo.Consent;
 
+import java.util.List;
+
 @Mapper
 public interface ConsentRepository {
     @Select("SELECT * FROM consent WHERE entrant_id = #{id}")
-    Consent getConsent(@Param("id") int id);
+    List<Consent> getConsent(@Param("id") int id);
+
+    @Select("SELECT * FROM consent WHERE entrant_id = #{id} and action_type='Add'")
+    List<Consent> getFullAdd(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert("INSERT INTO consent(entrant_id, admission_info_id, date, action_type) " +

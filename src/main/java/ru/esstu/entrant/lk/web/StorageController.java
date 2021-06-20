@@ -32,15 +32,19 @@ public class StorageController {
     }
 
     @RequestMapping(value = "/file/save.do", method = RequestMethod.POST)
-
     public FileDto save(@RequestParam(required = false) MultipartFile file, String type, int entrantId) {
         String fileCode = "";
         if (file != null && !file.isEmpty()) {
             fileCode = storageConnector.saveFile(file);
         }
-        StorageFile storageFile = storageConnector.getStorageFile(fileCode);
         String filename= file.getOriginalFilename();
         String contentType = file.getContentType();
         return fileService.save(fileCode,type,entrantId,filename,contentType);
+    }
+    @RequestMapping(value = "/file/delete.do",method = RequestMethod.POST)
+    public void delete(@RequestParam(required = false)String guid,int idForDelete){
+        String fileCode=guid;
+        storageConnector.removeFileSafety(fileCode);
+        fileService.delete(idForDelete);
     }
 }

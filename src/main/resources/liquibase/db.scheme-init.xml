@@ -407,4 +407,111 @@
                 schemaName="lk"
                 tableName="parents_information"/>
     </changeSet>
+    <changeSet id="2021-16-06-message_fix" author="nikita">
+        <addColumn tableName="message_table">
+            <column name="sender_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2021-16-06-additional_to_private_fix-1" author="nikita">
+        <dropColumn  schemaName="lk"
+                     tableName="additional_information">
+            <column  name="reservist"/>
+            <column  name="needs_hostel"/>
+        </dropColumn>
+        <addColumn tableName="entrant_private_data">
+            <column name="reservist" type="boolean"></column>
+        </addColumn>
+        <addColumn tableName="entrant_private_data">
+            <column name="needs_hostel" type="boolean"></column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="" author="">
+        <modifyDataType tableName="message_table" columnName="date" newDataType="timestamp without time zone"/>
+    </changeSet>
+    <changeSet id="2021-16-06-hotfix" author="druzhinin">
+        <addColumn tableName="education_info">
+            <column type="text" name="entrance_test"></column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2021-16-06-hotfix2" author="druzhinin">
+    <modifyDataType tableName="entrant_private_data" columnName="reservist" newDataType="text"/>
+        <modifyDataType tableName="entrant_private_data" columnName="needs_hostel" newDataType="text"/>
+    </changeSet>
+    <changeSet id="2021-16-06-hotfix3" author="druzhinin">
+        <addColumn tableName="dialog_table">
+            <column name="last_message" type="int"></column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2021-16-06-hotfix4" author="druzhinin">
+        <addColumn tableName="message_table">
+            <column name="role" type="text"></column>
+        </addColumn>
+        <dropForeignKeyConstraint baseTableName="message_table" constraintName="fk_message_dialog"/>
+        <dropPrimaryKey tableName="dialog_table" />
+        <addPrimaryKey tableName="dialog_table" columnNames="id,moderator_role"/>
+        <addForeignKeyConstraint baseTableName="message_table" baseColumnNames="dialog_id,role" constraintName="fk_message_dialog" referencedTableName="dialog_table"
+                                 referencedColumnNames="id, moderator_role"/>
+    </changeSet>
+    <changeSet id="2021-19-06-hotfix5" author="">
+        <addColumn tableName="benefit_information">
+            <column name="benefit_checked" type="text"></column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2021-19-06-hotfix5" author="druzhinin">
+        <addColumn tableName="entrant_private_data">
+            <column name="consent_checked" type="text"></column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="dima_ne_dushi" author="druzhinin">
+        <modifyDataType tableName="entrant_private_data" columnName="consent_checked" newDataType="bool"/>
+    </changeSet>
+    <changeSet id="2021-18-06-configuration" author="nikita">
+        <createTable tableName="configuration">
+            <column name="id" type="integer">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="max_withdrawal_of_consent" type="integer"></column>
+            <column name="last_date_bubget" type="date"></column>
+            <column name="last_date_quote" type="date">
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2021-19-06-consentDateFix" author="nikita">
+        <modifyDataType tableName="consent" columnName="date" newDataType="timestamp without time zone"/>
+    </changeSet>
+    <changeSet id="2021-10-06-configurationFix" author="nikita">
+        <renameColumn
+                columnDataType="date"
+                newColumnName="last_date_budget"
+                oldColumnName="last_date_bubget"
+                schemaName="lk"
+                tableName="configuration"/>
+
+    </changeSet>
+    <changeSet id="2021-16-06-admissionInfoFix" author="nikita">
+        <addColumn tableName="admission_info">
+            <column name="consent_budget" type="boolean">
+            </column>
+        </addColumn>
+        <addColumn tableName="admission_info">
+            <column name="consent_target" type="boolean">
+            </column>
+        </addColumn>
+        <addColumn tableName="admission_info">
+            <column name="consent_quote" type="boolean">
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2021-16-06-admissionInfoFix2" author="nikita">
+        <dropColumn  schemaName="lk"
+                     tableName="admission_info">
+            <column  name="consent"/>
+        </dropColumn>
+    </changeSet>
+    <changeSet id="2021-20-06-asfasf" author="nikita">
+        <modifyDataType tableName="benefit_information" columnName="benefit_checked" newDataType="boolean"/>
+    </changeSet>
+
 </databaseChangeLog>

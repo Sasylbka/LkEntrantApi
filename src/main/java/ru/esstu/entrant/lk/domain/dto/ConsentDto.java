@@ -13,5 +13,5 @@ public class ConsentDto {//История запросов
     private int entrantId;
     private int admissionInfoId;
     private Date date;
-    private String actionType;
+    private String actionType;//add или cancel
 }

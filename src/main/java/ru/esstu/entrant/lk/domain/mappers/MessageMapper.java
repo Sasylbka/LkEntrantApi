@@ -19,7 +19,9 @@ public class MessageMapper {
         }
         return new MessageDto(
                 vo.getId(),
+                vo.getRole(),
                 vo.getDialogId(),
+                vo.getSenderId(),
                 vo.getSender(),
                 vo.getMessage(),
                 vo.getDate()
@@ -32,7 +34,9 @@ public class MessageMapper {
         }
         return new Message(
                 dto.getId(),
+                dto.getRole(),
                 dto.getDialogId(),
+                dto.getSenderId(),
                 dto.getSender(),
                 dto.getMessage(),
                 dto.getDate()

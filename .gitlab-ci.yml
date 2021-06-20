@@ -62,21 +62,21 @@ package-docker-tags:
     - docker build -t docker.esstu.ru:443/entrant/entrant-lk:$CI_COMMIT_TAG .
     - docker push docker.esstu.ru:443/entrant/entrant-lk:$CI_COMMIT_TAG
 
-#deploy-docker-develop:
-#  image: kroniak/ssh-client
-#  stage: deploy
-#  only:
-#    - develop
-#  tags:
-#    - docker
-#  before_script:
-#    - mkdir -p ~/.ssh
-#    - chmod 700 ~/.ssh
-#    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-#    - echo "$SSH_PRIVATE_KEY_TEST" > ~/.ssh/id_rsa
-#    - chmod 600 ~/.ssh/id_rsa
-#  script:
-#    - ssh entrant@entrant.esstu.ru 'cd ~/poligon/docker/entrant; ./lk-update.sh;'
+deploy-docker-develop:
+  image: kroniak/ssh-client
+  stage: deploy
+  only:
+    - develop
+  tags:
+    - docker
+  before_script:
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - echo "$SSH_PRIVATE_KEY_TEST" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+  script:
+    - ssh vladimir@$SSH_HOSTNAME_MASTER 'cd docker/; ./entrant-lk-api-update-develop.sh;'
 
 deploy-docker-master:
   image: kroniak/ssh-client

@@ -14,7 +14,8 @@ public class BenefitInformation {
     private int entrantId;
     private String reasonForTheBenefit;
     private String documentForTheBenefit;
-    private String serialNumberDocumentForTheBenefit;
+    private String serialNumberOfDocumentForTheBenefit;
     private String issuedBy;
     private Date dataOfIssued;
+    private Boolean benefitChecked;
 }

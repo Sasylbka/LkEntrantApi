@@ -19,7 +19,11 @@ public class SpecialityRefMapper {
                 vo.getEduFormId(),
                 vo.getEduLevelId(),
                 vo.getSpecialityName(),
-                vo.getSpecCode()
+                vo.getSpecCode(),
+                vo.getNumberBudget(),
+                vo.getNumberPaid(),
+                vo.getNumberTarget(),
+                vo.getNumberBenefit()
         );
     }
     public Speciality toVO(SpecialityDto dto) {
@@ -31,7 +35,11 @@ public class SpecialityRefMapper {
                 dto.getEduFormId(),
                 dto.getEduLevelId(),
                 dto.getSpecialityName(),
-                dto.getSpecCode()
+                dto.getSpecCode(),
+                dto.getNumberBudget(),
+                dto.getNumberPaid(),
+                dto.getNumberTarget(),
+                dto.getNumberBenefit()
         );
     }
     public List<SpecialityDto> toDtos (List<Speciality> vos) {

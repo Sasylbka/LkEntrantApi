@@ -13,4 +13,8 @@ public class Speciality {
     private int eduLevelId;
     private String specialityName;
     private String specCode;
+    private int numberBudget;
+    private int numberPaid;
+    private int numberTarget;
+    private int numberBenefit;
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public interface QuestionnaireRepository {
     @Select("SELECT "+
             "entrant.id,"+
-            "entrant_private_data.id,"+
+            "entrant_private_data.entrant_id,"+
             "entrant_private_data.name,"+
             "entrant_private_data.family_name,"+
             "entrant_private_data.patronymic,"+

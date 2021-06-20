@@ -16,7 +16,9 @@ import java.util.Locale;
 @NoArgsConstructor
 public class MessageDto {
     private int id;
+    private String role;
     private int dialogId;
+    private int senderId;
     private String sender;
     private String message;
     private Date date;

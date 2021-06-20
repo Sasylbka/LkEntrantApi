@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.repositories;
 
 import org.apache.ibatis.annotations.*;
+import ru.esstu.entrant.lk.domain.dto.FileDto;
 import ru.esstu.entrant.lk.domain.vo.Consent;
 import ru.esstu.entrant.lk.domain.vo.EntrantPrivateData;
 import ru.esstu.entrant.lk.domain.vo.File;
@@ -15,4 +16,8 @@ public interface FileRepository {
     @Insert("INSERT INTO entrant_files(entrant_id, file_name, file_extension, document_type,guid)" +
             "VALUES(#{file.entrantId},#{file.fileName},#{file.fileExtension},#{file.documentType},#{file.guid})")
     long save(@Param("file") File file);
+    @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
+    @Delete("Delete From entrant_files " +
+            "Where entrant_files.id=#{idForDelete}")
+    long delete(@Param("idForDelete") int idForDelete);
 }
