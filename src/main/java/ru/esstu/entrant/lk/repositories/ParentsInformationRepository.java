@@ -11,11 +11,11 @@ public interface ParentsInformationRepository {
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert("INSERT INTO parents_information(entrant_id, father_mobile_number, father_name, father_second_name, father_patronymic, place_of_father_job," +
-            "mother_mobile_number, mother_name, mother_second_name, mother_patronymic, place_of_mother_job, additional_phone_number) " +
+            "father_email,mother_mobile_number, mother_name, mother_second_name, mother_patronymic, place_of_mother_job,mother_email, additional_phone_number) " +
             "VALUES(#{parentsInformation.entrantId},#{parentsInformation.fatherMobileNumber},#{parentsInformation.fatherName}," +
-            "#{parentsInformation.fatherSecondName},#{parentsInformation.fatherPatronymic},#{parentsInformation.placeOfFatherJob}," +
+            "#{parentsInformation.fatherSecondName},#{parentsInformation.fatherPatronymic},#{parentsInformation.placeOfFatherJob},#{parentsInformation.fatherEmail}," +
             "#{parentsInformation.motherMobileNumber},#{parentsInformation.motherName},#{parentsInformation.motherSecondName}," +
-            "#{parentsInformation.motherPatronymic},#{parentsInformation.placeOfMotherJob},#{parentsInformation.additionalPhoneNumber})")
+            "#{parentsInformation.motherPatronymic},#{parentsInformation.placeOfMotherJob},#{parentsInformation.motherEmail},#{parentsInformation.additionalPhoneNumber})")
     long save(@Param("parentsInformation") ParentsInformation parentsInformation);
 
     @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
@@ -25,7 +25,8 @@ public interface ParentsInformationRepository {
             "place_of_father_job=#{parentsInformation.placeOfFatherJob}, " +
             "mother_mobile_number=#{parentsInformation.motherMobileNumber}, mother_name=#{parentsInformation.motherName}, " +
             "mother_second_name=#{parentsInformation.motherSecondName}, mother_patronymic=#{parentsInformation.motherPatronymic}, " +
-            "place_of_mother_job=#{parentsInformation.placeOfMotherJob}, additional_phone_number=#{parentsInformation.additionalPhoneNumber} " +
+            "place_of_mother_job=#{parentsInformation.placeOfMotherJob}, additional_phone_number=#{parentsInformation.additionalPhoneNumber},mother_email=#{parentsInformation.motherEmail}," +
+            "father_email=#{parentsInformation.fatherEmail}" +
             "WHERE entrant_id=#{parentsInformation.entrantId}")
     long update(@Param("parentsInformation") ParentsInformation parentsInformation);
 }

@@ -526,4 +526,10 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="2021-22-06" author="sergey">
+        <addColumn tableName="parents_information">
+            <column name="father_email" type="text"></column>
+            <column name="mother_email" type="text"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
