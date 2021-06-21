@@ -3,7 +3,12 @@ package ru.esstu.entrant.lk.domain.mappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.esstu.entrant.lk.domain.dto.EducationalAchievementsDto;
+import ru.esstu.entrant.lk.domain.dto.EducationalAchievementsDto;
 import ru.esstu.entrant.lk.domain.vo.EducationalAchievements;
+import ru.esstu.entrant.lk.domain.vo.EducationalAchievements;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Маппер.
@@ -58,5 +63,12 @@ public class EducationalAchievementsMapper {
                 dto.getDataOfIssued(),
                 dto.getCandidateMinimumsPassed()
         );
+    }
+    public List<EducationalAchievementsDto> toDtos (List<EducationalAchievements> vos) {
+        List<EducationalAchievementsDto> list = new ArrayList<>();
+        for (EducationalAchievements vo : vos) {
+            list.add(toDto(vo));
+        }
+        return list;
     }
 }

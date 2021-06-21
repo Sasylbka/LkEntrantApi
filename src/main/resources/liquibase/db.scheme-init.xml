@@ -513,5 +513,17 @@
     <changeSet id="2021-20-06-asfasf" author="nikita">
         <modifyDataType tableName="benefit_information" columnName="benefit_checked" newDataType="boolean"/>
     </changeSet>
-
+    <changeSet id="2021-20-06-uniqueDelete" author="nikita">
+        <dropUniqueConstraint tableName="passport_data" constraintName="passport_data_number_key" />
+        <dropUniqueConstraint tableName="passport_data" constraintName="passport_data_series_key" />
+        <dropUniqueConstraint tableName="benefit_information" constraintName="benefit_information_serial_number_of_document_for_the_benef_key" />
+        <dropUniqueConstraint tableName="education_info" constraintName="education_info_document_of_education_serial_number_key" />
+        <dropUniqueConstraint tableName="educational_achievements" constraintName="educational_achievements_document_of_olympiad_victories_ser_key" />
+    </changeSet>
+    <changeSet id="2021-21-06-rejection_reason" author="nikita">
+        <addColumn tableName="changes_date">
+            <column name="rejection_reason" type="text">
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

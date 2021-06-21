@@ -83,7 +83,7 @@ public class ConsentService {
         accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
         //Проверка на количество доступных подач согласий
         List<ConsentDto> temp=getFullAdd(admissionInfoDto.getEntrantId());//Лист истории добавлений
-        List<AdmissionInfo> tempAI=admissionInfoRepository.getAdmissionInfo(admissionInfoDto.getEntrantId());//Лист всех направлений entrant-а
+        List<AdmissionInfo> tempAI=admissionInfoRepository.getAdmissionInfos(admissionInfoDto.getEntrantId());//Лист всех направлений entrant-а
         AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);//Выбранное направление для согласия
         int count=configurationRepository.getConfiguration().getMaxWithdrawalOfConsent()-temp.size();//Количество доступных подач согласий
         if(count>0) {

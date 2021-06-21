@@ -35,12 +35,20 @@ public class AdmissionInfoController {
     public List<AdmissionInfoDto> get(final int id) {
        return admissionInfoService.getAdmissionInfo(id);
     }
+
     @RequestMapping(method = RequestMethod.POST, path = "/admissionInfo")
     public AdmissionInfoDto save(@RequestBody final AdmissionInfoDto admissionInfoDto) {
         return admissionInfoService.save(admissionInfoDto);
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, path = "/admissionInfo")
+    public void delete(final int id) {
+        admissionInfoService.delete(id);
+    }
+
     @RequestMapping(method = RequestMethod.PATCH, path = "/admissionInfo")
     public AdmissionInfoDto update(@RequestBody final AdmissionInfoDto admissionInfoDto) {
         return admissionInfoService.update(admissionInfoDto);
     }
+
 }

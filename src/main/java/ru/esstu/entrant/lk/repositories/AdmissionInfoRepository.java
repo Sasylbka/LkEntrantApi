@@ -11,7 +11,10 @@ import java.util.List;
 @Mapper
 public interface AdmissionInfoRepository {
     @Select("SELECT * FROM admission_info WHERE entrant_id=#{id}")
-    List<AdmissionInfo> getAdmissionInfo(@Param("id") int id);
+    List<AdmissionInfo> getAdmissionInfos(@Param("id") int id);
+
+    @Select("SELECT * FROM admission_info WHERE id=#{id}")
+    AdmissionInfo getAdmissionInfo(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert("INSERT INTO admission_info(entrant_id, level_of_education, direction, budget, contract, targeted_training, quota," +
@@ -29,10 +32,14 @@ public interface AdmissionInfoRepository {
     long update(@Param("admissionInfo") AdmissionInfo admissionInfo);
 
     @Options( keyProperty = "id", keyColumn = "id")
+    @Delete("DELETE from admission_info " +
+            "WHERE id=#{id}")
+    long delete(@Param("id") int id);
+
+    @Options( keyProperty = "id", keyColumn = "id")
     @Update("UPDATE admission_info SET consent_budget=#{admissionInfo.consentBudget}, " +
             "consent_target=#{admissionInfo.consentTarget}, consent_quote=#{admissionInfo.consentQuote} " +
             "WHERE id=#{admissionInfo.id}")
     long updateConsent(@Param("admissionInfo") AdmissionInfo admissionInfo);
-
 
 }

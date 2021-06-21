@@ -31,7 +31,7 @@ public class AdmissionInfoService {
 
     public List<AdmissionInfoDto> getAdmissionInfo(final int id) {
         accessService.commonAccessCheck(id);
-        List<AdmissionInfoDto> temp = admissionInfoMapper.toDtos(admissionInfoRepository.getAdmissionInfo(id));
+        List<AdmissionInfoDto> temp = admissionInfoMapper.toDtos(admissionInfoRepository.getAdmissionInfos(id));
         return temp;
     }
     public AdmissionInfoDto save(final AdmissionInfoDto admissionInfoDto) {
@@ -45,5 +45,10 @@ public class AdmissionInfoService {
         AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);
         admissionInfoRepository.update(entity);
         return admissionInfoMapper.toDto(entity);
+    }
+    public void delete(final int id) {
+        AdmissionInfo admissionInfo=admissionInfoRepository.getAdmissionInfo(id);
+        accessService.commonAccessCheck(admissionInfo.getEntrantId());
+        admissionInfoRepository.delete(id);
     }
 }

@@ -4,10 +4,15 @@ import org.apache.ibatis.annotations.*;
 import ru.esstu.entrant.lk.domain.dto.EducationalAchievementsDto;
 import ru.esstu.entrant.lk.domain.vo.EducationalAchievements;
 
+import java.util.List;
+
 @Mapper
 public interface EducationalAchievementsRepository {
     @Select("SELECT * FROM educational_achievements WHERE entrant_id = #{id}")
-    EducationalAchievements getEducationalAchievements(@Param("id") int id);
+    List<EducationalAchievements> getEducationalAchievementsList(@Param("id") int id);
+
+    @Select("SELECT * FROM educational_achievements WHERE entrant_id = #{id}")
+    List<EducationalAchievements> getEducationalAchievements(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert("INSERT INTO educational_achievements(entrant_id, medal, honors_degree, olympiad_participation, document_of_olympiad_victories," +

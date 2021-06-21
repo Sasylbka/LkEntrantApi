@@ -9,6 +9,8 @@ import ru.esstu.entrant.lk.domain.vo.EducationalAchievements;
 import ru.esstu.entrant.lk.domain.vo.EducationalAchievements;
 import ru.esstu.entrant.lk.repositories.EducationalAchievementsRepository;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class EducationalAchievementsService {
@@ -26,13 +28,9 @@ public class EducationalAchievementsService {
     }
 
 
-    public EducationalAchievementsDto getEducationalAchievements(final int id) {
-        accessService.commonAccessCheck(id);
-        EducationalAchievementsDto temp = educationalAchievementsMapper.toDto(educationalAchievementsRepository.getEducationalAchievements(id));
-        if (temp==null){
-            temp=new EducationalAchievementsDto();
-            return temp;
-        }
+    public List<EducationalAchievementsDto> getEducationalAchievementsList(final int id) {
+        //accessService.commonAccessCheck(id);
+        List<EducationalAchievementsDto> temp = educationalAchievementsMapper.toDtos(educationalAchievementsRepository.getEducationalAchievementsList(id));
         return temp;
     }
 

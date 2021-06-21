@@ -14,5 +14,6 @@ public class ChangesDate {
     private Date dateOfCreation;
     private Date dateOfSend;
     private Date dateOfAnswer;
+    private String rejectionReason;
 
 }

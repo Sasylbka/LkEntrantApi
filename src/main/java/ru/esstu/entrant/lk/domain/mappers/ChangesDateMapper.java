@@ -16,7 +16,8 @@ public class ChangesDateMapper {
                 vo.getEntrantId(),
                 vo.getDateOfCreation(),
                 vo.getDateOfSend(),
-                vo.getDateOfAnswer()
+                vo.getDateOfAnswer(),
+                vo.getRejectionReason()
         );
     }
     /**
@@ -34,7 +35,8 @@ public class ChangesDateMapper {
                 dto.getEntrantId(),
                 dto.getDateOfCreation(),
                 dto.getDateOfSend(),
-                dto.getDateOfAnswer()
+                dto.getDateOfAnswer(),
+                dto.getRejectionReason()
         );
     }
 }

@@ -9,6 +9,8 @@ import ru.esstu.entrant.lk.domain.dto.EducationalAchievementsDto;
 import ru.esstu.entrant.lk.domain.vo.EducationalAchievements;
 import ru.esstu.entrant.lk.services.EducationalAchievementsService;
 
+import java.util.List;
+
 /**
  * API Profile.
  */
@@ -25,8 +27,8 @@ public class EducationalAchievementsController {
         this.educationalAchievementsService = educationalAchievementsService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/educationalAchievements")
-    public EducationalAchievementsDto get(final int id) {
-        return educationalAchievementsService.getEducationalAchievements(id);
+    public List<EducationalAchievementsDto> get(final int id) {
+        return educationalAchievementsService.getEducationalAchievementsList(id);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/educationalAchievements")
     public EducationalAchievementsDto save(@RequestBody final EducationalAchievementsDto educationalAchievementsDto) {
