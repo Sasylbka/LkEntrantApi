@@ -33,6 +33,8 @@ public interface AdmissionInfoRepository {
             "consent_target=#{admissionInfo.consentTarget}, consent_quote=#{admissionInfo.consentQuote} " +
             "WHERE id=#{admissionInfo.id}")
     long updateConsent(@Param("admissionInfo") AdmissionInfo admissionInfo);
+    @Delete("Delete from admission_info where id=#{admissionInfo.id}")
+    long delete(@Param("admissionInfo")AdmissionInfo admissionInfo);
 
 
 }

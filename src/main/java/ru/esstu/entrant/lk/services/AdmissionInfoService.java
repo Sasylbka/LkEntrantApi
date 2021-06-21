@@ -46,4 +46,10 @@ public class AdmissionInfoService {
         admissionInfoRepository.update(entity);
         return admissionInfoMapper.toDto(entity);
     }
+    public AdmissionInfoDto delete(AdmissionInfoDto admissionInfoDto) {
+        accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
+        AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);
+        admissionInfoRepository.delete(entity);
+        return admissionInfoMapper.toDto(entity);
+    }
 }
