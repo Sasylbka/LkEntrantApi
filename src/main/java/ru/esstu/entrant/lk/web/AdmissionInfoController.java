@@ -43,8 +43,4 @@ public class AdmissionInfoController {
     public AdmissionInfoDto update(@RequestBody final AdmissionInfoDto admissionInfoDto) {
         return admissionInfoService.update(admissionInfoDto);
     }
-    @RequestMapping(method = RequestMethod.DELETE, path = "/admissionInfo")
-    public AdmissionInfoDto delete(@RequestBody(required = false)AdmissionInfoDto admissionInfoDto) {
-        return admissionInfoService.delete(admissionInfoDto);
-    }
 }
