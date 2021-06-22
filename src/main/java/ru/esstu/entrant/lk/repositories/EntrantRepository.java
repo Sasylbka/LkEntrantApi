@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.repositories;
 
 import org.apache.ibatis.annotations.*;
+import ru.esstu.entrant.lk.domain.vo.Additionals.Keycloak;
 import ru.esstu.entrant.lk.domain.vo.Entrant;
 
 @Mapper
@@ -8,7 +9,10 @@ public interface EntrantRepository {
     @Select("SELECT * FROM entrant WHERE id = #{id}")
     Entrant getEntrant(@Param("id") int id);
 
-    @Select("SELECT * FROM entrant WHERE keycloak_guid = #{guid}")
+    @Select("SELECT keycloak_guid FROM entrant WHERE id=#{entrantId}")
+    Keycloak getKeycloakGuid(@Param("entrantId") int entrantId);
+
+    @Select("SELECT * FROM entrant WHERE keycloak_guid =#{guid}")
     Entrant getEntrantByKeycloakGuid(String guid);
 
     @Options(useGeneratedKeys = true, keyProperty = "entrant.id", keyColumn = "id")
