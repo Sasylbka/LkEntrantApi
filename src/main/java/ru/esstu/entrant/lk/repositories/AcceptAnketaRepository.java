@@ -18,7 +18,7 @@ public interface AcceptAnketaRepository {
             "Values (#{keycloak.keycloakGuid},#{entrantPrivateData.familyName}, " +
             "#{entrantPrivateData.name}, #{entrantPrivateData.patronymic}, #{male}," +
             " #{contactInformation.mobileNumber}, #{contactInformation.email}, #{entrantPrivateData.dateOfBirth}," +
-            "#{keycloak.keycloakGuid}, true, false, #{entrant.login}, #{entrant.password}, " +
+            "#{keycloak.keycloakGuid}, true, true, #{entrant.login}, #{entrant.password}, " +
             "#{entrantPrivateData.cityOfBirth},#{entrantPrivateData.regionOfBirth}," +
             " #{entrantPrivateData.snills},#{benefitInformation.reasonForTheBenefit})")
     long addEntrantPerson(@Param("benefitInformation")BenefitInformation benefitInformation,
