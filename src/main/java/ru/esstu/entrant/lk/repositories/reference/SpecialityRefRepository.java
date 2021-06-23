@@ -11,6 +11,7 @@ public interface SpecialityRefRepository {
             "public.speciality.edu_form_id, " +
             "public.speciality.speciality_name, " +
             "public.speciality.edu_level_id, " +
+            "public.speciality.faculty_id, " +
             "public.speciality_code.spec_code, " +
             "public.acceptance_plan.number_budget, " +
             "public.acceptance_plan.number_paid, " +
