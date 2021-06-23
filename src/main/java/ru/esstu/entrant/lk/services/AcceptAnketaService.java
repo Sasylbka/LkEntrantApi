@@ -119,9 +119,9 @@ public class AcceptAnketaService {
             jobInformation=new JobInformation();
         }
         if(entrantPrivateData.getGender()=="male")
-            acceptAnketaRepository.addEntrantPerson(benefitInformation,contactInformation,entrantPrivateData,entrant,jobInformation,entrantRepository.getKeycloakGuid(entrantId),true);
+            acceptAnketaRepository.addEntrantPerson(benefitInformation,contactInformation,entrantPrivateData,entrant,jobInformation,entrantRepository.getKeycloakGuid(entrantId),true,IdFactory.getGUID(this));
         else{
-            acceptAnketaRepository.addEntrantPerson(benefitInformation,contactInformation,entrantPrivateData,entrant,jobInformation,entrantRepository.getKeycloakGuid(entrantId),false);
+            acceptAnketaRepository.addEntrantPerson(benefitInformation,contactInformation,entrantPrivateData,entrant,jobInformation,entrantRepository.getKeycloakGuid(entrantId),false,IdFactory.getGUID(this));
         }
         Person person=personPTRepository.getPerson(keycloak.getKeycloakGuid());
         String guid = IdFactory.getGUID(this);

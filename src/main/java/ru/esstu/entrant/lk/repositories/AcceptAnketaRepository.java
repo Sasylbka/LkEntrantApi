@@ -15,7 +15,7 @@ public interface AcceptAnketaRepository {
             "telephone, mail, birthdate, activate_id, enabled, " +
             "external, username, password, birth_city, birth_region, " +
             "snils, disability_type_id) " +
-            "Values (#{keycloak.keycloakGuid},#{entrantPrivateData.familyName}, " +
+            "Values (#{guid},#{entrantPrivateData.familyName}, " +
             "#{entrantPrivateData.name}, #{entrantPrivateData.patronymic}, #{male}," +
             " #{contactInformation.mobileNumber}, #{contactInformation.email}, #{entrantPrivateData.dateOfBirth}," +
             "#{keycloak.keycloakGuid}, true, true, #{entrant.login}, #{entrant.password}, " +
@@ -27,7 +27,8 @@ public interface AcceptAnketaRepository {
                    @Param("entrant") Entrant entrant,
                    @Param("jobInformation") JobInformation jobInformation,
                    @Param("keycloak") Keycloak keycloak,
-                          @Param("male")boolean male);
+                          @Param("male")boolean male,
+                          @Param("guid") String guid);
     @Insert("INSERT INTO public.address(" +
             " addr_id,city, street, index, region_id, " +
             "building_num, flat_num, creation_time)" +
