@@ -26,7 +26,7 @@ public class SpecialityRefService {
         {
             if(temp.get(i).getFacultyId()==13)
             {
-                temp.get(i).setAccelEdu(true);
+                temp.get(i).setAccelerated(true);
             }
         }
         return specialityRefMapper.toDtos(temp);
