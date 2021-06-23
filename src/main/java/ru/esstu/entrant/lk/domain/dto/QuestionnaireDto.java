@@ -22,4 +22,7 @@ public class QuestionnaireDto {
     private Date dateOfAnswer;
     private String status;
     private String contract;
+    private String email;
+    private String mobileNumber;
+
 }
