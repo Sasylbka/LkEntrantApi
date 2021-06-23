@@ -14,13 +14,13 @@ public interface AcceptAnketaRepository {
     @Insert("Insert into public.person(person_id, surname, name, patronymic, male, " +
             "telephone, mail, birthdate, activate_id, enabled, " +
             "external, username, password, birth_city, birth_region, " +
-            "snils, disability_type_id) " +
+            "snils) " +
             "Values (#{guid},#{entrantPrivateData.familyName}, " +
             "#{entrantPrivateData.name}, #{entrantPrivateData.patronymic}, #{male}," +
             " #{contactInformation.mobileNumber}, #{contactInformation.email}, #{entrantPrivateData.dateOfBirth}," +
             "#{keycloak.keycloakGuid}, true, true, #{entrant.login}, #{entrant.password}, " +
             "#{entrantPrivateData.cityOfBirth},#{entrantPrivateData.regionOfBirth}," +
-            " #{entrantPrivateData.snills},#{benefitInformation.reasonForTheBenefit})")
+            " #{entrantPrivateData.snills})")
     long addEntrantPerson(@Param("benefitInformation")BenefitInformation benefitInformation,
                    @Param("contactInformation") ContactInformation contactInformation,
                    @Param("entrantPrivateData") EntrantPrivateData entrantPrivateData,
@@ -126,10 +126,9 @@ public interface AcceptAnketaRepository {
                          @Param("mail") String mail,
                          @Param("guid")String guid);
     @Insert("Insert into public.entrant (entrant_id,military_status_id,nat_id,cit_id," +
-            "sport_qualification_id,need_hostel,statement_date,entrant_status_id,username) " +
+            "need_hostel,statement_date,entrant_status_id,username) " +
             "Values(#{person.personId},#{militaryStatusId},0,1," +
-            "#{sportQualificationId}," +
-            "#{needHostel},#{changesDate.dateOfSend},#{status}," +
+            "#{needHostel},#{changesDate.dateOfSend},2," +
             "#{entrant.login})")
     long addEntrant(@Param("person")Person person,
                     @Param("entrantPrivateData") EntrantPrivateData entrantPrivateData,
@@ -137,9 +136,7 @@ public interface AcceptAnketaRepository {
                     @Param("changesDate")ChangesDate changesDate,
                     @Param("entrant")Entrant entrant,
                     @Param("militaryStatusId")int militaryStatusId,
-                    @Param("sportQualificationId")int sportQualificationId,
-                    @Param("needHostel") boolean needHostel,
-                    @Param("status")int status);
+                    @Param("needHostel") boolean needHostel);
 
 }
 
