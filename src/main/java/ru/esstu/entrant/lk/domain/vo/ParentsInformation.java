@@ -15,10 +15,12 @@ public class ParentsInformation {
     private String fatherSecondName;
     private String fatherPatronymic;
     private String placeOfFatherJob;
+    private String fatherEmail;
     private String motherMobileNumber;
     private String motherName;
     private String motherSecondName;
     private String motherPatronymic;
     private String placeOfMotherJob;
+    private String motherEmail;
     private String additionalPhoneNumber;
 }

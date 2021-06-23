@@ -24,7 +24,9 @@ public class QuestionnaireMapper{
                 vo.getDateOfSend(),
                 vo.getDateOfAnswer(),
                 vo.getStatus(),
-                vo.getContract()
+                vo.getContract(),
+                vo.getEmail(),
+                vo.getMobileNumber()
         );
     }
     public Questionnaire toVO(QuestionnaireDto dto) {
@@ -42,7 +44,9 @@ public class QuestionnaireMapper{
                 dto.getDateOfSend(),
                 dto.getDateOfAnswer(),
                 dto.getStatus(),
-                dto.getContract()
+                dto.getContract(),
+                dto.getEmail(),
+                dto.getMobileNumber()
         );
     }
     public List<QuestionnaireDto> toDtos (List<Questionnaire> vos) {

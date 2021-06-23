@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.reference.SpecialityDto;
 import ru.esstu.entrant.lk.domain.mappers.reference.SpecialityRefMapper;
+import ru.esstu.entrant.lk.domain.vo.reference.Speciality;
 import ru.esstu.entrant.lk.repositories.reference.SpecialityRefRepository;
 
 import java.util.List;
@@ -20,6 +21,14 @@ public class SpecialityRefService {
     }
 
     public List<SpecialityDto> getSpecialities() {
-        return specialityRefMapper.toDtos(specialityRefRepository.getSpecialities());
+        List<Speciality> temp=specialityRefRepository.getSpecialities();
+        for(int i=0;i<temp.size();i++)
+        {
+            if(temp.get(i).getFacultyId()==13)
+            {
+                temp.get(i).setAccelerated(true);
+            }
+        }
+        return specialityRefMapper.toDtos(temp);
     }
 }

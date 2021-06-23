@@ -18,12 +18,15 @@ public interface QuestionnaireRepository {
             "changes_date.date_of_send,"+
             "changes_date.date_of_answer,"+
             "admission_info.contract,"+
-            "entrant.status "+
+            "entrant.status," +
+            "contact_information.email, "+
+            "contact_information.mobile_number " +
             "FROM "+
             "entrant "+
             "Left join entrant_private_data on entrant.id=entrant_private_data.entrant_id "+
             "left join admission_info on entrant.id=admission_info.entrant_id "+
-            "left join changes_date on entrant.id=changes_date.entrant_id ")
+            "left join changes_date on entrant.id=changes_date.entrant_id " +
+            "left join contact_information on entrant.id=contact_information.entrant_id")
     List<Questionnaire> getQuestionnaire();
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")

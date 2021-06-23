@@ -23,7 +23,9 @@ public class SpecialityRefMapper {
                 vo.getNumberBudget(),
                 vo.getNumberPaid(),
                 vo.getNumberTarget(),
-                vo.getNumberBenefit()
+                vo.getNumberBenefit(),
+                vo.getFacultyId(),
+                vo.getAccelerated()
         );
     }
     public Speciality toVO(SpecialityDto dto) {
@@ -39,7 +41,9 @@ public class SpecialityRefMapper {
                 dto.getNumberBudget(),
                 dto.getNumberPaid(),
                 dto.getNumberTarget(),
-                dto.getNumberBenefit()
+                dto.getNumberBenefit(),
+                dto.getFacultyId(),
+                dto.getAccelerated()
         );
     }
     public List<SpecialityDto> toDtos (List<Speciality> vos) {

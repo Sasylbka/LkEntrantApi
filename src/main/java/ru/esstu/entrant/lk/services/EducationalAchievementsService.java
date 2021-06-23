@@ -29,7 +29,7 @@ public class EducationalAchievementsService {
 
 
     public List<EducationalAchievementsDto> getEducationalAchievementsList(final int id) {
-        //accessService.commonAccessCheck(id);
+        accessService.commonAccessCheck(id);
         List<EducationalAchievementsDto> temp = educationalAchievementsMapper.toDtos(educationalAchievementsRepository.getEducationalAchievementsList(id));
         return temp;
     }

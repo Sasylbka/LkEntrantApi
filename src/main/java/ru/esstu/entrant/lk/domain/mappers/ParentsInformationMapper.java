@@ -28,11 +28,13 @@ public class ParentsInformationMapper {
                 vo.getFatherSecondName(),
                 vo.getFatherPatronymic(),
                 vo.getPlaceOfFatherJob(),
+                vo.getFatherEmail(),
                 vo.getMotherMobileNumber(),
                 vo.getMotherName(),
                 vo.getMotherSecondName(),
                 vo.getMotherPatronymic(),
                 vo.getPlaceOfMotherJob(),
+                vo.getMotherEmail(),
                 vo.getAdditionalPhoneNumber()
         );
     }
@@ -54,11 +56,13 @@ public class ParentsInformationMapper {
                 dto.getFatherSecondName(),
                 dto.getFatherPatronymic(),
                 dto.getPlaceOfFatherJob(),
+                dto.getFatherEmail(),
                 dto.getMotherMobileNumber(),
                 dto.getMotherName(),
                 dto.getMotherSecondName(),
                 dto.getMotherPatronymic(),
                 dto.getPlaceOfMotherJob(),
+                dto.getMotherEmail(),
                 dto.getAdditionalPhoneNumber()
         );
     }

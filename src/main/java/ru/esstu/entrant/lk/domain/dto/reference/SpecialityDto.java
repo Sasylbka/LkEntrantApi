@@ -17,4 +17,6 @@ public class SpecialityDto {
     private int numberPaid;
     private int numberTarget;
     private int numberBenefit;
+    private int facultyId;
+    private Boolean accelerated;//Ускоренное обучение
 }
