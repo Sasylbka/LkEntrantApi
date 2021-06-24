@@ -126,6 +126,7 @@ public class AcceptAnketaService {
             jobInformation=new JobInformation();
         }
         Person person=personPTRepository.getPerson(keycloak.getKeycloakGuid());
+        /*
         if(person==null) {
             if (entrantPrivateData.getGender() == "male")
                 acceptAnketaRepository.addEntrantPerson(benefitInformation, contactInformation, entrantPrivateData, entrant, jobInformation, entrantRepository.getKeycloakGuid(entrantId), true, IdFactory.getGUID(this));
@@ -135,11 +136,10 @@ public class AcceptAnketaService {
         }
         else {
             throw new AlreadyHaveException("Такая персона уже есть об образовании уже есть");
-        }
+        }*/
         person=personPTRepository.getPerson(keycloak.getKeycloakGuid());
         String guid = IdFactory.getGUID(this);
         if(additionalInformation.get(1).isCoincides()){
-            //int regionId= regionRefRepository.getOne(additionalInformation.get(0).getRegion()).getRegionId();
             acceptAnketaRepository.addAddress(additionalInformation.get(0),changesDate,guid,Integer.parseInt(additionalInformation.get(0).getRegion()));
             acceptAnketaRepository.createAddressPerson(additionalInformation.get(0),person,guid,1);
             guid = IdFactory.getGUID(this);
@@ -168,7 +168,7 @@ public class AcceptAnketaService {
             militaryStatusId=5;
         }
         int sportQualificationId=Integer.parseInt(educationalAchievements.get(0).getCandidateMinimumsPassed());
-        int entrantStatus=entrantStatusRefRepository.getOne(entrant.getStatus()).getEntrantStatusId();
+        //int entrantStatus=entrantStatusRefRepository.getOne(entrant.getStatus()).getEntrantStatusId();
         boolean needHostel;
         String tmp = entrantPrivateData.getNeedsHostel();
         if(entrantPrivateData.getNeedsHostel().equals("yes")){
