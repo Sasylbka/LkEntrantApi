@@ -5,10 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.mappers.*;
 import ru.esstu.entrant.lk.domain.vo.*;
 import ru.esstu.entrant.lk.domain.vo.Additionals.Keycloak;
-import ru.esstu.entrant.lk.domain.vo.PublicTables.EducationalDocument;
-import ru.esstu.entrant.lk.domain.vo.PublicTables.Person;
-import ru.esstu.entrant.lk.domain.vo.PublicTables.RelativeFather;
-import ru.esstu.entrant.lk.domain.vo.PublicTables.RelativeMother;
+import ru.esstu.entrant.lk.domain.vo.Entrant;
+import ru.esstu.entrant.lk.domain.vo.PublicTables.*;
 import ru.esstu.entrant.lk.domain.vo.reference.EntrantStatus;
 import ru.esstu.entrant.lk.domain.vo.reference.MilitaryStatus;
 import ru.esstu.entrant.lk.domain.vo.reference.Speciality;
@@ -50,6 +48,7 @@ public class AcceptAnketaService {
     private final ForeignLanguageRefRepository foreignLanguageRefRepository;
     private final EducationalDocumentPTRepository educationalDocumentPTRepository;
     private final EntrantPTRepository entrantPTRepository;
+    private final IdentificationInfoPTRepository identificationInfoPTRepository;
     private final ru.esstu.entrant.lk.repositories.reference.EducationalAchievementsRefRepository educationalAchievementsRef;
     public AcceptAnketaService(
             AdmissionInfoRepository admissionInfoRepository,
@@ -77,7 +76,8 @@ public class AcceptAnketaService {
             SpecialityRefRepository specialityRefRepository,
             ForeignLanguageRefRepository foreignLanguageRefRepository,
             EducationalDocumentPTRepository educationalDocumentPTRepository,
-            EntrantPTRepository entrantPTRepository){
+            EntrantPTRepository entrantPTRepository,
+            IdentificationInfoPTRepository identificationInfoPTRepository){
         this.admissionInfoRepository=admissionInfoRepository;
         this.additionalInformationRepository=additionalInformationRepository;
         this.benefitInformationRepository=benefitInformationRepository;
@@ -104,6 +104,7 @@ public class AcceptAnketaService {
         this.foreignLanguageRefRepository=foreignLanguageRefRepository;
         this.educationalDocumentPTRepository=educationalDocumentPTRepository;
         this.entrantPTRepository=entrantPTRepository;
+        this.identificationInfoPTRepository=identificationInfoPTRepository;
     }
     public void AcceptAnketa(final int entrantId, final int moderatorId){
         accessService.commonAccessCheck(moderatorId);
@@ -189,7 +190,15 @@ public class AcceptAnketaService {
         String docNumber= educationInfo.getDocumentOfEducationSerialNumber().substring(0,3);
         String docSerial= educationInfo.getDocumentOfEducationSerialNumber().substring(4,temp);
 
-        //acceptAnketaRepository.addIdentificationInfo(passportData,person);
+
+        IdentificationInfo pi=identificationInfoPTRepository.getEntrant(passportData.getSeries(),passportData.getNumber());
+        if(pi==null) {
+            acceptAnketaRepository.addIdentificationInfo(passportData, person);
+        }
+        else{
+            throw new AlreadyHaveException("Такой паспорт уже есть");
+        }
+
         int achievementsId=0;
         if(educationalAchievements.get(0).getMedal().equals("gold")){
             achievementsId=2;

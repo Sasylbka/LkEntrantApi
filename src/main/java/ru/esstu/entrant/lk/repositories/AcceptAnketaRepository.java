@@ -85,11 +85,11 @@ public interface AcceptAnketaRepository {
     long addLanguage(@Param("foreignLanguageId")int foreignLanguageId,@Param("person")Person person);
     @Insert("Insert into public.entrance_info (entrance_info_id, " +
             "entrant_id, spec_id,registered_on ,taken_docs_away, " +
-            "prefer_number,edu_manager_id) " +
+            "prefer_number,edu_manager_id,pass_preparatory_course) " +
             "VALUES (#{guid}, #{person.personId}, " +
             "#{directionId}, #{changesDate.dateOfSend}, " +
             "false,#{prefer_number}, " +
-            "#{moderatorId})")
+            "#{moderatorId},false)")
     long addSpeciality(@Param("admissionInfo") AdmissionInfo admissionInfo,
                        @Param("person")Person person,
                        @Param("prefer_number")int prefer_number,
