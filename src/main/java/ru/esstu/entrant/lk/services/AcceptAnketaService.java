@@ -126,7 +126,7 @@ public class AcceptAnketaService {
             jobInformation=new JobInformation();
         }
         Person person=personPTRepository.getPerson(keycloak.getKeycloakGuid());
-        /*
+
         if(person==null) {
             if (entrantPrivateData.getGender() == "male")
                 acceptAnketaRepository.addEntrantPerson(benefitInformation, contactInformation, entrantPrivateData, entrant, jobInformation, entrantRepository.getKeycloakGuid(entrantId), true, IdFactory.getGUID(this));
@@ -136,7 +136,7 @@ public class AcceptAnketaService {
         }
         else {
             throw new AlreadyHaveException("Такая персона уже есть об образовании уже есть");
-        }*/
+        }
         person=personPTRepository.getPerson(keycloak.getKeycloakGuid());
         String guid = IdFactory.getGUID(this);
         if(additionalInformation.get(1).isCoincides()){
