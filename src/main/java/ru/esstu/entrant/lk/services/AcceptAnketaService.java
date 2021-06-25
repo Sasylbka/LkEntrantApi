@@ -106,95 +106,92 @@ public class AcceptAnketaService {
         this.entrantPTRepository=entrantPTRepository;
         this.identificationInfoPTRepository=identificationInfoPTRepository;
     }
-    public void AcceptAnketa(final int entrantId, final int moderatorId){
+    public void AcceptAnketa(final int entrantId, final int moderatorId) {
         //accessService.commonAccessCheck(moderatorId);
-        List<AdditionalInformation> additionalInformation=additionalInformationRepository.getAdditionalInformation(entrantId);
-        List<AdmissionInfo> admissionInfo = admissionInfoRepository.getAdmissionInfos(entrantId);
-        BenefitInformation benefitInformation=benefitInformationRepository.getBenefitInformation(entrantId);
-        ChangesDate changesDate=changesDateRepository.getChangesDate(entrantId);
-        ContactInformation contactInformation=contactInformationRepository.getContactInformation(entrantId);
-        List<EducationalAchievements> educationalAchievements=educationalAchievementsRepository.getEducationalAchievements(entrantId);
-        EducationInfo educationInfo = educationInfoRepository.getEducationInfo(entrantId);
-        EntrantPrivateData entrantPrivateData=entrantPrivateDataRepository.getEntrantPrivateData(entrantId);
-        Entrant entrant=entrantRepository.getEntrant(entrantId);
-        JobInformation jobInformation=jobInformationRepository.getJobInformation(entrantId);
-        PassportData passportData= passportDataRepository.getPassportData(entrantId);
-        ParentsInformation parentsInformation=parentsInformationRepository.getParentsInformation(entrantId);
+        try {
+            List<AdditionalInformation> additionalInformation = additionalInformationRepository.getAdditionalInformation(entrantId);
+            List<AdmissionInfo> admissionInfo = admissionInfoRepository.getAdmissionInfos(entrantId);
+            BenefitInformation benefitInformation = benefitInformationRepository.getBenefitInformation(entrantId);
+            ChangesDate changesDate = changesDateRepository.getChangesDate(entrantId);
+            ContactInformation contactInformation = contactInformationRepository.getContactInformation(entrantId);
+            List<EducationalAchievements> educationalAchievements = educationalAchievementsRepository.getEducationalAchievements(entrantId);
+            EducationInfo educationInfo = educationInfoRepository.getEducationInfo(entrantId);
+            EntrantPrivateData entrantPrivateData = entrantPrivateDataRepository.getEntrantPrivateData(entrantId);
+            Entrant entrant = entrantRepository.getEntrant(entrantId);
+            JobInformation jobInformation = jobInformationRepository.getJobInformation(entrantId);
+            PassportData passportData = passportDataRepository.getPassportData(entrantId);
+            ParentsInformation parentsInformation = parentsInformationRepository.getParentsInformation(entrantId);
 
 
-        Keycloak keycloak =entrantRepository.getKeycloakGuid(entrantId);
-        if(jobInformation==null){
-            jobInformation=new JobInformation();
-        }
-        Person person=personPTRepository.getPerson(keycloak.getKeycloakGuid());
-
-        if(person==null) {
-            if (entrantPrivateData.getGender() == "male")
-                acceptAnketaRepository.addEntrantPerson(benefitInformation, contactInformation, entrantPrivateData, entrant, jobInformation, entrantRepository.getKeycloakGuid(entrantId), true, IdFactory.getGUID(this));
-            else {
-                acceptAnketaRepository.addEntrantPerson(benefitInformation, contactInformation, entrantPrivateData, entrant, jobInformation, entrantRepository.getKeycloakGuid(entrantId), false, IdFactory.getGUID(this));
+            Keycloak keycloak = entrantRepository.getKeycloakGuid(entrantId);
+            if (jobInformation == null) {
+                jobInformation = new JobInformation();
             }
-        }
-        else {
-            throw new AlreadyHaveException("Такая персона уже есть");
-        }
-        person=personPTRepository.getPerson(keycloak.getKeycloakGuid());
-        String guid = IdFactory.getGUID(this);
-        if(additionalInformation.get(1).isCoincides()){
-            acceptAnketaRepository.addAddress(additionalInformation.get(0),changesDate,guid,Integer.parseInt(additionalInformation.get(0).getRegion()));
-            acceptAnketaRepository.createAddressPerson(additionalInformation.get(0),person,guid,1);
-            guid = IdFactory.getGUID(this);
-            acceptAnketaRepository.addAddress(additionalInformation.get(0),changesDate,guid,Integer.parseInt(additionalInformation.get(0).getRegion()));
-            acceptAnketaRepository.createAddressPerson(additionalInformation.get(0),person,guid,2);
-        }
-        else
-        for(int i =0;i<additionalInformation.size();i++){
-            if(additionalInformation.get(i).getType()=="REGISTRATION_ADDRESS"){
+            Person person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
+
+            if (person == null) {
+                if (entrantPrivateData.getGender() == "male")
+                    acceptAnketaRepository.addEntrantPerson(benefitInformation, contactInformation, entrantPrivateData, entrant, jobInformation, entrantRepository.getKeycloakGuid(entrantId), true, IdFactory.getGUID(this));
+                else {
+                    acceptAnketaRepository.addEntrantPerson(benefitInformation, contactInformation, entrantPrivateData, entrant, jobInformation, entrantRepository.getKeycloakGuid(entrantId), false, IdFactory.getGUID(this));
+                }
+            } else {
+                throw new AlreadyHaveException("Такая персона уже есть");
+            }
+            person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
+            String guid = IdFactory.getGUID(this);
+            if (additionalInformation.get(1).isCoincides()) {
+                acceptAnketaRepository.addAddress(additionalInformation.get(0), changesDate, guid, Integer.parseInt(additionalInformation.get(0).getRegion()));
+                acceptAnketaRepository.createAddressPerson(additionalInformation.get(0), person, guid, 1);
                 guid = IdFactory.getGUID(this);
-                acceptAnketaRepository.addAddress(additionalInformation.get(i),changesDate,guid,Integer.parseInt(additionalInformation.get(i).getRegion()));
-                acceptAnketaRepository.createAddressPerson(additionalInformation.get(i),person,guid,1);
+                acceptAnketaRepository.addAddress(additionalInformation.get(0), changesDate, guid, Integer.parseInt(additionalInformation.get(0).getRegion()));
+                acceptAnketaRepository.createAddressPerson(additionalInformation.get(0), person, guid, 2);
+            } else
+                for (int i = 0; i < additionalInformation.size(); i++) {
+                    if (additionalInformation.get(i).getType() == "REGISTRATION_ADDRESS") {
+                        guid = IdFactory.getGUID(this);
+                        acceptAnketaRepository.addAddress(additionalInformation.get(i), changesDate, guid, Integer.parseInt(additionalInformation.get(i).getRegion()));
+                        acceptAnketaRepository.createAddressPerson(additionalInformation.get(i), person, guid, 1);
+                    } else {
+                        guid = IdFactory.getGUID(this);
+                        acceptAnketaRepository.addAddress(additionalInformation.get(i), changesDate, guid, Integer.parseInt(additionalInformation.get(i).getRegion()));
+                        acceptAnketaRepository.createAddressPerson(additionalInformation.get(i), person, guid, 2);
+
+                    }
+                }
+            int militaryStatusId;
+            if (entrantPrivateData.getReservist().equals("no")) {
+                militaryStatusId = 1;
+            } else {
+                militaryStatusId = 5;
             }
-            else {
-                guid = IdFactory.getGUID(this);
-                acceptAnketaRepository.addAddress(additionalInformation.get(i),changesDate,guid,Integer.parseInt(additionalInformation.get(i).getRegion()));
-                acceptAnketaRepository.createAddressPerson(additionalInformation.get(i),person,guid,2);
-
+            int sportQualificationId = 0;
+            if (educationalAchievements.get(0).getCandidateMinimumsPassed().length() < 2) {
+                if (educationalAchievements != null && educationalAchievements.get(0).getCandidateMinimumsPassed() != null) {
+                    sportQualificationId = Integer.parseInt(educationalAchievements.get(0).getCandidateMinimumsPassed());
+                }
             }
-        }
-        int militaryStatusId;
-        if(entrantPrivateData.getReservist().equals("no")){
-            militaryStatusId=1;
-        }
-        else{
-            militaryStatusId=5;
-        }
-        int sportQualificationId=0;
-        if(educationalAchievements.get(0).getCandidateMinimumsPassed().length()<2){
-        if(educationalAchievements!=null && educationalAchievements.get(0).getCandidateMinimumsPassed()!=null){
-            sportQualificationId = Integer.parseInt(educationalAchievements.get(0).getCandidateMinimumsPassed());
-        }}
-        //int entrantStatus=entrantStatusRefRepository.getOne(entrant.getStatus()).getEntrantStatusId();
-        boolean needHostel;
-        String tmp = entrantPrivateData.getNeedsHostel();
-        if(entrantPrivateData.getNeedsHostel().equals("yes")){
-            needHostel=true;
-        }
-        else{
-            needHostel=false;
-        }
+            //int entrantStatus=entrantStatusRefRepository.getOne(entrant.getStatus()).getEntrantStatusId();
+            boolean needHostel;
+            String tmp = entrantPrivateData.getNeedsHostel();
+            if (entrantPrivateData.getNeedsHostel().equals("yes")) {
+                needHostel = true;
+            } else {
+                needHostel = false;
+            }
 
 
-        acceptAnketaRepository.addEntrant(person, entrantPrivateData, educationalAchievements.get(0), changesDate, entrant, militaryStatusId, needHostel);
-        educationInfo.setDocumentOfEducationSerialNumber(educationInfo.getDocumentOfEducationSerialNumber().replaceAll("\\s+",""));
-        int temp = educationInfo.getDocumentOfEducationSerialNumber().length();
-        String docSerial= educationInfo.getDocumentOfEducationSerialNumber().substring(0,3);
-        String docNumber= educationInfo.getDocumentOfEducationSerialNumber().substring(4,temp);
+            acceptAnketaRepository.addEntrant(person, entrantPrivateData, educationalAchievements.get(0), changesDate, entrant, militaryStatusId, needHostel);
+            educationInfo.setDocumentOfEducationSerialNumber(educationInfo.getDocumentOfEducationSerialNumber().replaceAll("\\s+", ""));
+            int temp = educationInfo.getDocumentOfEducationSerialNumber().length();
+            String docSerial = educationInfo.getDocumentOfEducationSerialNumber().substring(0, 3);
+            String docNumber = educationInfo.getDocumentOfEducationSerialNumber().substring(4, temp);
 
-        acceptAnketaRepository.addIdentificationInfo(passportData, person);
+            acceptAnketaRepository.addIdentificationInfo(passportData, person);
 
 
-        int achievementsId=0;
-            if(educationalAchievements.get(0).getMedal()!=null) {
+            int achievementsId = 1;
+            if (educationalAchievements.get(0).getMedal() != null) {
                 if (educationalAchievements.get(0).getMedal().equals("gold")) {
                     achievementsId = 2;
                 }
@@ -202,18 +199,17 @@ public class AcceptAnketaService {
                     achievementsId = 3;
                 }
             }
-        int end_year=Integer.parseInt(educationInfo.getYearOfFinished());
-        //EducationalDocument doc = educationalDocumentPTRepository.getDocument(docSerial,docNumber);
-        int education = Integer.parseInt(educationInfo.getEducation());
-        int documentOfEducation=0;
-        //int documentOfEducation = Integer.parseInt(educationInfo.getDocumentOfEducation());
-        if(educationInfo.getDocumentOfEducation().equals("certificate")){
-            documentOfEducation=6;
-        }
-        else{
-            documentOfEducation=3;
-        }
-            acceptAnketaRepository.addEducationalDocument(educationInfo, person, educationalAchievements.get(0), docNumber, docSerial, achievementsId, end_year,education,documentOfEducation);
+            int end_year = Integer.parseInt(educationInfo.getYearOfFinished());
+            //EducationalDocument doc = educationalDocumentPTRepository.getDocument(docSerial,docNumber);
+            int education = Integer.parseInt(educationInfo.getEducation());
+            int documentOfEducation = 0;
+            //int documentOfEducation = Integer.parseInt(educationInfo.getDocumentOfEducation());
+            if (educationInfo.getDocumentOfEducation().equals("certificate")) {
+                documentOfEducation = 6;
+            } else {
+                documentOfEducation = 3;
+            }
+            acceptAnketaRepository.addEducationalDocument(educationInfo, person, educationalAchievements.get(0), docNumber, docSerial, achievementsId, end_year, education, documentOfEducation);
 
         /*for(int i=0;i<additionalInformation.size();i++) {
             temp=educationalAchievements.get(i).getDocumentOfOlympiadVictoriesSerialNumber().length();
@@ -222,48 +218,51 @@ public class AcceptAnketaService {
             acceptAnketaRepository.addOlimpiadDocument(person, educationalAchievements.get(i), IdFactory.getGUID(this),docNumber,docSerial);
         }*/
 
-        if(benefitInformation!=null){
-            temp=benefitInformation.getDocumentForTheBenefit().length();
-            if(benefitInformation.getDocumentForTheBenefit().length()>4) {
-                docNumber = benefitInformation.getDocumentForTheBenefit().substring(0, 3);
-                docSerial = benefitInformation.getDocumentForTheBenefit().substring(4, temp);
+            if (benefitInformation != null) {
+                temp = benefitInformation.getDocumentForTheBenefit().length();
+                if (benefitInformation.getDocumentForTheBenefit().length() > 4) {
+                    docNumber = benefitInformation.getDocumentForTheBenefit().substring(0, 3);
+                    docSerial = benefitInformation.getDocumentForTheBenefit().substring(4, temp);
+                } else {
+                    docNumber = benefitInformation.getDocumentForTheBenefit().substring(0, temp);
+                    docSerial = "";
+                }
+                acceptAnketaRepository.addBenefitDocument(person, benefitInformation, IdFactory.getGUID(this), docNumber, docSerial);
             }
-            else {
-                docNumber = benefitInformation.getDocumentForTheBenefit().substring(0, temp);
-                docSerial = "";
+            int foreignLanguageId = 7;
+            if (educationInfo.getStudiedLanguage().equals("english")) {
+                foreignLanguageId = 1;
             }
-            acceptAnketaRepository.addBenefitDocument(person,benefitInformation,IdFactory.getGUID(this),docNumber,docSerial);
-        }
-        int foreignLanguageId=7;
-        if(educationInfo.getStudiedLanguage().equals("english")){
-            foreignLanguageId=1;
-        }
-        if(educationInfo.getStudiedLanguage().equals("french")){
-            foreignLanguageId=2;
-        }
-        if(educationInfo.getStudiedLanguage().equals("german")){
-            foreignLanguageId=3;
-        }
-        if(educationInfo.getStudiedLanguage().equals("other") ||educationInfo.getStudiedLanguage().equals("spanish") ){
-            foreignLanguageId=6;
-        }
-        acceptAnketaRepository.addLanguage(foreignLanguageId,person);
-        List<Speciality> list=specialityRefRepository.getSpecialities();
-        long directionId=0;
-        for(int i=0;i<admissionInfo.size();i++){
+            if (educationInfo.getStudiedLanguage().equals("french")) {
+                foreignLanguageId = 2;
+            }
+            if (educationInfo.getStudiedLanguage().equals("german")) {
+                foreignLanguageId = 3;
+            }
+            if (educationInfo.getStudiedLanguage().equals("other") || educationInfo.getStudiedLanguage().equals("spanish")) {
+                foreignLanguageId = 6;
+            }
+            acceptAnketaRepository.addLanguage(foreignLanguageId, person);
+            List<Speciality> list = specialityRefRepository.getSpecialities();
+            long directionId = 0;
+            for (int i = 0; i < admissionInfo.size(); i++) {
             /*for(int j=0;j< list.size();j++){
                 if(list.get(j).getSpecialityName().equals(admissionInfo.get(i).getDirection())){
                     directionId= list.get(j).getSpecId();
                     break;
                 }
             }*/
-            acceptAnketaRepository.addSpeciality(admissionInfo.get(i),person,i,moderatorId,changesDate,IdFactory.getGUID(this),Integer.parseInt(admissionInfo.get(i).getDirection()),Integer.parseInt(admissionInfo.get(i).getAdmittanceCategory()));
+                acceptAnketaRepository.addSpeciality(admissionInfo.get(i), person, i, moderatorId, changesDate, IdFactory.getGUID(this), Integer.parseInt(admissionInfo.get(i).getDirection()), Integer.parseInt(admissionInfo.get(i).getAdmittanceCategory()));
+            }
+            guid = IdFactory.getGUID(this);
+            acceptAnketaRepository.addFatherPerson(person, parentsInformation, "mail", guid);
+            acceptAnketaRepository.addRelativeFather(parentsInformation, person, guid);
+            guid = IdFactory.getGUID(this);
+            acceptAnketaRepository.addMotherPerson(person, parentsInformation, "mail", guid);
+            acceptAnketaRepository.addRelativeMother(parentsInformation, person, guid);
         }
-        guid =IdFactory.getGUID(this);
-        acceptAnketaRepository.addFatherPerson(person,parentsInformation,"mail",guid);
-        acceptAnketaRepository.addRelativeFather(parentsInformation,person,guid);
-        guid =IdFactory.getGUID(this);
-        acceptAnketaRepository.addMotherPerson(person,parentsInformation,"mail",guid);
-        acceptAnketaRepository.addRelativeMother(parentsInformation,person,guid);
+        catch (Exception e){
+
+        }
     }
 }
