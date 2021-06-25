@@ -107,7 +107,7 @@ public class AcceptAnketaService {
         this.identificationInfoPTRepository=identificationInfoPTRepository;
     }
     public void AcceptAnketa(final int entrantId, final int moderatorId){
-        accessService.commonAccessCheck(moderatorId);
+        //accessService.commonAccessCheck(moderatorId);
         List<AdditionalInformation> additionalInformation=additionalInformationRepository.getAdditionalInformation(entrantId);
         List<AdmissionInfo> admissionInfo = admissionInfoRepository.getAdmissionInfos(entrantId);
         BenefitInformation benefitInformation=benefitInformationRepository.getBenefitInformation(entrantId);
@@ -185,18 +185,13 @@ public class AcceptAnketaService {
 
 
         acceptAnketaRepository.addEntrant(person, entrantPrivateData, educationalAchievements.get(0), changesDate, entrant, militaryStatusId, needHostel);
+        educationInfo.setDocumentOfEducationSerialNumber(educationInfo.getDocumentOfEducationSerialNumber().replaceAll("\\s+",""));
         int temp = educationInfo.getDocumentOfEducationSerialNumber().length();
-        String docNumber= educationInfo.getDocumentOfEducationSerialNumber().substring(0,3);
-        String docSerial= educationInfo.getDocumentOfEducationSerialNumber().substring(4,temp);
+        String docSerial= educationInfo.getDocumentOfEducationSerialNumber().substring(0,3);
+        String docNumber= educationInfo.getDocumentOfEducationSerialNumber().substring(4,temp);
 
+        acceptAnketaRepository.addIdentificationInfo(passportData, person);
 
-        IdentificationInfo pi=identificationInfoPTRepository.getEntrant(passportData.getSeries(),passportData.getNumber());
-        if(pi==null) {
-            acceptAnketaRepository.addIdentificationInfo(passportData, person);
-        }
-        else{
-            throw new AlreadyHaveException("Такой паспорт уже есть");
-        }
 
         int achievementsId=0;
             if(educationalAchievements.get(0).getMedal()!=null) {
