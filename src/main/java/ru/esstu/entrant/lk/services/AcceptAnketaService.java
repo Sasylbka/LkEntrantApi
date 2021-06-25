@@ -204,7 +204,16 @@ public class AcceptAnketaService {
             }
         int end_year=Integer.parseInt(educationInfo.getYearOfFinished());
         //EducationalDocument doc = educationalDocumentPTRepository.getDocument(docSerial,docNumber);
-            acceptAnketaRepository.addEducationalDocument(educationInfo, person, educationalAchievements.get(0), docNumber, docSerial, achievementsId, end_year);
+        int education = Integer.parseInt(educationInfo.getEducation());
+        int documentOfEducation=0;
+        //int documentOfEducation = Integer.parseInt(educationInfo.getDocumentOfEducation());
+        if(educationInfo.getDocumentOfEducation().equals("certificate")){
+            documentOfEducation=6;
+        }
+        else{
+            documentOfEducation=3;
+        }
+            acceptAnketaRepository.addEducationalDocument(educationInfo, person, educationalAchievements.get(0), docNumber, docSerial, achievementsId, end_year,education,documentOfEducation);
 
         /*for(int i=0;i<additionalInformation.size();i++) {
             temp=educationalAchievements.get(i).getDocumentOfOlympiadVictoriesSerialNumber().length();
@@ -212,6 +221,7 @@ public class AcceptAnketaService {
             docSerial = educationalAchievements.get(i).getDocumentOfOlympiadVictoriesSerialNumber().substring(4,temp);
             acceptAnketaRepository.addOlimpiadDocument(person, educationalAchievements.get(i), IdFactory.getGUID(this),docNumber,docSerial);
         }*/
+
         if(benefitInformation!=null){
             temp=benefitInformation.getDocumentForTheBenefit().length();
             if(benefitInformation.getDocumentForTheBenefit().length()>4) {
@@ -234,8 +244,8 @@ public class AcceptAnketaService {
         if(educationInfo.getStudiedLanguage().equals("german")){
             foreignLanguageId=3;
         }
-        if(educationInfo.getStudiedLanguage().equals("spanish")){
-            foreignLanguageId=4;
+        if(educationInfo.getStudiedLanguage().equals("other") ||educationInfo.getStudiedLanguage().equals("spanish") ){
+            foreignLanguageId=6;
         }
         acceptAnketaRepository.addLanguage(foreignLanguageId,person);
         List<Speciality> list=specialityRefRepository.getSpecialities();
@@ -247,7 +257,7 @@ public class AcceptAnketaService {
                     break;
                 }
             }*/
-            acceptAnketaRepository.addSpeciality(admissionInfo.get(i),person,i,moderatorId,changesDate,IdFactory.getGUID(this),Integer.parseInt(admissionInfo.get(i).getDirection()));
+            acceptAnketaRepository.addSpeciality(admissionInfo.get(i),person,i,moderatorId,changesDate,IdFactory.getGUID(this),Integer.parseInt(admissionInfo.get(i).getDirection()),Integer.parseInt(admissionInfo.get(i).getAdmittanceCategory()));
         }
         guid =IdFactory.getGUID(this);
         acceptAnketaRepository.addFatherPerson(person,parentsInformation,"mail",guid);
