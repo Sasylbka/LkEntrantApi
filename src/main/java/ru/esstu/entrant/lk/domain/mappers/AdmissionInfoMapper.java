@@ -26,6 +26,7 @@ public class AdmissionInfoMapper {
                 vo.getEntrantId(),
                 vo.getLevelOfEducation(),
                 vo.getDirection(),
+                vo.getAdmittanceCategory(),
                 vo.isBudget(),
                 vo.isContract(),
                 vo.isTargetedTraining(),
@@ -33,6 +34,7 @@ public class AdmissionInfoMapper {
                 vo.isConsentBudget(),
                 vo.isConsentTarget(),
                 vo.isConsentQuote()
+
         );
     }
     public AdmissionInfo toVO(AdmissionInfoDto dto) {
@@ -44,6 +46,7 @@ public class AdmissionInfoMapper {
                 dto.getEntrantId(),
                 dto.getLevelOfEducation(),
                 dto.getDirection(),
+                dto.getAdmittanceCategory(),
                 dto.isBudget(),
                 dto.isContract(),
                 dto.isTargetedTraining(),

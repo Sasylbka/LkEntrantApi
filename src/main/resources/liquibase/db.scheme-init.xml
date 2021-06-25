@@ -532,4 +532,9 @@
             <column name="mother_email" type="text"></column>
         </addColumn>
     </changeSet>
+    <changeSet id="2021-25-06" author="sergey">
+        <addColumn tableName="admission_info">
+            <column name="admittance_category" type="text"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
