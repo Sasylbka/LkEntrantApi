@@ -17,9 +17,9 @@ public interface AdmissionInfoRepository {
     AdmissionInfo getAdmissionInfo(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO admission_info(entrant_id, level_of_education, direction, budget, contract, targeted_training, quota," +
+    @Insert("INSERT INTO admission_info(entrant_id, level_of_education, direction,admittance_category, budget, contract, targeted_training, quota," +
             " consent_budget, consent_target, consent_quote ) " +
-            "VALUES(#{admissionInfo.entrantId},#{admissionInfo.levelOfEducation},#{admissionInfo.direction}," +
+            "VALUES(#{admissionInfo.entrantId},#{admissionInfo.levelOfEducation},#{admissionInfo.direction},#{admissionInfo.admittanceCategory}," +
             "#{admissionInfo.budget},#{admissionInfo.contract},#{admissionInfo.targetedTraining},#{admissionInfo.quota},#{admissionInfo.consentBudget}," +
             "#{admissionInfo.consentTarget},#{admissionInfo.consentQuote})")
     long save(@Param("admissionInfo") AdmissionInfo admissionInfo);
@@ -27,7 +27,7 @@ public interface AdmissionInfoRepository {
     @Options( keyProperty = "id", keyColumn = "id")
     @Update("UPDATE admission_info SET level_of_education=#{admissionInfo.levelOfEducation}, " +
             "direction=#{admissionInfo.direction}, budget=#{admissionInfo.budget}, contract=#{admissionInfo.contract}, " +
-            "targeted_training=#{admissionInfo.targetedTraining}, quota=#{admissionInfo.quota} " +
+            "targeted_training=#{admissionInfo.targetedTraining}, quota=#{admissionInfo.quota},admittance_category=#{admissionInfo.admittanceCategory}" +
             "WHERE id=#{admissionInfo.id}")
     long update(@Param("admissionInfo") AdmissionInfo admissionInfo);
 
