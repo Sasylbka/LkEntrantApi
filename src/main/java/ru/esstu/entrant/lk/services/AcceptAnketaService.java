@@ -136,7 +136,7 @@ public class AcceptAnketaService {
             }
         }
         else {
-            throw new AlreadyHaveException("Такая персона уже есть об образовании уже есть");
+            throw new AlreadyHaveException("Такая персона уже есть");
         }
         person=personPTRepository.getPerson(keycloak.getKeycloakGuid());
         String guid = IdFactory.getGUID(this);
@@ -182,14 +182,9 @@ public class AcceptAnketaService {
         else{
             needHostel=false;
         }
-        ru.esstu.entrant.lk.domain.vo.PublicTables.Entrant entrant1=entrantPTRepository.getEntrant(person.getPersonId());
-        if(entrant1==null) {
-            acceptAnketaRepository.addEntrant(person, entrantPrivateData, educationalAchievements.get(0), changesDate, entrant, militaryStatusId, needHostel);
-        }
-        else{
-            throw new AlreadyHaveException("Такой абитуриент уже есть");
 
-        }
+
+        acceptAnketaRepository.addEntrant(person, entrantPrivateData, educationalAchievements.get(0), changesDate, entrant, militaryStatusId, needHostel);
         int temp = educationInfo.getDocumentOfEducationSerialNumber().length();
         String docNumber= educationInfo.getDocumentOfEducationSerialNumber().substring(0,3);
         String docSerial= educationInfo.getDocumentOfEducationSerialNumber().substring(4,temp);
@@ -213,13 +208,9 @@ public class AcceptAnketaService {
                 }
             }
         int end_year=Integer.parseInt(educationInfo.getYearOfFinished());
-        EducationalDocument doc = educationalDocumentPTRepository.getDocument(docSerial,docNumber);
-        if(doc==null) {
+        //EducationalDocument doc = educationalDocumentPTRepository.getDocument(docSerial,docNumber);
             acceptAnketaRepository.addEducationalDocument(educationInfo, person, educationalAchievements.get(0), docNumber, docSerial, achievementsId, end_year);
-        }
-        else {
-           throw new AlreadyHaveException("Такой документ об образовании уже есть");
-        }
+
         /*for(int i=0;i<additionalInformation.size();i++) {
             temp=educationalAchievements.get(i).getDocumentOfOlympiadVictoriesSerialNumber().length();
             docNumber = educationalAchievements.get(i).getDocumentOfOlympiadVictoriesSerialNumber().substring(0,3);
