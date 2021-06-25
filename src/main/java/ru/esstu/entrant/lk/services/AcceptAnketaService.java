@@ -262,7 +262,7 @@ public class AcceptAnketaService {
             acceptAnketaRepository.addRelativeMother(parentsInformation, person, guid);
         }
         catch (Exception e){
-
+            throw new AlreadyHaveException(e.getMessage());
         }
     }
 }
