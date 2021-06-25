@@ -205,13 +205,7 @@ public class AcceptAnketaService {
             int end_year = Integer.parseInt(educationInfo.getYearOfFinished());
             //EducationalDocument doc = educationalDocumentPTRepository.getDocument(docSerial,docNumber);
             int education = Integer.parseInt(educationInfo.getEducation());
-            int documentOfEducation = 0;
-            //int documentOfEducation = Integer.parseInt(educationInfo.getDocumentOfEducation());
-            if (educationInfo.getDocumentOfEducation().equals("certificate")) {
-                documentOfEducation = 6;
-            } else {
-                documentOfEducation = 3;
-            }
+            Integer documentOfEducation = Integer.parseInt(educationInfo.getDocumentOfEducation());
             acceptAnketaRepository.addEducationalDocument(educationInfo, person, educationalAchievements.get(0), docNumber, docSerial, achievementsId, end_year, education, documentOfEducation);
 
         /*for(int i=0;i<additionalInformation.size();i++) {
