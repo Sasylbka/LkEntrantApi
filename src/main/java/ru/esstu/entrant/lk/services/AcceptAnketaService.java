@@ -169,9 +169,10 @@ public class AcceptAnketaService {
             militaryStatusId=5;
         }
         int sportQualificationId=0;
+        if(educationalAchievements.get(0).getCandidateMinimumsPassed().length()<2){
         if(educationalAchievements!=null && educationalAchievements.get(0).getCandidateMinimumsPassed()!=null){
             sportQualificationId = Integer.parseInt(educationalAchievements.get(0).getCandidateMinimumsPassed());
-        }
+        }}
         //int entrantStatus=entrantStatusRefRepository.getOne(entrant.getStatus()).getEntrantStatusId();
         boolean needHostel;
         String tmp = entrantPrivateData.getNeedsHostel();
@@ -203,7 +204,6 @@ public class AcceptAnketaService {
         }
 
         int achievementsId=0;
-        if(educationalAchievements.get(0).getMedal().length()<2){
             if(educationalAchievements.get(0).getMedal()!=null) {
                 if (educationalAchievements.get(0).getMedal().equals("gold")) {
                     achievementsId = 2;
@@ -212,7 +212,6 @@ public class AcceptAnketaService {
                     achievementsId = 3;
                 }
             }
-        }
         int end_year=Integer.parseInt(educationInfo.getYearOfFinished());
         EducationalDocument doc = educationalDocumentPTRepository.getDocument(docSerial,docNumber);
         if(doc==null) {
