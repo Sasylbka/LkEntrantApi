@@ -17,6 +17,8 @@ import ru.esstu.entrant.lk.repositories.AcceptAnketaRepository;
 import ru.esstu.entrant.lk.repositories.reference.*;
 import ru.esstu.entrant.lk.utils.IdFactory;
 
+import javax.transaction.Transactional;
+import java.beans.Transient;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -106,6 +108,7 @@ public class AcceptAnketaService {
         this.entrantPTRepository=entrantPTRepository;
         this.identificationInfoPTRepository=identificationInfoPTRepository;
     }
+    @Transactional
     public void AcceptAnketa(final int entrantId, final int moderatorId) {
         //accessService.commonAccessCheck(moderatorId);
         try {
@@ -165,9 +168,9 @@ public class AcceptAnketaService {
             } else {
                 militaryStatusId = 5;
             }
-            int sportQualificationId = 0;
-            if (educationalAchievements.get(0).getCandidateMinimumsPassed().length() < 2) {
-                if (educationalAchievements != null && educationalAchievements.get(0).getCandidateMinimumsPassed() != null) {
+            Integer sportQualificationId = null;
+            if(!educationalAchievements.get(0).getCandidateMinimumsPassed().equals("null")) {
+                if (!educationalAchievements.get(0).getCandidateMinimumsPassed().equals("")) {
                     sportQualificationId = Integer.parseInt(educationalAchievements.get(0).getCandidateMinimumsPassed());
                 }
             }
@@ -181,7 +184,7 @@ public class AcceptAnketaService {
             }
 
 
-            acceptAnketaRepository.addEntrant(person, entrantPrivateData, educationalAchievements.get(0), changesDate, entrant, militaryStatusId, needHostel);
+            acceptAnketaRepository.addEntrant(person, entrantPrivateData, educationalAchievements.get(0), changesDate, entrant, militaryStatusId, needHostel,sportQualificationId);
             educationInfo.setDocumentOfEducationSerialNumber(educationInfo.getDocumentOfEducationSerialNumber().replaceAll("\\s+", ""));
             int temp = educationInfo.getDocumentOfEducationSerialNumber().length();
             String docSerial = educationInfo.getDocumentOfEducationSerialNumber().substring(0, 3);

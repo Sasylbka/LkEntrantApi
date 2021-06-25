@@ -73,10 +73,10 @@ public interface AcceptAnketaRepository {
                              @Param("guid") String guid,@Param("docNumber")String docNumber,
                              @Param("docSerial")String docSerial);
     @Insert("Insert into public.entrant_doc (doc_id, entrant_id," +
-            "doc_series, doc_number, doc_date, doc_organization) " +
+            "doc_series, doc_number, doc_date, doc_organization,doc_type_id) " +
             "VALUES (#{guid}, #{person.personId},  " +
             "#{docSerial}, " +
-            "#{docNumber}, #{benefitInformation.dataOfIssued}, #{benefitInformation.issuedBy})")
+            "#{docNumber}, #{benefitInformation.dataOfIssued}, #{benefitInformation.issuedBy},#{benefitInformation.reasonForTheBenefit})")
     long addBenefitDocument(@Param("person")Person person,
                             @Param("benefitInformation") BenefitInformation benefitInformation,
                             @Param("guid") String guid,
@@ -129,17 +129,18 @@ public interface AcceptAnketaRepository {
                          @Param("mail") String mail,
                          @Param("guid")String guid);
     @Insert("Insert into public.entrant (entrant_id,military_status_id,nat_id,cit_id," +
-            "need_hostel,statement_date,entrant_status_id,username) " +
+            "need_hostel,statement_date,entrant_status_id,username,sport_qualification_id) " +
             "Values(#{person.personId},#{militaryStatusId},0,1," +
             "#{needHostel},#{changesDate.dateOfSend},3," +
-            "#{entrant.login})")
+            "#{entrant.login},#{sportQualificationId})")
     long addEntrant(@Param("person")Person person,
                     @Param("entrantPrivateData") EntrantPrivateData entrantPrivateData,
                     @Param("educationAchievements")EducationalAchievements educationalAchievements,
                     @Param("changesDate")ChangesDate changesDate,
                     @Param("entrant")Entrant entrant,
                     @Param("militaryStatusId")int militaryStatusId,
-                    @Param("needHostel") boolean needHostel);
+                    @Param("needHostel") boolean needHostel,
+                    @Param("sportQualificationId")Integer sportQualificationId);
 
 }
 
