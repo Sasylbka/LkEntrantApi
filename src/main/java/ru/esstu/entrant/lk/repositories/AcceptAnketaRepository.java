@@ -58,7 +58,6 @@ public interface AcceptAnketaRepository {
             ", #{docNumber}, #{educationInfo.dateOfFinished},  #{achievementsId}," +
             "#{endDate}, #{education},#{documentOfEducation})")
     long addEducationalDocument(@Param("educationInfo")EducationInfo educationInfo, @Param("person") Person person,
-                                @Param("educationalAchievements") EducationalAchievements educationalAchievements,
                                 @Param("docNumber")String docNumber,@Param("docSerial")String docSerial,
                                 @Param("achievementsId") int achievementsId,@Param("endDate") int endDate,
                                 @Param("education")int education,
@@ -89,7 +88,7 @@ public interface AcceptAnketaRepository {
             "entrant_id, spec_id,registered_on ,taken_docs_away, " +
             "prefer_number,edu_manager_id,passed_preparatory_course,admittance_category_id) " +
             "VALUES (#{guid}, #{person.personId}, " +
-            "#{directionId}, #{changesDate.dateOfSend}, " +
+            "#{directionId}, #{changesDate.dateOfCreation}, " +
             "false,#{prefer_number}, " +
             "#{moderatorId},false,#{admittanceCategory})")
     long addSpeciality(@Param("admissionInfo") AdmissionInfo admissionInfo,
@@ -131,11 +130,10 @@ public interface AcceptAnketaRepository {
     @Insert("Insert into public.entrant (entrant_id,military_status_id,nat_id,cit_id," +
             "need_hostel,statement_date,entrant_status_id,username,sport_qualification_id) " +
             "Values(#{person.personId},#{militaryStatusId},0,1," +
-            "#{needHostel},#{changesDate.dateOfSend},3," +
+            "#{needHostel},#{changesDate.dateOfCreation},3," +
             "#{entrant.login},#{sportQualificationId})")
     long addEntrant(@Param("person")Person person,
                     @Param("entrantPrivateData") EntrantPrivateData entrantPrivateData,
-                    @Param("educationAchievements")EducationalAchievements educationalAchievements,
                     @Param("changesDate")ChangesDate changesDate,
                     @Param("entrant")Entrant entrant,
                     @Param("militaryStatusId")int militaryStatusId,
