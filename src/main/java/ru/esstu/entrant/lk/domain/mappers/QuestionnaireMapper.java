@@ -25,6 +25,7 @@ public class QuestionnaireMapper{
                 vo.getDateOfAnswer(),
                 vo.getStatus(),
                 vo.getContract(),
+                vo.isAccelerated(),
                 vo.getEmail(),
                 vo.getMobileNumber()
         );
@@ -45,6 +46,7 @@ public class QuestionnaireMapper{
                 dto.getDateOfAnswer(),
                 dto.getStatus(),
                 dto.getContract(),
+                dto.isAccelerated(),
                 dto.getEmail(),
                 dto.getMobileNumber()
         );
