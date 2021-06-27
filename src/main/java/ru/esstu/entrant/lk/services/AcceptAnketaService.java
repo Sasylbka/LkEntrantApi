@@ -169,9 +169,12 @@ public class AcceptAnketaService {
                 militaryStatusId = 5;
             }
             Integer sportQualificationId = null;
-            if(!educationalAchievements.get(0).getCandidateMinimumsPassed().equals("null")) {
-                if (!educationalAchievements.get(0).getCandidateMinimumsPassed().equals("")) {
-                    sportQualificationId = Integer.parseInt(educationalAchievements.get(0).getCandidateMinimumsPassed());
+            if (educationalAchievements != null && educationalAchievements.size() > 0) {
+                if (!educationalAchievements.get(0).getCandidateMinimumsPassed().equals("null")) {
+                    if (!educationalAchievements.get(0).getCandidateMinimumsPassed().equals("")) {
+                        sportQualificationId =
+                                Integer.parseInt(educationalAchievements.get(0).getCandidateMinimumsPassed());
+                    }
                 }
             }
             //int entrantStatus=entrantStatusRefRepository.getOne(entrant.getStatus()).getEntrantStatusId();
@@ -184,7 +187,7 @@ public class AcceptAnketaService {
             }
 
 
-            acceptAnketaRepository.addEntrant(person, entrantPrivateData, educationalAchievements.get(0), changesDate, entrant, militaryStatusId, needHostel,sportQualificationId);
+            acceptAnketaRepository.addEntrant(person, entrantPrivateData, changesDate, entrant, militaryStatusId, needHostel,sportQualificationId);
             educationInfo.setDocumentOfEducationSerialNumber(educationInfo.getDocumentOfEducationSerialNumber().replaceAll("\\s+", ""));
             int temp = educationInfo.getDocumentOfEducationSerialNumber().length();
             String docSerial = educationInfo.getDocumentOfEducationSerialNumber().substring(0, 3);
@@ -194,19 +197,21 @@ public class AcceptAnketaService {
 
 
             int achievementsId = 1;
-            if (educationalAchievements.get(0).getMedal() != null) {
-                if (educationalAchievements.get(0).getMedal().equals("gold")) {
-                    achievementsId = 2;
-                }
-                if (educationalAchievements.get(0).getMedal().equals("silver")) {
-                    achievementsId = 3;
+            if (educationalAchievements != null && educationalAchievements.size() > 0) {
+                if (educationalAchievements.get(0).getMedal() != null) {
+                    if (educationalAchievements.get(0).getMedal().equals("gold")) {
+                        achievementsId = 2;
+                    }
+                    if (educationalAchievements.get(0).getMedal().equals("silver")) {
+                        achievementsId = 3;
+                    }
                 }
             }
             int end_year = Integer.parseInt(educationInfo.getYearOfFinished());
             //EducationalDocument doc = educationalDocumentPTRepository.getDocument(docSerial,docNumber);
             int education = Integer.parseInt(educationInfo.getEducation());
             Integer documentOfEducation = Integer.parseInt(educationInfo.getDocumentOfEducation());
-            acceptAnketaRepository.addEducationalDocument(educationInfo, person, educationalAchievements.get(0), docNumber, docSerial, achievementsId, end_year, education, documentOfEducation);
+            acceptAnketaRepository.addEducationalDocument(educationInfo, person, docNumber, docSerial, achievementsId, end_year, education, documentOfEducation);
 
         /*for(int i=0;i<additionalInformation.size();i++) {
             temp=educationalAchievements.get(i).getDocumentOfOlympiadVictoriesSerialNumber().length();

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface AdditionalInformationRepository {
-    @Select("SELECT * FROM additional_information WHERE entrant_id = #{id}")
+    @Select("SELECT * FROM additional_information WHERE entrant_id = #{id} order by type")
     List<AdditionalInformation> getAdditionalInformation(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")

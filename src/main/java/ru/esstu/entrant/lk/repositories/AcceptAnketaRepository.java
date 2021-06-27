@@ -58,7 +58,6 @@ public interface AcceptAnketaRepository {
             ", #{docNumber}, #{educationInfo.dateOfFinished},  #{achievementsId}," +
             "#{endDate}, #{education},#{documentOfEducation})")
     long addEducationalDocument(@Param("educationInfo")EducationInfo educationInfo, @Param("person") Person person,
-                                @Param("educationalAchievements") EducationalAchievements educationalAchievements,
                                 @Param("docNumber")String docNumber,@Param("docSerial")String docSerial,
                                 @Param("achievementsId") int achievementsId,@Param("endDate") int endDate,
                                 @Param("education")int education,
@@ -135,7 +134,6 @@ public interface AcceptAnketaRepository {
             "#{entrant.login},#{sportQualificationId})")
     long addEntrant(@Param("person")Person person,
                     @Param("entrantPrivateData") EntrantPrivateData entrantPrivateData,
-                    @Param("educationAchievements")EducationalAchievements educationalAchievements,
                     @Param("changesDate")ChangesDate changesDate,
                     @Param("entrant")Entrant entrant,
                     @Param("militaryStatusId")int militaryStatusId,
