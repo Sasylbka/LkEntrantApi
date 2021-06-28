@@ -20,6 +20,7 @@ public class Questionnaire {
     private Date dateOfAnswer;
     private String status;
     private String contract;
+    private boolean accelerated;
     private String email;
     private String mobileNumber;
 

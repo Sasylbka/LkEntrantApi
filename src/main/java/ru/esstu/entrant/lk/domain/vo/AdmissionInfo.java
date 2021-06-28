@@ -15,6 +15,7 @@ public class AdmissionInfo {
     private String levelOfEducation;
     private String direction;//id из справочника
     private String admittanceCategory;
+    private boolean accelerated;
     private boolean budget;//бюджет
     private boolean contract;//договор
     private boolean targetedTraining;//целевое

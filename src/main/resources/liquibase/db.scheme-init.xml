@@ -537,4 +537,9 @@
             <column name="admittance_category" type="text"></column>
         </addColumn>
     </changeSet>
+    <changeSet id="2021-27-06" author="nikita">
+        <addColumn tableName="admission_info">
+            <column name="accelerated" type="boolean"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
