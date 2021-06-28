@@ -542,4 +542,14 @@
             <column name="accelerated" type="boolean"></column>
         </addColumn>
     </changeSet>
+    <changeSet id="2021-28-06" author="sergey">
+        <createTable tableName="users_google_fcm">
+            <column name="id" type="serial"/>
+            <column name="user_id" type="varchar(32)"/>
+            <column name="platform" type="varchar(32)"/>
+            <column name="token" type="varchar(512)"/>
+            <column name="created_at" type="timestamp without time zone"/>
+            <column name="modified_at" type="timestamp without time zone"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
