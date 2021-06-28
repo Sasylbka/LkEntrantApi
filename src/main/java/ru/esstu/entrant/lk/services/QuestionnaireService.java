@@ -40,11 +40,9 @@ public class QuestionnaireService {
     public Boolean checkAccel(QuestionnaireDto questionnaireDto) {//Проверка на ускоренное обучение
         List<AdmissionInfo> aiList = admissionInfoRepository.getAdmissionInfos(questionnaireDto.getId());
         if (aiList.size() == 0) {
-            return false;
-        }
-        for (AdmissionInfo i :
-                aiList) {
-            if (specialityRefRepository.getFacultyId(Long.parseLong(i.getDirection())) == 13) {
+            return null;
+        } else for (int i = 0; i < aiList.size(); i++) {
+            if (specialityRefRepository.getFacultyId(Long.parseLong(aiList.get(i).getDirection())) == 13) {
                 return true;
             }
         }
@@ -62,7 +60,6 @@ public class QuestionnaireService {
             if (!list.contains(temp.get(i).getId())) {
                 list.add(temp.get(i).getId());
                 temp1.add(temp.get(i));
-                temp1.get(i).setAccelerated(false);
             }
         }
         for (int i = 0; i < temp1.size(); i++) {
