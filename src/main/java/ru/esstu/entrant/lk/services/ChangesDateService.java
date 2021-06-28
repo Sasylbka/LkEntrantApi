@@ -6,6 +6,7 @@ import ru.esstu.entrant.lk.domain.dto.ChangesDateDto;
 import ru.esstu.entrant.lk.domain.mappers.ChangesDateMapper;
 import ru.esstu.entrant.lk.domain.vo.ChangesDate;
 import ru.esstu.entrant.lk.repositories.ChangesDateRepository;
+
 @Service
 @Slf4j
 public class ChangesDateService {
@@ -23,19 +24,21 @@ public class ChangesDateService {
 
     public ChangesDateDto getChangesDate(final int id) {
         accessService.commonAccessCheck(id);
-        ChangesDateDto temp= ChangesDateMapper.toDto(ChangesDateRepository.getChangesDate(id));
-        if(temp==null){
-            temp=new ChangesDateDto();
+        ChangesDateDto temp = ChangesDateMapper.toDto(ChangesDateRepository.getChangesDate(id));
+        if (temp == null) {
+            temp = new ChangesDateDto();
             return temp;
         }
         return temp;
     }
+
     public ChangesDateDto save(final ChangesDateDto changesDateDto) {
         accessService.commonAccessCheck(changesDateDto.getEntrantId());
         ChangesDate entity = ChangesDateMapper.toVO(changesDateDto);
         ChangesDateRepository.save(entity);
         return ChangesDateMapper.toDto(entity);
     }
+
     public ChangesDateDto update(final ChangesDateDto changesDateDto) {
         accessService.commonAccessCheck(changesDateDto.getEntrantId());
         ChangesDate entity = ChangesDateMapper.toVO(changesDateDto);

@@ -4,25 +4,25 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <changeSet id="2021-07-06-entrant-lk-init-v.0.9.1" author="nikita">
         <createTable tableName="admission_info">
-            <column name="id"  type="serial">
+            <column name="id" type="serial">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
             <column name="entrant_id" type="integer"></column>
             <column name="level_of_education" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="direction"  type="text">
+            <column name="direction" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="budget"  type="boolean">
+            <column name="budget" type="boolean">
             </column>
-            <column name="contract"  type="boolean">
+            <column name="contract" type="boolean">
             </column>
-            <column name="targeted_training"  type="boolean">
+            <column name="targeted_training" type="boolean">
             </column>
-            <column name="quota"  type="boolean">
+            <column name="quota" type="boolean">
             </column>
-            <column name="consent"  type="boolean">
+            <column name="consent" type="boolean">
             </column>
         </createTable>
         <createTable tableName="ask_of_result_trials">
@@ -30,7 +30,7 @@
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
             <column name="entrant_id" type="integer"></column>
-            <column name="result"  type="text">
+            <column name="result" type="text">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -45,13 +45,13 @@
             <column name="number" type="text">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="place_of_issue" type="text" >
+            <column name="place_of_issue" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="code_of_subdivision" type="text" >
+            <column name="code_of_subdivision" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="date_of_issue" type="date" >
+            <column name="date_of_issue" type="date">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -60,26 +60,26 @@
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
             <column name="entrant_id" type="integer"></column>
-            <column name="name" type="text" >
+            <column name="name" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="family_name" type="text" >
+            <column name="family_name" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="patronymic" type="text" />
+            <column name="patronymic" type="text"/>
             <column name="gender" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="date_of_birth" type="date" >
+            <column name="date_of_birth" type="date">
                 <constraints nullable="false"/>
             </column>
-            <column name="city_of_birth" type="text" >
+            <column name="city_of_birth" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="region_of_birth" type="text" >
+            <column name="region_of_birth" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="snills" type="text" >
+            <column name="snills" type="text">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -102,7 +102,7 @@
         </createTable>
         <createTable tableName="parents_information">
             <column name="id" type="serial">
-                <constraints primaryKey="true" nullable="false" unique="true" />
+                <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
             <column name="entrant_id" type="integer"></column>
             <column name="father_mobile_number" type="text"/>
@@ -224,7 +224,7 @@
             <column name="honors_degree" type="text">
                 <constraints nullable="false"/>
             </column>
-            <column name="olympiad_participation"  type="text"/>
+            <column name="olympiad_participation" type="text"/>
             <column name="document_of_olympiad_victories" type="text"/>
             <column name="document_of_olympiad_victories_serial_number" type="text">
                 <constraints unique="true"/>
@@ -415,10 +415,10 @@
         </addColumn>
     </changeSet>
     <changeSet id="2021-16-06-additional_to_private_fix-1" author="nikita">
-        <dropColumn  schemaName="lk"
-                     tableName="additional_information">
-            <column  name="reservist"/>
-            <column  name="needs_hostel"/>
+        <dropColumn schemaName="lk"
+                    tableName="additional_information">
+            <column name="reservist"/>
+            <column name="needs_hostel"/>
         </dropColumn>
         <addColumn tableName="entrant_private_data">
             <column name="reservist" type="boolean"></column>
@@ -436,7 +436,7 @@
         </addColumn>
     </changeSet>
     <changeSet id="2021-16-06-hotfix2" author="druzhinin">
-    <modifyDataType tableName="entrant_private_data" columnName="reservist" newDataType="text"/>
+        <modifyDataType tableName="entrant_private_data" columnName="reservist" newDataType="text"/>
         <modifyDataType tableName="entrant_private_data" columnName="needs_hostel" newDataType="text"/>
     </changeSet>
     <changeSet id="2021-16-06-hotfix3" author="druzhinin">
@@ -449,9 +449,10 @@
             <column name="role" type="text"></column>
         </addColumn>
         <dropForeignKeyConstraint baseTableName="message_table" constraintName="fk_message_dialog"/>
-        <dropPrimaryKey tableName="dialog_table" />
+        <dropPrimaryKey tableName="dialog_table"/>
         <addPrimaryKey tableName="dialog_table" columnNames="id,moderator_role"/>
-        <addForeignKeyConstraint baseTableName="message_table" baseColumnNames="dialog_id,role" constraintName="fk_message_dialog" referencedTableName="dialog_table"
+        <addForeignKeyConstraint baseTableName="message_table" baseColumnNames="dialog_id,role"
+                                 constraintName="fk_message_dialog" referencedTableName="dialog_table"
                                  referencedColumnNames="id, moderator_role"/>
     </changeSet>
     <changeSet id="2021-19-06-hotfix5" author="">
@@ -505,20 +506,23 @@
         </addColumn>
     </changeSet>
     <changeSet id="2021-16-06-admissionInfoFix2" author="nikita">
-        <dropColumn  schemaName="lk"
-                     tableName="admission_info">
-            <column  name="consent"/>
+        <dropColumn schemaName="lk"
+                    tableName="admission_info">
+            <column name="consent"/>
         </dropColumn>
     </changeSet>
     <changeSet id="2021-20-06-asfasf" author="nikita">
         <modifyDataType tableName="benefit_information" columnName="benefit_checked" newDataType="boolean"/>
     </changeSet>
     <changeSet id="2021-20-06-uniqueDelete" author="nikita">
-        <dropUniqueConstraint tableName="passport_data" constraintName="passport_data_number_key" />
-        <dropUniqueConstraint tableName="passport_data" constraintName="passport_data_series_key" />
-        <dropUniqueConstraint tableName="benefit_information" constraintName="benefit_information_serial_number_of_document_for_the_benef_key" />
-        <dropUniqueConstraint tableName="education_info" constraintName="education_info_document_of_education_serial_number_key" />
-        <dropUniqueConstraint tableName="educational_achievements" constraintName="educational_achievements_document_of_olympiad_victories_ser_key" />
+        <dropUniqueConstraint tableName="passport_data" constraintName="passport_data_number_key"/>
+        <dropUniqueConstraint tableName="passport_data" constraintName="passport_data_series_key"/>
+        <dropUniqueConstraint tableName="benefit_information"
+                              constraintName="benefit_information_serial_number_of_document_for_the_benef_key"/>
+        <dropUniqueConstraint tableName="education_info"
+                              constraintName="education_info_document_of_education_serial_number_key"/>
+        <dropUniqueConstraint tableName="educational_achievements"
+                              constraintName="educational_achievements_document_of_olympiad_victories_ser_key"/>
     </changeSet>
     <changeSet id="2021-21-06-rejection_reason" author="nikita">
         <addColumn tableName="changes_date">
@@ -551,5 +555,11 @@
             <column name="created_at" type="timestamp without time zone"/>
             <column name="modified_at" type="timestamp without time zone"/>
         </createTable>
+    </changeSet>
+    <changeSet id="2021-28-06fix2" author="">
+        <modifyDataType tableName="changes_date" columnName="date_of_creation"
+                        newDataType="timestamp without time zone"/>
+        <modifyDataType tableName="changes_date" columnName="date_of_send" newDataType="timestamp without time zone"/>
+        <modifyDataType tableName="changes_date" columnName="date_of_answer" newDataType="timestamp without time zone"/>
     </changeSet>
 </databaseChangeLog>
