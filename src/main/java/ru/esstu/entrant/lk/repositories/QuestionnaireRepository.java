@@ -18,7 +18,6 @@ public interface QuestionnaireRepository {
             "changes_date.date_of_send,"+
             "changes_date.date_of_answer,"+
             "admission_info.contract,"+
-            "admission_info.accelerated,"+
             "entrant.status," +
             "contact_information.email, "+
             "contact_information.mobile_number " +

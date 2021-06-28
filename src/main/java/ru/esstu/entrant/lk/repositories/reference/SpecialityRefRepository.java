@@ -1,9 +1,13 @@
 package ru.esstu.entrant.lk.repositories.reference;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
+import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
 import ru.esstu.entrant.lk.domain.vo.reference.Speciality;
 
+import java.math.BigInteger;
 import java.util.List;
 @Mapper
 public interface SpecialityRefRepository {
@@ -21,4 +25,8 @@ public interface SpecialityRefRepository {
             "left join public.speciality_code on public.speciality.spec_code_id=public.speciality_code.spec_id " +
             "left join public.acceptance_plan on public.speciality.spec_id=public.acceptance_plan.spec_id ")
     List<Speciality> getSpecialities();
+    @Select("SELECT " +
+            "faculty_id " +
+            "FROM public.speciality WHERE spec_id=#{admissionInfo}")
+    long getFacultyId(@Param("admissionInfo") long admissionInfo);
 }

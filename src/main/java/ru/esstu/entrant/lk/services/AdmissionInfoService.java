@@ -28,7 +28,6 @@ public class AdmissionInfoService {
         this.accessService = accessService;
     }
 
-
     public List<AdmissionInfoDto> getAdmissionInfo(final int id) {
         accessService.commonAccessCheck(id);
         List<AdmissionInfoDto> temp = admissionInfoMapper.toDtos(admissionInfoRepository.getAdmissionInfos(id));
