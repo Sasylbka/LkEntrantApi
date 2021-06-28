@@ -38,7 +38,6 @@ public class QuestionnaireService {
     }
 
     public Boolean checkAccel(QuestionnaireDto questionnaireDto) {//Проверка на ускоренное обучение
-
         List<AdmissionInfo> aiList = admissionInfoRepository.getAdmissionInfos(questionnaireDto.getId());
         if (aiList.size() == 0) {
             return null;
@@ -65,7 +64,7 @@ public class QuestionnaireService {
                 temp1.add(temp.get(i));
             }
         }
-        for (int i = 0; i < temp.size(); i++) {
+        for (int i = 0; i < temp1.size(); i++) {
             temp1.get(i).setAccelerated(checkAccel(temp.get(i)));
         }
         return temp1;
