@@ -42,8 +42,9 @@ public class QuestionnaireService {
         if (aiList.size() == 0) {
             return false;
         }
-        for (int i = 0; i < aiList.size(); i++) {
-            if (specialityRefRepository.getFacultyId(Long.parseLong(aiList.get(i).getDirection())) == 13) {
+        for (AdmissionInfo i :
+                aiList) {
+            if (specialityRefRepository.getFacultyId(Long.parseLong(i.getDirection())) == 13) {
                 return true;
             }
         }
