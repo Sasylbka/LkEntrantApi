@@ -562,4 +562,11 @@
         <modifyDataType tableName="changes_date" columnName="date_of_send" newDataType="timestamp without time zone"/>
         <modifyDataType tableName="changes_date" columnName="date_of_answer" newDataType="timestamp without time zone"/>
     </changeSet>
+    <changeSet id="2021-28-06fix3" author="sergey">
+        <addColumn tableName="education_info">
+            <column name="city" type="text"/>
+            <column name="region_of_finished" type="text"/>
+            <column name="district_of_finished" type="text"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

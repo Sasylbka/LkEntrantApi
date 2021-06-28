@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.services.reference;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
 import ru.esstu.entrant.lk.domain.dto.reference.EntrantDocTypeDto;
 import ru.esstu.entrant.lk.domain.mappers.reference.EntrantDocTypeRefMapper;
@@ -8,7 +9,7 @@ import ru.esstu.entrant.lk.repositories.reference.EntrantDocTypeRefRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-@RestController
+@Service
 @Slf4j
 public class EntrantDocTypeRefService {
     private final EntrantDocTypeRefRepository entrantDocTypeRefRepository;
