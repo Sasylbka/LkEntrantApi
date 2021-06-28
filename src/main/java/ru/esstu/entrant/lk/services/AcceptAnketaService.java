@@ -254,7 +254,9 @@ public class AcceptAnketaService {
                     break;
                 }
             }*/
-                acceptAnketaRepository.addSpeciality(admissionInfo.get(i), person, i, moderatorId, changesDate, IdFactory.getGUID(this), Integer.parseInt(admissionInfo.get(i).getDirection()), Integer.parseInt(admissionInfo.get(i).getAdmittanceCategory()));
+                acceptAnketaRepository.addSpeciality(admissionInfo.get(i), person, i + 1, moderatorId, changesDate,
+                        IdFactory.getGUID(this), Integer.parseInt(admissionInfo.get(i).getDirection()),
+                        Integer.parseInt(admissionInfo.get(i).getAdmittanceCategory()));
             }
             guid = IdFactory.getGUID(this);
             acceptAnketaRepository.addFatherPerson(person, parentsInformation, "mail", guid);

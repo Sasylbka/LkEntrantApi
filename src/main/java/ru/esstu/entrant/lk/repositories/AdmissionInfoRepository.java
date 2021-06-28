@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface AdmissionInfoRepository {
-    @Select("SELECT * FROM admission_info WHERE entrant_id=#{id}")
+    @Select("SELECT * FROM admission_info WHERE entrant_id=#{id} order by id")
     List<AdmissionInfo> getAdmissionInfos(@Param("id") int id);
 
     @Select("SELECT * FROM admission_info WHERE id=#{id}")
