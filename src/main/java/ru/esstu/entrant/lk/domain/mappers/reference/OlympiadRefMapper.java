@@ -1,14 +1,15 @@
 package ru.esstu.entrant.lk.domain.mappers.reference;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
 import ru.esstu.entrant.lk.domain.dto.reference.OlympiadDto;
 import ru.esstu.entrant.lk.domain.vo.reference.Olympiad;
 
 import java.util.ArrayList;
 import java.util.List;
-@RestController
 @Slf4j
+@Component
 public class OlympiadRefMapper {
     public OlympiadDto toDto(Olympiad vo) {
         if (vo == null) {

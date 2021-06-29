@@ -1,5 +1,6 @@
 package ru.esstu.entrant.lk.domain.vo;
 
+import io.swagger.models.auth.In;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,9 @@ public class EducationInfo {
     private String yearOfFinished;
     private String documentOfEducation;
     private String documentOfEducationSerialNumber;
+    private String city;
+    private Integer regionOfFinished;
+    private Integer districtOfFinished;
     private String placeOfFinished;
     private Date dateOfFinished;
     private String studiedLanguage;

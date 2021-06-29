@@ -19,7 +19,8 @@ public class EntrantMapper {
                 vo.getId(),
                 vo.getLogin(),
                 vo.getPassword(),
-                vo.getStatus()
+                vo.getStatus(),
+                vo.getKeycloakEmail()
         );
     }
 
@@ -31,7 +32,8 @@ public class EntrantMapper {
                 dto.getId(),
                 dto.getLogin(),
                 dto.getPassword(),
-                dto.getStatus()
+                dto.getStatus(),
+                dto.getKeycloakEmail()
         );
     }
 }
