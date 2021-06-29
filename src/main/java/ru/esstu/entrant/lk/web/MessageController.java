@@ -21,14 +21,17 @@ public class MessageController {
     public MessageController(MessageService messageService) {
         this.messageService = messageService;
     }
+
     @RequestMapping(method = RequestMethod.GET, path = "/message")
     public List<MessageDto> get(final int id, final String role) {
         return messageService.getMessage(id, role);
     }
+
     @RequestMapping(method = RequestMethod.POST, path = "/message")
     public MessageDto save(@RequestBody final MessageDto MessageDto) throws ParseException {
         return messageService.save(MessageDto);
     }
+
     @RequestMapping(method = RequestMethod.GET, path = "/lastMessage")
     public MessageDto getLastMessage(final int id,final String role){
         return messageService.getLastMessage(id,role);

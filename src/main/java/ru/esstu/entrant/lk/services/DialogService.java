@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.services;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.DialogDto;
 import ru.esstu.entrant.lk.domain.dto.DialogDto;
@@ -20,7 +21,7 @@ public class DialogService {
     private final AccessService accessService;
 
     public DialogService(DialogRepository dialogRepository,
-                            DialogMapper dialogMapper,
+                         DialogMapper dialogMapper,
                          AccessService accessService) {
         this.dialogRepository = dialogRepository;
         this.dialogMapper = dialogMapper;
@@ -28,23 +29,26 @@ public class DialogService {
     }
 
 
-    public List<DialogDto> getModeratorDialog(final int id,final String role) {
+    public List<DialogDto> getModeratorDialog(final int id, final String role) {
         //accessService.commonAccessCheck(id);
         return dialogMapper.toDtos(dialogRepository.getModeratorDialog(role));
     }
+
     public List<DialogDto> getEntrantDialog(final int id) {
         //accessService.commonAccessCheck(id);
         return dialogMapper.toDtos(dialogRepository.getEntrantDialog(id));
     }
+
     public DialogDto save(final DialogDto dialogDto) {
         accessService.commonAccessCheck(dialogDto.getEntrantId());
-        Dialog entity= dialogMapper.toVO(dialogDto);
+        Dialog entity = dialogMapper.toVO(dialogDto);
         dialogRepository.save(entity);
         return dialogMapper.toDto(entity);
     }
-    public void update(final int dialogId,final String role,final int id){
-        Dialog dialog=dialogRepository.getOne(dialogId,role);
-        dialogRepository.update(dialogId,role,id,dialog.getEntrantId());
+
+    public void update(final int dialogId, final String role, final int id) {
+        Dialog dialog = dialogRepository.getOne(dialogId, role);
+        dialogRepository.update(dialogId, role, id, dialog.getEntrantId());
     }
 
 }
