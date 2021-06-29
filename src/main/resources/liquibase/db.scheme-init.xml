@@ -569,4 +569,12 @@
             <column name="district_of_finished" type="text"/>
         </addColumn>
     </changeSet>
+    <changeSet id="2021-29-06" author="sergey">
+        <dropColumn tableName="users_google_fcm" columnName="created_at"/>
+        <dropColumn tableName="users_google_fcm" columnName="modified_at"/>
+        <addColumn tableName="users_google_fcm">
+            <column name="created_at" type="timestamp without time zone" defaultValueComputed="NOW()"/>
+            <column name="modified_at" type="timestamp without time zone" defaultValueComputed="NOW()"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
