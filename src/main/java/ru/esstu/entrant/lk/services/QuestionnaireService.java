@@ -41,7 +41,8 @@ public class QuestionnaireService {
         List<AdmissionInfo> aiList = admissionInfoRepository.getAdmissionInfos(questionnaireDto.getId());
         if (aiList.size() == 0) {
             return null;
-        } else for (int i = 0; i < aiList.size(); i++) {
+        }
+        for (int i = 0; i < aiList.size(); i++) {
             if (specialityRefRepository.getFacultyId(Long.parseLong(aiList.get(i).getDirection())) == 13) {
                 return true;
             }
@@ -63,7 +64,7 @@ public class QuestionnaireService {
             }
         }
         for (int i = 0; i < temp1.size(); i++) {
-            temp1.get(i).setAccelerated(checkAccel(temp.get(i)));
+            temp1.get(i).setAccelerated(checkAccel(temp1.get(i)));
         }
         return temp1;
     }
