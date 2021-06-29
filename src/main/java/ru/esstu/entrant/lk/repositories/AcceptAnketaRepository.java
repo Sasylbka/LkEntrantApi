@@ -14,13 +14,13 @@ public interface AcceptAnketaRepository {
     @Insert("Insert into public.person(person_id, surname, name, patronymic, male, " +
             "telephone, mail, birthdate, activate_id, enabled, " +
             "external, username, password, birth_city, birth_region, " +
-            "snils) " +
+            "snils,pager) " +
             "Values (#{guid},#{entrantPrivateData.familyName}, " +
             "#{entrantPrivateData.name}, #{entrantPrivateData.patronymic}, #{male}," +
             " #{contactInformation.mobileNumber}, #{contactInformation.email}, #{entrantPrivateData.dateOfBirth}," +
             "#{keycloak.keycloakGuid}, true, true, #{entrant.login}, #{entrant.password}, " +
             "#{entrantPrivateData.cityOfBirth},#{entrantPrivateData.regionOfBirth}," +
-            " #{entrantPrivateData.snills})")
+            " #{entrantPrivateData.snills}, #{contactInformation.mobileNumber})")
     long addEntrantPerson(@Param("benefitInformation")BenefitInformation benefitInformation,
                    @Param("contactInformation") ContactInformation contactInformation,
                    @Param("entrantPrivateData") EntrantPrivateData entrantPrivateData,
@@ -53,10 +53,10 @@ public interface AcceptAnketaRepository {
     long addIdentificationInfo(@Param("passportData")PassportData passportData, @Param("person")Person person);
     @Insert("INSERT INTO public.educational_document(" +
             "entrant_id, edu_inst_name, doc_series, doc_number, " +
-            "doc_date,  achievement_id, end_year,edu_inst_type_id,edu_doc_type_id)" +
+            "doc_date,  achievement_id, end_year,edu_inst_type_id,edu_doc_type_id,city,region_id)" +
             "VALUES (#{person.personId},#{educationInfo.placeOfFinished} ,#{docSerial} " +
             ", #{docNumber}, #{educationInfo.dateOfFinished},  #{achievementsId}," +
-            "#{endDate}, #{education},#{documentOfEducation})")
+            "#{endDate}, #{education},#{documentOfEducation},#{educationInfo.city},#{educationInfo.districtOfFinished})")
     long addEducationalDocument(@Param("educationInfo")EducationInfo educationInfo, @Param("person") Person person,
                                 @Param("docNumber")String docNumber,@Param("docSerial")String docSerial,
                                 @Param("achievementsId") int achievementsId,@Param("endDate") int endDate,
@@ -128,17 +128,18 @@ public interface AcceptAnketaRepository {
                          @Param("mail") String mail,
                          @Param("guid")String guid);
     @Insert("Insert into public.entrant (entrant_id,military_status_id,nat_id,cit_id," +
-            "need_hostel,statement_date,entrant_status_id,username,sport_qualification_id) " +
+            "need_hostel,statement_date,entrant_status_id,username,sport_qualification_id,graduation_place_id) " +
             "Values(#{person.personId},#{militaryStatusId},0,1," +
             "#{needHostel},#{changesDate.dateOfCreation},3," +
-            "#{entrant.login},#{sportQualificationId})")
+            "#{entrant.login},#{sportQualificationId},#{educationInfo.regionOfFinished})")
     long addEntrant(@Param("person")Person person,
                     @Param("entrantPrivateData") EntrantPrivateData entrantPrivateData,
                     @Param("changesDate")ChangesDate changesDate,
                     @Param("entrant")Entrant entrant,
                     @Param("militaryStatusId")int militaryStatusId,
                     @Param("needHostel") boolean needHostel,
-                    @Param("sportQualificationId")Integer sportQualificationId);
+                    @Param("sportQualificationId")Integer sportQualificationId,
+                    @Param("educationInfo") EducationInfo educationInfo);
 
 }
 

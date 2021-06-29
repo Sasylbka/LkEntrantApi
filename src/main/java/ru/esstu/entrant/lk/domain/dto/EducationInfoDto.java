@@ -16,6 +16,9 @@ public class EducationInfoDto {
     private String yearOfFinished;
     private String documentOfEducation;
     private String documentOfEducationSerialNumber;
+    private String city;
+    private int regionOfFinished;
+    private int districtOfFinished;
     private String placeOfFinished;
     private Date dateOfFinished;
     private String studiedLanguage;
