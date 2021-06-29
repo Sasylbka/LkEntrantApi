@@ -185,8 +185,10 @@ public class AcceptAnketaService {
             } else {
                 needHostel = false;
             }
-            if(educationInfo.getRegionOfFinished()==0){
-                educationInfo.setRegionOfFinished(null);
+            if(educationInfo.getRegionOfFinished()!=null) {
+                if (educationInfo.getRegionOfFinished() == 0) {
+                    educationInfo.setRegionOfFinished(null);
+                }
             }
             acceptAnketaRepository.addEntrant(person, entrantPrivateData, changesDate, entrant, militaryStatusId, needHostel,sportQualificationId,educationInfo);
             educationInfo.setDocumentOfEducationSerialNumber(educationInfo.getDocumentOfEducationSerialNumber().replaceAll("\\s+", ""));
@@ -210,8 +212,10 @@ public class AcceptAnketaService {
             }
             int end_year = Integer.parseInt(educationInfo.getYearOfFinished());
             //EducationalDocument doc = educationalDocumentPTRepository.getDocument(docSerial,docNumber);
+            if(educationInfo.getDistrictOfFinished()!=null){
             if(educationInfo.getDistrictOfFinished()==0){
                 educationInfo.setDistrictOfFinished(null);
+            }
             }
             int education = Integer.parseInt(educationInfo.getEducation());
             Integer documentOfEducation = Integer.parseInt(educationInfo.getDocumentOfEducation());
