@@ -12,4 +12,5 @@ public class Entrant {
     private String login;
     private String password;
     private String status;
+    private String keycloakEmail;
 }
