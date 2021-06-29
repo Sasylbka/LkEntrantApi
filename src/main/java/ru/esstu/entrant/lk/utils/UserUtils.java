@@ -25,12 +25,19 @@ public class UserUtils {
 
     public static boolean hasCommonAccess(int currentUserId, int entityUserId) {
         if (isModerator()) return true;
+        if (isEconomic()) return true;
         if (isEntrant() && currentUserId != 0 && currentUserId == entityUserId) return true;
         return false;
     }
 
     public static boolean isModerator() {
-        if (hasRole(UserRoleEnum.ROLE_SELECTION_COMMIT.toString()) || hasRole(UserRoleEnum.ROLE_ECONOMIC.toString()))
+        if (hasRole(UserRoleEnum.ROLE_SELECTION_COMMIT.toString()))
+            return true;
+        return false;
+    }
+
+    public static boolean isEconomic() {
+        if (hasRole(UserRoleEnum.ROLE_ECONOMIC.toString()))
             return true;
         return false;
     }
