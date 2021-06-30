@@ -599,4 +599,12 @@
             <column name="keycloak_email" type="text"/>
         </addColumn>
     </changeSet>
+    <changeSet id="2021-30-dialogNewMessage" author="nikita">
+        <addColumn tableName="dialog_table">
+            <column name="last_read_entrant_message" type="int"/>
+            <column name="last_read_moderator_message" type="int"/>
+            <column name="have_unread_entrant_message" type="boolean"/>
+            <column name="have_unread_moderator_message" type="boolean"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

@@ -20,7 +20,7 @@ public class DialogService {
     private final AccessService accessService;
 
     public DialogService(DialogRepository dialogRepository,
-                            DialogMapper dialogMapper,
+                         DialogMapper dialogMapper,
                          AccessService accessService) {
         this.dialogRepository = dialogRepository;
         this.dialogMapper = dialogMapper;
@@ -28,23 +28,60 @@ public class DialogService {
     }
 
 
-    public List<DialogDto> getModeratorDialog(final int id,final String role) {
+    public List<DialogDto> getModeratorDialog(final int id, final String role) {
         //accessService.commonAccessCheck(id);
-        return dialogMapper.toDtos(dialogRepository.getModeratorDialog(role));
+        List<Dialog> list = dialogRepository.getModeratorDialog(role);
+        for (Dialog entity : list) {
+            if (entity.getLastMessage() > entity.getLastReadModeratorMessage()) {
+                entity.setHaveUnreadModeratorMessage(true);
+            } else {
+                entity.setHaveUnreadModeratorMessage(false);
+            }
+        }
+        return dialogMapper.toDtos(list);
     }
+
     public List<DialogDto> getEntrantDialog(final int id) {
         //accessService.commonAccessCheck(id);
-        return dialogMapper.toDtos(dialogRepository.getEntrantDialog(id));
+        List<Dialog> list = dialogRepository.getEntrantDialog(id);
+        for (Dialog entity : list) {
+            if (entity.getLastMessage() > entity.getLastReadModeratorMessage()) {
+                entity.setHaveUnreadEntrantMessage(true);
+            } else {
+                entity.setHaveUnreadEntrantMessage(false);
+            }
+        }
+        return dialogMapper.toDtos(list);
     }
+
     public DialogDto save(final DialogDto dialogDto) {
-        accessService.commonAccessCheck(dialogDto.getEntrantId());
-        Dialog entity= dialogMapper.toVO(dialogDto);
+        //accessService.commonAccessCheck(dialogDto.getEntrantId());
+        Dialog entity = dialogMapper.toVO(dialogDto);
         dialogRepository.save(entity);
         return dialogMapper.toDto(entity);
     }
-    public void update(final int dialogId,final String role,final int id){
-        Dialog dialog=dialogRepository.getOne(dialogId,role);
-        dialogRepository.update(dialogId,role,id,dialog.getEntrantId());
+
+    public void update(final int dialogId, final String role, final int id) {
+        Dialog dialog = dialogRepository.getOne(dialogId, role);
+        dialogRepository.update(dialogId, role, id, dialog.getEntrantId());
     }
 
+    public void updateLRMM(final int dialogId, final String role, final int id) {//последнего прочитанного сообщения модером(любым).
+        Dialog dialog = dialogRepository.getOne(dialogId, role);
+        dialogRepository.updateLastReadModeratorMessage(dialogId, role, id, dialog.getEntrantId());
+    }
+
+    public void updateLREM(final int dialogId, final String role, final int id) {//последнего прочитанного сообщения энтрантом
+        Dialog dialog = dialogRepository.getOne(dialogId, role);
+        dialogRepository.updateLastReadEntrantMessage(dialogId, role, id, dialog.getEntrantId());
+    }
+/*
+    public List<DialogDto> getUnreadModeratorMessage(final String role) {//Есть ли непрочитанные у модератора
+
+    }
+
+    public List<DialogDto> getUnreadEntrantMessage(final int entrantId) {//Есть ли непрочитанные у entrant-a
+
+    }
+*/
 }

@@ -19,7 +19,11 @@ public class DialogMapper {
                 vo.getId(),
                 vo.getModeratorRole(),
                 vo.getEntrantId(),
-                vo.getLastMessage()
+                vo.getLastMessage(),
+                vo.getLastReadModeratorMessage(),
+                vo.getLastReadEntrantMessage(),
+                vo.isHaveUnreadEntrantMessage(),
+                vo.isHaveUnreadModeratorMessage()
         );
     }
 
@@ -31,7 +35,11 @@ public class DialogMapper {
                 dto.getId(),
                 dto.getModeratorRole(),
                 dto.getEntrantId(),
-                dto.getLastMessage()
+                dto.getLastMessage(),
+                dto.getLastReadModeratorMessage(),
+                dto.getLastReadEntrantMessage(),
+                dto.isHaveUnreadEntrantMessage(),
+                dto.isHaveUnreadModeratorMessage()
         );
     }
     public List<DialogDto> toDtos (List<Dialog> vos) {
