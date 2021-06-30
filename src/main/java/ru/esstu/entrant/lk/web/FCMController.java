@@ -24,8 +24,6 @@ public class FCMController {
     @ResponseBody
     @RequestMapping(value = "/fcm/tokenRegistry", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity tokenRegistry(@RequestBody RequestFirebaseToken requestFirebaseToken) {
-        System.out.println(requestFirebaseToken.toString());
-        System.out.println("user id" + userService.getCurrentUser().getId());
         try {
             userFCMService.tokenRegistry(Integer.toString(userService.getCurrentUser().getId()), requestFirebaseToken.getPlatform(), requestFirebaseToken.getToken());
         } catch (Exception e) {

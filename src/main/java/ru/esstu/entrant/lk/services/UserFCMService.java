@@ -18,19 +18,29 @@ public class UserFCMService {
     }
 
     public void tokenRegistry(String userId, String platform, String token) {
-        UsersGoogleFcm userFCM = googleFcmRepository.findByUserIdAndPlatform(userId, platform);
+        UsersGoogleFcm userFCM = googleFcmRepository.findByUserId(userId);
         if (userFCM == null) {
             userFCM = new UsersGoogleFcm();
+            userFCM.setUserId(userId);
+            userFCM.setPlatform(platform);
+            userFCM.setToken(token);
+            googleFcmRepository.save(userFCM);
+        } else {
+            userFCM.setPlatform(platform);
+            userFCM.setToken(token);
+            googleFcmRepository.update(userFCM);
         }
-
-        userFCM.setUserId(userId);
-        userFCM.setPlatform(platform);
-        userFCM.setToken(token);
-        googleFcmRepository.save(userFCM);
-
     }
 
     public void tokenUpdate(String userId, String platform, String token) {
         this.tokenRegistry(userId, platform, token);
+    }
+
+    public UsersGoogleFcm getTokenByUser(String userId) {
+        return googleFcmRepository.findByUserId(userId);
+    }
+
+    public void removeToken(UsersGoogleFcm userFCM) {
+        // googleFcmRepository.delete(userFCM);
     }
 }

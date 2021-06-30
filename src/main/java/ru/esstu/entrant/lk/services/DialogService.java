@@ -51,4 +51,8 @@ public class DialogService {
         dialogRepository.update(dialogId, role, id, dialog.getEntrantId());
     }
 
+    public Dialog getEntrantDialog(final int dialogId, final String role) {
+        return dialogRepository.getOne(dialogId, role);
+    }
+
 }

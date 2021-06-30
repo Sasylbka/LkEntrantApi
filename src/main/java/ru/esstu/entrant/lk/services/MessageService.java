@@ -2,6 +2,7 @@ package ru.esstu.entrant.lk.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.esstu.entrant.lk.async.NotificationAsync;
 import ru.esstu.entrant.lk.domain.dto.MessageDto;
 import ru.esstu.entrant.lk.domain.mappers.DialogMapper;
 import ru.esstu.entrant.lk.domain.mappers.MessageMapper;
@@ -20,16 +21,18 @@ public class MessageService {
     private final DialogService dialogService;
     private final DialogRepository dialogRepository;
     private final DialogMapper dialogMapper;
+    private final NotificationAsync notificationAsync;
 
     public MessageService(MessageRepository messageRepository,
                           MessageMapper messageMapper, DialogService dialogService, DialogRepository dialogRepository,
                           DialogMapper dialogMapper,
-                          AccessService accessService) {
+                          AccessService accessService, NotificationAsync notificationAsync) {
         this.messageRepository = messageRepository;
         this.messageMapper = messageMapper;
         this.dialogRepository = dialogRepository;
         this.dialogMapper = dialogMapper;
         this.dialogService = dialogService;
+        this.notificationAsync = notificationAsync;
     }
 
 
@@ -41,6 +44,7 @@ public class MessageService {
     public MessageDto save(final MessageDto messageDto) throws ParseException {
         Message entity = messageMapper.toVO(messageDto);
         messageRepository.save(entity);
+        notificationAsync.sendNotificationMessageAsync(dialogService.getEntrantDialog(entity.getDialogId(), entity.getRole()), entity);
         dialogService.update(entity.getDialogId(), entity.getRole(), entity.getId());
         return messageMapper.toDto(entity);
     }
