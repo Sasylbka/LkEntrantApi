@@ -29,7 +29,7 @@ public class DialogService {
 
 
     public List<DialogDto> getModeratorDialog(final int id, final String role) {
-        //accessService.commonAccessCheck(id);
+        accessService.commonAccessCheck(id);
         List<Dialog> list = dialogRepository.getModeratorDialog(role);
         for (Dialog entity : list) {
             if (entity.getLastMessage() > entity.getLastReadModeratorMessage()) {
@@ -42,7 +42,7 @@ public class DialogService {
     }
 
     public List<DialogDto> getEntrantDialog(final int id) {
-        //accessService.commonAccessCheck(id);
+        accessService.commonAccessCheck(id);
         List<Dialog> list = dialogRepository.getEntrantDialog(id);
         for (Dialog entity : list) {
             if (entity.getLastMessage() > entity.getLastReadModeratorMessage()) {
@@ -55,7 +55,7 @@ public class DialogService {
     }
 
     public DialogDto save(final DialogDto dialogDto) {
-        //accessService.commonAccessCheck(dialogDto.getEntrantId());
+        accessService.commonAccessCheck(dialogDto.getEntrantId());
         Dialog entity = dialogMapper.toVO(dialogDto);
         dialogRepository.save(entity);
         return dialogMapper.toDto(entity);
