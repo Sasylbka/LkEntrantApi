@@ -46,8 +46,8 @@ public class ConsentController {
         return consentService.save(consentDto);
     }
     @RequestMapping(method = RequestMethod.POST, path = "/consentAdd")
-    public ConsentDto add(@RequestBody final AdmissionInfoDto admissionInfoDto) {
-        return consentService.add(admissionInfoDto);
+    public void add(@RequestBody final AdmissionInfoDto admissionInfoDto) {
+        consentService.add(admissionInfoDto);
     }
     @RequestMapping(method = RequestMethod.PATCH, path = "/consentAdd")
     public AdmissionInfoDto cancelConsent(@RequestBody final AdmissionInfoDto admissionInfoDto) {
