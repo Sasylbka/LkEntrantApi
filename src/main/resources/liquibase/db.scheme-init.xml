@@ -577,4 +577,21 @@
             <column name="modified_at" type="timestamp without time zone" defaultValueComputed="NOW()"/>
         </addColumn>
     </changeSet>
+    <changeSet id="2021-30-06_add_portAchievements" author="nikita">
+        <createTable tableName="sport_achievements">
+            <column name="id" type="serial">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="entrant_id" type="integer"></column>
+            <column name="document_of_sport_victories" type="text"/>
+            <column name="document_of_sport_victories_serial_number" type="text"/>
+            <column name="issued_by" type="text"/>
+            <column name="data_of_issued" type="date"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="sport_achievements"
+                                 baseColumnNames="entrant_id"
+                                 constraintName="fk_sport_achievements_entrant"
+                                 referencedTableName="entrant"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 </databaseChangeLog>
