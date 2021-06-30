@@ -133,10 +133,10 @@ public class AcceptAnketaService {
             Person person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
 
             if (person == null) {
-                if (entrantPrivateData.getGender() == "male")
-                    acceptAnketaRepository.addEntrantPerson(benefitInformation, contactInformation, entrantPrivateData, entrant, jobInformation, entrantRepository.getKeycloakGuid(entrantId), false, IdFactory.getGUID(this));
-                else {
+                if (entrantPrivateData.getGender().equals("male"))
                     acceptAnketaRepository.addEntrantPerson(benefitInformation, contactInformation, entrantPrivateData, entrant, jobInformation, entrantRepository.getKeycloakGuid(entrantId), true, IdFactory.getGUID(this));
+                else {
+                    acceptAnketaRepository.addEntrantPerson(benefitInformation, contactInformation, entrantPrivateData, entrant, jobInformation, entrantRepository.getKeycloakGuid(entrantId), false, IdFactory.getGUID(this));
                 }
             } else {
                 throw new AlreadyHaveException("Такая персона уже есть");
@@ -193,9 +193,12 @@ public class AcceptAnketaService {
             acceptAnketaRepository.addEntrant(person, entrantPrivateData, changesDate, entrant, militaryStatusId, needHostel,sportQualificationId,educationInfo);
             educationInfo.setDocumentOfEducationSerialNumber(educationInfo.getDocumentOfEducationSerialNumber().replaceAll("\\s+", ""));
             int temp = educationInfo.getDocumentOfEducationSerialNumber().length();
-            String docSerial = educationInfo.getDocumentOfEducationSerialNumber().substring(0, 3);
-            String docNumber = educationInfo.getDocumentOfEducationSerialNumber().substring(4, temp);
-
+            String docSerial="0";
+            String docNumber=educationInfo.getDocumentOfEducationSerialNumber();
+            if(temp>6) {
+                docSerial = educationInfo.getDocumentOfEducationSerialNumber().substring(0, 5);
+                docNumber = educationInfo.getDocumentOfEducationSerialNumber().substring(6, temp);
+            }
             acceptAnketaRepository.addIdentificationInfo(passportData, person);
 
 
