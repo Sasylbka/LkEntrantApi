@@ -1,6 +1,8 @@
 package ru.esstu.entrant.lk.utils;
 
 import org.keycloak.KeycloakPrincipal;
+import org.keycloak.KeycloakSecurityContext;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +17,18 @@ public class UserUtils {
 
     public static String getCurrentUserKeycloakGuid() {
         return ((KeycloakPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getName();
+    }
+    public static String getCurrentEmail(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            if (authentication.getPrincipal() instanceof KeycloakPrincipal) {
+                KeycloakPrincipal<KeycloakSecurityContext> kp = (KeycloakPrincipal<KeycloakSecurityContext>) authentication.getPrincipal();
+                // retrieving username here
+                String email = kp.getKeycloakSecurityContext().getToken().getEmail();
+                return email;
+            }
+        }
+        return "";
     }
 
     public static Boolean hasRole(String role) {

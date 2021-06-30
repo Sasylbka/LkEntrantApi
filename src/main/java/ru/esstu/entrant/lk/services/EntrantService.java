@@ -56,8 +56,10 @@ public class EntrantService {
 
     public Entrant getOrCreateEntrantByKeycloakGuid(final String guid) {
         Entrant entrant = entrantRepository.getEntrantByKeycloakGuid(guid);
+
         if (entrant == null) {
             Entrant newEntrant = new Entrant();
+            newEntrant.setKeycloakEmail(UserUtils.getCurrentEmail());
             newEntrant.setLogin("keycloak"); //пока не используется
             newEntrant.setPassword("keycloak"); //пока не используется
             entrantRepository.save(newEntrant, guid);

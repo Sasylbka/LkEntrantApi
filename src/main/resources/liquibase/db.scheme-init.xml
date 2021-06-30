@@ -594,4 +594,9 @@
                                  referencedTableName="entrant"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="2021-30-06" author="sergey">
+        <addColumn tableName="entrant">
+            <column name="keycloak_email" type="text"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
