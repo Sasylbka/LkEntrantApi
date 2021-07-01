@@ -30,6 +30,6 @@ public interface EducationInfoRepository {
             "studied_language=#{educationInfo.studiedLanguage}, " +
             "if_choosen_level_of_education_first=#{educationInfo.ifChoosenLevelOfEducationFirst}, " +
             "entrance_test=#{educationInfo.entranceTest}, city=#{educationInfo.city},region_of_finished=#{educationInfo.regionOfFinished}," +
-            "district_of_finished=#{educationInfo.regionOfFinished} WHERE entrant_id=#{educationInfo.entrantId}")
+            "district_of_finished=#{educationInfo.districtOfFinished} WHERE entrant_id=#{educationInfo.entrantId}")
     long update(@Param("educationInfo") EducationInfo educationInfo);
 }
