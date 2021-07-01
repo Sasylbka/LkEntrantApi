@@ -1,7 +1,6 @@
 package ru.esstu.entrant.lk.repositories;
 
 import org.apache.ibatis.annotations.*;
-import org.springframework.security.core.parameters.P;
 import ru.esstu.entrant.lk.domain.vo.Dialog;
 
 import java.util.List;
@@ -20,14 +19,14 @@ public interface DialogRepository {
     long save(@Param("dialog") Dialog dialog);
 
     @Update("Update dialog_table Set entrant_id=#{entrantId},last_message=#{lastMessage} Where id=#{dialogId} and moderator_role=#{moderatorRole}")
-    long update(@Param("dialogId") int dialogId, @Param("moderatorRole") String moderator_role,@Param("lastMessage")int lastMessage,@Param("entrantId")int entrantId);
+    long update(@Param("dialogId") int dialogId, @Param("moderatorRole") String moderator_role, @Param("lastMessage") int lastMessage, @Param("entrantId") int entrantId);
 
     @Update("Update dialog_table Set entrant_id=#{entrantId},last_read_moderator_message=#{lastMessage} Where id=#{dialogId} and moderator_role=#{moderatorRole}")
-    long updateLastReadModeratorMessage(@Param("dialogId") int dialogId, @Param("moderatorRole") String moderator_role,@Param("lastMessage")int lastMessage,@Param("entrantId")int entrantId);
+    long updateLastReadModeratorMessage(@Param("dialogId") int dialogId, @Param("moderatorRole") String moderator_role, @Param("lastMessage") int lastMessage, @Param("entrantId") int entrantId);
 
     @Update("Update dialog_table Set entrant_id=#{entrantId},last_read_entrant_message=#{lastMessage} Where id=#{dialogId} and moderator_role=#{moderatorRole}")
-    long updateLastReadEntrantMessage(@Param("dialogId") int dialogId, @Param("moderatorRole") String moderator_role,@Param("lastMessage")int lastMessage,@Param("entrantId")int entrantId);
+    long updateLastReadEntrantMessage(@Param("dialogId") int dialogId, @Param("moderatorRole") String moderator_role, @Param("lastMessage") int lastMessage, @Param("entrantId") int entrantId);
 
     @Select("SELECT * FROM dialog_table WHERE moderator_role = #{moderatorRole} and id=#{dialogId}")
-    Dialog getOne(@Param("dialogId") int dialogId,@Param("moderatorRole") String moderator_role);
+    Dialog getOne(@Param("dialogId") int dialogId, @Param("moderatorRole") String moderator_role);
 }

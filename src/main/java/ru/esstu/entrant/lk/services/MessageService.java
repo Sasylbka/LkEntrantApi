@@ -12,6 +12,7 @@ import ru.esstu.entrant.lk.utils.UserUtils;
 import java.text.ParseException;
 import java.util.List;
 
+
 @Service
 @Slf4j
 public class MessageService {
@@ -32,10 +33,10 @@ public class MessageService {
 
     public List<MessageDto> getMessage(final int id, final String role) {
         List<MessageDto> temp = messageMapper.toDtos(messageRepository.getMessage(id, role));
-        MessageDto mes = temp.get(temp.size() - 1); //Последнее сообщение
-        if (!UserUtils.isModerator() || !UserUtils.isEconomic()) {
+        MessageDto mes = temp.get(temp.size() - 1);//Последнее сообщение
+        if (UserUtils.isModerator() || UserUtils.isEconomic()) {
             dialogService.updateLRMM(mes.getDialogId(), mes.getRole(), mes.getId());
-        } else if (!UserUtils.isEntrant()) {
+        } else if (UserUtils.isEntrant()) {
             dialogService.updateLREM(mes.getDialogId(), mes.getRole(), mes.getId());
         }
         return temp;
@@ -46,9 +47,9 @@ public class MessageService {
         messageRepository.save(entity);
         notificationAsync.sendNotificationMessageAsync(dialogService.getEntrantDialog(entity.getDialogId(), entity.getRole()), entity);
         dialogService.update(entity.getDialogId(), entity.getRole(), entity.getId());
-        if (!UserUtils.isModerator() || !UserUtils.isEconomic()) {
+        if (UserUtils.isModerator() || UserUtils.isEconomic()) {
             dialogService.updateLRMM(entity.getDialogId(), entity.getRole(), entity.getId());
-        } else if (!UserUtils.isEntrant()) {
+        } else if (UserUtils.isEntrant()) {
             dialogService.updateLREM(entity.getDialogId(), entity.getRole(), entity.getId());
         }
         return messageMapper.toDto(entity);

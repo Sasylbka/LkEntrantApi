@@ -45,7 +45,7 @@ public class DialogService {
         accessService.commonAccessCheck(id);
         List<Dialog> list = dialogRepository.getEntrantDialog(id);
         for (Dialog entity : list) {
-            if (entity.getLastMessage() > entity.getLastReadModeratorMessage()) {
+            if (entity.getLastMessage() > entity.getLastReadEntrantMessage()) {
                 entity.setHaveUnreadEntrantMessage(true);
             } else {
                 entity.setHaveUnreadEntrantMessage(false);
@@ -75,15 +75,7 @@ public class DialogService {
         Dialog dialog = dialogRepository.getOne(dialogId, role);
         dialogRepository.updateLastReadEntrantMessage(dialogId, role, id, dialog.getEntrantId());
     }
-/*
-    public List<DialogDto> getUnreadModeratorMessage(final String role) {//Есть ли непрочитанные у модератора
 
-    }
-
-    public List<DialogDto> getUnreadEntrantMessage(final int entrantId) {//Есть ли непрочитанные у entrant-a
-
-    }
-*/
     public Dialog getEntrantDialog(final int dialogId, final String role) {
         return dialogRepository.getOne(dialogId, role);
     }
