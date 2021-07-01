@@ -79,7 +79,7 @@ public class ConsentService {
         consentRepository.save(entity);
         return consentMapper.toDto(entity);
     }
-    public ConsentDto add(final AdmissionInfoDto admissionInfoDto) {//Добавление согласия
+    public void add(final AdmissionInfoDto admissionInfoDto) {//Добавление согласия
         accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
         //Проверка на количество доступных подач согласий
         List<ConsentDto> temp=getFullAdd(admissionInfoDto.getEntrantId());//Лист истории добавлений
@@ -106,7 +106,6 @@ public class ConsentService {
             ConsentDto consentDto = new ConsentDto(0, admissionInfoDto.getEntrantId(), admissionInfoDto.getId(), date, "Add");
             Consent entityC = consentMapper.toVO(consentDto);
             consentRepository.save(entityC);
-            return consentMapper.toDto(entityC);
         }
         else {throw new PermissionDeniedException(
                 "У вас кончились попытки для подачи заявления о согласии.");}
