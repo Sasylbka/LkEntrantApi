@@ -23,7 +23,7 @@ public class FCMController {
 
     @ResponseBody
     @RequestMapping(value = "/fcm/tokenRegistry", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity tokenRegistry(@RequestBody RequestFirebaseToken requestFirebaseToken) {
+    public ResponseEntity<?> tokenRegistry(@RequestBody RequestFirebaseToken requestFirebaseToken) {
         try {
             userFCMService.tokenRegistry(Integer.toString(userService.getCurrentUser().getId()), requestFirebaseToken.getPlatform(), requestFirebaseToken.getToken());
         } catch (Exception e) {
@@ -34,7 +34,7 @@ public class FCMController {
 
     @ResponseBody
     @RequestMapping(value = "/fcm/tokenUpdate", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity tokenUpdate(@RequestBody RequestFirebaseToken requestFirebaseToken) {
+    public ResponseEntity<?> tokenUpdate(@RequestBody RequestFirebaseToken requestFirebaseToken) {
         try {
             userFCMService.tokenUpdate(Integer.toString(userService.getCurrentUser().getId()),  requestFirebaseToken.getPlatform(), requestFirebaseToken.getToken());
         } catch (Exception e) {

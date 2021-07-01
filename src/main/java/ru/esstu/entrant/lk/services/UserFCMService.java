@@ -41,6 +41,6 @@ public class UserFCMService {
     }
 
     public void removeToken(UsersGoogleFcm userFCM) {
-        // googleFcmRepository.delete(userFCM);
+         googleFcmRepository.delete(userFCM.getId());
     }
 }

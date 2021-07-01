@@ -1,6 +1,5 @@
 package ru.esstu.entrant.lk.async;
 
-import org.jooq.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.scheduling.annotation.Async;
@@ -30,12 +29,6 @@ public class NotificationAsync {
 
     @Async
     public void sendNotificationMessageAsync(Dialog dialog, Message sentMessage) {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         if (sentMessage.getSenderId() != dialog.getEntrantId()) {
             UsersGoogleFcm userFCM = userFCMService.getTokenByUser(Integer.toString(dialog.getEntrantId()));
             if (userFCM != null) {
@@ -51,7 +44,7 @@ public class NotificationAsync {
                 notification.addNotificationAttribute("from_id", sentMessage.getSenderId());
                 notification.text(sentMessage.getMessage());
                 notification.sound("default");
-                 System.out.println(notification.toJSON());
+//                 System.out.println(notification.toJSON());
                 FirebaseResponse firebaseResponse = pushNotificationService.send(new HttpEntity<>(notification.toJSON()));
                 if (firebaseResponse.getFailure() > 0) {
                     userFCMService.removeToken(userFCM);
