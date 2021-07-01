@@ -12,12 +12,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class FirebaseNotification {
 
     private Collection<String> multicast;
-    private HashMap<String, Object> requestAttributes;
-    private HashMap<String, Object> notificationAttributes;
+    private final HashMap<String, Object> requestAttributes;
+    private final HashMap<String, Object> notificationAttributes;
 
     public FirebaseNotification() {
-        clearTargets();
-        clearAttributes();
+        multicast = new ArrayList<>();
+        notificationAttributes = new HashMap<>();
+        requestAttributes = new HashMap<>();
     }
 
     public String toJSON() {
@@ -32,15 +33,6 @@ public class FirebaseNotification {
             objectNode.putPOJO("registration_ids", multicast);
         }
         return objectNode.toString();
-    }
-
-    public void clearTargets() {
-        multicast = new ArrayList<>();
-    }
-
-    public void clearAttributes() {
-        notificationAttributes = new HashMap<>();
-        requestAttributes = new HashMap<>();
     }
 
     public FirebaseNotification addNotificationAttribute(String key, Object value) {
