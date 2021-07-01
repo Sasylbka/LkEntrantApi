@@ -84,4 +84,8 @@ public class DialogService {
 
     }
 */
+    public Dialog getEntrantDialog(final int dialogId, final String role) {
+        return dialogRepository.getOne(dialogId, role);
+    }
+
 }
