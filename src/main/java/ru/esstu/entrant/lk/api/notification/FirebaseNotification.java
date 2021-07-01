@@ -16,7 +16,8 @@ public class FirebaseNotification {
     private HashMap<String, Object> notificationAttributes;
 
     public FirebaseNotification() {
-        clear();
+        clearTargets();
+        clearAttributes();
     }
 
     public String toJSON() {
@@ -33,22 +34,13 @@ public class FirebaseNotification {
         return objectNode.toString();
     }
 
-    public FirebaseNotification clear() {
-        clearTargets();
-        clearAttributes();
-
-        return this;
-    }
-
-    public FirebaseNotification clearTargets() {
+    public void clearTargets() {
         multicast = new ArrayList<>();
-        return this;
     }
 
-    public FirebaseNotification clearAttributes() {
+    public void clearAttributes() {
         notificationAttributes = new HashMap<>();
         requestAttributes = new HashMap<>();
-        return this;
     }
 
     public FirebaseNotification addNotificationAttribute(String key, Object value) {
