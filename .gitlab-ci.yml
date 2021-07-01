@@ -36,7 +36,7 @@ package-docker-master:
     - docker
   script:
     - docker login -u $DOCKER_ESSTU_USER -p $DOCKER_ESSTU_PASSWORD https://docker.esstu.ru:443
-    - docker build -t docker.esstu.ru:443/entrant/entrant-lk:master .
+    - docker build --network=host -t docker.esstu.ru:443/entrant/entrant-lk:master .
     - docker push docker.esstu.ru:443/entrant/entrant-lk:master
 
 package-docker-develop:
