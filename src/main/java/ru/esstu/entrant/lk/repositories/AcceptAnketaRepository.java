@@ -56,7 +56,7 @@ public interface AcceptAnketaRepository {
             "doc_date,  achievement_id, end_year,edu_inst_type_id,edu_doc_type_id,city,region_id)" +
             "VALUES (#{person.personId},#{educationInfo.placeOfFinished} ,#{docSerial} " +
             ", #{docNumber}, #{educationInfo.dateOfFinished},  #{achievementsId}," +
-            "#{endDate}, #{education},#{documentOfEducation},#{educationInfo.city},#{educationInfo.districtOfFinished})")
+            "#{endDate}, #{education},#{documentOfEducation},#{educationInfo.city},#{educationInfo.regionOfFinished})")
     long addEducationalDocument(@Param("educationInfo")EducationInfo educationInfo, @Param("person") Person person,
                                 @Param("docNumber")String docNumber,@Param("docSerial")String docSerial,
                                 @Param("achievementsId") int achievementsId,@Param("endDate") int endDate,
@@ -131,7 +131,7 @@ public interface AcceptAnketaRepository {
             "need_hostel,statement_date,entrant_status_id,username,sport_qualification_id,graduation_place_id) " +
             "Values(#{person.personId},#{militaryStatusId},0,1," +
             "#{needHostel},#{changesDate.dateOfCreation},3," +
-            "#{entrant.login},#{sportQualificationId},#{educationInfo.regionOfFinished})")
+            "#{entrant.login},#{sportQualificationId},#{educationInfo.districtOfFinished})")
     long addEntrant(@Param("person")Person person,
                     @Param("entrantPrivateData") EntrantPrivateData entrantPrivateData,
                     @Param("changesDate")ChangesDate changesDate,

@@ -196,7 +196,7 @@ public class AcceptAnketaService {
             String docSerial="0";
             String docNumber=educationInfo.getDocumentOfEducationSerialNumber();
             if(temp>6) {
-                docSerial = educationInfo.getDocumentOfEducationSerialNumber().substring(0, 5);
+                docSerial = educationInfo.getDocumentOfEducationSerialNumber().substring(0, 6);
                 docNumber = educationInfo.getDocumentOfEducationSerialNumber().substring(6, temp);
             }
             acceptAnketaRepository.addIdentificationInfo(passportData, person);
@@ -234,7 +234,7 @@ public class AcceptAnketaService {
             if (benefitInformation != null) {
                 temp = benefitInformation.getDocumentForTheBenefit().length();
                 if (benefitInformation.getDocumentForTheBenefit().length() > 5) {
-                    docNumber = benefitInformation.getDocumentForTheBenefit().substring(0, 5);
+                    docNumber = benefitInformation.getDocumentForTheBenefit().substring(0, 6);
                     docSerial = benefitInformation.getDocumentForTheBenefit().substring(6, temp);
                 } else {
                     docNumber = benefitInformation.getDocumentForTheBenefit().substring(0, temp);
