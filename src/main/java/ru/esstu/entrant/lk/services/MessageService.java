@@ -22,7 +22,7 @@ public class MessageService {
 
     public MessageService(MessageRepository messageRepository,
                           MessageMapper messageMapper, DialogService dialogService,
-                          AccessService accessService, NotificationAsync notificationAsync) {
+                          NotificationAsync notificationAsync) {
         this.messageRepository = messageRepository;
         this.messageMapper = messageMapper;
         this.dialogService = dialogService;
@@ -32,14 +32,11 @@ public class MessageService {
 
     public List<MessageDto> getMessage(final int id, final String role) {
         List<MessageDto> temp = messageMapper.toDtos(messageRepository.getMessage(id, role));
-        MessageDto mes=temp.get(temp.size()-1);//Последнее сообщение
-        if (!UserUtils.isModerator()||!UserUtils.isEconomic())
-        {
-            dialogService.updateLRMM(mes.getDialogId(), mes.getRole(),mes.getId());
-        }
-        else if(!UserUtils.isEntrant())
-        {
-            dialogService.updateLREM(mes.getDialogId(), mes.getRole(),mes.getId());
+        MessageDto mes = temp.get(temp.size() - 1); //Последнее сообщение
+        if (!UserUtils.isModerator() || !UserUtils.isEconomic()) {
+            dialogService.updateLRMM(mes.getDialogId(), mes.getRole(), mes.getId());
+        } else if (!UserUtils.isEntrant()) {
+            dialogService.updateLREM(mes.getDialogId(), mes.getRole(), mes.getId());
         }
         return temp;
     }
@@ -49,19 +46,15 @@ public class MessageService {
         messageRepository.save(entity);
         notificationAsync.sendNotificationMessageAsync(dialogService.getEntrantDialog(entity.getDialogId(), entity.getRole()), entity);
         dialogService.update(entity.getDialogId(), entity.getRole(), entity.getId());
-        if (!UserUtils.isModerator()||!UserUtils.isEconomic())
-        {
-           dialogService.updateLRMM(entity.getDialogId(), entity.getRole(),entity.getId());
-        }
-        else if(!UserUtils.isEntrant())
-        {
-            dialogService.updateLREM(entity.getDialogId(), entity.getRole(),entity.getId());
+        if (!UserUtils.isModerator() || !UserUtils.isEconomic()) {
+            dialogService.updateLRMM(entity.getDialogId(), entity.getRole(), entity.getId());
+        } else if (!UserUtils.isEntrant()) {
+            dialogService.updateLREM(entity.getDialogId(), entity.getRole(), entity.getId());
         }
         return messageMapper.toDto(entity);
     }
 
     public MessageDto getLastMessage(final int id, final String role) {
-        MessageDto temp = messageMapper.toDto(messageRepository.getLastMessage(id, role));
-        return temp;
+        return messageMapper.toDto(messageRepository.getLastMessage(id, role));
     }
 }

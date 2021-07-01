@@ -20,7 +20,7 @@ public interface GoogleFcmRepository {
             "platform=#{usersGoogleFcm.platform}, token=#{usersGoogleFcm.token} WHERE user_id=#{usersGoogleFcm.userId}")
     long update(@Param("usersGoogleFcm") UsersGoogleFcm usersGoogleFcm);
 
-    @Options( keyProperty = "id", keyColumn = "id")
+    @Options(keyProperty = "id", keyColumn = "id")
     @Delete("DELETE from users_google_fcm " +
             "WHERE id=#{id}")
     void delete(@Param("id") int id);
