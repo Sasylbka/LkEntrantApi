@@ -6,6 +6,7 @@ import ru.esstu.entrant.lk.domain.dto.EntrantDto;
 import ru.esstu.entrant.lk.domain.dto.EntrantPrivateDataDto;
 import ru.esstu.entrant.lk.domain.mappers.EntrantMapper;
 import ru.esstu.entrant.lk.domain.vo.Entrant;
+import ru.esstu.entrant.lk.domain.vo.PublicTables.EntrantForKeycloak;
 import ru.esstu.entrant.lk.exceptions.PermissionDeniedException;
 import ru.esstu.entrant.lk.repositories.EntrantRepository;
 import ru.esstu.entrant.lk.utils.UserUtils;
@@ -30,7 +31,7 @@ public class EntrantService {
                     "Нет прав доступа. ИД пользователя : " + id);
         }
         EntrantDto temp = entrantMapper.toDto(entrantRepository.getEntrant(id));
-        if(temp==null){
+        if (temp == null) {
             temp = new EntrantDto();
             return temp;
         }
@@ -56,12 +57,25 @@ public class EntrantService {
 
     public Entrant getOrCreateEntrantByKeycloakGuid(final String guid) {
         Entrant entrant = entrantRepository.getEntrantByKeycloakGuid(guid);
-
         if (entrant == null) {
             Entrant newEntrant = new Entrant();
             newEntrant.setKeycloakEmail(UserUtils.getCurrentEmail());
             newEntrant.setLogin("keycloak"); //пока не используется
             newEntrant.setPassword("keycloak"); //пока не используется
+            entrantRepository.save(newEntrant, guid);
+            return newEntrant;
+        }
+        return entrant;
+    }
+
+    public Entrant createKeycloakEntrant(final String guid, EntrantForKeycloak entrantForKeycloak) {
+        Entrant entrant = entrantRepository.getEntrantByKeycloakGuid(guid);
+        if (entrant == null) {
+            Entrant newEntrant = new Entrant();
+            newEntrant.setKeycloakEmail(entrantForKeycloak.getLoginForLk());
+            newEntrant.setLogin("keycloak"); //пока не используется
+            newEntrant.setPassword("keycloak"); //пока не используется
+            newEntrant.setStatus("ACCEPTED_PERSONALLY");
             entrantRepository.save(newEntrant, guid);
             return newEntrant;
         }
