@@ -33,11 +33,13 @@ public class MessageService {
 
     public List<MessageDto> getMessage(final int id, final String role) {
         List<MessageDto> temp = messageMapper.toDtos(messageRepository.getMessage(id, role));
-        MessageDto mes = temp.get(temp.size() - 1);//Последнее сообщение
-        if (UserUtils.isModerator() || UserUtils.isEconomic()) {
-            dialogService.updateLRMM(mes.getDialogId(), mes.getRole(), mes.getId());
-        } else if (UserUtils.isEntrant()) {
-            dialogService.updateLREM(mes.getDialogId(), mes.getRole(), mes.getId());
+        if (temp != null && !temp.isEmpty()) {
+            MessageDto mes = temp.get(temp.size() - 1);//Последнее сообщение
+            if (UserUtils.isModerator() || UserUtils.isEconomic()) {
+                dialogService.updateLRMM(mes.getDialogId(), mes.getRole(), mes.getId());
+            } else if (UserUtils.isEntrant()) {
+                dialogService.updateLREM(mes.getDialogId(), mes.getRole(), mes.getId());
+            }
         }
         return temp;
     }

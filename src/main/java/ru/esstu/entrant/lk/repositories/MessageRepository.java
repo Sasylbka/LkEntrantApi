@@ -5,7 +5,7 @@ import ru.esstu.entrant.lk.domain.vo.Message;
 import java.util.List;
 @Mapper
 public interface MessageRepository {
-    @Select("SELECT * FROM message_table WHERE dialog_id = #{id} and role=#{role}")
+    @Select("SELECT * FROM message_table WHERE dialog_id = #{id} and role=#{role} order by id")
     List<Message> getMessage(@Param("id") int id, @Param("role")String role);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
