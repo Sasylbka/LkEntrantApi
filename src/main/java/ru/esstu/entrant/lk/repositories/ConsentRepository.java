@@ -10,7 +10,7 @@ public interface ConsentRepository {
     @Select("SELECT * FROM consent WHERE entrant_id = #{id}")
     List<Consent> getConsent(@Param("id") int id);
 
-    @Select("SELECT * FROM consent WHERE entrant_id = #{id} and action_type='Add'")
+    @Select("SELECT * FROM consent WHERE entrant_id = #{id} and action_type='ADD'")
     List<Consent> getFullAdd(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")

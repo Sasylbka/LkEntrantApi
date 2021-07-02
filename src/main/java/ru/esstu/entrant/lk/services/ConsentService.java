@@ -54,7 +54,7 @@ public class ConsentService {
         return temp;
     }
     public int getCount( final int id) {//Получить историю согласия энтранта
-        accessService.commonAccessCheck(id);
+        accessService.commonAccessCheck(id); 
         List<ConsentDto> temp=getFullAdd(id);//Лист истории добавлений
         int count=configurationRepository.getConfiguration().getMaxWithdrawalOfConsent()-temp.size();//Количество доступных подач согласий
         return count;
@@ -67,7 +67,7 @@ public class ConsentService {
     public List<ConsentDto> getFullAdd(final int id) {//Получить историю согласия только с add.
         accessService.commonAccessCheck(id);
         List<ConsentDto> temp =  consentMapper.toDtos(consentRepository.getFullAdd(id));
-        int count=temp.size();
+        
         return temp;
     }
     public Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
@@ -103,7 +103,7 @@ public class ConsentService {
             //Запись в историю
             LocalDateTime localDateTime = LocalDateTime.now();
             Date date = convertToDateViaSqlTimestamp(localDateTime);
-            ConsentDto consentDto = new ConsentDto(0, admissionInfoDto.getEntrantId(), admissionInfoDto.getId(), date, "Add");
+            ConsentDto consentDto = new ConsentDto(0, admissionInfoDto.getEntrantId(), admissionInfoDto.getId(), date, "ADD");
             Consent entityC = consentMapper.toVO(consentDto);
             consentRepository.save(entityC);
         }
@@ -127,7 +127,7 @@ public class ConsentService {
         //Добавление в историю запросов
         LocalDateTime localDateTime = LocalDateTime.now();
         Date date = convertToDateViaSqlTimestamp(localDateTime);
-        ConsentDto consentDto = new ConsentDto(0, admissionInfoDto.getEntrantId(), admissionInfoDto.getId(), date, "Cancel");
+        ConsentDto consentDto = new ConsentDto(0, admissionInfoDto.getEntrantId(), admissionInfoDto.getId(), date, "CANCEL");
         Consent entityC = consentMapper.toVO(consentDto);
         //Сохранение в историю запросов
         consentRepository.save(entityC);
