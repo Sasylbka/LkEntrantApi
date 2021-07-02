@@ -21,7 +21,7 @@ public class QuestionnaireDto {
     private Date dateOfSend;
     private Date dateOfAnswer;
     private String status;
-    private String contract;
+    private Boolean contract;
     private Boolean accelerated;
     private String email;
     private String mobileNumber;
