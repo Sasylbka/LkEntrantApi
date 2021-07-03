@@ -65,6 +65,9 @@ public class QuestionnaireService {
         }
         for (int i = 0; i < temp1.size(); i++) {
             temp1.get(i).setAccelerated(checkAccel(temp1.get(i)));
+            if(temp1.get(i).getAccelerated()==null){
+                temp1.get(i).setAccelerated(false);
+            }
         }
         return temp1;
     }
