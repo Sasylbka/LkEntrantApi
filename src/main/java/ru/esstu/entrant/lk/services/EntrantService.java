@@ -2,6 +2,7 @@ package ru.esstu.entrant.lk.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.esstu.entrant.lk.async.NotificationAsync;
 import ru.esstu.entrant.lk.domain.dto.EntrantDto;
 import ru.esstu.entrant.lk.domain.dto.EntrantPrivateDataDto;
 import ru.esstu.entrant.lk.domain.mappers.EntrantMapper;
@@ -16,11 +17,13 @@ public class EntrantService {
 
     private final EntrantRepository entrantRepository;
     private final EntrantMapper entrantMapper;
+    private final NotificationAsync notificationAsync;
 
     public EntrantService(EntrantRepository entrantRepository,
-                          EntrantMapper entrantMapper) {
+                          EntrantMapper entrantMapper, NotificationAsync notificationAsync) {
         this.entrantRepository = entrantRepository;
         this.entrantMapper = entrantMapper;
+        this.notificationAsync = notificationAsync;
     }
 
     public EntrantDto getEntrant(final int id) {
@@ -49,9 +52,9 @@ public class EntrantService {
     }
 
     public Entrant updateStatus(final Entrant entrant) {
-        Entrant entity = entrant;
-        entrantRepository.updateStatus(entity);
-        return entity;
+        entrantRepository.updateStatus(entrant);
+        notificationAsync.sendNotificationStatusApplicationChanged(entrant);
+        return entrant;
     }
 
     public Entrant getOrCreateEntrantByKeycloakGuid(final String guid) {

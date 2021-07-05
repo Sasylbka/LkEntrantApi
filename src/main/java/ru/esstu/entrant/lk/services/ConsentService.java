@@ -3,6 +3,7 @@ package ru.esstu.entrant.lk.services;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.type.LocalDateType;
 import org.springframework.stereotype.Service;
+import ru.esstu.entrant.lk.async.NotificationAsync;
 import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
 import ru.esstu.entrant.lk.domain.dto.ConfigurationDto;
 import ru.esstu.entrant.lk.domain.dto.ConsentDto;
@@ -32,6 +33,7 @@ public class ConsentService {
     private final AdmissionInfoMapper admissionInfoMapper;
     private final AccessService accessService;
     private final ConfigurationRepository configurationRepository;
+    private final NotificationAsync notificationAsync;
 
 
     public ConsentService(ConsentRepository consentRepository,
@@ -39,7 +41,8 @@ public class ConsentService {
                           AccessService accessService,
                           AdmissionInfoRepository admissionInfoRepository,
                           AdmissionInfoMapper admissionInfoMapper,
-                          ConfigurationRepository configurationRepository
+                          ConfigurationRepository configurationRepository,
+                          NotificationAsync notificationAsync
                           ) {
         this.consentRepository = consentRepository;
         this.consentMapper = consentMapper;
@@ -47,6 +50,7 @@ public class ConsentService {
         this.admissionInfoRepository=admissionInfoRepository;
         this.accessService = accessService;
         this.configurationRepository=configurationRepository;
+        this.notificationAsync = notificationAsync;
     }
     public List<ConsentDto> getConsent(final int id) {//Получить историю согласия энтранта
         accessService.commonAccessCheck(id);
@@ -54,7 +58,7 @@ public class ConsentService {
         return temp;
     }
     public int getCount( final int id) {//Получить историю согласия энтранта
-        accessService.commonAccessCheck(id); 
+        accessService.commonAccessCheck(id);
         List<ConsentDto> temp=getFullAdd(id);//Лист истории добавлений
         int count=configurationRepository.getConfiguration().getMaxWithdrawalOfConsent()-temp.size();//Количество доступных подач согласий
         return count;
@@ -67,7 +71,7 @@ public class ConsentService {
     public List<ConsentDto> getFullAdd(final int id) {//Получить историю согласия только с add.
         accessService.commonAccessCheck(id);
         List<ConsentDto> temp =  consentMapper.toDtos(consentRepository.getFullAdd(id));
-        
+
         return temp;
     }
     public Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
@@ -106,6 +110,7 @@ public class ConsentService {
             ConsentDto consentDto = new ConsentDto(0, admissionInfoDto.getEntrantId(), admissionInfoDto.getId(), date, "ADD");
             Consent entityC = consentMapper.toVO(consentDto);
             consentRepository.save(entityC);
+            notificationAsync.sendNotificationStatusConsentChanged(entityC);
         }
         else {throw new PermissionDeniedException(
                 "У вас кончились попытки для подачи заявления о согласии.");}
@@ -131,6 +136,7 @@ public class ConsentService {
         Consent entityC = consentMapper.toVO(consentDto);
         //Сохранение в историю запросов
         consentRepository.save(entityC);
+        notificationAsync.sendNotificationStatusConsentChanged(entityC);
         return admissionInfoMapper.toDto(entity);
     }
 }
