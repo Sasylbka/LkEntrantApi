@@ -43,61 +43,61 @@ public class ConsentService {
                           AdmissionInfoMapper admissionInfoMapper,
                           ConfigurationRepository configurationRepository,
                           NotificationAsync notificationAsync
-                          ) {
+    ) {
         this.consentRepository = consentRepository;
         this.consentMapper = consentMapper;
-        this.admissionInfoMapper=admissionInfoMapper;
-        this.admissionInfoRepository=admissionInfoRepository;
+        this.admissionInfoMapper = admissionInfoMapper;
+        this.admissionInfoRepository = admissionInfoRepository;
         this.accessService = accessService;
-        this.configurationRepository=configurationRepository;
+        this.configurationRepository = configurationRepository;
         this.notificationAsync = notificationAsync;
     }
+
     public List<ConsentDto> getConsent(final int id) {//Получить историю согласия энтранта
         accessService.commonAccessCheck(id);
-        List<ConsentDto> temp =  consentMapper.toDtos(consentRepository.getConsent(id));
-        return temp;
+        return consentMapper.toDtos(consentRepository.getConsent(id));
     }
-    public int getCount( final int id) {//Получить историю согласия энтранта
+
+    public int getCount(final int id) {//Получить историю согласия энтранта
         accessService.commonAccessCheck(id);
-        List<ConsentDto> temp=getFullAdd(id);//Лист истории добавлений
-        int count=configurationRepository.getConfiguration().getMaxWithdrawalOfConsent()-temp.size();//Количество доступных подач согласий
-        return count;
+        List<ConsentDto> temp = getFullAdd(id);//Лист истории добавлений
+        return configurationRepository.getConfiguration().getMaxWithdrawalOfConsent() - temp.size();
     }
+
     public int getMaxWithdrawalOfConsent(final int id) {//Получить историю согласия энтранта
         accessService.commonAccessCheck(id);
-        int maxWithdrawalOfConsent=configurationRepository.getConfiguration().getMaxWithdrawalOfConsent();//Максимальное количество подач согласий
-        return maxWithdrawalOfConsent;
+        return configurationRepository.getConfiguration().getMaxWithdrawalOfConsent();
     }
+
     public List<ConsentDto> getFullAdd(final int id) {//Получить историю согласия только с add.
         accessService.commonAccessCheck(id);
-        List<ConsentDto> temp =  consentMapper.toDtos(consentRepository.getFullAdd(id));
 
-        return temp;
+        return consentMapper.toDtos(consentRepository.getFullAdd(id));
     }
+
     public Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
         return java.sql.Timestamp.valueOf(dateToConvert);
     }
+
     public ConsentDto save(final ConsentDto consentDto) { //Добавить в историю запросов на согласие
         accessService.commonAccessCheck(consentDto.getEntrantId());
-        Consent entity= consentMapper.toVO(consentDto);
+        Consent entity = consentMapper.toVO(consentDto);
         consentRepository.save(entity);
         return consentMapper.toDto(entity);
     }
+
     public void add(final AdmissionInfoDto admissionInfoDto) {//Добавление согласия
         accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
         //Проверка на количество доступных подач согласий
-        List<ConsentDto> temp=getFullAdd(admissionInfoDto.getEntrantId());//Лист истории добавлений
-        List<AdmissionInfo> tempAI=admissionInfoRepository.getAdmissionInfos(admissionInfoDto.getEntrantId());//Лист всех направлений entrant-а
-        AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);//Выбранное направление для согласия
-        int count=configurationRepository.getConfiguration().getMaxWithdrawalOfConsent()-temp.size();//Количество доступных подач согласий
-        if(count>0) {
+        List<ConsentDto> temp = getFullAdd(admissionInfoDto.getEntrantId());//Лист истории добавлений
+        List<AdmissionInfo> tempAI = admissionInfoRepository.getAdmissionInfos(admissionInfoDto.getEntrantId());//Лист всех направлений entrant-а
+        AdmissionInfo entity = admissionInfoMapper.toVO(admissionInfoDto);//Выбранное направление для согласия
+        int count = configurationRepository.getConfiguration().getMaxWithdrawalOfConsent() - temp.size();//Количество доступных подач согласий
+        if (count > 0) {
             //Проверка admissionInfo на уже имеющееся согласие
-            for(int i=0;i<tempAI.size();i++)
-            {
+            for (AdmissionInfo admissionInfo : tempAI) {
                 //Проверка на наличие согласия у других направлений
-                if(tempAI.get(i).isConsentBudget()==true||tempAI.get(i).isConsentTarget()==true||tempAI.get(i).isConsentQuote()==true)
-
-                {
+                if (admissionInfo.isConsentBudget() || admissionInfo.isConsentTarget() || admissionInfo.isConsentQuote()) {
                     throw new PermissionDeniedException(
                             "У вас уже выбрано другое согласие. Пожалуйста, отзовите прошлое согласие и попробуйте снова.");
                 }
@@ -111,20 +111,23 @@ public class ConsentService {
             Consent entityC = consentMapper.toVO(consentDto);
             consentRepository.save(entityC);
             notificationAsync.sendNotificationStatusConsentChanged(entityC);
+        } else {
+            throw new PermissionDeniedException(
+                    "У вас кончились попытки для подачи заявления о согласии.");
         }
-        else {throw new PermissionDeniedException(
-                "У вас кончились попытки для подачи заявления о согласии.");}
     }
+
     public AdmissionInfoDto saveConsent(final AdmissionInfoDto admissionInfoDto) { //Добавить согласие в admissionInfo
-       accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
-        AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);
+        accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
+        AdmissionInfo entity = admissionInfoMapper.toVO(admissionInfoDto);
         admissionInfoRepository.updateConsent(entity);
         return admissionInfoMapper.toDto(entity);
     }
+
     public AdmissionInfoDto cancelConsent(final AdmissionInfoDto admissionInfoDto) { //Отмена заявления о согласии на зачисление
         accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
         //Очистка согласия в AdmissionInfo
-        AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);
+        AdmissionInfo entity = admissionInfoMapper.toVO(admissionInfoDto);
         entity.setConsentBudget(false);
         entity.setConsentQuote(false);
         entity.setConsentTarget(false);

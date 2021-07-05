@@ -25,30 +25,37 @@ public class ConsentController {
      */
     private final ConsentService consentService;
     private final AdmissionInfoService admissionInfoService;
+
     public ConsentController(ConsentService consentService, AdmissionInfoService admissionInfoService) {
         this.consentService = consentService;
-        this.admissionInfoService=admissionInfoService;
+        this.admissionInfoService = admissionInfoService;
     }
+
     @RequestMapping(method = RequestMethod.GET, path = "/consent")
     public List<ConsentDto> get(final int id) {
         return consentService.getConsent(id);
     }
+
     @RequestMapping(method = RequestMethod.GET, path = "/consentCount")
     public int getCount(final int id) {
         return consentService.getCount(id);
     }
+
     @RequestMapping(method = RequestMethod.GET, path = "/consentMax")
     public int getMaxWithdrawalOfConsent(final int id) {
         return consentService.getMaxWithdrawalOfConsent(id);
     }
+
     @RequestMapping(method = RequestMethod.POST, path = "/consent")
     public ConsentDto save(@RequestBody final ConsentDto consentDto) {
         return consentService.save(consentDto);
     }
+
     @RequestMapping(method = RequestMethod.POST, path = "/consentAdd")
     public void add(@RequestBody final AdmissionInfoDto admissionInfoDto) {
         consentService.add(admissionInfoDto);
     }
+
     @RequestMapping(method = RequestMethod.PATCH, path = "/consentAdd")
     public AdmissionInfoDto cancelConsent(@RequestBody final AdmissionInfoDto admissionInfoDto) {
         return consentService.cancelConsent(admissionInfoDto);
