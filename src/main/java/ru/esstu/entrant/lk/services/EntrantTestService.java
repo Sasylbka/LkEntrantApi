@@ -33,8 +33,8 @@ public class EntrantTestService {
         this.specialityRefRepository = specialityRefRepository;
     }
 
-    public List<EntrantTestDto> getEntrantTest() {
-        List<EntrantTestDto> temp = entrantTestMapper.toDtos(entrantTestRepository.getEntrantTest());
+    public List<EntrantTestDto> getEntrantTest(final String guid) {
+        List<EntrantTestDto> temp = entrantTestMapper.toDtos(entrantTestRepository.getEntrantTest(guid));
         return temp;
     }
 }

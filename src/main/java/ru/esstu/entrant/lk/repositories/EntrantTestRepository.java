@@ -15,10 +15,10 @@ public interface EntrantTestRepository {
             "entrant_test.login.start_test_time, "+
             "entrant_test.login.enabled "+
             "FROM "+
-            "entrant_test.login "+
-            "Left join public.exam_table on entrant_test.login.exam_code=public.exam_table.exam_id " +
-            "left join public.discipline on public.exam_table.disc_id=public.discipline.disc_id " +
-            "left join public.person on entrant_test.login.entrant_code=public.person.person_id")
-    List<EntrantTest> getEntrantTest();
+            "entrant_test.login, public.exam_table, public.discipline " +
+            "WHERE entrant_test.login.exam_code=public.exam_table.exam_id " +
+            "and public.exam_table.disc_id=public.discipline.disc_id " +
+            "and entrant_test.login.entrant_code=#{personId}")
+    List<EntrantTest> getEntrantTest(@Param("personId") String personId);
 
 }
