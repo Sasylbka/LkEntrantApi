@@ -18,8 +18,6 @@ import ru.esstu.entrant.lk.repositories.reference.*;
 import ru.esstu.entrant.lk.utils.IdFactory;
 
 import javax.transaction.Transactional;
-import java.beans.Transient;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @Service
@@ -52,6 +50,7 @@ public class AcceptAnketaService {
     private final EntrantPTRepository entrantPTRepository;
     private final IdentificationInfoPTRepository identificationInfoPTRepository;
     private final ru.esstu.entrant.lk.repositories.reference.EducationalAchievementsRefRepository educationalAchievementsRef;
+
     public AcceptAnketaService(
             AdmissionInfoRepository admissionInfoRepository,
             AdditionalInformationRepository additionalInformationRepository,
@@ -79,35 +78,36 @@ public class AcceptAnketaService {
             ForeignLanguageRefRepository foreignLanguageRefRepository,
             EducationalDocumentPTRepository educationalDocumentPTRepository,
             EntrantPTRepository entrantPTRepository,
-            IdentificationInfoPTRepository identificationInfoPTRepository){
-        this.admissionInfoRepository=admissionInfoRepository;
-        this.additionalInformationRepository=additionalInformationRepository;
-        this.benefitInformationRepository=benefitInformationRepository;
-        this.changesDateRepository=changesDateRepository;
-        this.contactInformationRepository=contactInformationRepository;
-        this.educationalAchievementsRepository=educationalAchievementsRepository;
-        this.educationInfoRepository=educationInfoRepository;
-        this.entrantRepository=entrantRepository;
-        this.jobInformationRepository=jobInformationRepository;
-        this.parentsInformationRepository=parentsInformationRepository;
-        this.passportDataRepository=passportDataRepository;
-        this.entrantPrivateDataRepository=entrantPrivateDataRepository;
-        this.accessService=accessService;
-        this.acceptAnketaRepository=acceptAnketaRepository;
-        this.personPTRepository=personPTRepository;
-        this.relativeFatherPTRepository=relativeFatherPTRepository;
-        this.relativeMotherPTRepository=relativeMotherPTRepository;
-        this.regionRefRepository=regionRefRepository;
-        this.educationalAchievementsRef=educationalAchievementsRef;
-        this.militaryStatusRefRepository=militaryStatusRefRepository;
-        this.sportQualificationRefRepository=sportQualificationRefRepository;
-        this.entrantStatusRefRepository=entrantStatusRefRepository;
-        this.specialityRefRepository=specialityRefRepository;
-        this.foreignLanguageRefRepository=foreignLanguageRefRepository;
-        this.educationalDocumentPTRepository=educationalDocumentPTRepository;
-        this.entrantPTRepository=entrantPTRepository;
-        this.identificationInfoPTRepository=identificationInfoPTRepository;
+            IdentificationInfoPTRepository identificationInfoPTRepository) {
+        this.admissionInfoRepository = admissionInfoRepository;
+        this.additionalInformationRepository = additionalInformationRepository;
+        this.benefitInformationRepository = benefitInformationRepository;
+        this.changesDateRepository = changesDateRepository;
+        this.contactInformationRepository = contactInformationRepository;
+        this.educationalAchievementsRepository = educationalAchievementsRepository;
+        this.educationInfoRepository = educationInfoRepository;
+        this.entrantRepository = entrantRepository;
+        this.jobInformationRepository = jobInformationRepository;
+        this.parentsInformationRepository = parentsInformationRepository;
+        this.passportDataRepository = passportDataRepository;
+        this.entrantPrivateDataRepository = entrantPrivateDataRepository;
+        this.accessService = accessService;
+        this.acceptAnketaRepository = acceptAnketaRepository;
+        this.personPTRepository = personPTRepository;
+        this.relativeFatherPTRepository = relativeFatherPTRepository;
+        this.relativeMotherPTRepository = relativeMotherPTRepository;
+        this.regionRefRepository = regionRefRepository;
+        this.educationalAchievementsRef = educationalAchievementsRef;
+        this.militaryStatusRefRepository = militaryStatusRefRepository;
+        this.sportQualificationRefRepository = sportQualificationRefRepository;
+        this.entrantStatusRefRepository = entrantStatusRefRepository;
+        this.specialityRefRepository = specialityRefRepository;
+        this.foreignLanguageRefRepository = foreignLanguageRefRepository;
+        this.educationalDocumentPTRepository = educationalDocumentPTRepository;
+        this.entrantPTRepository = entrantPTRepository;
+        this.identificationInfoPTRepository = identificationInfoPTRepository;
     }
+
     @Transactional
     public void AcceptAnketa(final int entrantId, final int moderatorId) {
         accessService.commonAccessCheck(moderatorId);
@@ -134,9 +134,14 @@ public class AcceptAnketaService {
 
             if (person == null) {
                 if (entrantPrivateData.getGender().equals("male"))
-                    acceptAnketaRepository.addEntrantPerson(benefitInformation, contactInformation, entrantPrivateData, entrant, jobInformation, entrantRepository.getKeycloakGuid(entrantId), true, IdFactory.getGUID(this));
+                    acceptAnketaRepository.addEntrantPerson(benefitInformation,
+                            contactInformation, entrantPrivateData,
+                            entrant, jobInformation, entrantRepository.getKeycloakGuid(entrantId),
+                            true, IdFactory.getGUID(this));
                 else {
-                    acceptAnketaRepository.addEntrantPerson(benefitInformation, contactInformation, entrantPrivateData, entrant, jobInformation, entrantRepository.getKeycloakGuid(entrantId), false, IdFactory.getGUID(this));
+                    acceptAnketaRepository.addEntrantPerson(benefitInformation,
+                            contactInformation, entrantPrivateData, entrant, jobInformation,
+                                entrantRepository.getKeycloakGuid(entrantId), false, IdFactory.getGUID(this));
                 }
             } else {
                 throw new AlreadyHaveException("Такая персона уже есть");
@@ -195,12 +200,12 @@ public class AcceptAnketaService {
                     educationInfo.setDistrictOfFinished(null);
                 }
             }
-            acceptAnketaRepository.addEntrant(person, entrantPrivateData, changesDate, entrant, militaryStatusId, needHostel,sportQualificationId,educationInfo);
+            acceptAnketaRepository.addEntrant(person, entrantPrivateData, changesDate, entrant, militaryStatusId, needHostel, sportQualificationId, educationInfo);
             educationInfo.setDocumentOfEducationSerialNumber(educationInfo.getDocumentOfEducationSerialNumber().replaceAll("\\s+", ""));
             int temp = educationInfo.getDocumentOfEducationSerialNumber().length();
-            String docSerial="0";
-            String docNumber=educationInfo.getDocumentOfEducationSerialNumber();
-            if(temp>6) {
+            String docSerial = "0";
+            String docNumber = educationInfo.getDocumentOfEducationSerialNumber();
+            if (temp > 6) {
                 docSerial = educationInfo.getDocumentOfEducationSerialNumber().substring(0, 6);
                 docNumber = educationInfo.getDocumentOfEducationSerialNumber().substring(6, temp);
             }
@@ -260,12 +265,6 @@ public class AcceptAnketaService {
             List<Speciality> list = specialityRefRepository.getSpecialities();
             long directionId = 0;
             for (int i = 0; i < admissionInfo.size(); i++) {
-            /*for(int j=0;j< list.size();j++){
-                if(list.get(j).getSpecialityName().equals(admissionInfo.get(i).getDirection())){
-                    directionId= list.get(j).getSpecId();
-                    break;
-                }
-            }*/
                 acceptAnketaRepository.addSpeciality(admissionInfo.get(i), person, i + 1, moderatorId, changesDate,
                         IdFactory.getGUID(this), Integer.parseInt(admissionInfo.get(i).getDirection()),
                         Integer.parseInt(admissionInfo.get(i).getAdmittanceCategory()));
@@ -276,8 +275,7 @@ public class AcceptAnketaService {
             guid = IdFactory.getGUID(this);
             acceptAnketaRepository.addMotherPerson(person, parentsInformation, "mail", guid);
             acceptAnketaRepository.addRelativeMother(parentsInformation, person, guid);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new AlreadyHaveException(e.getMessage());
         }
     }

@@ -3,12 +3,15 @@ package ru.esstu.entrant.lk.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.EntrantDto;
-import ru.esstu.entrant.lk.domain.dto.EntrantPrivateDataDto;
 import ru.esstu.entrant.lk.domain.mappers.EntrantMapper;
 import ru.esstu.entrant.lk.domain.vo.Entrant;
+import ru.esstu.entrant.lk.domain.vo.EntrantPrivateData;
 import ru.esstu.entrant.lk.domain.vo.PublicTables.EntrantForKeycloak;
+import ru.esstu.entrant.lk.domain.vo.PublicTables.EntrantPerson;
 import ru.esstu.entrant.lk.exceptions.PermissionDeniedException;
+import ru.esstu.entrant.lk.repositories.EntrantPrivateDataRepository;
 import ru.esstu.entrant.lk.repositories.EntrantRepository;
+import ru.esstu.entrant.lk.repositories.PublicTables.EntrantPersonPTRepository;
 import ru.esstu.entrant.lk.utils.UserUtils;
 
 @Service
@@ -17,11 +20,15 @@ public class EntrantService {
 
     private final EntrantRepository entrantRepository;
     private final EntrantMapper entrantMapper;
-
+    private final EntrantPersonPTRepository entrantPersonPTRepository;
+    private final EntrantPrivateDataRepository entrantPrivateDataRepository;
     public EntrantService(EntrantRepository entrantRepository,
-                          EntrantMapper entrantMapper) {
+                          EntrantMapper entrantMapper, EntrantPersonPTRepository entrantPersonPTRepository, EntrantPrivateDataRepository entrantPrivateDataRepository) {
         this.entrantRepository = entrantRepository;
         this.entrantMapper = entrantMapper;
+        this.entrantPersonPTRepository = entrantPersonPTRepository;
+
+        this.entrantPrivateDataRepository = entrantPrivateDataRepository;
     }
 
     public EntrantDto getEntrant(final int id) {
@@ -77,6 +84,17 @@ public class EntrantService {
             newEntrant.setPassword("keycloak"); //пока не используется
             newEntrant.setStatus("ACCEPTED_PERSONALLY");
             entrantRepository.save(newEntrant, guid);
+            EntrantPerson entrantPerson = entrantPersonPTRepository.getEntrantPerson(guid);
+            Entrant entrant1=entrantRepository.getEntrantByKeycloakGuid(guid);
+            String male="male";
+            if(!entrantPerson.isMale()) {
+                male = "female";
+            }
+            EntrantPrivateData entrantPrivateData = new EntrantPrivateData(0,entrant1.getId(),
+                    entrantPerson.getName(),entrantPerson.getSurname(),entrantPerson.getPatronymic(),
+                    male,entrantPerson.getBirthdate(),entrantPerson.getBirthCity(),entrantPerson.getBirthRegion(),
+                    entrantPerson.getSnils(),"no","no",false);
+            entrantPrivateDataRepository.save(entrantPrivateData);
             return newEntrant;
         }
         return entrant;

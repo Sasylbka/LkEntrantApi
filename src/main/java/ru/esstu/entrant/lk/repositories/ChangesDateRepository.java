@@ -9,7 +9,8 @@ public interface ChangesDateRepository {
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert("INSERT INTO changes_date(entrant_id,date_of_creation,date_of_send,date_of_answer,rejection_reason) " +
-            "VALUES( #{ChangesDate.entrantId},#{ChangesDate.dateOfCreation}, #{ChangesDate.dateOfSend},#{ChangesDate.dateOfAnswer},#{ChangesDate.rejectionReason})")
+            "VALUES( #{ChangesDate.entrantId},#{ChangesDate.dateOfCreation}, #{ChangesDate.dateOfSend}," +
+            "#{ChangesDate.dateOfAnswer},#{ChangesDate.rejectionReason})")
     long save(@Param("ChangesDate") ChangesDate ChangesDate);
     
     @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")

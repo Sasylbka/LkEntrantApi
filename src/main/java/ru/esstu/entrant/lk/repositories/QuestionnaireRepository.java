@@ -30,6 +30,7 @@ public interface QuestionnaireRepository {
     List<Questionnaire> getQuestionnaire();
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO questionnaire(entrant_id, status,additional) VALUES( #{questionnaire.entrantId}, #{questionnaire.status}, #{questionnaire.additional})")
+    @Insert("INSERT INTO questionnaire(entrant_id, status,additional) VALUES( #{questionnaire.entrantId}, " +
+            "#{questionnaire.status}, #{questionnaire.additional})")
     long save(@Param("contactInformation") ContactInformation contactInformation);
 }
