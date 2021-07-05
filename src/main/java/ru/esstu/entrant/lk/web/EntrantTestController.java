@@ -18,7 +18,7 @@ public class EntrantTestController {
         this.entrantTestService = entrantTestService;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/entrantTest")
-    public List<EntrantTestDto> get(final String guid) {
-        return entrantTestService.getEntrantTest(guid);
+    public List<EntrantTestDto> get() {
+        return entrantTestService.getEntrantTest();
     }
 }
