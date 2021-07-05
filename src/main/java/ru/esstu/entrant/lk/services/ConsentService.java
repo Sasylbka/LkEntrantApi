@@ -24,7 +24,8 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ConsentService {
+public class
+ConsentService {
 
     private final ConsentRepository consentRepository;
     private final ConsentMapper consentMapper;
@@ -79,7 +80,7 @@ public class ConsentService {
         consentRepository.save(entity);
         return consentMapper.toDto(entity);
     }
-    public void add(final AdmissionInfoDto admissionInfoDto) {//Добавление согласия
+    public AdmissionInfoDto add(final AdmissionInfoDto admissionInfoDto) {//Добавление согласия
         accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
         //Проверка на количество доступных подач согласий
         List<ConsentDto> temp=getFullAdd(admissionInfoDto.getEntrantId());//Лист истории добавлений
@@ -106,6 +107,7 @@ public class ConsentService {
             ConsentDto consentDto = new ConsentDto(0, admissionInfoDto.getEntrantId(), admissionInfoDto.getId(), date, "ADD");
             Consent entityC = consentMapper.toVO(consentDto);
             consentRepository.save(entityC);
+            return admissionInfoMapper.toDto(entity);
         }
         else {throw new PermissionDeniedException(
                 "У вас кончились попытки для подачи заявления о согласии.");}
