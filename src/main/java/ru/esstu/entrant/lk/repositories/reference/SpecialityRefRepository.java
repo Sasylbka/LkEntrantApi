@@ -28,5 +28,5 @@ public interface SpecialityRefRepository {
     @Select("SELECT " +
             "faculty_id " +
             "FROM public.speciality WHERE spec_id=#{admissionInfo}")
-    long getFacultyId(@Param("admissionInfo") long admissionInfo);
+    Long getFacultyId(@Param("admissionInfo") Long admissionInfo);
 }
