@@ -2,6 +2,7 @@ package ru.esstu.entrant.lk.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.esstu.entrant.lk.async.NotificationAsync;
 import ru.esstu.entrant.lk.domain.dto.EntrantDto;
 import ru.esstu.entrant.lk.domain.mappers.EntrantMapper;
 import ru.esstu.entrant.lk.domain.vo.Entrant;
@@ -22,13 +23,19 @@ public class EntrantService {
     private final EntrantMapper entrantMapper;
     private final EntrantPersonPTRepository entrantPersonPTRepository;
     private final EntrantPrivateDataRepository entrantPrivateDataRepository;
+    private final NotificationAsync notificationAsync;
+
     public EntrantService(EntrantRepository entrantRepository,
-                          EntrantMapper entrantMapper, EntrantPersonPTRepository entrantPersonPTRepository, EntrantPrivateDataRepository entrantPrivateDataRepository) {
+                          EntrantMapper entrantMapper,
+                          EntrantPersonPTRepository entrantPersonPTRepository,
+                          EntrantPrivateDataRepository entrantPrivateDataRepository,
+                          NotificationAsync notificationAsync) {
         this.entrantRepository = entrantRepository;
         this.entrantMapper = entrantMapper;
         this.entrantPersonPTRepository = entrantPersonPTRepository;
 
         this.entrantPrivateDataRepository = entrantPrivateDataRepository;
+        this.notificationAsync = notificationAsync;
     }
 
     public EntrantDto getEntrant(final int id) {
@@ -57,9 +64,9 @@ public class EntrantService {
     }
 
     public Entrant updateStatus(final Entrant entrant) {
-        Entrant entity = entrant;
-        entrantRepository.updateStatus(entity);
-        return entity;
+        entrantRepository.updateStatus(entrant);
+        notificationAsync.sendNotificationStatusApplicationChanged(entrant);
+        return entrant;
     }
 
     public Entrant getOrCreateEntrantByKeycloakGuid(final String guid) {
