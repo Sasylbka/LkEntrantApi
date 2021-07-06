@@ -29,6 +29,7 @@ public class ConsentMapper {
                 vo.getId(),
                 vo.getEntrantId(),
                 vo.getAdmissionInfoId(),
+                vo.getFormOfFinancing(),
                 vo.getDate(),
                 vo.getActionType()
         );
@@ -46,6 +47,7 @@ public class ConsentMapper {
                 dto.getId(),
                 dto.getEntrantId(),
                 dto.getAdmissionInfoId(),
+                dto.getFormOfFinancing(),
                 dto.getDate(),
                 dto.getActionType()
         );

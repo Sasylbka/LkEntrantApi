@@ -66,7 +66,6 @@ ConsentService {
     public List<ConsentDto> getFullAdd(final int id) {//Получить историю согласия только с add.
         accessService.commonAccessCheck(id);
         List<ConsentDto> temp =  consentMapper.toDtos(consentRepository.getFullAdd(id));
-
         return temp;
     }
     public Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
@@ -102,7 +101,11 @@ ConsentService {
             //Запись в историю
             LocalDateTime localDateTime = LocalDateTime.now();
             Date date = convertToDateViaSqlTimestamp(localDateTime);
-            ConsentDto consentDto = new ConsentDto(0, admissionInfoDto.getEntrantId(), admissionInfoDto.getId(), date, "ADD");
+            String formOfFin="";
+            if(entity.isConsentBudget()) { formOfFin="Бюджет";}
+            if(entity.isConsentQuote()) { formOfFin="Особые права";}
+            if(entity.isConsentTarget()) { formOfFin="Целевое";}
+            ConsentDto consentDto = new ConsentDto(0, admissionInfoDto.getEntrantId(), admissionInfoDto.getId(),formOfFin, date, "ADD");
             Consent entityC = consentMapper.toVO(consentDto);
             consentRepository.save(entityC);
             notificationAsync.sendNotificationStatusConsentChanged(entityC);
@@ -112,15 +115,20 @@ ConsentService {
                 "У вас кончились попытки для подачи заявления о согласии.");}
     }
     public AdmissionInfoDto saveConsent(final AdmissionInfoDto admissionInfoDto) { //Добавить согласие в admissionInfo
-       accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
+        accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
         AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);
         admissionInfoRepository.updateConsent(entity);
         return admissionInfoMapper.toDto(entity);
     }
     public AdmissionInfoDto cancelConsent(final AdmissionInfoDto admissionInfoDto) { //Отмена заявления о согласии на зачисление
         accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
-        //Очистка согласия в AdmissionInfo
         AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);
+        //Выделение формы финансирования
+        String formOfFin="";
+        if(entity.isConsentBudget()) { formOfFin="Бюджет";}
+        if(entity.isConsentQuote()) { formOfFin="Особые права";}
+        if(entity.isConsentTarget()) { formOfFin="Целевое";}
+        //Очистка согласия в AdmissionInfo
         entity.setConsentBudget(false);
         entity.setConsentQuote(false);
         entity.setConsentTarget(false);
@@ -128,7 +136,7 @@ ConsentService {
         //Добавление в историю запросов
         LocalDateTime localDateTime = LocalDateTime.now();
         Date date = convertToDateViaSqlTimestamp(localDateTime);
-        ConsentDto consentDto = new ConsentDto(0, admissionInfoDto.getEntrantId(), admissionInfoDto.getId(), date, "CANCEL");
+        ConsentDto consentDto = new ConsentDto(0, admissionInfoDto.getEntrantId(), admissionInfoDto.getId(), formOfFin, date, "CANCEL");
         Consent entityC = consentMapper.toVO(consentDto);
         //Сохранение в историю запросов
         consentRepository.save(entityC);

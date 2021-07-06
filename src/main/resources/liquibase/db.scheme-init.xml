@@ -607,4 +607,9 @@
             <column name="have_unread_moderator_message" type="boolean"/>
         </addColumn>
     </changeSet>
+    <changeSet id="2021-06-07" author="nikita">
+        <addColumn tableName="consent">
+            <column name="form_of_financing" type="text"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

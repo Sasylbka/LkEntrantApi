@@ -12,6 +12,7 @@ public class Consent {//История запросов
     private int id;
     private int entrantId;
     private int admissionInfoId;
+    private String formOfFinancing;//бюджет, льготы, целевое
     private Date date;
     private String actionType;
 }

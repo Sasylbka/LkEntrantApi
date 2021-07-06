@@ -14,13 +14,13 @@ public interface ConsentRepository {
     List<Consent> getFullAdd(@Param("id") int id);
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("INSERT INTO consent(entrant_id, admission_info_id, date, action_type) " +
-            "VALUES(#{consent.entrantId},#{consent.admissionInfoId},#{consent.date},#{consent.actionType})")
+    @Insert("INSERT INTO consent(entrant_id, admission_info_id, form_of_financing, date, action_type) " +
+            "VALUES(#{consent.entrantId},#{consent.admissionInfoId},#{consent.formOfFinancing},#{consent.date},#{consent.actionType})")
     long save(@Param("consent") Consent consent);// сохранение действия в базу данных
 
-    @Options(useGeneratedKeys = false, keyProperty = "id", keyColumn = "id")
+    @Options(keyProperty = "id", keyColumn = "id")
     @Update("UPDATE consent SET " +
-            "admission_info_id=#{consent.admissionInfoId}, date=#{consent.date}, action_type#{consent.actionType} " +
+            "admission_info_id=#{consent.admissionInfoId}, form_of_financing=#{consent.formOfFinancing}, date=#{consent.date}, action_type#{consent.actionType} " +
             "WHERE entrant_id=#{consent.entrantId}")
     long update(@Param("consent") Consent consent);// обновление действия в базе данных для определённого пользователя
 }
