@@ -61,6 +61,7 @@ public class NotificationAsync {
         notification.addRequestAttribute("mutable_content", true);
         notification.to(userFCM.getToken());
         notification.tag("STATUS_APPLICATION");
+        notification.addNotificationAttribute("CURRENT_STATUS", entrant.getStatus());
 
         switch (entrant.getStatus()) {
             case "PROCESS_FILLING": notification.title("Ваше заявление в процессе заполнения"); break;
@@ -70,8 +71,7 @@ public class NotificationAsync {
             case "REJECTED": notification.title("Ваше заявление отклонено"); break;
         }
 
-        Date date = new Date();
-        notification.addNotificationAttribute("time", date.getTime());
+        notification.addNotificationAttribute("time", new Date().getTime());
         notification.sound("default");
         FirebaseResponse firebaseResponse = pushNotificationService.send(new HttpEntity<>(notification.toJSON()));
         if (firebaseResponse.getFailure() > 0) {
@@ -87,14 +87,14 @@ public class NotificationAsync {
         notification.addRequestAttribute("mutable_content", true);
         notification.to(userFCM.getToken());
         notification.tag("STATUS_CONSENT");
+        notification.addNotificationAttribute("CURRENT_STATUS", consent.getActionType());
 
         switch (consent.getActionType()) {
             case "ADD": notification.title("Ваше согласие принято"); break;
             case "CANCEL": notification.title("Ваше согласие отозвано"); break;
         }
 
-        Date date = new Date();
-        notification.addNotificationAttribute("time", date.getTime());
+        notification.addNotificationAttribute("time", new Date().getTime());
         notification.sound("default");
         FirebaseResponse firebaseResponse = pushNotificationService.send(new HttpEntity<>(notification.toJSON()));
         if (firebaseResponse.getFailure() > 0) {
