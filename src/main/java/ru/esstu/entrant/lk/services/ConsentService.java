@@ -7,12 +7,13 @@ import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
 import ru.esstu.entrant.lk.domain.dto.ConsentDto;
 import ru.esstu.entrant.lk.domain.mappers.AdmissionInfoMapper;
 import ru.esstu.entrant.lk.domain.mappers.ConsentMapper;
+import ru.esstu.entrant.lk.domain.vo.Additionals.Keycloak;
 import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
 import ru.esstu.entrant.lk.domain.vo.Consent;
+import ru.esstu.entrant.lk.domain.vo.PublicTables.Person;
 import ru.esstu.entrant.lk.exceptions.PermissionDeniedException;
-import ru.esstu.entrant.lk.repositories.AdmissionInfoRepository;
-import ru.esstu.entrant.lk.repositories.ConfigurationRepository;
-import ru.esstu.entrant.lk.repositories.ConsentRepository;
+import ru.esstu.entrant.lk.repositories.*;
+import ru.esstu.entrant.lk.repositories.PublicTables.PersonPTRepository;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -30,7 +31,9 @@ ConsentService {
     private final AccessService accessService;
     private final ConfigurationRepository configurationRepository;
     private final NotificationAsync notificationAsync;
-
+    private final ImportConsentRepository importConsentRepository;
+    private final EntrantRepository entrantRepository;
+    private final PersonPTRepository personPTRepository;
 
     public ConsentService(ConsentRepository consentRepository,
                           ConsentMapper consentMapper,
@@ -38,7 +41,7 @@ ConsentService {
                           AdmissionInfoRepository admissionInfoRepository,
                           AdmissionInfoMapper admissionInfoMapper,
                           ConfigurationRepository configurationRepository,
-                          NotificationAsync notificationAsync) {
+                          NotificationAsync notificationAsync, ImportConsentRepository importConsentRepository, EntrantRepository entrantRepository, PersonPTRepository personPTRepository) {
         this.consentRepository = consentRepository;
         this.consentMapper = consentMapper;
         this.admissionInfoMapper=admissionInfoMapper;
@@ -46,6 +49,10 @@ ConsentService {
         this.accessService = accessService;
         this.configurationRepository=configurationRepository;
         this.notificationAsync = notificationAsync;
+        this.importConsentRepository = importConsentRepository;
+
+        this.entrantRepository = entrantRepository;
+        this.personPTRepository = personPTRepository;
     }
     public List<ConsentDto> getConsent(final int id) {//Получить историю согласия энтранта
         accessService.commonAccessCheck(id);
@@ -98,6 +105,9 @@ ConsentService {
             }
             //Добавление согласия
             saveConsent(admissionInfoMapper.toDto(entity));
+            Keycloak keycloak = entrantRepository.getKeycloakGuid(entity.getEntrantId());
+            Person person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
+            importConsentRepository.UpdateOriginalDocument(true, person.getPersonId(),Integer.parseInt(entity.getDirection()));
             //Запись в историю
             LocalDateTime localDateTime = LocalDateTime.now();
             Date date = convertToDateViaSqlTimestamp(localDateTime);
@@ -132,6 +142,9 @@ ConsentService {
         entity.setConsentBudget(false);
         entity.setConsentQuote(false);
         entity.setConsentTarget(false);
+        Keycloak keycloak = entrantRepository.getKeycloakGuid(entity.getEntrantId());
+        Person person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
+        importConsentRepository.UpdateOriginalDocument(false, person.getPersonId(),Integer.parseInt(entity.getDirection()));
         admissionInfoRepository.updateConsent(entity);
         //Добавление в историю запросов
         LocalDateTime localDateTime = LocalDateTime.now();
