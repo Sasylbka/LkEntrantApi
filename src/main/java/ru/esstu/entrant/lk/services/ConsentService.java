@@ -89,6 +89,11 @@ ConsentService {
     @Transactional
     public AdmissionInfoDto add(final AdmissionInfoDto admissionInfoDto) {//Добавление согласия
         accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
+        if(!entrantRepository.getEntrant(admissionInfoDto.getEntrantId()).getStatus().equals("ACCEPTED"))
+        {
+            throw new PermissionDeniedException(
+                    "Ваша заявка еще не принята. Попробуйте позже.");
+        }
         //Проверка на количество доступных подач согласий
         List<ConsentDto> temp=getFullAdd(admissionInfoDto.getEntrantId());//Лист истории добавлений
         List<AdmissionInfo> tempAI=admissionInfoRepository.getAdmissionInfos(admissionInfoDto.getEntrantId());//Лист всех направлений entrant-а
