@@ -15,6 +15,8 @@ public interface AdmissionInfoRepository {
 
     @Select("SELECT * FROM admission_info WHERE id=#{id}")
     AdmissionInfo getAdmissionInfo(@Param("id") int id);
+    @Select("SELECT * FROM admission_info")
+    List<AdmissionInfo> selectAll();
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert("INSERT INTO admission_info(entrant_id, level_of_education, direction,admittance_category, budget, contract, targeted_training, quota," +
