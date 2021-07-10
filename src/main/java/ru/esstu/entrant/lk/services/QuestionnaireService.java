@@ -50,6 +50,7 @@ public class QuestionnaireService {
         return false;
     }
 
+
     public List<QuestionnaireDto> getQuestionnaire() {
         List<QuestionnaireDto> temp = questionnaireMapper.toDtos(questionnaireRepository.getQuestionnaire());
         int k = 0;
@@ -64,6 +65,12 @@ public class QuestionnaireService {
             }
         }
         for (int i = 0; i < temp1.size(); i++) {
+            List <AdmissionInfo> admissionInfoList = admissionInfoRepository.selectAll();
+            for (AdmissionInfo yoba:admissionInfoList) {
+                if(yoba.getEntrantId()==temp1.get(i).getEntrantId())
+                    if(yoba.isContract())
+                    temp1.get(i).setContract("true");
+            }
             temp1.get(i).setAccelerated(checkAccel(temp1.get(i)));
             if(temp1.get(i).getAccelerated()==null){
                 temp1.get(i).setAccelerated(false);

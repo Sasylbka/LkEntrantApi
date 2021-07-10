@@ -2,6 +2,7 @@ package ru.esstu.entrant.lk.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.esstu.entrant.lk.async.NotificationAsync;
 import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
 import ru.esstu.entrant.lk.domain.dto.ConsentDto;
@@ -78,14 +79,21 @@ ConsentService {
     public Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
         return java.sql.Timestamp.valueOf(dateToConvert);
     }
+    @Transactional
     public ConsentDto save(final ConsentDto consentDto) { //Добавить в историю запросов на согласие
         accessService.commonAccessCheck(consentDto.getEntrantId());
         Consent entity= consentMapper.toVO(consentDto);
         consentRepository.save(entity);
         return consentMapper.toDto(entity);
     }
+    @Transactional
     public AdmissionInfoDto add(final AdmissionInfoDto admissionInfoDto) {//Добавление согласия
         accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
+        if(!entrantRepository.getEntrant(admissionInfoDto.getEntrantId()).getStatus().equals("ACCEPTED"))
+        {
+            throw new PermissionDeniedException(
+                    "Ваша заявка еще не принята. Попробуйте позже.");
+        }
         //Проверка на количество доступных подач согласий
         List<ConsentDto> temp=getFullAdd(admissionInfoDto.getEntrantId());//Лист истории добавлений
         List<AdmissionInfo> tempAI=admissionInfoRepository.getAdmissionInfos(admissionInfoDto.getEntrantId());//Лист всех направлений entrant-а
@@ -107,7 +115,6 @@ ConsentService {
             saveConsent(admissionInfoMapper.toDto(entity));
             Keycloak keycloak = entrantRepository.getKeycloakGuid(entity.getEntrantId());
             Person person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
-            importConsentRepository.UpdateOriginalDocument(true, person.getPersonId(),Integer.parseInt(entity.getDirection()));
             //Запись в историю
             LocalDateTime localDateTime = LocalDateTime.now();
             Date date = convertToDateViaSqlTimestamp(localDateTime);
@@ -119,6 +126,7 @@ ConsentService {
             Consent entityC = consentMapper.toVO(consentDto);
             consentRepository.save(entityC);
             notificationAsync.sendNotificationStatusConsentChanged(entityC);
+            importConsentRepository.UpdateOriginalDocument(true, person.getPersonId(),Integer.parseInt(entity.getDirection()));
             return admissionInfoMapper.toDto(entity);
         }
         else {throw new PermissionDeniedException(
@@ -130,6 +138,7 @@ ConsentService {
         admissionInfoRepository.updateConsent(entity);
         return admissionInfoMapper.toDto(entity);
     }
+    @Transactional
     public AdmissionInfoDto cancelConsent(final AdmissionInfoDto admissionInfoDto) { //Отмена заявления о согласии на зачисление
         accessService.commonAccessCheck(admissionInfoDto.getEntrantId());
         AdmissionInfo entity= admissionInfoMapper.toVO(admissionInfoDto);
@@ -144,7 +153,6 @@ ConsentService {
         entity.setConsentTarget(false);
         Keycloak keycloak = entrantRepository.getKeycloakGuid(entity.getEntrantId());
         Person person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
-        importConsentRepository.UpdateOriginalDocument(false, person.getPersonId(),Integer.parseInt(entity.getDirection()));
         admissionInfoRepository.updateConsent(entity);
         //Добавление в историю запросов
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -153,6 +161,7 @@ ConsentService {
         Consent entityC = consentMapper.toVO(consentDto);
         //Сохранение в историю запросов
         consentRepository.save(entityC);
+        importConsentRepository.UpdateOriginalDocument(false, person.getPersonId(),Integer.parseInt(entity.getDirection()));
         return admissionInfoMapper.toDto(entity);
     }
 }

@@ -12,5 +12,4 @@ public interface ImportConsentRepository {
             "entrant_id=#{entrant_id} and spec_id=#{spec_id}")
     long UpdateOriginalDocument(@Param("status") boolean status,@Param("entrant_id")String entrant_id,
                                 @Param("spec_id")int spec_id);
-
 }
