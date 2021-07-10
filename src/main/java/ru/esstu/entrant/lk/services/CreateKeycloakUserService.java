@@ -11,8 +11,6 @@ import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.vo.PublicTables.EntrantForKeycloak;
-import ru.esstu.entrant.lk.exceptions.AlreadyHaveException;
-import ru.esstu.entrant.lk.exceptions.InvalidObjectException;
 import ru.esstu.entrant.lk.repositories.PublicTables.EntrantForKeycloakRepository;
 
 import javax.transaction.Transactional;
@@ -61,11 +59,11 @@ public class CreateKeycloakUserService {
             activate_id = result.getLocation().toString();
             activate_id = activate_id.replace("https://sso.esstu.ru/auth/admin/realms/esstu/users/", "");
         } catch (Exception e) {
-            throw new AlreadyHaveException(e.getMessage());
+            System.out.println(entrantForKeycloak.getLoginForLk());
         }
 
         if (result == null || result.getStatus() != 201) {
-            throw new InvalidObjectException("Ошибка создания пользователя");
+            System.out.println(entrantForKeycloak.getLoginForLk());
         }
         return activate_id;
     }
