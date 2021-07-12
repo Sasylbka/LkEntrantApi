@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import ru.esstu.entrant.lk.domain.dto.FileDto;
+import ru.esstu.entrant.lk.domain.vo.Message;
 import ru.esstu.ls.aicstorages.general.is.IStorageConnector;
 import ru.esstu.ls.aicstorages.general.is.StorageFile;
 import ru.esstu.entrant.lk.services.FileService;
@@ -30,7 +31,6 @@ public class StorageController {
         this.storageConnector = storageConnector;
         this.fileService=fileService;
     }
-
     @RequestMapping(value = "/file/save.do", method = RequestMethod.POST)
     public FileDto save(@RequestParam(required = false) MultipartFile file, String type, int entrantId) {
         String fileCode = "";
@@ -40,6 +40,16 @@ public class StorageController {
         String filename= file.getOriginalFilename();
         String contentType = file.getContentType();
         return fileService.save(fileCode,type,entrantId,filename,contentType);
+    }
+    @RequestMapping(value = "/file/saveInMesssage.do", method = RequestMethod.POST)
+    public FileDto saveMessage(@RequestParam(required = false) MultipartFile file, int entrantId,int dialogId,String role,String message) {
+        String fileCode = "";
+        if (file != null && !file.isEmpty()) {
+            fileCode = storageConnector.saveFile(file);
+        }
+        String filename= file.getOriginalFilename();
+        String contentType = file.getContentType();
+        return fileService.saveInMessage(fileCode,"GET_FROM_MESSAGE",entrantId,filename,contentType,dialogId,role,message,filename);
     }
     @RequestMapping(value = "/file/delete.do",method = RequestMethod.POST)
     public void delete(@RequestParam(required = false)String guid,int idForDelete){

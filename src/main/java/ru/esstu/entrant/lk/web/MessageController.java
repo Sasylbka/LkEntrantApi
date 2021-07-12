@@ -31,7 +31,6 @@ public class MessageController {
     public MessageDto save(@RequestBody final MessageDto MessageDto) throws ParseException {
         return messageService.save(MessageDto);
     }
-
     @RequestMapping(method = RequestMethod.GET, path = "/lastMessage")
     public MessageDto getLastMessage(final int id,final String role){
         return messageService.getLastMessage(id,role);

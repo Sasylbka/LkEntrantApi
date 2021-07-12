@@ -24,7 +24,10 @@ public class MessageMapper {
                 vo.getSenderId(),
                 vo.getSender(),
                 vo.getMessage(),
-                vo.getDate()
+                vo.getDate(),
+                vo.isAttachments(),
+                vo.getFilesGuid(),
+                vo.getFileName()
         );
     }
 
@@ -39,7 +42,10 @@ public class MessageMapper {
                 dto.getSenderId(),
                 dto.getSender(),
                 dto.getMessage(),
-                dto.getDate()
+                dto.getDate(),
+                dto.isAttachments(),
+                dto.getFilesGuid(),
+                dto.getFileName()
         );
     }
     public List<MessageDto> toDtos (List<Message> vos) {
