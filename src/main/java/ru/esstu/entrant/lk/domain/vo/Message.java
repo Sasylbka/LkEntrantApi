@@ -23,4 +23,7 @@ public class Message {
     private String sender;
     private String message;
     private Date date;
+    private boolean attachments;
+    private String filesGuid;
+    private String fileName;
 }
