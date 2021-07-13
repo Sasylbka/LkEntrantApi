@@ -4,21 +4,24 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.PublicTables.PersonDto;
 import ru.esstu.entrant.lk.domain.mappers.PublicTables.PersonPTMapper;
+import ru.esstu.entrant.lk.domain.vo.PublicTables.Person;
 import ru.esstu.entrant.lk.repositories.PublicTables.PersonPTRepository;
+import ru.esstu.entrant.lk.utils.UserUtils;
 
 import java.util.List;
 @Service
 @Slf4j
-public class PersonPTService { private final PersonPTRepository PersonPTRepository;
-    private final PersonPTMapper PersonPTMapper;
+public class PersonPTService { private final PersonPTRepository personPTRepository;
+    private final PersonPTMapper personPTMapper;
 
-    public PersonPTService(PersonPTRepository PersonPTRepository,
-                                 PersonPTMapper PersonPTMapper) {
-        this.PersonPTRepository = PersonPTRepository;
-        this.PersonPTMapper = PersonPTMapper;
+    public PersonPTService(PersonPTRepository personPTRepository,
+                                 PersonPTMapper personPTMapper) {
+        this.personPTRepository = personPTRepository;
+        this.personPTMapper = personPTMapper;
     }
 
-    public PersonDto getPerson(String activate_id) {
-        return PersonPTMapper.toDto(PersonPTRepository.getPerson(activate_id));
+    public PersonDto getPerson() {
+        Person person=personPTRepository.getPerson(UserUtils.getCurrentUserKeycloakGuid());
+        return personPTMapper.toDto(personPTRepository.getPerson(person.getPersonId()));
     }
 }

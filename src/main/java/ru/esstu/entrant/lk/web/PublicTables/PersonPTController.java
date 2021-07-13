@@ -15,7 +15,7 @@ public class PersonPTController {
         this.personPTService=personPTService;
     }
     @RequestMapping(method = RequestMethod.GET,path = "/public/person")
-    public PersonDto get(final String activate_id){
-        return personPTService.getPerson(activate_id);
+    public PersonDto get(){
+        return personPTService.getPerson();
     }
 }
