@@ -41,7 +41,7 @@ public class StorageController {
         String contentType = file.getContentType();
         return fileService.save(fileCode,type,entrantId,filename,contentType);
     }
-    @RequestMapping(value = "/file/saveInMesssage.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/file/saveInMessage.do", method = RequestMethod.POST)
     public FileDto saveMessage(@RequestParam(required = false) MultipartFile file, int entrantId,int dialogId,String role,String message) {
         String fileCode = "";
         if (file != null && !file.isEmpty()) {
