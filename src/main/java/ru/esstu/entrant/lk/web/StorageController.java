@@ -42,14 +42,14 @@ public class StorageController {
         return fileService.save(fileCode,type,entrantId,filename,contentType);
     }
     @RequestMapping(value = "/file/saveInMessage.do", method = RequestMethod.POST)
-    public FileDto saveMessage(@RequestParam(required = false) MultipartFile file, int entrantId,int dialogId,String role,String message) {
+    public void saveMessage(@RequestParam(required = false) MultipartFile file, int entrantId,int dialogId,String role,String message) {
         String fileCode = "";
         if (file != null && !file.isEmpty()) {
             fileCode = storageConnector.saveFile(file);
         }
         String filename= file.getOriginalFilename();
         String contentType = file.getContentType();
-        return fileService.saveInMessage(fileCode,"GET_FROM_MESSAGE",entrantId,filename,contentType,dialogId,role,message,filename);
+        fileService.saveInMessage(fileCode,"GET_FROM_MESSAGE",entrantId,filename,contentType,dialogId,role,message,filename);
     }
     @RequestMapping(value = "/file/delete.do",method = RequestMethod.POST)
     public void delete(@RequestParam(required = false)String guid,int idForDelete){
