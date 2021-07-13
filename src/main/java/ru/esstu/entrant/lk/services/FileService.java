@@ -46,7 +46,7 @@ public class FileService {
         fileRepository.save(entity);
         return fileMapper.toDto(entity);
     }
-    public void saveInMessage(final String filecode,
+    public FileDto saveInMessage(final String filecode,
                                  final String type,final int entrantId,final String fileName,
                                  final String fileExtension,final int dialogId,final String role,final String sendedMessage,
                                  final String filename){
@@ -59,7 +59,7 @@ public class FileService {
         Message message = new Message(0,role,dialogId,entrantId,entrantPrivateData.getName()+" "+entrantPrivateData.getFamilyName()+" "+
                 entrantPrivateData.getPatronymic(),sendedMessage,date,true,filecode,filename);
         messageRepository.saveAttachments(message);
-        fileMapper.toDto(entity);
+        return fileMapper.toDto(entity);
     }
     public void delete(final int idForDelete){
         fileRepository.delete(idForDelete);
