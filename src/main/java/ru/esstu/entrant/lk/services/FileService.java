@@ -23,14 +23,16 @@ public class FileService {
     private final AccessService accessService;
     private final EntrantPrivateDataRepository entrantPrivateDataRepository;
     private final MessageRepository messageRepository;
+    private final UserService userService;
     public FileService(FileRepository fileRepository,
                        FileMapper fileMapper,
-                       AccessService accessService, EntrantPrivateDataRepository entrantPrivateDataRepository, MessageRepository messageRepository) {
+                       AccessService accessService, EntrantPrivateDataRepository entrantPrivateDataRepository, MessageRepository messageRepository, UserService userService) {
         this.fileRepository = fileRepository;
         this.fileMapper = fileMapper;
         this.accessService = accessService;
         this.entrantPrivateDataRepository = entrantPrivateDataRepository;
         this.messageRepository = messageRepository;
+        this.userService = userService;
     }
     public Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
         return java.sql.Timestamp.valueOf(dateToConvert);
@@ -56,8 +58,22 @@ public class FileService {
         EntrantPrivateData entrantPrivateData = entrantPrivateDataRepository.getEntrantPrivateData(entrantId);
         LocalDateTime localDateTime = LocalDateTime.now();
         Date date = convertToDateViaSqlTimestamp(localDateTime);
-        Message message = new Message(0,role,dialogId,entrantId,entrantPrivateData.getName()+" "+entrantPrivateData.getFamilyName()+" "+
-                entrantPrivateData.getPatronymic(),sendedMessage,date,true,filecode,filename);
+        Message message=null;
+        String userRole = userService.getCurrentUser().getUserRole().toString();
+        if(userRole.equals("ROLE_ENTRANT")) {
+             message = new Message(0, role, dialogId, entrantId, entrantPrivateData.getFamilyName() + " " + entrantPrivateData.getName() + " " +
+                    entrantPrivateData.getPatronymic(), sendedMessage, date, true, filecode, filename);
+        }
+        else{
+            if(userRole.equals("ROLE_SELECTION_COMMIT")){
+                message = new Message(0, role, dialogId, userService.getCurrentUser().getId(),
+                        "Применая комиссия", sendedMessage, date, true, filecode, filename);
+            }
+            else {
+                message = new Message(0, role, dialogId, userService.getCurrentUser().getId(),
+                        "Экономический отдел", sendedMessage, date, true, filecode, filename);
+            }
+        }
         messageRepository.saveAttachments(message);
         return fileMapper.toDto(entity);
     }
