@@ -10,6 +10,9 @@ public interface ConsentRepository {
     @Select("SELECT * FROM consent WHERE entrant_id = #{id}")
     List<Consent> getConsent(@Param("id") int id);//получение всеё истории действий для определённого пользователя
 
+    @Select("SELECT * FROM consent ")
+    List<Consent> getConsents();//получение всеё истории действий для определённого пользователя
+
     @Select("SELECT * FROM consent WHERE entrant_id = #{id} and action_type='ADD'")
     List<Consent> getFullAdd(@Param("id") int id);
 
