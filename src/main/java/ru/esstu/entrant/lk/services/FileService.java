@@ -67,7 +67,7 @@ public class FileService {
         else{
             if(userRole.equals("ROLE_SELECTION_COMMIT")){
                 message = new Message(0, role, dialogId, userService.getCurrentUser().getId(),
-                        "Применая комиссия", sendedMessage, date, true, filecode, filename);
+                        "Приемная комиссия", sendedMessage, date, true, filecode, filename);
             }
             else {
                 message = new Message(0, role, dialogId, userService.getCurrentUser().getId(),
