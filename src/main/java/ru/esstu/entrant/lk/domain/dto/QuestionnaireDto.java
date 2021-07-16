@@ -24,5 +24,6 @@ public class QuestionnaireDto {
     private Boolean accelerated;
     private String email;
     private String mobileNumber;
-
+    private Boolean consent=false;
+    private String direction;
 }
