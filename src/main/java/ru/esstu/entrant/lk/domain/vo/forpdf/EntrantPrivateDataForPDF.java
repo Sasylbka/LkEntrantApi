@@ -9,14 +9,14 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EntrantPrivateDataForPDF {
-    private String familyName;
+    private String surname;
     private String name;
     private String patronymic;
-    private String gender;
-    private Date dateOfBirth;
-    private String cityOfBirth;
-    private String regionOfBirth;
-    private String snills;
-    private Integer reservist;//военнообязанный
-    private Boolean needsHostel;//нужно общежитие
+    private Boolean male;
+    private Date birthdate;
+    private String birthRegion;
+    private String birthCity;
+    private String snils;
+    private Integer militaryStatusId;//военнообязанный
+    private Boolean needHostel;//нужно общежитие
 }

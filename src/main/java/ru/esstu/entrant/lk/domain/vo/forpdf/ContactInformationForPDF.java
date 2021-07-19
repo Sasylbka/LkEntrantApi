@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BenefitInformationForPDF {
-    private Integer docTypeId;
-    private int militaryStatusId;
-    private boolean needHostel;
+public class ContactInformationForPDF {
+    private String telephone;
 }

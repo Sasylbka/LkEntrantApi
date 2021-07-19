@@ -10,9 +10,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdmissionInfoForPDF {
-    private int direction;
-    private boolean original_edu_document;
-    private Date registered_on;
+    private int specId;
+    private boolean originalEduDocument;
+    private Date registeredOn;
     private String directionName;
     private String levelOfEducation;
     private String eduForm;

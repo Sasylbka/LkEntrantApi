@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdditionalInformationForPDF {
-    private Integer region;
-    private Integer area;
+    private Integer regionId;
+    private Integer districtId;
     private String city;
     private String street;
-    private String numberOfBuilding;
-    private String numberOfApartments;
+    private String buildingNum;
+    private String flatNum;
     private String index;
-    private Integer type;
+    private Integer addressTypeId;
 }

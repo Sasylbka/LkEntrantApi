@@ -10,15 +10,15 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EducationInfoForPDF {
-    private Integer education;
-    private Integer yearOfFinished;
-    private String documentOfEducation;
-    private String serial;
-    private String number;
-    private Integer regionOfFinished;
-    private Integer districtOfFinished;
+    private Integer eduInstTypeId;
+    private Integer endYear;
+    private Integer eduDocTypeId;
+    private String docSeries;
+    private String docNumber;
+    private Integer regionId;
+    private Integer graduationPlaceId;
     private String city;
-    private String placeOfFinished;
-    private Date dateOfFinished;
-    private Integer studiedLanguage;
+    private String eduInstName;
+    private Date docDate;
+    private Integer langId;
 }
