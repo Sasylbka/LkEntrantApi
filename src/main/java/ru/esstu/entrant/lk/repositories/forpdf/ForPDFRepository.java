@@ -22,6 +22,11 @@ public interface ForPDFRepository {
             "WHERE public.speciality.spec_id=#{id} and public.educational_form.edu_form_id=public.speciality.edu_form_id")
     String getEduForm(@Param("id") int id);
 
+    @Select("SELECT edu_form_name " +
+            "FROM public.educational_level, public.speciality " +
+            "WHERE public.speciality.spec_id=#{id} and public.educational_level.edu_level_id=public.speciality.edu_level_id")
+    String getEduLevel(@Param("id") int id);
+
     @Select("SELECT public.edu_institution_type.name " +
             "FROM public.edu_institution_type, public.educational_document " +
             "WHERE public.educational_document.edu_inst_type_id=public.edu_institution_type.edu_inst_type_id " +

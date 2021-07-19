@@ -7,9 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import ru.esstu.entrant.lk.domain.vo.*;
 import ru.esstu.entrant.lk.domain.vo.Additionals.Keycloak;
 import ru.esstu.entrant.lk.domain.vo.PublicTables.Person;
-import ru.esstu.entrant.lk.domain.vo.forpdf.AdditionalInformationForPDF;
-import ru.esstu.entrant.lk.domain.vo.forpdf.EducationInfoForPDF;
-import ru.esstu.entrant.lk.domain.vo.forpdf.EntrantPrivateDataForPDF;
+import ru.esstu.entrant.lk.domain.vo.forpdf.*;
 
 import java.util.List;
 
@@ -53,5 +51,25 @@ public interface ReverseImportRepository {
             "FROM public.person " +
             "WHERE public.person_id.person_id=#{personId})")
     ContactInformation getContactFromPublic(@Param("personId")String personId);
-    ///////////*НЕОБХОДИМО СДЕЛАТЬ УЧЕБНЫЕ ДОСТИЖЕНИЯ, ЛЬГОТЫ, РОДИТЕЛЕЙ, НАПРАВЛЕНИЯ И СОГЛАСИЕ *////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Select("Select public.educational_document.achievement_id, public.entrant_doc.doc_type_id," +
+            "public.entrant.sport_qualification_id From public.educational_document,public.entrant_doc,public.entrant " +
+            "Where public.entrant.entrant_id=#{personId} and public.educational_document.entrant_id=#{personId} " +
+            "and public.entrant_doc.entrant_id=#{personId}")
+    List<EducationalAchievementsForPDF> getEducationalAchievementsFromPublic(@Param("personId") String personId);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Select("Select public.entrant_doc.doc_type_id,public.entrant.military_status_id,public.entrant.need_hostel " +
+            "From public.entrant_doc,public.entrant Where public.entrant_doc.entrant_id=#{personId} and " +
+            "public.entrant.entrant_id=#{personId}")
+    List<BenefitInformationForPDF> getBenefitInformationFromPublic(@Param("personId") String personId);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Select("Select public.person.name,public.person.surname,public.person.patronymic,public.person.telephone " +
+            "From public.person where person_id=#{personId}")
+    ParentsInformationForPDF getParentsInfoFromPublic(@Param("personId")String personId);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Select("Select public.entrance_info.spec_id,public.entrance_info.original_edu_document,public.entrance_info.registered_on From public.entrance_info Where entrant_id=#{personId}")
+    List<AdmissionInfoForPDF> getAdmissionInfoFromPublic(@Param("personId") String personId);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////*НЕОБХОДИМО СДЕЛАТЬ  СОГЛАСИЕ *////////////////////
+
 }

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.vo.*;
 import ru.esstu.entrant.lk.domain.vo.Additionals.Keycloak;
 import ru.esstu.entrant.lk.domain.vo.PublicTables.Person;
-import ru.esstu.entrant.lk.domain.vo.forpdf.AdditionalInformationForPDF;
-import ru.esstu.entrant.lk.domain.vo.forpdf.EducationInfoForPDF;
-import ru.esstu.entrant.lk.domain.vo.forpdf.EntrantPrivateDataForPDF;
+import ru.esstu.entrant.lk.domain.vo.PublicTables.RelativeFather;
+import ru.esstu.entrant.lk.domain.vo.PublicTables.RelativeMother;
+import ru.esstu.entrant.lk.domain.vo.forpdf.*;
 import ru.esstu.entrant.lk.repositories.*;
 import ru.esstu.entrant.lk.repositories.PublicTables.*;
 import ru.esstu.entrant.lk.repositories.forpdf.ForPDFRepository;
@@ -22,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,14 +35,15 @@ public class DocxGeneratorService {
     private final ConsentRepository consentRepository;
     private final PersonPTRepository personPTRepository;
     private final ReverseImportRepository reverseImportRepository;
-
+    private final RelativeMotherPTRepository relativeMotherPTRepository;
+    private final RelativeFatherPTRepository relativeFatherPTRepository;
     public DocxGeneratorService(
             AccessService accessService,
             EntrantRepository entrantRepository,
             ForPDFRepository forPDFRepository,
             ConsentRepository consentRepository,
             PersonPTRepository personPTRepository,
-            ReverseImportRepository reverseImportRepository) {
+            ReverseImportRepository reverseImportRepository, RelativeMotherPTRepository relativeMotherPTRepository, RelativeFatherPTRepository relativeFatherPTRepository) {
 
         this.entrantRepository = entrantRepository;
         this.accessService = accessService;
@@ -49,6 +51,8 @@ public class DocxGeneratorService {
         this.consentRepository = consentRepository;
         this.personPTRepository = personPTRepository;
         this.reverseImportRepository = reverseImportRepository;
+        this.relativeMotherPTRepository = relativeMotherPTRepository;
+        this.relativeFatherPTRepository = relativeFatherPTRepository;
     }
 
     private static final String TEMPLATE_NAME = "files/template.docx";
@@ -60,15 +64,24 @@ public class DocxGeneratorService {
         Person person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         List<AdditionalInformationForPDF> additionalInformation = reverseImportRepository.getAdditionalInfoFromPublic(person.getPersonId());
-        List<AdmissionInfo> admissionInfo = ;
-        BenefitInformation benefitInformation = ;
+        List<AdmissionInfoForPDF> admissionInfo = reverseImportRepository.getAdmissionInfoFromPublic(person.getPersonId());
+        for (AdmissionInfoForPDF list:admissionInfo) {
+            list.setDirectionName(forPDFRepository.getDirection(list.getDirection()));
+            list.setEduForm(forPDFRepository.getEduForm(list.getDirection()));
+            list.setLevelOfEducation(forPDFRepository.getEduLevel(list.getDirection()));
+        }
+        List<BenefitInformationForPDF> benefitInformation = reverseImportRepository.getBenefitInformationFromPublic(person.getPersonId());
         ContactInformation contactInformation = reverseImportRepository.getContactFromPublic(person.getPersonId());
-        List<EducationalAchievements> educationalAchievements = ;
+        List<EducationalAchievementsForPDF> educationalAchievements= reverseImportRepository.getEducationalAchievementsFromPublic(person.getPersonId());
         EducationInfoForPDF educationInfo = reverseImportRepository.getEducInfoFromPublic(person.getPersonId());
         EntrantPrivateDataForPDF entrantPrivateData = reverseImportRepository.getEntrantPrivateDataFromPublic(person.getPersonId());
         PassportData passportData = reverseImportRepository.getPassportDataFromPublic(person.getPersonId());
-        ParentsInformation parentsInformation = ;
-        List<Consent> consent = ;
+        RelativeMother relativeMother= relativeMotherPTRepository.getMotherId(person.getPersonId());
+        RelativeFather relativeFather= relativeFatherPTRepository.getFatherId(person.getPersonId());
+        List<ParentsInformationForPDF> parents= new ArrayList<>();
+        // В РОДИТЕЛЯХ: НУЛЕВОЙ ЭЛЕМЕНТ - МАТЬ, ПЕРВЫЙ - ОТЕЦ. МЕСТО РАБОТЫ БЕРИ ИЗ RelativeMother И RelativeFather
+        parents.add(reverseImportRepository.getParentsInfoFromPublic(relativeMother.getRealtiveId()));
+        parents.add(reverseImportRepository.getParentsInfoFromPublic(relativeFather.getRealtiveId()));
         InputStream templateInputStream = this.getClass().getClassLoader().getResourceAsStream(TEMPLATE_NAME);
         WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(templateInputStream);
         MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
