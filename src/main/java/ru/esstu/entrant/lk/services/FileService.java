@@ -3,7 +3,6 @@ package ru.esstu.entrant.lk.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.FileDto;
-import ru.esstu.entrant.lk.domain.dto.MessageDto;
 import ru.esstu.entrant.lk.domain.mappers.FileMapper;
 import ru.esstu.entrant.lk.domain.mappers.MessageMapper;
 import ru.esstu.entrant.lk.domain.vo.EntrantPrivateData;
@@ -27,17 +26,17 @@ public class FileService {
     private final EntrantPrivateDataRepository entrantPrivateDataRepository;
     private final MessageRepository messageRepository;
     private final DialogService dialogService;
-    private final MessageMapper messageMapper;
+    private final UserService userService;
     public FileService(FileRepository fileRepository,
                        FileMapper fileMapper,
-                       AccessService accessService, EntrantPrivateDataRepository entrantPrivateDataRepository, MessageRepository messageRepository, DialogService dialogService, MessageMapper messageMapper) {
+                       AccessService accessService, EntrantPrivateDataRepository entrantPrivateDataRepository, MessageRepository messageRepository, DialogService dialogService, UserService userService) {
         this.fileRepository = fileRepository;
         this.fileMapper = fileMapper;
         this.accessService = accessService;
         this.entrantPrivateDataRepository = entrantPrivateDataRepository;
         this.messageRepository = messageRepository;
         this.dialogService = dialogService;
-        this.messageMapper = messageMapper;
+        this.userService = userService;
     }
     public Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
         return java.sql.Timestamp.valueOf(dateToConvert);
@@ -63,8 +62,22 @@ public class FileService {
         EntrantPrivateData entrantPrivateData = entrantPrivateDataRepository.getEntrantPrivateData(entrantId);
         LocalDateTime localDateTime = LocalDateTime.now();
         Date date = convertToDateViaSqlTimestamp(localDateTime);
-        Message message = new Message(0,role,dialogId,entrantId,entrantPrivateData.getName()+" "+entrantPrivateData.getFamilyName()+" "+
-                entrantPrivateData.getPatronymic(),sendedMessage,date,true,filecode,filename);
+        Message message=null;
+        String userRole = userService.getCurrentUser().getUserRole().toString();
+        if(userRole.equals("ROLE_ENTRANT")) {
+            message = new Message(0, role, dialogId, entrantId, entrantPrivateData.getFamilyName() + " " + entrantPrivateData.getName() + " " +
+                    entrantPrivateData.getPatronymic(), sendedMessage, date, true, filecode, filename);
+        }
+        else{
+            if(userRole.equals("ROLE_SELECTION_COMMIT")){
+                message = new Message(0, role, dialogId, userService.getCurrentUser().getId(),
+                        "Приемная комиссия", sendedMessage, date, true, filecode, filename);
+            }
+            else {
+                message = new Message(0, role, dialogId, userService.getCurrentUser().getId(),
+                        "Экономический отдел", sendedMessage, date, true, filecode, filename);
+            }
+        }
         messageRepository.saveAttachments(message);
         dialogService.update(dialogId, role, message.getId());
         if (UserUtils.isModerator() || UserUtils.isEconomic()) {
