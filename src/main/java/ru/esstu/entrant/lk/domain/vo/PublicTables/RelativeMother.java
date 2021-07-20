@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RelativeMother {
     private String realtiveId;
+    private String labourPlace;
 }

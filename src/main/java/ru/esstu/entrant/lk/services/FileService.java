@@ -4,12 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.FileDto;
 import ru.esstu.entrant.lk.domain.mappers.FileMapper;
+import ru.esstu.entrant.lk.domain.mappers.MessageMapper;
 import ru.esstu.entrant.lk.domain.vo.EntrantPrivateData;
 import ru.esstu.entrant.lk.domain.vo.File;
 import ru.esstu.entrant.lk.domain.vo.Message;
 import ru.esstu.entrant.lk.repositories.EntrantPrivateDataRepository;
 import ru.esstu.entrant.lk.repositories.FileRepository;
 import ru.esstu.entrant.lk.repositories.MessageRepository;
+import ru.esstu.entrant.lk.utils.UserUtils;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -23,15 +25,17 @@ public class FileService {
     private final AccessService accessService;
     private final EntrantPrivateDataRepository entrantPrivateDataRepository;
     private final MessageRepository messageRepository;
+    private final DialogService dialogService;
     private final UserService userService;
     public FileService(FileRepository fileRepository,
                        FileMapper fileMapper,
-                       AccessService accessService, EntrantPrivateDataRepository entrantPrivateDataRepository, MessageRepository messageRepository, UserService userService) {
+                       AccessService accessService, EntrantPrivateDataRepository entrantPrivateDataRepository, MessageRepository messageRepository, DialogService dialogService, UserService userService) {
         this.fileRepository = fileRepository;
         this.fileMapper = fileMapper;
         this.accessService = accessService;
         this.entrantPrivateDataRepository = entrantPrivateDataRepository;
         this.messageRepository = messageRepository;
+        this.dialogService = dialogService;
         this.userService = userService;
     }
     public Date convertToDateViaSqlTimestamp(LocalDateTime dateToConvert) {
@@ -49,9 +53,9 @@ public class FileService {
         return fileMapper.toDto(entity);
     }
     public FileDto saveInMessage(final String filecode,
-                                 final String type,final int entrantId,final String fileName,
-                                 final String fileExtension,final int dialogId,final String role,final String sendedMessage,
-                                 final String filename){
+                                    final String type, final int entrantId, final String fileName,
+                                    final String fileExtension, final int dialogId, final String role, final String sendedMessage,
+                                    final String filename){
         FileDto fileDto=new FileDto(0,entrantId,fileName,fileExtension,type,filecode);
         File entity=fileMapper.toVO(fileDto);
         fileRepository.save(entity);
@@ -61,7 +65,7 @@ public class FileService {
         Message message=null;
         String userRole = userService.getCurrentUser().getUserRole().toString();
         if(userRole.equals("ROLE_ENTRANT")) {
-             message = new Message(0, role, dialogId, entrantId, entrantPrivateData.getFamilyName() + " " + entrantPrivateData.getName() + " " +
+            message = new Message(0, role, dialogId, entrantId, entrantPrivateData.getFamilyName() + " " + entrantPrivateData.getName() + " " +
                     entrantPrivateData.getPatronymic(), sendedMessage, date, true, filecode, filename);
         }
         else{
@@ -75,6 +79,12 @@ public class FileService {
             }
         }
         messageRepository.saveAttachments(message);
+        dialogService.update(dialogId, role, message.getId());
+        if (UserUtils.isModerator() || UserUtils.isEconomic()) {
+            dialogService.updateLRMM(dialogId, role, message.getId());
+        } else if (UserUtils.isEntrant()) {
+            dialogService.updateLREM(dialogId, role, message.getId());
+        }
         return fileMapper.toDto(entity);
     }
     public void delete(final int idForDelete){
