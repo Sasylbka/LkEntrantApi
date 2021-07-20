@@ -27,7 +27,9 @@ public class QuestionnaireMapper{
                 vo.getContract(),
                 vo.getAccelerated(),
                 vo.getEmail(),
-                vo.getMobileNumber()
+                vo.getMobileNumber(),
+                vo.getConsent(),
+                vo.getDirection()
         );
     }
     public Questionnaire toVO(QuestionnaireDto dto) {
@@ -48,7 +50,9 @@ public class QuestionnaireMapper{
                 dto.getContract(),
                 dto.getAccelerated(),
                 dto.getEmail(),
-                dto.getMobileNumber()
+                dto.getMobileNumber(),
+                dto.getConsent(),
+                dto.getDirection()
         );
     }
     public List<QuestionnaireDto> toDtos (List<Questionnaire> vos) {
