@@ -56,6 +56,10 @@ dependencies {
     implementation 'org.mybatis:mybatis-spring:2.0.2'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3'
     implementation 'org.docx4j:docx4j-ImportXHTML:8.2.1'
+    implementation 'org.docx4j:docx4j-JAXB-Internal:8.0.0'
+    implementation 'org.docx4j:docx4j-JAXB-ReferenceImpl:8.0.0'
+    implementation 'org.docx4j:docx4j-JAXB-MOXy:8.0.0'
+    implementation 'org.docx4j:docx4j-export-fo:8.0.0'
 
     implementation fileTree(dir: 'lib', include: ['*.jar'])
     implementation group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.6.4'

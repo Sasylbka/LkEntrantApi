@@ -1,6 +1,7 @@
 package ru.esstu.entrant.lk.services.forpdf;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.common.protocol.types.Field;
 import org.docx4j.Docx4J;
 import org.docx4j.model.datastorage.migration.VariablePrepare;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -22,6 +23,7 @@ import ru.esstu.entrant.lk.services.reference.EntrantDocTypeRefService;
 import ru.esstu.entrant.lk.utils.DateUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import javax.transaction.Transactional;
@@ -110,9 +112,8 @@ public class DocxGeneratorService {
         VariablePrepare.prepare(wordMLPackage);
         HashMap<String, String> variables = new HashMap<>();
         //Личные данные
-        variables.put("name", entrantPrivateData.getName());
-        variables.put("familyName", entrantPrivateData.getSurname());
-        variables.put("patronymic", entrantPrivateData.getPatronymic());
+        String FIO =entrantPrivateData.getName()+" "+entrantPrivateData.getSurname()+" "+entrantPrivateData.getPatronymic();
+        variables.put("fio", FIO);
         if(entrantPrivateData.getMale())
         {
             variables.put("gender", "Мужчина");
@@ -272,7 +273,8 @@ public class DocxGeneratorService {
         variables.put("consentData", d);
         documentPart.variableReplace(variables);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        wordMLPackage.save(outputStream);
+        //wordMLPackage.save(outputStream);
+        Docx4J.toPDF(wordMLPackage,outputStream);
         return outputStream.toByteArray();
     }
 
