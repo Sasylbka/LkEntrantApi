@@ -23,5 +23,6 @@ public class Questionnaire {
     private Boolean accelerated;
     private String email;
     private String mobileNumber;
-
+    private Boolean consent=false;
+    private String direction;
 }
