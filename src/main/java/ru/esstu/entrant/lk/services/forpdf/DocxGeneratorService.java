@@ -68,7 +68,7 @@ public class DocxGeneratorService {
 
     @Transactional
     public byte[] generateDocxFileFromTemplate(final int entrantId) throws Exception {
-        //accessService.commonAccessCheck(entrantId);
+        accessService.commonAccessCheck(entrantId);
         Keycloak keycloak = entrantRepository.getKeycloakGuid(entrantId);
         Person person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

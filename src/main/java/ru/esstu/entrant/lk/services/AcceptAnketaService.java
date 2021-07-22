@@ -156,7 +156,7 @@ public class AcceptAnketaService {
                 acceptAnketaRepository.createAddressPerson(additionalInformation.get(0), person, guid, 2);
             } else
                 for (int i = 0; i < additionalInformation.size(); i++) {
-                    if (additionalInformation.get(i).getType() == "REGISTRATION_ADDRESS") {
+                    if (additionalInformation.get(i).getType().equals("REGISTRATION_ADDRESS")) {
                         guid = IdFactory.getGUID(this);
                         acceptAnketaRepository.addAddress(additionalInformation.get(i), changesDate, guid, Integer.parseInt(additionalInformation.get(i).getRegion()));
                         acceptAnketaRepository.createAddressPerson(additionalInformation.get(i), person, guid, 1);
