@@ -35,7 +35,7 @@ public interface AcceptAnketaRepository {
             "VALUES (#{guid},#{additionalInformation.city},#{additionalInformation.street}, " +
             "#{additionalInformation.index}, #{regionId}," +
             " #{additionalInformation.numberOfBuilding}, #{additionalInformation.numberOfApartments}, " +
-            " #{changesDate.dateOfCreation})")
+            " #{changesDate.dateOfSend})")
     long addAddress(@Param("additionalInformation")AdditionalInformation additionalInformation,
                    @Param("changesDate") ChangesDate changesDate,@Param("guid") String guid,@Param("regionId") int regionId);
     @Insert("INSERT INTO public.person_address_mtm(" +
@@ -88,7 +88,7 @@ public interface AcceptAnketaRepository {
             "entrant_id, spec_id,registered_on ,taken_docs_away, " +
             "prefer_number,edu_manager_id,passed_preparatory_course,admittance_category_id) " +
             "VALUES (#{guid}, #{person.personId}, " +
-            "#{directionId}, #{changesDate.dateOfCreation}, " +
+            "#{directionId}, #{changesDate.dateOfSend}, " +
             "false,#{prefer_number}, " +
             "#{moderatorId},false,#{admittanceCategory})")
     long addSpeciality(@Param("admissionInfo") AdmissionInfo admissionInfo,
@@ -130,7 +130,7 @@ public interface AcceptAnketaRepository {
     @Insert("Insert into public.entrant (entrant_id,military_status_id,nat_id,cit_id," +
             "need_hostel,statement_date,entrant_status_id,username,sport_qualification_id,graduation_place_id) " +
             "Values(#{person.personId},#{militaryStatusId},0,1," +
-            "#{needHostel},#{changesDate.dateOfCreation},3," +
+            "#{needHostel},#{changesDate.dateOfSend},3," +
             "#{entrant.login},#{sportQualificationId},#{educationInfo.districtOfFinished})")
     long addEntrant(@Param("person")Person person,
                     @Param("entrantPrivateData") EntrantPrivateData entrantPrivateData,

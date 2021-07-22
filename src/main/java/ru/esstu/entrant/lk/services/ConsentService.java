@@ -126,7 +126,7 @@ ConsentService {
             Consent entityC = consentMapper.toVO(consentDto);
             consentRepository.save(entityC);
             notificationAsync.sendNotificationStatusConsentChanged(entityC);
-            importConsentRepository.UpdateOriginalDocument(true, person.getPersonId(),Integer.parseInt(entity.getDirection()));
+            importConsentRepository.ReceiveOriginalDocument(true, person.getPersonId(),Integer.parseInt(entity.getDirection()),date);
             return admissionInfoMapper.toDto(entity);
         }
         else {throw new PermissionDeniedException(
@@ -161,7 +161,7 @@ ConsentService {
         Consent entityC = consentMapper.toVO(consentDto);
         //Сохранение в историю запросов
         consentRepository.save(entityC);
-        importConsentRepository.UpdateOriginalDocument(false, person.getPersonId(),Integer.parseInt(entity.getDirection()));
+        importConsentRepository.RevocationOriginalDocument(false, person.getPersonId(),Integer.parseInt(entity.getDirection()),date);
         return admissionInfoMapper.toDto(entity);
     }
 }
