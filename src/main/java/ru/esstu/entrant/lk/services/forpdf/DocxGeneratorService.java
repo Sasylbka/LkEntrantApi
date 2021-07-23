@@ -40,6 +40,7 @@ import java.io.*;
 
 import javax.transaction.Transactional;
 import java.io.File;
+import java.net.URL;
 import java.util.*;
 
 @Service
@@ -75,7 +76,7 @@ public class DocxGeneratorService {
     }
 
     private static final String TEMPLATE_NAME = "files/template.docx";
-    private static final String TEMP_NAME = "files/temp.docx";
+    private static final String PDF_NAME = "files/file.pdf";
 
     @Transactional
     public byte[] generateDocxFileFromTemplate(final int entrantId) throws Exception {
@@ -117,14 +118,12 @@ public class DocxGeneratorService {
         // В РОДИТЕЛЯХ: НУЛЕВОЙ ЭЛЕМЕНТ - МАТЬ, ПЕРВЫЙ - ОТЕЦ. МЕСТО РАБОТЫ БЕРИ ИЗ RelativeMother И RelativeFather
         parents.add(reverseImportRepository.getParentsInfoFromPublic(relativeMother.getRealtiveId()));
         parents.add(reverseImportRepository.getParentsInfoFromPublic(relativeFather.getRealtiveId()));
-        InputStream templateInputStream = this.getClass().getClassLoader().getResourceAsStream(TEMPLATE_NAME);
-        WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(templateInputStream);
-        MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
-        VariablePrepare.prepare(wordMLPackage);
+        //InputStream templateInputStream = this.getClass().getClassLoader().getResourceAsStream(TEMPLATE_NAME);
+        //WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(templateInputStream);
+        //MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
+        //VariablePrepare.prepare(wordMLPackage);
 
-
-        File docxFile = new File("src/main/resources/files/template.docx");
-        InputStream in = new FileInputStream(docxFile);
+        InputStream in = this.getClass().getClassLoader().getResourceAsStream(TEMPLATE_NAME);
         IXDocReport report = XDocReportRegistry.getRegistry().loadReport(in, TemplateEngineKind.Velocity);
         IContext context = report.createContext();
 
@@ -298,14 +297,10 @@ public class DocxGeneratorService {
         PdfOptions pdfOptions = PdfOptions.create();
         pdfOptions.fontEncoding("iso-8859-15");
         options.subOptions(pdfOptions);
-        OutputStream outputStream = new FileOutputStream(new File(docxFile.getParent() +"\\file.pdf"));
+        OutputStream outputStream = new FileOutputStream(new File(System.getProperty("user.dir")+"\\src\\main\\resources\\files\\file.pdf"));
         report.convert(context,options,outputStream);
-        File pdf = new File("src/main/resources/files/file.pdf");
-        ByteArrayOutputStream os=new ByteArrayOutputStream();
-        RandomAccessFile f = new RandomAccessFile(pdf,"r");
-        byte[] fileContent = new byte[(int)f.length()];
-        f.readFully(fileContent);
-        return fileContent;
+        InputStream pdf = this.getClass().getClassLoader().getResourceAsStream(PDF_NAME);
+        return pdf.readAllBytes();
     }
 
 }
