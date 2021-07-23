@@ -1,7 +1,15 @@
 package ru.esstu.entrant.lk.services.forpdf;
 
+import fr.opensagres.xdocreport.converter.ConverterTypeTo;
+import fr.opensagres.xdocreport.converter.ConverterTypeVia;
+import fr.opensagres.xdocreport.converter.Options;
+import fr.opensagres.xdocreport.document.IXDocReport;
+import fr.opensagres.xdocreport.document.registry.XDocReportRegistry;
+import fr.opensagres.xdocreport.template.IContext;
+import fr.opensagres.xdocreport.template.TemplateEngineKind;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.protocol.types.Field;
+import org.apache.poi.xwpf.converter.pdf.PdfOptions;
 import org.docx4j.Docx4J;
 import org.docx4j.model.datastorage.migration.VariablePrepare;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -22,11 +30,10 @@ import ru.esstu.entrant.lk.services.AccessService;
 import ru.esstu.entrant.lk.services.reference.EntrantDocTypeRefService;
 import ru.esstu.entrant.lk.utils.DateUtils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.*;
 
 import javax.transaction.Transactional;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -68,7 +75,7 @@ public class DocxGeneratorService {
 
     @Transactional
     public byte[] generateDocxFileFromTemplate(final int entrantId) throws Exception {
-        accessService.commonAccessCheck(entrantId);
+        //accessService.commonAccessCheck(entrantId);
         Keycloak keycloak = entrantRepository.getKeycloakGuid(entrantId);
         Person person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,7 +113,7 @@ public class DocxGeneratorService {
         // В РОДИТЕЛЯХ: НУЛЕВОЙ ЭЛЕМЕНТ - МАТЬ, ПЕРВЫЙ - ОТЕЦ. МЕСТО РАБОТЫ БЕРИ ИЗ RelativeMother И RelativeFather
         parents.add(reverseImportRepository.getParentsInfoFromPublic(relativeMother.getRealtiveId()));
         parents.add(reverseImportRepository.getParentsInfoFromPublic(relativeFather.getRealtiveId()));
-        InputStream templateInputStream = this.getClass().getClassLoader().getResourceAsStream(TEMPLATE_NAME);
+        File templateInputStream = new File (this.getClass().getClassLoader().getResource("files/template1.docx").getFile());
         WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(templateInputStream);
         MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
         VariablePrepare.prepare(wordMLPackage);
@@ -276,6 +283,7 @@ public class DocxGeneratorService {
         //wordMLPackage.save(outputStream);
         Docx4J.toPDF(wordMLPackage,outputStream);
         return outputStream.toByteArray();
+
     }
 
 }
