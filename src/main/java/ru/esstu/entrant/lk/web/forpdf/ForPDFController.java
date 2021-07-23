@@ -12,6 +12,10 @@ import ru.esstu.entrant.lk.services.forpdf.DocxGeneratorService;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.io.RandomAccessFile;
 import java.util.List;
 
 @RestController
@@ -25,10 +29,15 @@ public class ForPDFController {
     }
     @RequestMapping(method = RequestMethod.GET, path = "/getDoc.pdf")
     public void get(final int id, HttpServletResponse response) throws Exception {
-        byte[] result;
-        result = docxGeneratorService.generateDocxFileFromTemplate(id);
+        File file = docxGeneratorService.generateDocxFileFromTemplate(id);
+        File pdf = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\PDF","file.pdf");
+        RandomAccessFile f = new RandomAccessFile(pdf,"r");
+        byte[] fileContent = new byte[(int)f.length()];
+        f.readFully(fileContent);
+        f.close();
+        boolean deleting = file.delete();
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "filename=\"message.pdf\"");
-        response.getOutputStream().write(result);
+        response.setHeader("Content-Disposition", "filename=\"file.pdf\"");
+        response.getOutputStream().write(fileContent);
     }
 }

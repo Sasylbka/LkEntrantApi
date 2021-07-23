@@ -76,11 +76,13 @@ public class DocxGeneratorService {
     }
 
     private static final String TEMPLATE_NAME = "files/template.docx";
-    private static final String PDF_NAME = "files/file.pdf";
+    private static final String PDF_NAME = "PDF/file.pdf";
 
     @Transactional
-    public byte[] generateDocxFileFromTemplate(final int entrantId) throws Exception {
+    public File generateDocxFileFromTemplate(final int entrantId) throws Exception {
         //accessService.commonAccessCheck(entrantId);
+        File file = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\PDF","file.pdf");
+        boolean creating = file.createNewFile();
         Keycloak keycloak = entrantRepository.getKeycloakGuid(entrantId);
         Person person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -297,10 +299,10 @@ public class DocxGeneratorService {
         PdfOptions pdfOptions = PdfOptions.create();
         pdfOptions.fontEncoding("iso-8859-15");
         options.subOptions(pdfOptions);
-        OutputStream outputStream = new FileOutputStream(new File(System.getProperty("user.dir")+"\\src\\main\\resources\\files\\file.pdf"));
+        OutputStream outputStream = new FileOutputStream(file);
         report.convert(context,options,outputStream);
-        InputStream pdf = this.getClass().getClassLoader().getResourceAsStream(PDF_NAME);
-        return pdf.readAllBytes();
+        outputStream.close();
+        return file;
     }
 
 }
