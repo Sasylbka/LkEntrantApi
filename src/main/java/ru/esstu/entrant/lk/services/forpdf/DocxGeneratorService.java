@@ -113,7 +113,7 @@ public class DocxGeneratorService {
         // В РОДИТЕЛЯХ: НУЛЕВОЙ ЭЛЕМЕНТ - МАТЬ, ПЕРВЫЙ - ОТЕЦ. МЕСТО РАБОТЫ БЕРИ ИЗ RelativeMother И RelativeFather
         parents.add(reverseImportRepository.getParentsInfoFromPublic(relativeMother.getRealtiveId()));
         parents.add(reverseImportRepository.getParentsInfoFromPublic(relativeFather.getRealtiveId()));
-        File templateInputStream = new File (this.getClass().getClassLoader().getResource("files/template1.docx").getFile());
+        InputStream templateInputStream = this.getClass().getClassLoader().getResourceAsStream(TEMPLATE_NAME);
         WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(templateInputStream);
         MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
         VariablePrepare.prepare(wordMLPackage);
