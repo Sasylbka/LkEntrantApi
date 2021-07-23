@@ -3,7 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.4.20-M2'
     id "com.gorylenko.gradle-git-properties" version "2.2.0"
 }
-
 apply plugin: 'pmd'
 apply plugin: 'io.spring.dependency-management'
 
@@ -60,7 +59,8 @@ dependencies {
     implementation 'org.docx4j:docx4j-JAXB-ReferenceImpl:8.0.0'
     implementation 'org.docx4j:docx4j-JAXB-MOXy:8.0.0'
     implementation 'org.docx4j:docx4j-export-fo:8.0.0'
-
+    implementation group: 'fr.opensagres.xdocreport', name: 'xdocreport', version: '1.0.4'
+    implementation group: 'org.apache.velocity', name: 'velocity', version: '1.6.2'
     implementation fileTree(dir: 'lib', include: ['*.jar'])
     implementation group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.6.4'
 
