@@ -294,7 +294,7 @@ public class DocxGeneratorService {
         //InputStream docxFile = new FileInputStream(Objects.requireNonNull(this.getClass().getResourceAsStream(TEMP_NAME));
         Options options = Options.getTo(ConverterTypeTo.PDF).via(ConverterTypeVia.XWPF);
         PdfOptions pdfOptions = PdfOptions.create();
-        pdfOptions.fontEncoding("Cp1251");
+        pdfOptions.fontEncoding("UTF8");
         options.subOptions(pdfOptions);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         report.convert(context,options,outputStream);
