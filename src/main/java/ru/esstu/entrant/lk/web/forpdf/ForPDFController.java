@@ -29,15 +29,9 @@ public class ForPDFController {
     }
     @RequestMapping(method = RequestMethod.GET, path = "/getDoc.pdf")
     public void get(final int id, HttpServletResponse response) throws Exception {
-        File file = docxGeneratorService.generateDocxFileFromTemplate(id);
-        File pdf = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\PDF","file.pdf");
-        RandomAccessFile f = new RandomAccessFile(pdf,"r");
-        byte[] fileContent = new byte[(int)f.length()];
-        f.readFully(fileContent);
-        f.close();
-        boolean deleting = file.delete();
+        byte [] result = docxGeneratorService.generateDocxFileFromTemplate(id);
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "filename=\"file.pdf\"");
-        response.getOutputStream().write(fileContent);
+        response.getOutputStream().write(result);
     }
 }

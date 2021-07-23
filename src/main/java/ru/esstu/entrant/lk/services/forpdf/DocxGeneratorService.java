@@ -79,10 +79,8 @@ public class DocxGeneratorService {
     private static final String PDF_NAME = "PDF/file.pdf";
 
     @Transactional
-    public File generateDocxFileFromTemplate(final int entrantId) throws Exception {
+    public byte[] generateDocxFileFromTemplate(final int entrantId) throws Exception {
         //accessService.commonAccessCheck(entrantId);
-        File file = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\PDF","file.pdf");
-        boolean creating = file.createNewFile();
         Keycloak keycloak = entrantRepository.getKeycloakGuid(entrantId);
         Person person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -292,17 +290,15 @@ public class DocxGeneratorService {
         context.put("consentData", d);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         //documentPart.variableReplace(context);
         //InputStream docxFile = new FileInputStream(Objects.requireNonNull(this.getClass().getResourceAsStream(TEMP_NAME));
         Options options = Options.getTo(ConverterTypeTo.PDF).via(ConverterTypeVia.XWPF);
         PdfOptions pdfOptions = PdfOptions.create();
         pdfOptions.fontEncoding("iso-8859-15");
         options.subOptions(pdfOptions);
-        OutputStream outputStream = new FileOutputStream(file);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         report.convert(context,options,outputStream);
-        outputStream.close();
-        return file;
+        return outputStream.toByteArray();
     }
 
 }
