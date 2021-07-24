@@ -2,33 +2,42 @@ package ru.esstu.entrant.lk.services.forpdf;
 
 import lombok.extern.slf4j.Slf4j;
 import org.docx4j.Docx4J;
+import org.docx4j.fonts.IdentityPlusMapper;
+import org.docx4j.fonts.Mapper;
+import org.docx4j.fonts.PhysicalFont;
+import org.docx4j.fonts.PhysicalFonts;
+import org.docx4j.jaxb.Context;
 import org.docx4j.model.datastorage.migration.VariablePrepare;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.WordprocessingML.FontTablePart;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+import org.docx4j.wml.RFonts;
 import org.springframework.stereotype.Service;
 import ru.esstu.entrant.lk.domain.dto.reference.EntrantDocTypeDto;
-import ru.esstu.entrant.lk.domain.vo.*;
 import ru.esstu.entrant.lk.domain.vo.Additionals.Keycloak;
 import ru.esstu.entrant.lk.domain.vo.PublicTables.Person;
 import ru.esstu.entrant.lk.domain.vo.PublicTables.RelativeFather;
 import ru.esstu.entrant.lk.domain.vo.PublicTables.RelativeMother;
 import ru.esstu.entrant.lk.domain.vo.forpdf.*;
-import ru.esstu.entrant.lk.repositories.*;
-import ru.esstu.entrant.lk.repositories.PublicTables.*;
+import ru.esstu.entrant.lk.repositories.ConsentRepository;
+import ru.esstu.entrant.lk.repositories.EntrantRepository;
+import ru.esstu.entrant.lk.repositories.PublicTables.PersonPTRepository;
+import ru.esstu.entrant.lk.repositories.PublicTables.RelativeFatherPTRepository;
+import ru.esstu.entrant.lk.repositories.PublicTables.RelativeMotherPTRepository;
 import ru.esstu.entrant.lk.repositories.forpdf.ForPDFRepository;
 import ru.esstu.entrant.lk.repositories.forpdf.ReverseImportRepository;
 import ru.esstu.entrant.lk.services.AccessService;
 import ru.esstu.entrant.lk.services.reference.EntrantDocTypeRefService;
 import ru.esstu.entrant.lk.utils.DateUtils;
 
+import javax.transaction.Transactional;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-
-import javax.transaction.Transactional;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -272,6 +281,29 @@ public class DocxGeneratorService {
         documentPart.variableReplace(variables);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         //wordMLPackage.save(outputStream);
+        Mapper fontMapper = new IdentityPlusMapper();
+        String fontFamily = "Arial";
+        URL simsunUrl = Thread.currentThread().getContextClassLoader().getResource("files/arial.ttf");
+        PhysicalFonts.addPhysicalFonts(fontFamily, simsunUrl);
+        PhysicalFont simsunFont = PhysicalFonts.get(fontFamily);
+//        FontTablePart fontTablePart= wordMLPackage.getMainDocumentPart().getFontTablePart();
+//        fontTablePart.processEmbeddings();
+//        Set<String> fontsInUse = wordMLPackage.getMainDocumentPart().fontsInUse();
+//         Make each embedded font available to the font mapper.
+//        for(String s : fontsInUse) {
+//            PhysicalFont physicalFont = PhysicalFonts.get(s);
+//            fontMapper.put(s, physicalFont);
+//        }
+        // Now you can access your fonts, such as 'Comic Sans' or 'Arial Unicode MS'.
+        //PhysicalFont font = PhysicalFonts.getPhysicalFonts().get(
+                //"");
+        //fontMapper.put(Mapper.FONT_FALLBACK, font);
+        fontMapper.put(fontFamily, simsunFont);
+        RFonts rfonts = Context.getWmlObjectFactory().createRFonts();
+        rfonts.setAsciiTheme(null);
+        rfonts.setAscii(fontFamily);
+        wordMLPackage.getMainDocumentPart().getPropertyResolver()
+                .getDocumentDefaultRPr().setRFonts(rfonts);
         Docx4J.toPDF(wordMLPackage,outputStream);
         return outputStream.toByteArray();
     }
