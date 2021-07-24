@@ -271,8 +271,7 @@ public class DocxGeneratorServiceTest {
         variables.put("consentData", d);
         documentPart.variableReplace(variables);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        //wordMLPackage.save(outputStream);
-        Docx4J.toPDF(wordMLPackage,outputStream);
+        wordMLPackage.save(outputStream);
         return outputStream.toByteArray();
     }
 
