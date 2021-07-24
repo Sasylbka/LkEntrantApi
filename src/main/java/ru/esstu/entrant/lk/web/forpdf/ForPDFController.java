@@ -27,11 +27,11 @@ public class ForPDFController {
     public ForPDFController( DocxGeneratorService docxGeneratorService) {
         this.docxGeneratorService = docxGeneratorService;
     }
-    @RequestMapping(method = RequestMethod.GET, path = "/getDoc.pdf")
+    @RequestMapping(method = RequestMethod.GET, path = "/getDoc")
     public void get(final int id, HttpServletResponse response) throws Exception {
-        byte [] result = docxGeneratorService.generateDocxFileFromTemplate(id);
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "filename=\"file.pdf\"");
+        byte[] result;
+        result = docxGeneratorService.generateDocxFileFromTemplate(id);
+        response.setHeader("Content-Disposition", "attachment; filename=\"message.docx\"");
         response.getOutputStream().write(result);
     }
 }
