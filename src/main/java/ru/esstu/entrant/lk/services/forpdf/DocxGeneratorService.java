@@ -19,6 +19,7 @@ import ru.esstu.entrant.lk.domain.vo.PublicTables.Person;
 import ru.esstu.entrant.lk.domain.vo.PublicTables.RelativeFather;
 import ru.esstu.entrant.lk.domain.vo.PublicTables.RelativeMother;
 import ru.esstu.entrant.lk.domain.vo.forpdf.*;
+import ru.esstu.entrant.lk.exceptions.InvalidObjectException;
 import ru.esstu.entrant.lk.repositories.ConsentRepository;
 import ru.esstu.entrant.lk.repositories.EntrantRepository;
 import ru.esstu.entrant.lk.repositories.PublicTables.PersonPTRepository;
@@ -78,51 +79,57 @@ public class DocxGeneratorService {
         accessService.commonAccessCheck(entrantId);
         Keycloak keycloak = entrantRepository.getKeycloakGuid(entrantId);
         Person person = personPTRepository.getPerson(keycloak.getKeycloakGuid());
+        if(person==null){
+            throw new InvalidObjectException("Этот пользователь не импортирован");
+        }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         List<AdditionalInformationForPDF> additionalInformation = reverseImportRepository.getAdditionalInfoFromPublic(person.getPersonId());
         List<AdmissionInfoForPDF> admissionInfo = reverseImportRepository.getAdmissionInfoFromPublic(person.getPersonId());
         List<BenefitInformationForPDF> benefitInformation = reverseImportRepository.getBenefitInformationFromPublic(person.getPersonId());
-        for (AdmissionInfoForPDF list:admissionInfo) {
+        for (AdmissionInfoForPDF list : admissionInfo) {
             list.setDirectionName(forPDFRepository.getDirection(list.getSpecId()));
             list.setEduForm(forPDFRepository.getEduForm(list.getSpecId()));
             list.setLevelOfEducation(forPDFRepository.getEduLevel(list.getSpecId()));
         }
-        Boolean olympiad=false;
-        Boolean benefit=false;
+        Boolean olympiad = false;
+        Boolean benefit = false;
         List<EntrantDocTypeDto> entrantDocTypes = entrantDocTypeRefService.getEntrantDocTypes();
-        List<Integer> doc_id=new ArrayList<>();
-        for (EntrantDocTypeDto doc:entrantDocTypes) {
+        List<Integer> doc_id = new ArrayList<>();
+        for (EntrantDocTypeDto doc : entrantDocTypes) {
             doc_id.add(doc.getDocTypeId());
         }
-        for (BenefitInformationForPDF element:benefitInformation) {
-            if(doc_id.contains(element.getDocTypeId())){
-                benefit=true;
-            }
-            else{
-                olympiad=true;
+        for (BenefitInformationForPDF element : benefitInformation) {
+            if (doc_id.contains(element.getDocTypeId())) {
+                benefit = true;
+            } else {
+                olympiad = true;
             }
         }
         ContactInformationForPDF contactInformation = reverseImportRepository.getContactFromPublic(person.getPersonId());
-        EducationalAchievementsForPDF educationalAchievements= reverseImportRepository.getEducationalAchievementsFromPublic(person.getPersonId());
+        EducationalAchievementsForPDF educationalAchievements = reverseImportRepository.getEducationalAchievementsFromPublic(person.getPersonId());
         EducationInfoForPDF educationInfo = reverseImportRepository.getEducInfoFromPublic(person.getPersonId());
         EntrantPrivateDataForPDF entrantPrivateData = reverseImportRepository.getEntrantPrivateDataFromPublic(person.getPersonId());
         PassportDataForPDF passportData = reverseImportRepository.getPassportDataFromPublic(person.getPersonId());
-        RelativeMother relativeMother= relativeMotherPTRepository.getMotherId(person.getPersonId());
-        RelativeFather relativeFather= relativeFatherPTRepository.getFatherId(person.getPersonId());
-        List<ParentsInformationForPDF> parents= new ArrayList<>();
+        RelativeMother relativeMother = relativeMotherPTRepository.getMotherId(person.getPersonId());
+        RelativeFather relativeFather = relativeFatherPTRepository.getFatherId(person.getPersonId());
+        ParentsInformationForPDF motherInfo = null;
+        ParentsInformationForPDF fatherInfo = null;
         // В РОДИТЕЛЯХ: НУЛЕВОЙ ЭЛЕМЕНТ - МАТЬ, ПЕРВЫЙ - ОТЕЦ. МЕСТО РАБОТЫ БЕРИ ИЗ RelativeMother И RelativeFather
-        parents.add(reverseImportRepository.getParentsInfoFromPublic(relativeMother.getRealtiveId()));
-        parents.add(reverseImportRepository.getParentsInfoFromPublic(relativeFather.getRealtiveId()));
+        if (relativeMother != null) {
+            motherInfo = reverseImportRepository.getParentsInfoFromPublic(relativeMother.getRealtiveId());
+        }
+        if (relativeFather != null) {
+            fatherInfo = reverseImportRepository.getParentsInfoFromPublic(relativeFather.getRealtiveId());
+        }
         InputStream templateInputStream = this.getClass().getClassLoader().getResourceAsStream(TEMPLATE_NAME);
         WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(templateInputStream);
         MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
         VariablePrepare.prepare(wordMLPackage);
         HashMap<String, String> variables = new HashMap<>();
         //Личные данные
-        String fio=entrantPrivateData.getSurname()+" "+entrantPrivateData.getName()+" "+entrantPrivateData.getPatronymic();
+        String fio = entrantPrivateData.getSurname() + " " + entrantPrivateData.getName() + " " + entrantPrivateData.getPatronymic();
         variables.put("fio", fio);
-        if(entrantPrivateData.getMale())
-        {
+        if (entrantPrivateData.getMale()) {
             variables.put("gender", "Мужчина");
         } else variables.put("gender", "Женщина");
         variables.put("dateOfBirth", DateUtils.format(entrantPrivateData.getBirthdate(), "dd.MM.yyyy"));
@@ -136,16 +143,16 @@ public class DocxGeneratorService {
         variables.put("dateOfIssue", DateUtils.format(passportData.getReleaseDate(), "dd.MM.yyyy"));
         variables.put("codeOfSubdivision", passportData.getDepartmentCode());
         //Инфо об образования
-        String educ=forPDFRepository.getInstTypeName(educationInfo.getEduInstTypeId());
+        String educ = forPDFRepository.getInstTypeName(educationInfo.getEduInstTypeId());
         variables.put("education", educ);
         variables.put("yearOfFinished", educationInfo.getEndYear().toString());
-        String docEduc=forPDFRepository.getEduDocType(educationInfo.getEduDocTypeId());
+        String docEduc = forPDFRepository.getEduDocType(educationInfo.getEduDocTypeId());
         variables.put("docOfEducation", docEduc);
         String serialNumber = educationInfo.getDocSeries() + educationInfo.getDocNumber();
         variables.put("docOfEducationSerialNumber", serialNumber);
         variables.put("regionOfFinished", forPDFRepository.getRegion(educationInfo.getRegionId()));
         variables.put("districtOfFinished", forPDFRepository.getDistrict(educationInfo.getGraduationPlaceId()));
-        String city=educationInfo.getCity();
+        String city = educationInfo.getCity();
         variables.put("cityOfFinished", city);
         variables.put("placeOfFinished", educationInfo.getEduInstName());
         variables.put("dateOfFinished", DateUtils.format(educationInfo.getDocDate(), "dd.MM.yyyy"));
@@ -177,22 +184,20 @@ public class DocxGeneratorService {
         }
         //Учебные достижения
         //medal - 2 Золотая, 3 серебряная
-        if(educationalAchievements.getAchievementId()==null)
-        {
+        if (educationalAchievements.getAchievementId() == null) {
             variables.put("medal", "-");
         }
-        if(educationalAchievements.getAchievementId()==2)
-        {
+        if (educationalAchievements.getAchievementId() == 2) {
             variables.put("medal", "Золотая");
         }
-        if(educationalAchievements.getAchievementId()==3)
-        {
+        if (educationalAchievements.getAchievementId() == 3) {
             variables.put("medal", "Серебряная");
         }
-        if(olympiad) variables.put("olympiad", "Да");
+        if (olympiad) variables.put("olympiad", "Да");
         else variables.put("olympiad", "Нет");
-        if(educationalAchievements.getSportQualificationId()==null) variables.put("sportQual", "-");
-        else variables.put("sportQual", forPDFRepository.getSportQualification(educationalAchievements.getSportQualificationId()));
+        if (educationalAchievements.getSportQualificationId() == null) variables.put("sportQual", "-");
+        else
+            variables.put("sportQual", forPDFRepository.getSportQualification(educationalAchievements.getSportQualificationId()));
         //Доп. инфо
         if (benefit)
             variables.put("haveBenefit", "Да");
@@ -208,22 +213,46 @@ public class DocxGeneratorService {
         else needsHostel = "Нет";
         variables.put("needsHostel", needsHostel);
         //Контактная информация
-        if(contactInformation.getTelephone()==null)
-        {
+        if (contactInformation.getTelephone() == null) {
             variables.put("mobileNumber", "-");
-        }
-        else variables.put("mobileNumber", contactInformation.getTelephone());
+        } else variables.put("mobileNumber", contactInformation.getTelephone());
         //Инфо о родителях
-        variables.put("fatherName", parents.get(1).getName());
-        variables.put("fatherSecondName", parents.get(1).getSurname());
-        variables.put("fatherPatronymic", parents.get(1).getPatronymic());
-        variables.put("fatherJob", relativeFather.getLabourPlace());
-        variables.put("fatherNumber", parents.get(1).getTelephone());
-        variables.put("motherName", parents.get(0).getName());
-        variables.put("motherSecondName", parents.get(0).getSurname());
-        variables.put("motherPatronymic", parents.get(0).getPatronymic());
-        variables.put("motherJob", relativeMother.getLabourPlace());
-        variables.put("motherNumber", parents.get(0).getTelephone());
+        if (fatherInfo != null )
+        { variables.put("fatherName", fatherInfo.getName());
+        variables.put("fatherSecondName", fatherInfo.getSurname());
+        variables.put("fatherPatronymic", fatherInfo.getPatronymic());
+        variables.put("fatherNumber", fatherInfo.getTelephone());
+        }
+        else {
+            variables.put("fatherName", "-");
+            variables.put("fatherSecondName", "-");
+            variables.put("fatherPatronymic", "-");
+            variables.put("fatherNumber", "-");
+        }
+        if(relativeFather!=null){
+            variables.put("fatherJob", relativeFather.getLabourPlace());
+        }
+        else {
+            variables.put("fatherJob", "-");
+        }
+        if(motherInfo != null )
+        { variables.put("motherName", motherInfo.getName());
+            variables.put("motherSecondName", motherInfo.getSurname());
+            variables.put("motherPatronymic", motherInfo.getPatronymic());
+            variables.put("motherNumber", motherInfo.getTelephone());
+        }
+        else {
+            variables.put("motherName", "-");
+            variables.put("motherSecondName", "-");
+            variables.put("motherPatronymic", "-");
+            variables.put("motherNumber", "-");
+        }
+        if(relativeMother!=null){
+            variables.put("motherJob", relativeMother.getLabourPlace());
+        }
+        else {
+            variables.put("motherJob", "-");
+        }
         //Направления обучения
         if (admissionInfo.size() != 0) {
             //1 Направление
