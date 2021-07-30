@@ -98,11 +98,13 @@ public class DocxGeneratorService {
         for (EntrantDocTypeDto doc : entrantDocTypes) {
             doc_id.add(doc.getDocTypeId());
         }
-        for (BenefitInformationForPDF element : benefitInformation) {
-            if (doc_id.contains(element.getDocTypeId())) {
-                benefit = true;
-            } else {
-                olympiad = true;
+        if(benefitInformation.size()>0) {
+            for (BenefitInformationForPDF element : benefitInformation) {
+                if (doc_id.contains(element.getDocTypeId())) {
+                    benefit = true;
+                } else {
+                    olympiad = true;
+                }
             }
         }
         ContactInformationForPDF contactInformation = reverseImportRepository.getContactFromPublic(person.getPersonId());
@@ -114,7 +116,7 @@ public class DocxGeneratorService {
         RelativeFather relativeFather = relativeFatherPTRepository.getFatherId(person.getPersonId());
         ParentsInformationForPDF motherInfo = null;
         ParentsInformationForPDF fatherInfo = null;
-        // В РОДИТЕЛЯХ: НУЛЕВОЙ ЭЛЕМЕНТ - МАТЬ, ПЕРВЫЙ - ОТЕЦ. МЕСТО РАБОТЫ БЕРИ ИЗ RelativeMother И RelativeFather
+        //МЕСТО РАБОТЫ БЕРИ ИЗ RelativeMother И RelativeFather
         if (relativeMother != null) {
             motherInfo = reverseImportRepository.getParentsInfoFromPublic(relativeMother.getRealtiveId());
         }
@@ -158,29 +160,40 @@ public class DocxGeneratorService {
         variables.put("dateOfFinished", DateUtils.format(educationInfo.getDocDate(), "dd.MM.yyyy"));
         variables.put("language", forPDFRepository.getLanguage(educationInfo.getLangId()));
         //Инфо о месте жительства
-        if (additionalInformation.get(0).getAddressTypeId() == 1) {
+        if(additionalInformation.size()==1){
             variables.put("region", forPDFRepository.getRegion(additionalInformation.get(0).getRegionId()));
             variables.put("city", additionalInformation.get(0).getCity());
             variables.put("street", additionalInformation.get(0).getStreet());
             variables.put("numOfBuilding", additionalInformation.get(0).getBuildingNum());
             variables.put("numOfApartments", additionalInformation.get(0).getFlatNum());
             variables.put("index", additionalInformation.get(0).getIndex());
-        } else {
-            variables.put("region", forPDFRepository.getRegion(additionalInformation.get(1).getRegionId()));
-            variables.put("area", forPDFRepository.getDistrict(additionalInformation.get(1).getDistrictId()));
-            variables.put("city", additionalInformation.get(1).getCity());
-            variables.put("street", additionalInformation.get(1).getStreet());
-            variables.put("numOfBuilding", additionalInformation.get(1).getBuildingNum());
-            variables.put("numOfApartments", additionalInformation.get(1).getFlatNum());
-            variables.put("index", additionalInformation.get(1).getIndex());
-        }
-        if (additionalInformation.get(0).getIndex().equals(additionalInformation.get(1).getIndex())
-                && additionalInformation.get(0).getFlatNum().equals(additionalInformation.get(1).getFlatNum())
-                && additionalInformation.get(0).getStreet().equals(additionalInformation.get(1).getStreet())
-                && additionalInformation.get(0).getBuildingNum().equals(additionalInformation.get(1).getBuildingNum()))
             variables.put("coincides", "Да");
+        }
         else {
-            variables.put("coincides", "Нет");
+            if (additionalInformation.get(0).getAddressTypeId() == 1) {
+                variables.put("region", forPDFRepository.getRegion(additionalInformation.get(0).getRegionId()));
+                variables.put("city", additionalInformation.get(0).getCity());
+                variables.put("street", additionalInformation.get(0).getStreet());
+                variables.put("numOfBuilding", additionalInformation.get(0).getBuildingNum());
+                variables.put("numOfApartments", additionalInformation.get(0).getFlatNum());
+                variables.put("index", additionalInformation.get(0).getIndex());
+            } else {
+                variables.put("region", forPDFRepository.getRegion(additionalInformation.get(1).getRegionId()));
+                variables.put("area", forPDFRepository.getDistrict(additionalInformation.get(1).getDistrictId()));
+                variables.put("city", additionalInformation.get(1).getCity());
+                variables.put("street", additionalInformation.get(1).getStreet());
+                variables.put("numOfBuilding", additionalInformation.get(1).getBuildingNum());
+                variables.put("numOfApartments", additionalInformation.get(1).getFlatNum());
+                variables.put("index", additionalInformation.get(1).getIndex());
+            }
+            if (additionalInformation.get(0).getIndex().equals(additionalInformation.get(1).getIndex())
+                    && additionalInformation.get(0).getFlatNum().equals(additionalInformation.get(1).getFlatNum())
+                    && additionalInformation.get(0).getStreet().equals(additionalInformation.get(1).getStreet())
+                    && additionalInformation.get(0).getBuildingNum().equals(additionalInformation.get(1).getBuildingNum()))
+                variables.put("coincides", "Да");
+            else {
+                variables.put("coincides", "Нет");
+            }
         }
         //Учебные достижения
         //medal - 2 Золотая, 3 серебряная
