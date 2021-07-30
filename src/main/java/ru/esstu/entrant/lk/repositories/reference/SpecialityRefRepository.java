@@ -3,11 +3,8 @@ package ru.esstu.entrant.lk.repositories.reference;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
-import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
 import ru.esstu.entrant.lk.domain.vo.reference.Speciality;
 
-import java.math.BigInteger;
 import java.util.List;
 @Mapper
 public interface SpecialityRefRepository {

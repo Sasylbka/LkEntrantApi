@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class EduDocType {
     private int eduDocTypeId;
     private String eduDocTypeName;
+    private Boolean forPostgraduate;
 }

@@ -623,4 +623,10 @@
             <column name="file_name" type="text"/>
         </addColumn>
     </changeSet>
+    <changeSet id="2021-07-30-admissionInfo" author="v.dambiev">
+        <addColumn tableName="admission_info">
+            <column name="profile" type="text">
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

@@ -1,19 +1,14 @@
 package ru.esstu.entrant.lk.web;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
-import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
 import ru.esstu.entrant.lk.services.AdmissionInfoService;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * API Profile.

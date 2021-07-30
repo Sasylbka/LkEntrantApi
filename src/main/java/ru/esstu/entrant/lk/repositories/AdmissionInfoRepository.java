@@ -1,10 +1,7 @@
 package ru.esstu.entrant.lk.repositories;
 
 import org.apache.ibatis.annotations.*;
-import org.springframework.web.bind.annotation.RequestBody;
-import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
 import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
-import ru.esstu.entrant.lk.domain.vo.reference.Region;
 
 import java.util.List;
 
@@ -20,15 +17,15 @@ public interface AdmissionInfoRepository {
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert("INSERT INTO admission_info(entrant_id, level_of_education, direction,admittance_category, budget, contract, targeted_training, quota," +
-            " consent_budget, consent_target, consent_quote ) " +
+            " consent_budget, consent_target, consent_quote, profile ) " +
             "VALUES(#{admissionInfo.entrantId},#{admissionInfo.levelOfEducation},#{admissionInfo.direction},#{admissionInfo.admittanceCategory}," +
             "#{admissionInfo.budget},#{admissionInfo.contract},#{admissionInfo.targetedTraining},#{admissionInfo.quota},#{admissionInfo.consentBudget}," +
-            "#{admissionInfo.consentTarget},#{admissionInfo.consentQuote})")
+            "#{admissionInfo.consentTarget},#{admissionInfo.consentQuote}, #{admissionInfo.profile})")
     long save(@Param("admissionInfo") AdmissionInfo admissionInfo);
 
     @Options( keyProperty = "id", keyColumn = "id")
     @Update("UPDATE admission_info SET level_of_education=#{admissionInfo.levelOfEducation}, " +
-            "direction=#{admissionInfo.direction}, budget=#{admissionInfo.budget}, contract=#{admissionInfo.contract}, " +
+            "direction=#{admissionInfo.direction}, profile=#{admissionInfo.profile}, budget=#{admissionInfo.budget}, contract=#{admissionInfo.contract}, " +
             "targeted_training=#{admissionInfo.targetedTraining}, quota=#{admissionInfo.quota},admittance_category=#{admissionInfo.admittanceCategory}" +
             "WHERE id=#{admissionInfo.id}")
     long update(@Param("admissionInfo") AdmissionInfo admissionInfo);
