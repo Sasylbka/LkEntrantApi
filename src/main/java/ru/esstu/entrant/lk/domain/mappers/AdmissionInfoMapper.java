@@ -3,8 +3,6 @@ package ru.esstu.entrant.lk.domain.mappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
-import ru.esstu.entrant.lk.domain.dto.AdmissionInfoDto;
-import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
 import ru.esstu.entrant.lk.domain.vo.AdmissionInfo;
 
 import java.util.ArrayList;
@@ -26,6 +24,7 @@ public class AdmissionInfoMapper {
                 vo.getEntrantId(),
                 vo.getLevelOfEducation(),
                 vo.getDirection(),
+                vo.getProfile(),
                 vo.getAdmittanceCategory(),
                 vo.isBudget(),
                 vo.isContract(),
@@ -46,6 +45,7 @@ public class AdmissionInfoMapper {
                 dto.getEntrantId(),
                 dto.getLevelOfEducation(),
                 dto.getDirection(),
+                dto.getProfile() != null && dto.getProfile().trim().isEmpty() ? null : dto.getProfile(),
                 dto.getAdmittanceCategory(),
                 dto.isBudget(),
                 dto.isContract(),

@@ -20,7 +20,8 @@ public class EducationalProfileRefMapper {
         }
         return new EducationalProfileDto(
                 vo.getEduProfileId(),
-                vo.getEduProfileName()
+                vo.getEduProfileName(),
+                vo.getSpecId()
         );
     }
     public EducationalProfile toVO(EducationalProfileDto dto) {
@@ -29,7 +30,8 @@ public class EducationalProfileRefMapper {
         }
         return new EducationalProfile(
                 dto.getEduProfileId(),
-                dto.getEduProfileName()
+                dto.getEduProfileName(),
+                dto.getSpecId()
         );
     }
     public List<EducationalProfileDto> toDtos (List<EducationalProfile> vos) {

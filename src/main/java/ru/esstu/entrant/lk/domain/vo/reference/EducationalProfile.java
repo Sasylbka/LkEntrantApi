@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class EducationalProfile {
     private int eduProfileId;
     private String eduProfileName;
+    private int specId;
 }

@@ -12,7 +12,6 @@ import ru.esstu.entrant.lk.repositories.QuestionnaireRepository;
 import ru.esstu.entrant.lk.repositories.reference.SpecialityRefRepository;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @Service

@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 public class EducationalProfileDto {
     private int eduProfileId;
     private String eduProfileName;
+    private int specId;
 }

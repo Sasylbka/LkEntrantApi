@@ -12,6 +12,7 @@ public class AdmissionInfoDto {
     private int entrantId;
     private String levelOfEducation;
     private String direction;//id из справочника
+    private String profile;//id из справочника
     private String admittanceCategory;
     private boolean budget;//выбрал бюджет
     private boolean contract;//договор
