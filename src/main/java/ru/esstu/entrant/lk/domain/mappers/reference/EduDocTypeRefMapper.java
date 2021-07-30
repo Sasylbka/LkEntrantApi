@@ -16,8 +16,7 @@ public class EduDocTypeRefMapper {
         }
         return new EduDocTypeDto(
                 vo.getEduDocTypeId(),
-                vo.getEduDocTypeName(),
-                vo.getForPostgraduate()
+                vo.getEduDocTypeName()
         );
     }
     public EduDocType toVO(EduDocTypeDto dto) {
@@ -26,8 +25,7 @@ public class EduDocTypeRefMapper {
         }
         return new EduDocType(
                 dto.getEduDocTypeId(),
-                dto.getEduDocTypeName(),
-                dto.getForPostgraduate()
+                dto.getEduDocTypeName()
         );
     }
     public List<EduDocTypeDto> toDtos (List<EduDocType> vos) {
