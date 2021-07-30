@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class DocumentType {
     private int id;
     private String name;
+    private Boolean forPostgraduate;
 }
