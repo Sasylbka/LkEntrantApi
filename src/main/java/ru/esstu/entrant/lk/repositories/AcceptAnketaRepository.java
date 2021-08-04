@@ -90,7 +90,7 @@ public interface AcceptAnketaRepository {
             "VALUES (#{guid}, #{person.personId}, " +
             "#{directionId}, #{changesDate.dateOfSend}, " +
             "false,#{prefer_number}, " +
-            "#{moderatorId},false,#{admittanceCategory}, #{admissionInfo.profile})")
+            "#{moderatorId},false,#{admittanceCategory}, #{profile})")
     long addSpeciality(@Param("admissionInfo") AdmissionInfo admissionInfo,
                        @Param("person")Person person,
                        @Param("prefer_number")int prefer_number,
@@ -98,7 +98,8 @@ public interface AcceptAnketaRepository {
                        @Param("changesDate") ChangesDate changesDate,
                        @Param("guid") String guid,
                        @Param("directionId")long directionId,
-                       @Param("admittanceCategory")int admittanceCategory);
+                       @Param("admittanceCategory")int admittanceCategory,
+                       @Param("profile")Integer profile);
     @Insert("Insert into public.relative (realtive_id,labour_place,grade_id,entrant_id) " +
             "Values(#{guid},#{parentsInformation.placeOfFatherJob}," +
             "5,#{person.personId})")

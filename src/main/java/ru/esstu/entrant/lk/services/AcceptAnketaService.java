@@ -1,19 +1,15 @@
 package ru.esstu.entrant.lk.services;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
-import ru.esstu.entrant.lk.domain.mappers.*;
 import ru.esstu.entrant.lk.domain.vo.*;
 import ru.esstu.entrant.lk.domain.vo.Additionals.Keycloak;
-import ru.esstu.entrant.lk.domain.vo.Entrant;
-import ru.esstu.entrant.lk.domain.vo.PublicTables.*;
-import ru.esstu.entrant.lk.domain.vo.reference.EntrantStatus;
-import ru.esstu.entrant.lk.domain.vo.reference.MilitaryStatus;
+import ru.esstu.entrant.lk.domain.vo.PublicTables.Person;
 import ru.esstu.entrant.lk.domain.vo.reference.Speciality;
 import ru.esstu.entrant.lk.exceptions.AlreadyHaveException;
 import ru.esstu.entrant.lk.repositories.*;
 import ru.esstu.entrant.lk.repositories.PublicTables.*;
-import ru.esstu.entrant.lk.repositories.AcceptAnketaRepository;
 import ru.esstu.entrant.lk.repositories.reference.*;
 import ru.esstu.entrant.lk.utils.IdFactory;
 
@@ -265,9 +261,14 @@ public class AcceptAnketaService {
             List<Speciality> list = specialityRefRepository.getSpecialities();
             long directionId = 0;
             for (int i = 0; i < admissionInfo.size(); i++) {
+                Integer profile = null;
+                if (NumberUtils.isDigits(admissionInfo.get(i).getProfile())) {
+                    profile = Integer.parseInt(admissionInfo.get(i).getDirection());
+                }
                 acceptAnketaRepository.addSpeciality(admissionInfo.get(i), person, i + 1, moderatorId, changesDate,
                         IdFactory.getGUID(this), Integer.parseInt(admissionInfo.get(i).getDirection()),
-                        Integer.parseInt(admissionInfo.get(i).getAdmittanceCategory()));
+                        Integer.parseInt(admissionInfo.get(i).getAdmittanceCategory()),
+                        profile);
             }
             guid = IdFactory.getGUID(this);
             acceptAnketaRepository.addFatherPerson(person, parentsInformation, "mail", guid);
