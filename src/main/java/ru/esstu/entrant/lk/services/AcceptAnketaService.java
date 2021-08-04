@@ -263,7 +263,7 @@ public class AcceptAnketaService {
             for (int i = 0; i < admissionInfo.size(); i++) {
                 Integer profile = null;
                 if (NumberUtils.isDigits(admissionInfo.get(i).getProfile())) {
-                    profile = Integer.parseInt(admissionInfo.get(i).getDirection());
+                    profile = Integer.parseInt(admissionInfo.get(i).getProfile());
                 }
                 acceptAnketaRepository.addSpeciality(admissionInfo.get(i), person, i + 1, moderatorId, changesDate,
                         IdFactory.getGUID(this), Integer.parseInt(admissionInfo.get(i).getDirection()),
