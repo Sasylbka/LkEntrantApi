@@ -629,4 +629,9 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="2021-08-04" author="Sergey">
+        <addColumn tableName="passport_data">
+            <column type="boolean" name="foreigner"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

@@ -29,7 +29,8 @@ public class PassportDataMapper {
                 vo.getNumber(),
                 vo.getPlaceOfIssue(),
                 vo.getCodeOfSubdivision(),
-                vo.getDateOfIssue()
+                vo.getDateOfIssue(),
+                vo.isForeigner()
         );
     }
 
@@ -50,7 +51,8 @@ public class PassportDataMapper {
                 dto.getNumber(),
                 dto.getPlaceOfIssue(),
                 dto.getCodeOfSubdivision(),
-                dto.getDateOfIssue()
+                dto.getDateOfIssue(),
+                dto.isForeigner()
         );
     }
 }

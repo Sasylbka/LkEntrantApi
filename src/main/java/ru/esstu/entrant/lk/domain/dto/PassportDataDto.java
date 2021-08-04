@@ -19,4 +19,5 @@ public class PassportDataDto {
     private String placeOfIssue;
     private String codeOfSubdivision;
     private Date dateOfIssue;
+    private boolean foreigner;
 }
